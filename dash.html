@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html class="Control" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>SHOUTca.st Control ALPHA</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <link rel="canonical" href="http://www.shoutca.st">
+		<link rel="icon" href="favicon.ico">
+        <meta name="keywords" content="shoutcast servers, cheap shoutcast, shoutcast, start an internet radio station, start a radio station, online radio, radio, shout, cast">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script src="./js/login.js"></script>
+        <script src="./js/pages.js"></script>
+        <link data-noprefix href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+        <link data-noprefix href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.1/css/font-awesome.min.css" rel="stylesheet">
+        <link data-noprefix href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Lato:400" rel="stylesheet">
+        <link rel="stylesheet" href="https://shoutca.st/controlbeta/controlcss/main.css">
+
+    </head>
+    <body data-spy="scroll" data-target="#topbar" onload="">
+    	<script>checkLoggedIn();</script>
+        <a id="home"></a>
+        <!-- Start of header -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="topbar" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand"  onclick="loadPage('dash')">SHOUTca.st Control</a>
+                </div>
+                <div class="collapse navbar-collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="home-link"><a  class="top-link"  title="Home" onclick="loadPage('dash')">Dashboard</a></li>
+                        <li class="genres-link"><a  class="top-link"  title="Genres" onclick="loadPage('#')">SOON</a></li>
+                        <li class="popular-link"><a  class="top-link"  title="Popular" onclick="loadPage('#')">SOON</a></li>
+                        <li class="new-link"><a class="top-link"  title="New" onclick="loadPage('#')">SOON</a></li>
+                        <li class="add-station-button"><a  role="button" class="btn btn-success">Logout</a></li>
+                    </ul>     
+                </div>
+            </div>
+        </nav>
+        <!-- End of header -->
+        <noscript>
+            <div class="alert alert-danger" style="margin-top: 2em;">
+                <p><i class="icon-warning-sign"></i> <b>Please enable Javascript in your browser.</b></p>
+            </div>
+        </noscript>
+        <div class="container" id="page">
