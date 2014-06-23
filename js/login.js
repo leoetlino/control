@@ -14,14 +14,12 @@ var login=function(email,password){
 }
 
 var checkLoggedIn=function(){
-	alert("calling ITFRAME");
-	var checkdata=function(data){
-		alert("wow")
-		if (data.result!="success") window.location.assign("./login.html");
-	}
 	$.getJSON(
     	'http://192.168.1.226:8080/control/check/', 
 		checkdata
 	);
 
+}
+var checkdata=function(data){
+	if (data.result!="OK") window.location.assign("./login.html?wrongLogin");
 }
