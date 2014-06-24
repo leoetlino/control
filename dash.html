@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="Control" lang="en">
+<html class="Control" lang="en" ng-app="control">
     <head>
         <meta charset="utf-8">
         <title>SHOUTca.st Control ALPHA</title>
@@ -15,10 +15,11 @@
         <link data-noprefix href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.1/css/font-awesome.min.css" rel="stylesheet">
         <link data-noprefix href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Lato:400" rel="stylesheet">
         <link rel="stylesheet" href="https://shoutca.st/controlbeta/controlcss/main.css">
-
+        
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular.min.js"></script>
+        <script type="text/javascript" src="./js/control.js"></script>
     </head>
-    <body data-spy="scroll" data-target="#topbar" onload="">
-    	<script>checkLoggedIn();</script>
+    <body data-spy="scroll" data-target="#topbar" onload="" ng-controller="pageController as page">
         <a id="home"></a>
         <!-- Start of header -->
         <nav class="navbar navbar-inverse navbar-fixed-top" id="topbar" role="navigation">
@@ -34,11 +35,11 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="home-link"><a  class="top-link"  title="Home" onclick="loadPage('dash')">Dashboard</a></li>
-                        <li class="genres-link"><a  class="top-link"  title="Genres" onclick="loadPage('#')">SOON</a></li>
-                        <li class="popular-link"><a  class="top-link"  title="Popular" onclick="loadPage('#')">SOON</a></li>
-                        <li class="new-link"><a class="top-link"  title="New" onclick="loadPage('#')">SOON</a></li>
-                        <li class="add-station-button"><a  role="button" class="btn btn-success">Logout</a></li>
+                        <li class="home-link"><a  class="top-link" ng-click="page.setPage('Dashboard')">Dashboard</a></li>
+                        <li class="genres-link"><a  class="top-link">Manage</a></li>
+                        <li class="popular-link"><a  class="top-link">Statistics</a></li>
+                        <li class="new-link"><a class="top-link">Support</a></li>
+                        <li class="add-station-button"><a  role="button" class="btn btn-success">Feedback</a></li>
                     </ul>     
                 </div>
             </div>
@@ -49,4 +50,84 @@
                 <p><i class="icon-warning-sign"></i> <b>Please enable Javascript in your browser.</b></p>
             </div>
         </noscript>
-        <div class="container" id="page">
+        
+        
+        <div class="container" id="Dashboard" ng-show="page.isPage('Dashboard')" ng-controller="dashboardController as dash">
+            <div class="container">
+                <h1>Hello, {{dash.user}}!</h1>
+                <p>Good looking huh? </p>
+                <p><a class="btn btn-primary btn-lg" role="button" ng-click="page.setPage('About')">Learn more »</a></p>
+            </div>
+        </div>
+        
+        <div class="container" id="About" ng-show="page.isPage('About')" ng-controller="aboutController as about">
+            <p>Good looking huh? </p>
+        </div>
+        
+        
+        
+        
+    <!-- Start of footer -->
+        <footer class="footer" id="main-footer">
+            <div class="container">
+                <div class="row footerlinks">
+                    <div class="col-xs-6 col-sm-2">
+                        <h5>About Us</h5>
+                        <p>A great place to find SHOUTcast and Icecast servers and start an online station, free mobile apps (iOS and Android) included with any paid plan.</p>
+                    </div>
+                    <div class="col-xs-6 col-sm-2">
+                        <h5>Get Help</h5>
+                        <ul>
+                            <li><a href="mailto:help@shoutca.st" target="_blank">help@shoutca.st</a></li>
+                            <li><a href="mailto:sales@shoutca.st" target="_blank">sales@shoutca.st</a></li>
+                            <li><a href="mailto:abuse@shoutca.st" target="_blank">abuse@shoutca.st</a></li>
+                            <li><i class="icon-phone"></i> +44 800 009 6978</li>
+                            <li><i class="icon-skype"></i> SHOUTca.st</li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-sm-2">
+                        <h5>Get Social</h5>
+                        <ul>
+                            <li><a href="//twitter.com/shoutca_st" target="_blank"><i class="icon-twitter-sign"></i> Follow us on Twitter</a></li>
+                            <li><a href="//facebook.com/shoutcastsolutions" target="_blank"><i class="icon-facebook-sign"></i> Like us on Facebook</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-sm-2">
+                        <h5>Get Info</h5>
+                        <ul>
+                            <li><a href="https://my.shoutca.st/knowledgebase">FAQ</a></li>
+                            <li><a href="https://my.shoutca.st">Client Area</a></li>
+                            <li><a href="http://innovatetechnologi.es">Innovate Technologies</a></li>
+                            <li><a href="//my.shoutca.st/announcements.php">Blog</a></li>
+                            <li><a href="careers.php">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-sm-2">
+                        <h5>Resources</h5>
+                        <ul>
+                            <li><a href="about.php">About Internet Radio</a></li>
+                            <li><a href="/radioresourcepod">Radio Resource Pod</a></li>
+                            <li><a href="/station-promo">Station Promotion</a></li>
+                            <li><a href="tos.php" data-toggle="modal" data-target="#tos-modal">Terms Of Service</a></li>
+                            <li><a href="privacy.php" data-toggle="modal" data-target="#privacy-modal">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-sm-2">
+                        <h5>More</h5>
+                        <ul>
+                            <li><a href="getstarted/which-server.php">Which server am I on?</a></li>
+                            <li><a href="testimonials.php">Testimonials</a></li>
+                            <li><a href="ios-apps.php" data-toggle="modal" data-target="#ios-apps-modal"><i class="icon-apple"></i> iPhone/iOS App</a></li>
+                            <li><a href="android-apps.php" data-toggle="modal" data-target="#android-apps-modal"><i class="icon-android"></i> Android App</a></li>
+                            <li><a href="web-hosting.php">Web Hosting</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                     <p>Copyright &copy; 2014. SHOUTca.st</p>
+            </div>
+        </footer>
+        </div>
+        <!-- End of footer -->
+    </body>
+</html>

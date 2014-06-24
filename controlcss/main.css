@@ -157,7 +157,7 @@ a.list-group-item:hover .list-group-item-heading, a.list-group-item:focus .list-
 
 .jumbotron, .footer {
     color: #fff;
-    background: url(../images/header-bg.jpg) no-repeat #232a31;
+    background: url(https://shoutca.st/images/header-bg.jpg) no-repeat #232a31;
     background-size: cover;
     background-attachment: fixed;
     overflow: hidden;
