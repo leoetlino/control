@@ -1,0 +1,101 @@
+/*
+ * Main CSS
+ * Copyright (c) 2014, Innovate Technologies.
+ *
+ */
+
+/* Include Diavlo Light */
+@font-face {
+    font-family: 'Diavlo Light';
+    src: url('fonts/Diavlo-Light-Regular.ttf.woff') format('woff'),
+         url('fonts/Diavlo-Light-Regular.ttf.svg#Diavlo-Light-Regular') format('svg'),
+         url('fonts/Diavlo-Light-Regular.ttf.eot'),
+         url('fonts/Diavlo-Light-Regular.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Branding and styling */
+.navbar-inverse {
+    background: #27ae60;
+    border-color: transparent;
+}
+
+@media screen and (min-width: 769px) {
+    .dashboard-box .panel-body {
+        min-height: 12em;
+    }
+
+    .panel-log-in {
+        width: 30%;
+        margin-top: 5em;
+    }
+}
+
+.panel-log-in .panel-body {
+    padding-bottom: 2em;
+}
+
+.dashboard-box .panel-heading, .dashboard-box .panel-body {
+    text-align: center;
+}
+
+#main-footer {
+    margin-top: 10em;
+}
+
+/* Helper classes */
+.font-diavlo {
+    font-family: 'Diavlo Light';
+}
+
+.row-equal-height, .row-equal-height > div[class*='col-'] {
+    display: box;
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.row-equal-height > div[class*='col-'] > div {
+    width: 100%;
+}
+
+.ng-enter {
+    animation: fadeIn 0.2s both ease-in;
+}
+
+/* Fixes */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.navbar-brand {
+    font-family: 'Diavlo Light';
+    font-size: 28px;
+    padding-top: 17px;
+    padding-bottom: 50px;
+    line-height: 34px;
+}
+
+.navbar-brand .label {
+    font-size: 0.5em;
+}
+
+.fade:not(.in) {
+    animation: fadeOut 0.3s both ease-in;
+    display: none;
+}
+
+#form-login {
+    margin-top: 20px;
+}
+
+/* Alert icons */
+.alert-icon-error:before, .alert-icon-warning:before {
+    content: "\f071";
+}
+
+.alert-icon-info:before {
+    content: "\f05a";
+}
+
+.alert-icon-success:before {
+    content: "\f058";
+}

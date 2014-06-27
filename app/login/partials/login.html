@@ -1,0 +1,29 @@
+<style>
+    @import url('/css/loading-bar-green.css');
+    body {
+        background: #232a31;
+    }
+    nav,
+    footer {
+        display: none;
+    }
+</style>
+<div class="panel panel-default panel-log-in center-block">
+    <div class="panel-body text-center">
+        <h2 class="font-diavlo">SHOUTca.st Control</h2>
+        <div id="alert-log-in" flash-alert active-class="in alert" class="animated-custom fade text-left">
+            <p class="alert-message"><i class="fa alert-icon-{{flash.type}}"></i> {{ flash.message }}</p>
+        </div>
+        <form id="form-login" name="loginForm" ng-submit="login(credentials)">
+            <div class="form-group email">
+                <label class="sr-only" for="login-email">Email Address</label>
+                <input autofocus class="form-control input-lg" type="email" required name="username" placeholder="Email Address" id="login-email" ng-model="credentials.email">
+            </div>
+            <div class="form-group password">
+                <label class="sr-only" for="login-password">Password</label>
+                <input class="form-control input-lg" type="password" required name="password" placeholder="Password" id="login-password" ng-model="credentials.password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="fa fa-sign-in"></i> Log In</button>
+        </form>
+    </div>
+</div>
