@@ -1,6 +1,6 @@
-define(['control'], function(control) {
-    control.service('Session', function(USER_ROLES, localStorageService) {
-        this.create = function(token, email) {
+define(['control'], function (control) {
+    control.service('Session', function (USER_ROLES, localStorageService) {
+        this.create = function (token, email) {
             this.token = token;
             this.email = email;
             this.userRole = [USER_ROLES.user];
@@ -8,13 +8,13 @@ define(['control'], function(control) {
             localStorageService.set('email', email);
         };
 
-        this.createFromLocalStorage = function() {
+        this.createFromLocalStorage = function () {
             this.token = localStorageService.get('token');
             this.email = localStorageService.get('email');
             this.userRole = [USER_ROLES.user];
         };
 
-        this.destroy = function() {
+        this.destroy = function () {
             this.token = null;
             this.email = null;
             this.userRole = null;
