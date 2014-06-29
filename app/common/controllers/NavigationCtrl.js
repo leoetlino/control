@@ -1,9 +1,11 @@
 /* global define */
 define(['control'], function(control) {
-    control.controller('NavigationCtrl', function($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthService, flash) {
+    control.controller('NavigationCtrl', function($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthService, flash, Session) {
         $scope.currentUser = null;
         $scope.userRoles = USER_ROLES;
         $scope.isAuthorized = AuthService.isAuthorized;
+        $scope.isAuthenticated = AuthService.isAuthenticated;
+        $scope.currentSession = Session;
         $scope.isActive = function (viewLocation) {
             return viewLocation === $location.path();
         };
