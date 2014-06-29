@@ -52,6 +52,9 @@ define(['common/services/routeResolver'], function () {
                 .when('/stats', $.extend({}, route.resolve('stats', 'Stats'), {
                     authorizedRoles: [USER_ROLES.all]
                 }))
+                .when('/feedback', $.extend({}, route.resolve('feedback', 'Feedback'), {
+                    authorizedRoles: [USER_ROLES.all]
+                }))
                 .otherwise({
                     redirectTo: '/'
                 });
