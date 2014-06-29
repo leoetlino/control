@@ -11,13 +11,6 @@ define(['control'], function (control) {
                 $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
             });
         };
-        $scope.logout = function(credentials) {
-            AuthService.logout(credentials).then(function() {
-                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-            }, function() {
-                $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
-            });
-        };
     }).constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',
         loginFailed: 'auth-login-failed',
