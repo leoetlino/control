@@ -18,7 +18,8 @@ require([
     'common/controllers/NavigationCtrl',
     'login/controllers/LoginCtrl',
     'dashboard/services/DashService',
-    'manage/services/ManageService'
+    'manage/services/ManageService',
+    'feedback/services/FeedbackService'
 ], function() {
     angular.bootstrap(document, ['control']);
 });

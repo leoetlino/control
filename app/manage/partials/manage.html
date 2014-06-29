@@ -7,8 +7,29 @@
         </ul>
     </div>
     <div class="col-md-8" ng-repeat="product in products" ng-show="isTabActive(product.id)">
-        <h3 class="page-header"><i class="fa fa-sliders"></i> {{product.group}} - {{product.name}} - {{product.username}}</h3>
-        <b>Test info</b>
+        <h3 class="page-header"></i> {{product.group}} - {{product.name}} - {{product.username}}</h3>
+        <div class="bs-callout bs-callout-warning" ng-show="product.group=='Resellers (France)' || product.group=='Resellers (Canada)'">
+            <p><b>Limited reseller support</b></p>
+            <p>Because of the reason that resellers need to stay white label we have decided not to provide Control to resellers.</p>
+            <p>You can still request apps for your clients here. Remember as reseller you will have to pay £5 per app.</p>
+        </div>
+        
+        <div ng-hide="product.group=='Resellers (France)' || product.group=='Resellers (Canada)'">
+            <div class="col-md-6">
+                <p><button type="button" class="btn btn-default">Request apps</button></p>
+                <p><button type="button" class="btn btn-default">Request #NowPlaying</button></p>
+                <p><button type="button" class="btn btn-default">Request StudioText</button></p>
+            </div>
+            
+            <div class="col-md-6">
+                <p><button type="button" class="btn btn-danger">Stop Server</button></p>
+                <p><button type="button" class="btn btn-warning">Restart Server</button></p>
+                <p><button type="button" class="btn btn-primary">Login to Centova Cast</button></p>
+            </div>
+            
+        </div>
+        
+        
     </div>
 </ul>
 </div>
