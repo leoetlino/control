@@ -60,13 +60,9 @@ define(['common/services/routeResolver'], function () {
     }]);
 
     control.config(function ($httpProvider) {
-        $httpProvider.interceptors.push([
-            '$injector',
-            function ($injector) {
-                return $injector.get('AuthInterceptor');
-            }
-        ]);
-    })
+        $httpProvider.interceptors.push('AuthInterceptor');
+        $httpProvider.interceptors.push('HttpTimeoutInterceptor');
+    });
 
     return control;
 });

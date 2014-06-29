@@ -11,6 +11,7 @@ require.config({
 require([
     'control',
     'common/services/routeResolver',
+    'common/services/HttpTimeoutInterceptor',
     'login/services/Session',
     'login/services/AuthService',
     'login/services/AuthInterceptor',
