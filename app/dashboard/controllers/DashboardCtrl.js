@@ -1,5 +1,4 @@
 define(['control'], function (control) {
-    //require(["/app/dashboard/services/DashService.js"])
     control.register.controller('DashboardCtrl', function($scope, DashService) {
         $scope.isReady=false;
         var update=function(res){
