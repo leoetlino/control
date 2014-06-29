@@ -16,6 +16,7 @@
  * Co-Founder Innovate Technologies
  */
 
+/* global define, angular, $ */
 define(['common/services/routeResolver'], function () {
     var control = angular.module('control', ['LocalStorageModule', 'angular-loading-bar', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'routeResolverServices', 'ui.bootstrap', 'ngRoute', 'ngAnimate']);
 
