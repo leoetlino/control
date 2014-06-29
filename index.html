@@ -39,6 +39,7 @@
                         <li ng-class="{ active: isActive('/stats')}"><a href="#/stats" title="Statistics"><i class="fa fa-bar-chart-o"></i> Stats</a></li>
                         <li><a href="//my.shoutca.st/submitticket.php?step=2&deptid=2" title="Support &amp; Help"><i class="fa fa-question-circle"></i> Support</a></li>
                         <li ng-class="{ active: isActive('/feedback')}"><a href="#/feedback" title="Feedback"><b>Feedback</b></a></li>
+                        <li ng-show="isAuthenticated"><a title="Log out from Control" ng-click="logout()"><i class="fa fa-sign-out"></i> Log Out</a></li>
                     </ul>
                 </div>
             </div>
