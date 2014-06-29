@@ -2,7 +2,7 @@
  * Copyright (C) 2014, Innovate Technologies.
  *
  * -------------------------------------
- * From our co-founder, Maarten Eyskens:
+ * From our Co-Founder, Maarten Eyskens:
  *
  * You're about to see the most modern control panel for SHOUTcast/Icecast
  * When you look close to all the existing systems all you see is outdated software

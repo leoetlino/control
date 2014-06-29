@@ -15,7 +15,9 @@ require([
     'login/services/AuthService',
     'login/services/AuthInterceptor',
     'common/controllers/NavigationCtrl',
-    'login/controllers/LoginCtrl'
+    'login/controllers/LoginCtrl',
+    'dashboard/services/DashService',
+    'manage/services/ManageService'
 ], function() {
     angular.bootstrap(document, ['control']);
 });
