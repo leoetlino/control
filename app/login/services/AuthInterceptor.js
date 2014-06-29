@@ -1,6 +1,14 @@
+/* global define */
 define(['control'], function(control) {
-    control.factory('AuthInterceptor', function($rootScope, $q, AUTH_EVENTS) {
+    control.factory('AuthInterceptor', function($rootScope, $q, AUTH_EVENTS, Session) {
         return {
+            request: function (config) {
+                config.headers = config.headers || {};
+                if (Session.token) {
+                    config.headers.Authorization = 'Bearer ' + Session.token;
+                }
+                return config;
+            },
             responseError: function(response) {
                 if (response.status === 400) {
                     $rootScope.$broadcast(AUTH_EVENTS.badRequest, response);
