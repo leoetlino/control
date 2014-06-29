@@ -9,9 +9,7 @@ define(['control'], function(control) {
         var originalPath = null;
         $rootScope.$on('$routeChangeStart', function(event, next) {
             var authorizedRoles = next.authorizedRoles;
-            console.log(authorizedRoles);
             if (!AuthService.isAuthorized(authorizedRoles)) {
-                console.log('NOT AUTHORIZED!!!');
                 event.preventDefault();
                 if (AuthService.isAuthenticated()) {
                     // user is not allowed

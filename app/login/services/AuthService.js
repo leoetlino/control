@@ -19,7 +19,6 @@ define(['control'], function (control) {
                 if (localStorageService.get('token') !== 'undefined' && localStorageService.get('token') !== null) {
                     Session.createFromLocalStorage();
                 }
-                console.log(Session);
                 return !!Session.token;
             },
             isAuthorized: function (authorizedRoles) {
