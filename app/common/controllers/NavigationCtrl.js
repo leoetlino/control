@@ -1,3 +1,4 @@
+/* global define */
 define(['control'], function(control) {
     control.controller('NavigationCtrl', function($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthService, flash) {
         $scope.currentUser = null;
