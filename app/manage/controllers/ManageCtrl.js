@@ -9,9 +9,11 @@ define(['control'], function (control) {
         ManageService.list(callback)
         
         $scope.isTabActive=function(tabid){
-            return $scope.activeTab===tabid;
+            return $scope.activeTab===tabid
         }
-        
+        $scope.selectTab=function(tabid){
+            $scope.activeTab=tabid
+        }
         
     });
 });

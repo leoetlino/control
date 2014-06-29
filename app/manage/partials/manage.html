@@ -3,11 +3,11 @@
 
     <div class="col-md-4">
         <ul class="nav nav-pills nav-stacked">
-            <li ng-repeat="product in products" ng-class="{active:isTabActive(product.id)}"><a href="#">{{product.group}} {{product.name}} - {{product.username}}</a></li>
+            <li ng-repeat="product in products" ng-class="{active:isTabActive(product.id)}"><a ng-click="selectTab(product.id)">{{product.username}} - {{product.name}}</a></li>
         </ul>
     </div>
-    <div class="col-md-8">
-        <h3 class="page-header"><i class="fa fa-sliders"></i> SHOUTcast v2 - testacc</h3>
+    <div class="col-md-8" ng-repeat="product in products" ng-show="isTabActive(product.id)">
+        <h3 class="page-header"><i class="fa fa-sliders"></i> {{product.group}} {{product.name}} - {{product.username}}</h3>
         <b>Test info</b>
     </div>
 </ul>
