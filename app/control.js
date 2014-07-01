@@ -44,9 +44,27 @@ define(['common/services/routeResolver'], function () {
                     controller: 'LoginCtrl',
                     title: 'Log In'
                 })
-                .when('/', $.extend({}, route.resolve('dashboard', 'Dashboard'), {
-                    authorizedRoles: [USER_ROLES.all]
-                }))
+                .when('/', {
+                    templateUrl: '/app/dashboard/partials/dashboard.html',
+                    authorizedRoles: [USER_ROLES.all],
+                    title: 'Dashboard',
+                    resolve: {
+                        summary: function (DashService) {
+                            return DashService.getInfo().then(function (response) {
+                                return response.data;
+                            });
+                        },
+                        controller: ['$q', '$rootScope', function ($q, $rootScope) {
+                            var defer = $q.defer();
+                            require(['/app/dashboard/controllers/DashboardCtrl.js'], function () {
+                                defer.resolve();
+                                $rootScope.$apply();
+                            });
+                            return defer.promise;
+                        }]
+                    },
+                    controller: 'DashboardCtrl'
+                })
                 .when('/manage', $.extend({}, route.resolve('manage', 'Manage your servers'), {
                     authorizedRoles: [USER_ROLES.all]
                 }))

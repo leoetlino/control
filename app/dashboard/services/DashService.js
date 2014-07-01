@@ -1,10 +1,12 @@
 define(['control'], function (control) {
-    control.factory('DashService', function ($http, localStorageService, AuthService) {
+    control.factory('DashService', function ($http, Session, AuthService) {
         return {
-            info:function(callback){
-                if (!AuthService.isAuthenticated())return;
-                $http.post('https://itframe-c9-imstr.c9.io/control/userInfo/', {email:localStorageService.get('email'),key:localStorageService.get('token')})
-                    .then(callback)
+            getInfo: function () {
+                if (!AuthService.isAuthenticated()) return;
+                return $http.post('https://itframe-c9-imstr.c9.io/control/userInfo/', {
+                    email: Session.email,
+                    key: Session.token
+                });
             }
         };
     });
