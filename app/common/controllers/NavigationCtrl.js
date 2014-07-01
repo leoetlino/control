@@ -43,7 +43,7 @@ define(['control'], function(control) {
 
         // Authorisation system
         $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
-            if (originalPath === 'undefined' || !originalPath) {
+            if (originalPath === 'undefined' || !originalPath || originalPath === '/login') {
                 originalPath = '/';
             }
             $location.path(originalPath);
@@ -52,7 +52,7 @@ define(['control'], function(control) {
             flash.to('alert-log-in').error = 'Couldn\'t login. Please check your credentials.';
         });
         $rootScope.$on(AUTH_EVENTS.logoutSuccess, function() {
-            flash.to('alert-log-in').success = 'You are now logged out!';
+            flash.to('alert-general').success = 'You are now logged out!';
             $location.path('/login');
         });
         $rootScope.$on(AUTH_EVENTS.logoutFailed, function() {
