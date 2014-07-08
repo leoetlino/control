@@ -4,11 +4,15 @@ define(['control'], function (control) {
             email: '',
             password: ''
         };
+        $scope.isLoading = false;
         $scope.login = function(credentials) {
+            $scope.isLoading = true;
             AuthService.login(credentials).then(function() {
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                $scope.isLoading = false;
             }, function() {
                 $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                $scope.isLoading = false;
             });
         };
     }).constant('AUTH_EVENTS', {

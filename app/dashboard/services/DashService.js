@@ -1,5 +1,5 @@
 define(['control'], function (control) {
-    control.factory('DashService', function ($http, localStorageService, AuthService) {
+    control.factory('DashService', function ($http, Session, AuthService) {
         return {
             info:function(callback){
                 if (!AuthService.isAuthenticated())return;
