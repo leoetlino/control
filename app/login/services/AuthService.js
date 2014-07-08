@@ -3,14 +3,14 @@ define(['control'], function (control) {
         return {
             login: function (credentials) {
                 return $http
-                    .post('https://itframe-c9-imstr.c9.io/control/login/', credentials)
+                    .post('https://itframe.shoutca.st/control/login/', credentials)
                     .then(function (res) {
                         Session.create(res.data.key, res.data.email);
                     });
             },
             logout: function (credentials) {
                 return $http
-                    .post('https://itframe-c9-imstr.c9.io/control/logout/', credentials)
+                    .post('https://itframe.shoutca.st/control/logout/', credentials)
                     .then(function () {
                         Session.destroy();
                     });

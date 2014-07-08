@@ -3,12 +3,19 @@ define(['control'], function (control) {
         $scope.isReady=false
         var callback=function(res){
             $scope.products=[]
+            var appCheck=function(app,l){
+                res.data[l.key].app=app;
+                $scope.products.push(res.data[l.key])
+                $scope.activeTab=$scope.products[0].id
+            }
+            
             for (var key in res.data){
-                if (res.data[key].status=="Active") $scope.products.push(res.data[key]);
+                if (res.data[key].status=="Active"){
+                    ManageService.hasApp(res.data[key].username,appCheck,{key:key})
+                }
             }
             
             $scope.isReady=true
-            $scope.activeTab=$scope.products[0].id
         }
         ManageService.list(callback)
         

@@ -3,7 +3,7 @@ define(['control'], function (control) {
         return {
             info:function(callback){
                 if (!AuthService.isAuthenticated())return;
-                $http.post('https://itframe-c9-imstr.c9.io/control/userInfo/', {email:localStorageService.get('email'),key:localStorageService.get('token')})
+                $http.post('https://itframe.shoutca.st/control/userInfo/', {email:localStorageService.get('email'),key:localStorageService.get('token')})
                     .then(callback)
             }
         };

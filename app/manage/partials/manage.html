@@ -7,7 +7,7 @@
         </ul>
     </div>
     <div class="col-md-8" ng-repeat="product in products" ng-show="isTabActive(product.id)">
-        <h3 class="page-header"></i> {{product.group}} - {{product.name}} - {{product.username}}</h3>
+        <h3 class="page-header"></i>{{product.group}} - {{product.name}} - {{product.username}}</h3>
         <div class="bs-callout bs-callout-warning" ng-show="product.group=='Resellers (France)' || product.group=='Resellers (Canada)'">
             <p><b>Limited reseller support</b></p>
             <p>Because of the reason that resellers need to stay white label we have decided not to provide Control to resellers.</p>
@@ -15,12 +15,14 @@
         </div>
         
         <div ng-hide="product.group=='Resellers (France)' || product.group=='Resellers (Canada)'">
-            <div class="col-md-6">
-                <p><button type="button" class="btn btn-default">Request apps</button></p>
+            <div class="col-md-6" ng-hide="product.name=='Free'">
+                <p ng-hide="product.app.android && product.app.ios"><a href="/requestapp"><button type="button" class="btn btn-default">Request apps</button></a></p>
                 <p><button type="button" class="btn btn-default">Request #NowPlaying</button></p>
                 <p><button type="button" class="btn btn-default">Request StudioText</button></p>
             </div>
-            
+            <div class="col-md-6" ng-show="product.name=='Free'">
+                <p>Sorry, please upgrade to access the awesome features</p>
+            </div>
             <div class="col-md-6">
                 <p><button type="button" class="btn btn-danger">Stop Server</button></p>
                 <p><button type="button" class="btn btn-warning">Restart Server</button></p>

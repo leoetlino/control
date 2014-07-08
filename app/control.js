@@ -18,7 +18,7 @@
 
 /* global define, angular, $ */
 define(['common/services/routeResolver'], function () {
-    var control = angular.module('control', ['LocalStorageModule', 'angular-loading-bar', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'routeResolverServices', 'ui.bootstrap', 'ngRoute', 'ngAnimate']);
+    var control = angular.module('control', ['LocalStorageModule', 'angular-loading-bar', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'routeResolverServices', 'ui.bootstrap', 'ngRoute', 'ngAnimate','angularFileUpload']);
 
     control.config(['$routeProvider', '$locationProvider', 'routeResolverProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', 'USER_ROLES', 'flashProvider',
         function ($routeProvider, $locationProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, USER_ROLES, flashProvider) {
@@ -54,6 +54,9 @@ define(['common/services/routeResolver'], function () {
                     authorizedRoles: [USER_ROLES.all]
                 }))
                 .when('/feedback', $.extend({}, route.resolve('feedback', 'Feedback'), {
+                    authorizedRoles: [USER_ROLES.all]
+                }))
+                .when('/requestapp', $.extend({}, route.resolve('requestapp', 'Request your mobile app'), {
                     authorizedRoles: [USER_ROLES.all]
                 }))
                 .otherwise({

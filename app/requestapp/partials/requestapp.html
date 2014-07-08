@@ -1,0 +1,138 @@
+<h1 class="page-header">
+    <i class="fa fa-mobile"></i> Request your mobile app</h1>
+<div class="col-md-8">
+    <form class="form-horizontal" role="form" name="form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Server</label>
+            <div class="input-group">
+                <select class="form-control" ng-model="server" required>
+                    <option ng-repeat="product in products" ng-disabled="product.ios && product.android || product.name=='Free'"
+                    ng-value="product.username">{{product.username}}</option>
+                </select>
+            </div>
+        </div>
+        <div ng-show="server">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Platform(s)</label>
+                <div class="input-group">
+                    <select class="form-control" ng-model="platform" ng-change="changeTab()" required>
+                        <option value="Both">Both</option>
+                        <option value="Android">Android</option>
+                        <option value="iOS">iPhone/iPad</option>
+                    </select>
+                </div>
+            </div>
+            <div ng-show="platform">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">App Name</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-pencil-square-o"></i>
+                        </div>
+                        <input class="form-control" type="text" placeholder="App Name" required>
+                    </div>
+                </div>
+                <div class="form-group" ng-hide="platform=='Android'">
+                    <label class="col-sm-2 control-label">App Keywords</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-tags"></i>
+                        </div>
+                        <input class="form-control" type="text" placeholder="App Keywords" maxlength="100" ng-required="platform!='Android'">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">App Description</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-bars"></i>
+                        </div>
+                        <textarea class="form-control" placeholder="App Description" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Website</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-globe"></i>
+                        </div>
+                        <input class="form-control" type="text" placeholder="Website" ng-model="website"
+                        ng-change="changeTab()">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Facebook</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-facebook-square"></i>
+                        </div>
+                        <input class="form-control" type="text" placeholder="Facebook" ng-model="facebook"
+                        ng-change="changeTab()">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Twitter</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-twitter-square"></i>
+                        </div>
+                        <input class="form-control" type="text" placeholder="Twitter" ng-model="twitter"
+                        ng-change="changeTab()">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Background</label>
+                    <div class="input-group bg">
+                        <input type="text" value="" class="form-control" required/>
+                        <span class="input-group-addon">
+                            <i></i>
+                        </span>
+                    </div>
+                    <script>
+                        $(function() {
+                            $('.bg').colorpicker();
+                        });
+                    </script>
+                </div>
+                <div class="form-group" ng-hide="platform=='Android'">
+                    <label class="col-sm-2 control-label">Button And Text Color</label>
+                    <div class="input-group tint">
+                        <input type="text" value="" class="form-control" ng-required="platform!='Android'"/>
+                        <span class="input-group-addon">
+                            <i></i>
+                        </span>
+                    </div>
+                    <script>
+                        $(function() {
+                            $('.tint').colorpicker();
+                        });
+                    </script>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Icon</label>
+                    <div class="input-group">
+                        <input type="file" ng-file-select="onIconUpload($files)" ng-hide="isUploadingIcon || isUploadedIcon">
+                        <div ng-file-drop="onIconUpload($files)" ng-file-drag-over-class="optional-css-class"
+                        ng-show="dropSupported" ng-hide="isUploadingIcon || isUploadedIcon">Or drop the icon here</div>
+                        <p ng-show="isUploadingIcon">{{uploadProgressIcon}}%</p>
+                        <p ng-show="isUploadedIcon">The Icon is uploaded correct</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Logo</label>
+                    <div class="input-group">
+                        <input type="file" ng-file-select="onLogoUpload($files)" ng-hide="isUploadingIcon|| isUploadedLogo">
+                        <div ng-file-drop="onLogoUpload($files)" ng-file-drag-over-class="optional-css-class"
+                        ng-show="dropSupported" ng-hide="isUploadingLogo || isUploadedLogo">Or drop the logo here</div>
+                        <p ng-show="isUploadingLogo">{{uploadProgressLogo}}%</p>
+                        <p ng-show="isUploadedLogo">The Logo is uploaded correct</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col-md-4">
+    <h1>FREE</h1>
+    <button type="submit" class="btn btn-success" ng-disabled="form.$invalid || !isUploadedLogo || !isUploadedIcon || numTabs===0">Submit app ></button>
+</div>

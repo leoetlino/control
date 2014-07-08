@@ -19,7 +19,8 @@ require([
     'login/controllers/LoginCtrl',
     'dashboard/services/DashService',
     'manage/services/ManageService',
-    'feedback/services/FeedbackService'
+    'feedback/services/FeedbackService',
+    'requestapp/services/RequestappService'
 ], function() {
     angular.bootstrap(document, ['control']);
 });
