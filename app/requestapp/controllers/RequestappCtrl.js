@@ -1,6 +1,7 @@
 define(['control'], function(control) {
     control.register.controller('RequestappCtrl', function($scope, RequestappService, $upload) {
-    
+        $scope.isReady=false
+        
         $scope.website = ""
         $scope.facebook = ""
         $scope.twitter = ""
@@ -14,6 +15,7 @@ define(['control'], function(control) {
             var appCheck = function(app, l) {
                 res.data[l.key].app = app;
                 $scope.products.push(res.data[l.key])
+                $scope.isReady=true
             }
 
             for (var key in res.data) {
