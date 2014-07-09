@@ -22,36 +22,39 @@ define(['control'], function (control) {
                 $http.post('https://itframe.shoutca.st/control/hasAndroidapp/', {email:localStorageService.get('email'),key:localStorageService.get('token'),username:username})
                     .then(calliOS)
             },
-            submitAndroid:function(name,desc,site,facebook,twitter,bg,icon,logo){
+            submitAndroid:function(name,desc,site,facebook,twitter,bg,icon,logo,username){
                 if (!AuthService.isAuthenticated())return;
                 $http.post('https://itframe.shoutca.st/control/apps/submit/Anrdoid/', {
                     email:localStorageService.get('email'),
                     key:localStorageService.get('token'),
                     name:name,
-                    desc:desc,
+                    description:desc,
                     facebook:facebook,
                     twitter:twitter,
                     bg:bg,
                     icon:icon,
-                    logo:logo
+                    logo:logo,
+                    username:username
                 })
                     .then(function(andrdata) {
                     })
             },
-            submitiOS:function(name,desc,keywords,site,facebook,twitter,bg,icon,logo){
+            submitiOS:function(name,desc,keywords,site,facebook,twitter,bg,tint,icon,logo,username){
                 if (!AuthService.isAuthenticated())return;
                 $http.post('https://itframe.shoutca.st/control/apps/submit/iOS/', {
                     email:localStorageService.get('email'),
                     key:localStorageService.get('token'),
                     name:name,
-                    desc:desc,
-                    keywords:keywords,
+                    description:desc,
+                    tags:keywords,
                     site:site,
                     facebook:facebook,
                     twitter:twitter,
                     bg:bg,
+                    tint:tint,
                     icon:icon,
-                    logo:logo
+                    logo:logo,
+                    username:username
                 })
                     .then(function(andrdata) {
                     })

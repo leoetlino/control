@@ -1,22 +1,22 @@
-<div ng-show="isReady">
+<div ng-show="isReady && !appSubmited">
     <h1 class="page-header">
-        <i class="fa fa-mobile"></i>Request your mobile app</h1>
+        <i class="fa fa-mobile"></i> Request your mobile app</h1>
     <div class="col-md-8">
-        <form class="form-horizontal" role="form" name="form">
+        <form class="form-horizontal" role="form" name="form" ng-submit="submit()">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Server</label>
                 <div class="input-group">
-                    <select class="form-control" ng-model="server" required>
+                    <select class="form-control" ng-model="username" required>
                         <option ng-repeat="product in products" ng-disabled="product.ios && product.android || product.name=='Free'"
                         ng-value="product.username">{{product.username}}</option>
                     </select>
                 </div>
             </div>
-            <div ng-show="server">
+            <div ng-show="username">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Platform(s)</label>
                     <div class="input-group">
-                        <select class="form-control" ng-model="platform" ng-change="changeTab()"
+                        <select class="form-control" ng-model="platform"
                         required>
                             <option value="Both">Both</option>
                             <option value="Android">Android</option>
@@ -31,7 +31,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-pencil-square-o"></i>
                             </div>
-                            <input class="form-control" type="text" placeholder="App Name" required>
+                            <input class="form-control" type="text" placeholder="App Name" ng-model="name" required>
                         </div>
                     </div>
                     <div class="form-group" ng-hide="platform=='Android'">
@@ -40,7 +40,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-tags"></i>
                             </div>
-                            <input class="form-control" type="text" placeholder="App Keywords" maxlength="100"
+                            <input class="form-control" type="text" placeholder="App Keywords" ng-model="keywords" maxlength="100"
                             ng-required="platform!='Android'">
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-bars"></i>
                             </div>
-                            <textarea class="form-control" placeholder="App Description" required></textarea>
+                            <textarea class="form-control" placeholder="App Description" ng-model="desc" required></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -59,8 +59,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-globe"></i>
                             </div>
-                            <input class="form-control" type="text" placeholder="Website" ng-model="website"
-                            ng-change="changeTab()">
+                            <input class="form-control" type="text" placeholder="Website" ng-model="website" ng-change="changeTab()">
                         </div>
                     </div>
                     <div class="form-group">
@@ -69,8 +68,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-facebook-square"></i>
                             </div>
-                            <input class="form-control" type="text" placeholder="Facebook" ng-model="facebook"
-                            ng-change="changeTab()">
+                            <input class="form-control" type="text" placeholder="Facebook" ng-model="facebook" ng-change="changeTab()">
                         </div>
                     </div>
                     <div class="form-group">
@@ -79,14 +77,13 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-twitter-square"></i>
                             </div>
-                            <input class="form-control" type="text" placeholder="Twitter" ng-model="twitter"
-                            ng-change="changeTab()">
+                            <input class="form-control" type="text" placeholder="Twitter" ng-model="twitter" ng-change="changeTab()">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Background</label>
                         <div class="input-group bg">
-                            <input type="text" value="" class="form-control" required/>
+                            <input type="text" value="" class="form-control" ng-model="bg" required/>
                             <span class="input-group-addon">
                                 <i></i>
                             </span>
@@ -100,7 +97,7 @@
                     <div class="form-group" ng-hide="platform=='Android'">
                         <label class="col-sm-2 control-label">Button And Text Color</label>
                         <div class="input-group tint">
-                            <input type="text" value="" class="form-control" ng-required="platform!='Android'"
+                            <input type="text" value="" class="form-control" ng-model="tint" ng-required="platform!='Android'"
                             />
                             <span class="input-group-addon">
                                 <i></i>
@@ -116,8 +113,7 @@
                         <label class="col-sm-2 control-label">Icon</label>
                         <div class="input-group">
                             <input type="file" ng-file-select="onIconUpload($files)" ng-hide="isUploadingIcon || isUploadedIcon">
-                            <div ng-file-drop="onIconUpload($files)" ng-file-drag-over-class="optional-css-class"
-                            ng-show="dropSupported" ng-hide="isUploadingIcon || isUploadedIcon">Or drop the icon here</div>
+                            <div ng-file-drop="onIconUpload($files)" ng-file-drag-over-class="optional-css-class" ng-hide="isUploadingIcon || isUploadedIcon">Or drop the icon here</div>
                             <p ng-show="isUploadingIcon">{{uploadProgressIcon}}%</p>
                             <p ng-show="isUploadedIcon">The Icon is uploaded correct</p>
                         </div>
@@ -126,18 +122,29 @@
                         <label class="col-sm-2 control-label">Logo</label>
                         <div class="input-group">
                             <input type="file" ng-file-select="onLogoUpload($files)" ng-hide="isUploadingIcon|| isUploadedLogo">
-                            <div ng-file-drop="onLogoUpload($files)" ng-file-drag-over-class="optional-css-class"
-                            ng-show="dropSupported" ng-hide="isUploadingLogo || isUploadedLogo">Or drop the logo here</div>
+                            <div ng-file-drop="onLogoUpload($files)" ng-file-drag-over-class="optional-css-class" ng-hide="isUploadingLogo || isUploadedLogo">Or drop the logo here</div>
                             <p ng-show="isUploadingLogo">{{uploadProgressLogo}}%</p>
                             <p ng-show="isUploadedLogo">The Logo is uploaded correct</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        
     </div>
     <div class="col-md-4">
         <h1>FREE</h1>
-        <button type="submit" class="btn btn-success" ng-disabled="form.$invalid || !isUploadedLogo || !isUploadedIcon || numTabs===0">Submit app ></button>
+        <button type="submit" class="btn btn-success" ng-disabled="form.$invalid || numTabs===0 || !logo || !icon">Submit app ></button>
     </div>
+</div>
+</form>
+<div class="text-center" ng-show="appSubmited"> 
+    <br>
+    <h2>Thanks for your request</h2>
+    <p class="lead">We have received the request for your app. We will try to make it as soon as possible</p>
+    
+    <ul class="list-unstyled list-inline">
+        <li class="margin-top-0dot5em"><a href="/dashboard" class="btn btn-primary btn-xl"><i class="fa fa-dashboard"></i> Back to Dashboard</a></li>
+        <li class="margin-top-0dot5em"><a href="/manage" class="btn btn-success btn-xl"><i class="fa fa-sliders"> Manage</i></a></li>
+    </ul>
+    
 </div>
