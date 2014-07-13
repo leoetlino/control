@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="shoutca-st control" lang="en">
-
     <head>
         <meta charset="utf-8">
         <title ng-bind="pageTitle + ' - Control | SHOUTca.st'">Control | SHOUTca.st</title>
@@ -11,16 +10,18 @@
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
         <base href="/">
         <meta name="keywords" content="shoutcast servers, cheap shoutcast, shoutcast, start an internet radio station, start a radio station, online radio, radio, shout, cast">
-        <link data-noprefix href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-        <link data-noprefix href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link data-noprefix href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css" rel="stylesheet">
         <link data-noprefix href="https://fonts.googleapis.com/css?family=Montserrat:400|Lato:400" rel="stylesheet">
-        <link rel="stylesheet" href="https://shoutca.st/css/main.css">
+        <!-- build:css css/control.min.css -->
+        <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="libs/fontawesome/css/font-awesome.css">
+        <link rel="stylesheet" href="libs/animate.css/animate.css">
+        <link rel="stylesheet" href="libs/angular-bootstrap-colorpicker/css/colorpicker.css">
+        <link rel="stylesheet" href="css/shoutca-st.css">
         <link rel="stylesheet" href="css/control.css">
         <link rel="stylesheet" href="css/loading-bar.css">
-        <link rel="stylesheet" href="css/bootstrap-colorpicker.min.css">
+        <link rel="stylesheet" href="css/loading-bar-green.css">
+        <!-- endbuild -->
     </head>
-
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top" id="topbar" role="navigation">
             <div class="container">
@@ -155,26 +156,26 @@
                 </div>
             </div>
         </div>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="//shoutca.st/js/cookies.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.8/angular.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.8/angular-route.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.8/angular-animate.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.8/angular-cookies.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.0/ui-bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
-        <script src="js/angular-local-storage.min.js"></script>
-        <script src="js/angular-flash.min.js"></script>
-        <script src="js/loading-bar.js"></script>
-        <script src="js/bootstrap-colorpicker.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
-        <script src="js/angular-file-upload-shim.min.js"></script> 
-        <script src="js/angular-file-upload.min.js"></script> 
+        <!-- build:js js/control.min.js -->
+        <script src="libs/jquery/dist/jquery.js"></script>
+        <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="js/cookies.min.js"></script>
+        <script src="libs/angular/angular.js"></script>
+        <script src="libs/angular-route/angular-route.js"></script>
+        <script src="libs/angular-animate/angular-animate.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+        <script src="libs/angular-ui-bootstrap-bower/ui-bootstrap.js"></script>
+        <script src="libs/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
+        <script src="libs/angular-local-storage/angular-local-storage.js"></script>
+        <script src="libs/angular-flash/dist/angular-flash.js"></script>
+        <script src="libs/angular-loading-bar/build/loading-bar.js"></script>
+        <script src="libs/angular-file-upload/angular-file-upload.js"></script>
+        <script src="libs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+        <script src="libs/modernizr/modernizr.js"></script>
+        <script src="libs/prefixfree/prefixfree.min.js"></script>
+        <script src="libs/requirejs/require.js"></script>
         <script src="app/app.js"></script>
+        <!-- endbuild -->
         <!-- Piwik -->
         <script>
             var _paq = _paq || [];
