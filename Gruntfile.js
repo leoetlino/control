@@ -74,6 +74,26 @@ module.exports = function (grunt) {
                     'dist/index.html': 'dist/index.html'
                 }
             }
+        },
+        jshint: {
+            options: {
+                curly: true,
+                eqeqeq: true,
+                eqnull: true,
+                browser: true,
+                indent: 4,
+                quotmark: 'single',
+                undef: true,
+                unused: true,
+                jquery: true,
+                globals: {
+                    jQuery: true,
+                    require: true,
+                    define: true,
+                    angular: true
+                },
+            },
+            all: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'js/**.js']
         }
     });
 
@@ -86,9 +106,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-rev');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin'
+        'jshint', 'clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin'
     ]);
 };
