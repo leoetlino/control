@@ -1,26 +1,24 @@
-/*
- * Loader
- * Copyright © 2014, Innovate Technologies.
- *
- */
+(function() {
+    'use strict';
+    /* global require, angular, document */
+    require.config({
+        baseUrl: "/app"
+    });
 
-require.config({
-    baseUrl: "/app"
-});
-
-require([
-    'control',
-    'common/services/routeResolver',
-    'common/services/HttpTimeoutInterceptor',
-    'login/services/Session',
-    'login/services/AuthService',
-    'login/services/AuthInterceptor',
-    'common/controllers/NavigationCtrl',
-    'login/controllers/LoginCtrl',
-    'dashboard/services/DashService',
-    'manage/services/ManageService',
-    'feedback/services/FeedbackService',
-    'requestapp/services/RequestappService'
-], function() {
-    angular.bootstrap(document, ['control']);
-});
+    require([
+        'control',
+        'common/services/routeResolver',
+        'common/services/HttpTimeoutInterceptor',
+        'login/services/Session',
+        'login/services/AuthService',
+        'login/services/AuthInterceptor',
+        'common/controllers/NavigationCtrl',
+        'login/controllers/LoginCtrl',
+        'dashboard/services/DashService',
+        'manage/services/ManageService',
+        'feedback/services/FeedbackService',
+        'requestapp/services/RequestappService'
+    ], function() {
+        angular.bootstrap(document, ['control']);
+    });
+})();
