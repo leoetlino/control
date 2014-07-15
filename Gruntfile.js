@@ -86,6 +86,7 @@ module.exports = function (grunt) {
                 undef: true,
                 unused: true,
                 jquery: true,
+                plusplus: false,
                 globals: {
                     jQuery: true,
                     require: true,

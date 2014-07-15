@@ -37,7 +37,7 @@ define(['control'], function(control) {
             }
 
         });
-        $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+        $rootScope.$on('$routeChangeSuccess', function() {
             $rootScope.pageTitle = $route.current.title;
         });
 

@@ -2,7 +2,7 @@
     'use strict';
     /* global require, angular, document */
     require.config({
-        baseUrl: "/app"
+        baseUrl: '/app'
     });
 
     require([
