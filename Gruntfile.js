@@ -1,4 +1,4 @@
-/* global module */
+/* global module, require */
 module.exports = function (grunt) {
     'use strict';
     grunt.initConfig({
@@ -107,6 +107,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+
+    grunt.registerTask('install-hook', function () {
+        var fs = require('fs');
+        grunt.file.copy('hooks/commit-msg', '.git/hooks/commit-msg');
+        fs.chmodSync('.git/hooks/commit-msg', '755');
+    });
+
+    grunt.task.run('install-hook');
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [

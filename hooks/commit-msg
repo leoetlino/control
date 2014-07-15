@@ -1,0 +1,4 @@
+#!/bin/sh
+
+exec < /dev/tty
+python hooks/validate-commit.py $1
