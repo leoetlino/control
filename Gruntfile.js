@@ -94,6 +94,11 @@ module.exports = function (grunt) {
                 },
             },
             all: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'js/**.js']
+        },
+        githooks: {
+            all: {
+                'pre-commit': 'jshint:all',
+            }
         }
     });
 
@@ -107,6 +112,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-githooks');
 
     grunt.registerTask('install-hook', function () {
         var fs = require('fs');
