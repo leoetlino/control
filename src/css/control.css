@@ -64,6 +64,11 @@
     animation: fadeIn 0.2s both ease-in;
 }
 
+.form-color-picker .input-group-addon {
+    padding: 0;
+    width: 30px;
+}
+
 /* Fixes */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 

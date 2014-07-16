@@ -16,9 +16,11 @@
  * Co-Founder Innovate Technologies
  */
 
-/* global define, angular, $ */
+/* global define, angular, $, require */
 define(['common/services/routeResolver'], function () {
-    var control = angular.module('control', ['LocalStorageModule', 'angular-loading-bar', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'routeResolverServices', 'ui.bootstrap', 'ngRoute', 'ngAnimate','angularFileUpload']);
+    'use strict';
+
+    var control = angular.module('control', ['LocalStorageModule', 'angular-loading-bar', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'routeResolverServices', 'ui.bootstrap', 'ngRoute', 'ngAnimate', 'angularFileUpload', 'colorpicker.module']);
 
     control.config(['$routeProvider', '$locationProvider', 'routeResolverProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', 'USER_ROLES', 'flashProvider',
         function ($routeProvider, $locationProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, USER_ROLES, flashProvider) {

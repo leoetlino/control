@@ -111,13 +111,5 @@ define(['control'], function(control) {
                 }).progress(changeProgress(evt)).success(uploadSuccess(data));
             }
         };
-
-        $('.bg').colorpicker().on('changeColor', function (ev) {
-            $scope.bg = ev.color.toHex();
-        });
-
-        $('.tint').colorpicker().on('changeColor', function (ev) {
-            $scope.tint = ev.color.toHex();
-        });
     });
 });
