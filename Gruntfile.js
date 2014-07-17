@@ -195,6 +195,7 @@ module.exports = function (grunt) {
     });
 
     grunt.task.run('install-hook');
+    grunt.task.run('githooks');
 
     grunt.registerTask('generate-dev-config', function () {
         grunt.task.run('ngconstant:development');
