@@ -192,10 +192,10 @@ module.exports = function (grunt) {
         var fs = require('fs');
         grunt.file.copy('hooks/commit-msg', '.git/hooks/commit-msg');
         fs.chmodSync('.git/hooks/commit-msg', '755');
+        grunt.task.run('githooks');
     });
 
     grunt.task.run('install-hook');
-    grunt.task.run('githooks');
 
     grunt.registerTask('generate-dev-config', function () {
         grunt.task.run('ngconstant:development');
