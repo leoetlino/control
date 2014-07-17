@@ -17,7 +17,7 @@
  */
 
 /* global define, angular, $, require */
-define(['common/services/routeResolver'], function () {
+define([], function () {
     'use strict';
 
     var control = angular.module('control', ['LocalStorageModule', 'angular-loading-bar', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'routeResolverServices', 'ui.bootstrap', 'ngRoute', 'ngAnimate', 'angularFileUpload', 'colorpicker.module', 'config']);
@@ -58,7 +58,7 @@ define(['common/services/routeResolver'], function () {
                         },
                         controller: ['$q', '$rootScope', function ($q, $rootScope) {
                             var defer = $q.defer();
-                            require(['/app/dashboard/controllers/DashboardCtrl.js'], function () {
+                            require(['dashboard/controllers/DashboardCtrl.js'], function () {
                                 defer.resolve();
                                 $rootScope.$apply();
                             });

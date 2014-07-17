@@ -130,6 +130,17 @@ module.exports = function (grunt) {
                 }
             }
         },
+        requirejs: {
+            compile: {
+                options: {
+                    baseUrl: 'dist/app',
+                    mainConfigFile: 'dist/app/app.js',
+                    out: 'dist/app/control-bundle.min.js',
+                    name: 'app',
+                    findNestedDependencies: true
+                }
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -144,6 +155,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-githooks');
     grunt.loadNpmTasks('grunt-ng-constant');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     grunt.registerTask('install-hook', function () {
         var fs = require('fs');
@@ -159,6 +171,6 @@ module.exports = function (grunt) {
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'ngconstant:production', 'clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin'
+        'jshint', 'ngconstant:production', 'clean', 'copy', 'useminPrepare', 'requirejs', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin'
     ]);
 };
