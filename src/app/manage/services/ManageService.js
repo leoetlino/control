@@ -1,24 +1,21 @@
 define(['control'], function (control) {
-    control.factory('ManageService', function ($http, localStorageService) {
+    control.factory('ManageService', function ($http, ENV) {
         return {
             list:function(callback){
-                $http.post('https://itframe.shoutca.st/control/accounts/', {email:localStorageService.get('email'),key:localStorageService.get('token')})
-                    .then(callback);
+                $http.post('https://' + ENV.apiEndpoint + '/control/accounts/').then(callback);
             },
 
             hasApp:function(username,callback,l){
                 var app={};
                 var calliOS=function(andrdata){
                     app.android=andrdata.data.hasAndoidapp;
-                    $http.post('https://itframe.shoutca.st/control/hasiOSapp/', {email:localStorageService.get('email'),key:localStorageService.get('token'),username:username})
-                    .then(checkiOS);
+                    $http.post('https://' + ENV.apiEndpoint + '/control/hasiOSapp/', {username: username}).then(checkiOS);
                 };
                 var checkiOS=function(iosdata){
                     app.ios=iosdata.data.hasiOSapp;
                     callback(app,l);
                 };
-                $http.post('https://itframe.shoutca.st/control/hasAndroidapp/', {email:localStorageService.get('email'),key:localStorageService.get('token'),username:username})
-                    .then(calliOS);
+                $http.post('https://' + ENV.apiEndpoint + '/control/hasAndroidapp/', {username:username}).then(calliOS);
             }
         };
     });

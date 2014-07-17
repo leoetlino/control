@@ -1,5 +1,5 @@
 define(['control'], function(control) {
-    control.register.controller('RequestappCtrl', function($scope, RequestappService, $upload) {
+    control.register.controller('RequestappCtrl', function($scope, RequestappService, $upload, ENV) {
         $scope.isReady = false;
         $scope.appSubmited = false;
 
@@ -78,7 +78,7 @@ define(['control'], function(control) {
             }, i, evt, data;
             for (i = 0; i < $files.length; i++) {
                 $scope.upload = $upload.upload({
-                    url: 'https://itframe.shoutca.st/control/apps/iconupload/',
+                    url: 'https://' + ENV.apiEndpoint + '/control/apps/iconupload/',
                     method: 'POST',
                     data: {},
                     file: $files[i]
@@ -104,7 +104,7 @@ define(['control'], function(control) {
             }, i, evt, data;
             for (i = 0; i < $files.length; i++) {
                 $scope.upload = $upload.upload({
-                    url: 'https://itframe.shoutca.st/control/apps/logoupload/',
+                    url: 'https://' + ENV.apiEndpoint + '/control/apps/logoupload/',
                     method: 'POST',
                     data: {},
                     file: $files[i]

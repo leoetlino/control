@@ -1,16 +1,16 @@
 define(['control'], function (control) {
-    control.factory('AuthService', function ($http, Session, USER_ROLES, localStorageService) {
+    control.factory('AuthService', function ($http, Session, USER_ROLES, localStorageService, ENV) {
         return {
             login: function (credentials) {
                 return $http
-                    .post('https://itframe.shoutca.st/control/login/', credentials)
+                    .post('https://' + ENV.apiEndpoint + '/control/login/', credentials)
                     .then(function (res) {
                         Session.create(res.data.key, res.data.email);
                     });
             },
             logout: function (credentials) {
                 return $http
-                    .post('https://itframe.shoutca.st/control/logout/', credentials)
+                    .post('https://' + ENV.apiEndpoint + '/control/logout/', credentials)
                     .then(function () {
                         Session.destroy();
                     });

@@ -1,8 +1,8 @@
 define(['control'], function (control) {
-    control.factory('FeedbackService', function ($http, localStorageService) {
+    control.factory('FeedbackService', function ($http, ENV) {
         return {
             send: function (title, message) {
-                $http.post('https://itframe.shoutca.st/control/feedback/', {email:localStorageService.get('email'),key:localStorageService.get('token'), 'title': title, 'message': message});
+                $http.post('https://' + ENV.apiEndpoint + '/control/feedback/', {'title': title, 'message': message});
             }
         };
     });
