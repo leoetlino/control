@@ -92,7 +92,7 @@ module.exports = function (grunt) {
                     require: true,
                     define: true,
                     angular: true
-                },
+                }
             },
             all: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'js/**.js']
         },
@@ -106,11 +106,11 @@ module.exports = function (grunt) {
                 name: 'config',
                 dest: 'src/app/config.js',
                 beautify: {
-                    "indent_size": 4,
-                    "indent_char": " ",
-                    "indent_level": 0,
-                    "indent_with_tabs": false,
-                    "space_before_conditional": true
+                    indent_size: 4,
+                    indent_char: ' ',
+                    indent_level: 0,
+                    indent_with_tabs: false,
+                    space_before_conditional: true
                 }
             },
             development: {
