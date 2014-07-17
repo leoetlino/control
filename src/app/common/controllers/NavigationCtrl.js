@@ -7,11 +7,8 @@ define(['control'], function(control) {
         $scope.isAuthenticated = AuthService.isAuthenticated;
         $scope.currentSession = Session;
         $scope.logout = function() {
-            AuthService.logout({'email': Session.email, 'key': Session.token}).then(function() {
-                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-            }, function() {
-                $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
-            });
+            AuthService.logout();
+            $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
         };
 
         $scope.isActive = function (viewLocation) {

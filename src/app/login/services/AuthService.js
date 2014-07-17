@@ -3,17 +3,13 @@ define(['control'], function (control) {
         return {
             login: function (credentials) {
                 return $http
-                    .post('https://' + ENV.apiEndpoint + '/control/login/', credentials)
+                    .post('https://' + ENV.apiEndpoint + '/authenticate', credentials)
                     .then(function (res) {
-                        Session.create(res.data.key, res.data.email);
+                        Session.create(res.data.token);
                     });
             },
-            logout: function (credentials) {
-                return $http
-                    .post('https://' + ENV.apiEndpoint + '/control/logout/', credentials)
-                    .then(function () {
-                        Session.destroy();
-                    });
+            logout: function () {
+                Session.destroy();
             },
             isAuthenticated: function () {
                 if (localStorageService.get('token') !== 'undefined' && localStorageService.get('token') !== null) {
