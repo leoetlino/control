@@ -171,6 +171,6 @@ module.exports = function (grunt) {
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'ngconstant:production', 'clean', 'copy', 'useminPrepare', 'requirejs', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin'
+        'jshint', 'ngconstant:production', 'clean', 'copy', 'useminPrepare', 'requirejs', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development'
     ]);
 };
