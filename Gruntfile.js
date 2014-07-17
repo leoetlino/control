@@ -4,7 +4,10 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         bowerrc: grunt.file.readJSON('.bowerrc'),
-        clean: ['dist', '.tmp'],
+        clean: {
+            preBuild: ['dist', '.tmp'],
+            postBuild: ['.tmp', 'backup']
+        },
         dirs: {
             'vendor': '<%= bowerrc.directory %>',
             'bootstrap': {
@@ -27,6 +30,18 @@ module.exports = function (grunt) {
                 cwd: 'src/libs/fontawesome/fonts/',
                 src: ['*.{eot,svg,ttf,woff}'],
                 dest: 'dist/fonts/'
+            },
+            backupIndexHtml: {
+                expand: true,
+                cwd: 'src/',
+                src: 'index.html',
+                dest: 'backup/'
+            },
+            restoreIndexHtml: {
+                expand: true,
+                cwd: 'backup',
+                src: 'index.html',
+                dest: 'src/'
             }
         },
         useminPrepare: {
@@ -53,7 +68,7 @@ module.exports = function (grunt) {
         rev: {
             assets: {
                 files: [{
-                    src: ['dist/js/control.min.js', 'dist/css/control.min.css', 'dist/**.js', 'dist/css/**.css', 'dist/libs/*/**.css', 'dist/**.eot', 'dist/**.svg', 'dist/**.ttf', 'dist/**.woff', 'dist/**.jpg', 'dist/**.png']
+                    src: ['dist/js/control-bundle.min.js', 'dist/js/control.min.js', 'dist/css/control.min.css', 'dist/**.js', 'dist/css/**.css', 'dist/libs/*/**.css', 'dist/**.eot', 'dist/**.svg', 'dist/**.ttf', 'dist/**.woff', 'dist/**.jpg', 'dist/**.png']
                 }]
             }
         },
@@ -137,7 +152,22 @@ module.exports = function (grunt) {
                     mainConfigFile: 'dist/app/app.js',
                     out: 'dist/app/control-bundle.min.js',
                     name: 'app',
-                    findNestedDependencies: true
+                    findNestedDependencies: true,
+                    uglify: {
+                        no_mangle: true
+                    }
+                }
+            }
+        },
+        htmlbuild: {
+            production: {
+                src: 'src/index.html',
+                dest: 'src/',
+                options: {
+                    scripts: {
+                        controlApp: 'dist/app/control-bundle.min.js'
+                    },
+                    parseTag: 'htmlbuild'
                 }
             }
         }
@@ -156,6 +186,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-githooks');
     grunt.loadNpmTasks('grunt-ng-constant');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-html-build');
 
     grunt.registerTask('install-hook', function () {
         var fs = require('fs');
@@ -171,6 +202,6 @@ module.exports = function (grunt) {
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'ngconstant:production', 'clean', 'copy', 'useminPrepare', 'requirejs', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development'
+        'jshint', 'ngconstant:production', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupIndexHtml', 'requirejs', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreIndexHtml', 'clean:postBuild'
     ]);
 };
