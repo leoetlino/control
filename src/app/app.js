@@ -14,6 +14,7 @@
         'login/services/AuthInterceptor',
         'common/controllers/NavigationCtrl',
         'login/controllers/LoginCtrl',
+        'dashboard/controllers/DashboardCtrl',
         'dashboard/services/DashService',
         'manage/services/ManageService',
         'feedback/services/FeedbackService',

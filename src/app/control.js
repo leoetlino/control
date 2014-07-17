@@ -16,7 +16,7 @@
  * Co-Founder Innovate Technologies
  */
 
-/* global define, angular, $, require */
+/* global define, angular, $ */
 define([], function () {
     'use strict';
 
@@ -55,15 +55,7 @@ define([], function () {
                             return DashService.getInfo().then(function (response) {
                                 return response.data;
                             });
-                        },
-                        controller: ['$q', '$rootScope', function ($q, $rootScope) {
-                            var defer = $q.defer();
-                            require(['dashboard/controllers/DashboardCtrl.js'], function () {
-                                defer.resolve();
-                                $rootScope.$apply();
-                            });
-                            return defer.promise;
-                        }]
+                        }
                     },
                     controller: 'DashboardCtrl'
                 })
