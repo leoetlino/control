@@ -100,7 +100,36 @@ module.exports = function (grunt) {
             all: {
                 'pre-commit': 'jshint:all'
             }
-        }
+        },
+        ngconstant: {
+            options: {
+                name: 'config',
+                dest: 'src/app/config.js',
+                beautify: {
+                    "indent_size": 4,
+                    "indent_char": " ",
+                    "indent_level": 0,
+                    "indent_with_tabs": false,
+                    "space_before_conditional": true
+                }
+            },
+            development: {
+                constants: {
+                    ENV: {
+                        name: 'development',
+                        apiEndpoint: 'itframe-c9-imstr.c9.io'
+                    }
+                }
+            },
+            production: {
+                constants: {
+                    ENV: {
+                        name: 'production',
+                        apiEndpoint: 'itframe.shoutca.st'
+                    }
+                }
+            }
+        },
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -114,6 +143,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-githooks');
+    grunt.loadNpmTasks('grunt-ng-constant');
 
     grunt.registerTask('install-hook', function () {
         var fs = require('fs');
@@ -123,8 +153,12 @@ module.exports = function (grunt) {
 
     grunt.task.run('install-hook');
 
+    grunt.registerTask('generate-dev-config', function () {
+        grunt.task.run('ngconstant:development');
+    });
+
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin'
+        'jshint', 'ngconstant:production', 'clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin'
     ]);
 };
