@@ -1,6 +1,3 @@
 {
-    "directory": "src/libs",
-    "scripts": {
-        "postinstall": "node_modules/bower-requirejs/bin/bower-requirejs.js -c src/app/config.js"
-    }
+    "directory": "src/libs"
 }
