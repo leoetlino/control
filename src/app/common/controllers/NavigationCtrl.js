@@ -31,8 +31,11 @@ define(['control'], function(control) {
                         originalPath = next.originalPath;
                     }
                 }
+            } else {
+                if (next.originalPath === '/login') {
+                    $location.path('/');
+                }
             }
-
         });
         $rootScope.$on('$routeChangeSuccess', function() {
             $rootScope.pageTitle = $route.current.title;
