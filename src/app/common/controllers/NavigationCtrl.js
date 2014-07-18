@@ -32,7 +32,7 @@ define(['control'], function(control) {
                     }
                 }
             } else {
-                if (next.originalPath === '/login') {
+                if (next.originalPath === '/login' && AuthService.isReallyAuthenticated()) {
                     $location.path('/');
                 }
             }

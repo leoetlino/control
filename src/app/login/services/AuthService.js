@@ -17,6 +17,20 @@ define(['control'], function (control) {
                 }
                 return !!Session.token;
             },
+            isReallyAuthenticated: function () {
+                var interceptors = control.$httpProvider.interceptors;
+                // temporarily disable AuthInterceptor
+                interceptors.splice(interceptors.indexOf('AuthInterceptor'), 1);
+                $http.post('https://' + ENV.apiEndpoint + '/control/check/')
+                    .then(function () {
+                        interceptors.push('AuthInterceptor');
+                        return true;
+                    }, function () {
+                        interceptors.push('AuthInterceptor');
+                        return false;
+                    });
+                return null;
+            },
             isAuthorized: function (authorizedRoles) {
                 if (!angular.isArray(authorizedRoles)) {
                     authorizedRoles = [authorizedRoles];
