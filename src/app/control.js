@@ -22,8 +22,8 @@ define([], function () {
 
     var control = angular.module('control', ['LocalStorageModule', 'angular-loading-bar', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'routeResolverServices', 'ui.bootstrap', 'ngRoute', 'ngAnimate', 'angularFileUpload', 'colorpicker.module', 'config', 'ngBootbox']);
 
-    control.config(['$routeProvider', '$locationProvider', 'routeResolverProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', 'USER_ROLES', 'flashProvider',
-        function ($routeProvider, $locationProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, USER_ROLES, flashProvider) {
+    control.config(['$routeProvider', '$locationProvider', 'routeResolverProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', 'USER_ROLES', 'flashProvider', '$httpProvider',
+        function ($routeProvider, $locationProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, USER_ROLES, flashProvider, $httpProvider) {
 
             flashProvider.errorClassnames.push('alert-danger');
             flashProvider.warnClassnames.push('alert-warning');
@@ -76,13 +76,11 @@ define([], function () {
                 });
 
             $locationProvider.html5Mode(true);
-    }]);
 
-    control.config(function ($httpProvider) {
-        $httpProvider.interceptors.push('AuthInterceptor');
-        $httpProvider.interceptors.push('HttpTimeoutInterceptor');
-        $httpProvider.interceptors.push('ServerErrorInterceptor');
-    });
+            $httpProvider.interceptors.push('AuthInterceptor');
+            $httpProvider.interceptors.push('HttpTimeoutInterceptor');
+            $httpProvider.interceptors.push('ServerErrorInterceptor');
+    }]);
 
     return control;
 });
