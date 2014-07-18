@@ -1,0 +1,13 @@
+{
+  "name": "ngBootbox",
+  "homepage": "https://github.com/eriktufvesson/ngBootbox",
+  "_release": "48b8c69f51",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "48b8c69f510c7ff0a17f6a398c778b36383dbf16"
+  },
+  "_source": "git://github.com/eriktufvesson/ngBootbox.git",
+  "_target": "*",
+  "_originalSource": "ngBootbox"
+}
