@@ -6,6 +6,11 @@ define(['control'], function (control) {
             localStorageService.set('token', token);
         };
 
+        this.update = function (token) {
+            this.destroy();
+            this.create(token);
+        };
+
         this.createFromLocalStorage = function () {
             this.token = localStorageService.get('token');
             this.userRole = [USER_ROLES.user];
