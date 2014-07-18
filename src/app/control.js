@@ -81,6 +81,7 @@ define([], function () {
     control.config(function ($httpProvider) {
         $httpProvider.interceptors.push('AuthInterceptor');
         $httpProvider.interceptors.push('HttpTimeoutInterceptor');
+        $httpProvider.interceptors.push('ServerErrorInterceptor');
     });
 
     return control;

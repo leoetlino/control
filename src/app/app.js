@@ -9,6 +9,7 @@
         'control',
         'common/services/routeResolver',
         'common/services/HttpTimeoutInterceptor',
+        'common/services/ServerErrorInterceptor',
         'login/services/Session',
         'login/services/AuthService',
         'login/services/AuthInterceptor',
