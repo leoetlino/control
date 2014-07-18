@@ -37,6 +37,8 @@ define([], function () {
                 factory: $provide.factory,
                 service: $provide.service
             };
+            control.$httpProvider = $httpProvider;
+
             var route = routeResolverProvider.route();
 
             $routeProvider
