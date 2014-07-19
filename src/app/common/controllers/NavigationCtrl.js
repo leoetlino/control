@@ -34,10 +34,6 @@ define(['control'], function(control) {
                         originalPath = next.originalPath;
                     }
                 }
-            } else {
-                if (next.originalPath === '/login' && AuthChecker.isReallyAuthenticated()) {
-                    $location.path('/');
-                }
             }
         });
         $rootScope.$on('$routeChangeSuccess', function() {
