@@ -9,7 +9,11 @@ define(['control'], function (control) {
                     });
             },
             logout: function () {
-                Session.destroy();
+                return $http
+                    .post('https://' + ENV.apiEndpoint + '/control/log-out')
+                    .then(function () {
+                        Session.destroy();
+                    });
             },
             keepAlivePromise: null,
             keepAlive: function () {

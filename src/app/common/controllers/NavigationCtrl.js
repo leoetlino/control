@@ -7,8 +7,11 @@ define(['control'], function(control) {
         $scope.isAuthenticated = AuthChecker.isAuthenticated;
         $scope.currentSession = Session;
         $scope.logout = function() {
-            AuthService.logout();
-            $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+            AuthService.logout().then(function () {
+                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+            }, function () {
+                $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
+            });
         };
 
         $scope.isActive = function (viewLocation) {
