@@ -132,7 +132,7 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'development',
-                        apiEndpoint: 'itframe-c9-imstr.c9.io'
+                        apiEndpoint: 'dev-itframe.shoutca.st'
                     }
                 }
             },
