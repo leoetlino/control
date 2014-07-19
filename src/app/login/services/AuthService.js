@@ -1,66 +1,38 @@
 define(['control'], function (control) {
-    control.factory('AuthService', function ($http, Session, USER_ROLES, localStorageService, ENV, $interval) {
-        return {
+    control.factory('AuthService', function ($http, Session, USER_ROLES, localStorageService, ENV, AuthChecker, $rootScope, $interval, AUTH_EVENTS) {
+        var AuthService = {
             login: function (credentials) {
                 return $http
                     .post('https://' + ENV.apiEndpoint + '/authenticate', credentials)
                     .then(function (res) {
                         Session.create(res.data.token);
-                        this.keepAlivePromise = $interval(this.keepAlive, 1000 * 60 * 25);
                     });
             },
             logout: function () {
                 Session.destroy();
-                if (angular.isDefined(this.keepAlivePromise)) {
-                    $interval.cancel(this.keepAlivePromise);
-                    this.keepAlivePromise = null;
-                }
-            },
-            isAuthenticated: function () {
-                if (localStorageService.get('token') !== 'undefined' && localStorageService.get('token') !== null) {
-                    Session.createFromLocalStorage();
-                }
-                return !!Session.token;
-            },
-            isReallyAuthenticated: function () {
-                var interceptors = control.$httpProvider.interceptors;
-                // temporarily disable AuthInterceptor
-                interceptors.splice(interceptors.indexOf('AuthInterceptor'), 1);
-                $http.post('https://' + ENV.apiEndpoint + '/control/check/')
-                    .then(function () {
-                        interceptors.push('AuthInterceptor');
-                        return true;
-                    }, function () {
-                        interceptors.push('AuthInterceptor');
-                        return false;
-                    });
-                return null;
-            },
-            isAuthorized: function (authorizedRoles) {
-                if (!angular.isArray(authorizedRoles)) {
-                    authorizedRoles = [authorizedRoles];
-                }
-                if (authorizedRoles.indexOf(USER_ROLES.public) !== -1) {
-                    return true;
-                }
-                if (authorizedRoles.indexOf(USER_ROLES.all) !== -1 && this.isAuthenticated()) {
-                    return true;
-                }
-                return (this.isAuthenticated() &&
-                    authorizedRoles.indexOf(Session.userRole) !== -1);
             },
             keepAlivePromise: null,
             keepAlive: function () {
-                if (!this.isReallyAuthenticated()) {
-                    return;
-                }
-
                 $http.post('https://' + ENV.apiEndpoint + '/control/keep-alive')
-                .then(function (res) {
-                    Session.update(res.data.token);
-                });
+                    .then(function (res) {
+                        Session.update(res.data.token);
+                    }, function (response) {
+                        $rootScope.$broadcast(AUTH_EVENTS.sessionTimeout, response);
+                    });
             }
         };
+
+        $rootScope.$on('sessionCreated', function onSessionCreated () {
+            AuthService.keepAlivePromise = $interval(AuthService.keepAlive, 1000 * 60 * 25);
+        });
+        $rootScope.$on('sessionDestroyed', function onSessionDestroyed () {
+            if (angular.isDefined(AuthService.keepAlivePromise)) {
+                $interval.cancel(AuthService.keepAlivePromise);
+                AuthService.keepAlivePromise = null;
+            }
+        });
+
+        return AuthService;
     });
 
 });

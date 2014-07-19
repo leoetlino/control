@@ -1,10 +1,10 @@
 /* global define */
 define(['control'], function(control) {
-    control.controller('NavigationCtrl', function($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthService, flash, Session) {
+    control.controller('NavigationCtrl', function($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session) {
         $scope.currentUser = null;
         $scope.userRoles = USER_ROLES;
-        $scope.isAuthorized = AuthService.isAuthorized;
-        $scope.isAuthenticated = AuthService.isAuthenticated;
+        $scope.isAuthorized = AuthChecker.isAuthorized;
+        $scope.isAuthenticated = AuthChecker.isAuthenticated;
         $scope.currentSession = Session;
         $scope.logout = function() {
             AuthService.logout();
@@ -17,9 +17,9 @@ define(['control'], function(control) {
         var originalPath = null;
         $rootScope.$on('$routeChangeStart', function(event, next) {
             var authorizedRoles = next.authorizedRoles;
-            if (!AuthService.isAuthorized(authorizedRoles)) {
+            if (!AuthChecker.isAuthorized(authorizedRoles)) {
                 event.preventDefault();
-                if (AuthService.isAuthenticated()) {
+                if (AuthChecker.isAuthenticated()) {
                     // user is not allowed
                     if (next.originalPath !== '/login') {
                         $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
@@ -32,7 +32,7 @@ define(['control'], function(control) {
                     }
                 }
             } else {
-                if (next.originalPath === '/login' && AuthService.isReallyAuthenticated()) {
+                if (next.originalPath === '/login' && AuthChecker.isReallyAuthenticated()) {
                     $location.path('/');
                 }
             }

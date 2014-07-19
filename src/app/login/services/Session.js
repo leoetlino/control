@@ -1,10 +1,11 @@
 define(['control'], function (control) {
-    control.service('Session', function (USER_ROLES, localStorageService) {
+    control.service('Session', function (USER_ROLES, localStorageService, $rootScope) {
         return {
             create: function (token) {
                 this.token = token;
                 this.userRole = [USER_ROLES.user];
                 localStorageService.set('token', token);
+                $rootScope.$broadcast('sessionCreated');
             },
 
             update: function (token) {
@@ -13,14 +14,14 @@ define(['control'], function (control) {
             },
 
             createFromLocalStorage: function () {
-                this.token = localStorageService.get('token');
-                this.userRole = [USER_ROLES.user];
+                this.create(localStorageService.get('token'));
             },
 
             destroy: function () {
                 this.token = null;
                 this.userRole = null;
                 localStorageService.remove('token');
+                $rootScope.$broadcast('sessionDestroyed');
             }
         };
     });

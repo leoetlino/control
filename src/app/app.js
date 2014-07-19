@@ -11,6 +11,7 @@
         'common/services/HttpTimeoutInterceptor',
         'common/services/ServerErrorInterceptor',
         'login/services/Session',
+        'login/services/AuthChecker',
         'login/services/AuthService',
         'login/services/AuthInterceptor',
         'common/controllers/NavigationCtrl',
