@@ -27,7 +27,7 @@ define(['control'], function (control) {
         };
 
         $rootScope.$on('sessionCreated', function onSessionCreated () {
-            AuthService.keepAlivePromise = $interval(AuthService.keepAlive, 1000 * 60 * 25);
+            AuthService.keepAlivePromise = $interval(AuthService.keepAlive, 1000 * 60 * 5);
         });
         $rootScope.$on('sessionDestroyed', function onSessionDestroyed () {
             if (angular.isDefined(AuthService.keepAlivePromise)) {
