@@ -187,6 +187,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-ng-constant');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-html-build');
+    grunt.loadNpmTasks('grunt-html2js');
 
     grunt.registerTask('install-hook', function () {
         var fs = require('fs');
