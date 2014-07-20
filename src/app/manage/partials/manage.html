@@ -1,37 +1,43 @@
-<div ng-show="isReady">
-<h1 class="page-header"><i class="fa fa-sliders"></i> Manage your services</h1>
-
-    <div class="col-md-4">
-        <ul class="nav nav-pills nav-stacked">
-            <li ng-repeat="product in products" ng-class="{active:isTabActive(product.id)}"><a ng-click="selectTab(product.id)">{{product.username}} - {{product.name}}</a></li>
-        </ul>
-    </div>
-    <div class="col-md-8" ng-repeat="product in products" ng-show="isTabActive(product.id)">
-        <h3 class="page-header"></i>{{product.group}} - {{product.name}} - {{product.username}}</h3>
-        <div class="bs-callout bs-callout-warning" ng-show="product.group=='Resellers (France)' || product.group=='Resellers (Canada)'">
-            <p><b>Limited reseller support</b></p>
-            <p>Because of the reason that resellers need to stay white label we have decided not to provide Control to resellers.</p>
-            <p>To request your apps please create a support ticket.</p>
+<h1 class="page-header"><fa name="sliders"></fa> Manage your services</h1>
+<br>
+<tabset vertical="true" type="pills">
+    <tab ng-repeat="product in products">
+        <tab-heading><fa name="gear"></fa> {{product.group}} - {{product.name}}<br><i>{{product.username}}</i> <span class="label" ng-class="{'label-danger': (['Terminated', 'Suspended', 'Cancelled'].indexOf(product.status) > -1), 'label-warning': (product.status === 'Pending'), 'label-success': (product.status === 'Active')}">{{product.status}}</span></tab-heading>
+        <h2 class="page-header no-margin-top">Service #{{product.id}}</h2>
+        <!-- Warnings -->
+        <div class="alert alert-danger" ng-show="(['Terminated', 'Suspended'].indexOf(product.status) > -1)">
+            <p><fa name="warning"></fa> This service has been terminated or suspended. No action can be taken on it.</p>
         </div>
-        
-        <div ng-hide="product.group=='Resellers (France)' || product.group=='Resellers (Canada)'">
-            <div class="col-md-6" ng-hide="product.name=='Free'">
-                <p ng-hide="product.app.android && product.app.ios"><a href="/requestapp"><button type="button" class="btn btn-default">Request apps</button></a></p>
-                <!--<p><button type="button" class="btn btn-default">Request #NowPlaying</button></p>-->
-                <!--<p><button type="button" class="btn btn-default">Request StudioText</button></p>-->
-            </div>
-            <div class="col-md-6" ng-show="product.name=='Free'">
-                <p>Sorry, these features are not availeble to free users.</p>
-            </div>
-            <!--<div class="col-md-6">
-                <p><button type="button" class="btn btn-danger">Stop Server</button></p>
-                <p><button type="button" class="btn btn-warning">Restart Server</button></p>
-                <p><button type="button" class="btn btn-primary">Login to Centova Cast</button></p>
-            </div>-->
-            
+        <div class="alert alert-warning" ng-show="product.name === 'Free'">
+            <p><fa name="warning"></fa> Some features are not available to free users.</p>
         </div>
-        
-        
-    </div>
-</ul>
-</div>
+        <div class="alert alert-warning" ng-show="product.isReseller">
+            <p><fa name="warning"></fa> As resellers need to stay white label, most of Control's features are not available for resellers.</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">Server</div>
+                    <div class="panel-body"><p class="lead">{{product.server}}</p></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">Username</div>
+                    <div class="panel-body"><p class="lead">{{product.username}}</p></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">Status</div>
+                    <div class="panel-body"><p class="lead">{{product.status}}</p></div>
+                </div>
+            </div>
+        </div>
+        <!-- Actions -->
+        <div ng-hide="product.name === 'Free'">
+            <p ng-hide="(['Terminated', 'Suspended', 'Cancelled', 'Pending'].indexOf(product.status) > -1) || (product.group.toLowerCase().indexOf('cast') === -1) || (product.hasAndroidApp && product.hasiOSApp)"><a href="/requestapp" class="btn btn-lg btn-default btn-block"><fa name="mobile-phone"></fa> Request Apps</a></p>
+        </div>
+        <p><a href="https://my.shoutca.st/clientarea.php?action=productdetails&id={{product.id}}" class="btn btn-lg btn-info btn-block">View Details <fa name="chevron-right"></fa></a></p>
+    </tab>
+</tabset>

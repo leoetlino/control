@@ -183,6 +183,22 @@
         <script>angular.module('templates-main', []);</script>
         <script src="app/app.js"></script>
         <!-- /htmlbuild -->
+        <script id="template/tabs/tabset.html" type="text/ng-template">
+<div class="row">
+    <div ng-class="{'col-sm-4': vertical}">
+        <ul class="nav nav-{{type || 'tabs'}}" ng-class="{'nav-stacked': vertical, 'nav-justified': justified}" ng-transclude></ul>
+    </div>
+    <div ng-class="{'col-sm-8': vertical}">
+        <div class="tab-content">
+            <div class="tab-pane"
+            ng-repeat="tab in tabs"
+            ng-class="{active: tab.active}"
+            tab-content-transclude="tab">
+            </div>
+        </div>
+    </div>
+</div>
+        </script>
         <!-- endbuild -->
         <noscript>
             <img src="//piwik.shoutca.st/piwik.php?idsite=1" style="border: 0;" alt="Piwik" />

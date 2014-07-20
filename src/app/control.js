@@ -61,9 +61,19 @@ define([], function () {
                     },
                     controller: 'DashboardCtrl'
                 })
-                .when('/manage', $.extend({}, route.resolve('manage', 'Manage your servers'), {
-                    authorizedRoles: [USER_ROLES.all]
-                }))
+                .when('/manage', {
+                    templateUrl: '/app/manage/partials/manage.html',
+                    authorizedRoles: [USER_ROLES.all],
+                    title: 'Manage your servers',
+                    resolve: {
+                        services: function (ManageService) {
+                            return ManageService.getServicesList().then(function (response) {
+                                return response.data;
+                            });
+                        }
+                    },
+                    controller: 'ManageCtrl'
+                })
                 .when('/stats', $.extend({}, route.resolve('stats', 'Stats'), {
                     authorizedRoles: [USER_ROLES.all]
                 }))
