@@ -165,12 +165,33 @@ module.exports = function (grunt) {
                 dest: 'src/',
                 options: {
                     scripts: {
-                        controlApp: 'dist/app/control-bundle.min.js'
+                        controlApp: ['dist/app/control-bundle.min.js', 'dist/app/templates.js']
                     },
                     parseTag: 'htmlbuild'
                 }
             }
-        }
+        },
+        html2js: {
+            options: {
+                htmlmin: {
+                    collapseBooleanAttributes: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true
+                },
+                rename: function (moduleName) {
+                    return '/' + moduleName;
+                }
+            },
+            main: {
+                src: ['src/app/**/partials/**.html'],
+                dest: 'dist/app/templates.js'
+            },
+        },
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -204,6 +225,6 @@ module.exports = function (grunt) {
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'ngconstant:production', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupIndexHtml', 'requirejs', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreIndexHtml', 'clean:postBuild'
+        'jshint', 'ngconstant:production', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupIndexHtml', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreIndexHtml', 'clean:postBuild'
     ]);
 };
