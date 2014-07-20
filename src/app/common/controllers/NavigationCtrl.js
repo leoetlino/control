@@ -51,8 +51,8 @@ define(['control'], function(control) {
             flash.to('alert-log-in').error = 'Couldn\'t login. Please check your credentials.';
         });
         $rootScope.$on(AUTH_EVENTS.logoutSuccess, function() {
-            flash.to('alert-general').success = 'You are now logged out!';
             $location.path('/login');
+            flash.to('alert-general').success = 'You are now logged out!';
         });
         $rootScope.$on(AUTH_EVENTS.logoutFailed, function() {
             flash.to('alert-general').error = 'Something went wrong when trying to log out. Please try again. If the problem persists, reload the page and contact us.';
@@ -61,16 +61,16 @@ define(['control'], function(control) {
             flash.to('alert-general').error = 'Something went wrong. Please try again. If the problem persists, reload the page and contact us.';
         });
         $rootScope.$on(AUTH_EVENTS.sessionTimeout, function() {
-            flash.to('alert-log-in').warning = 'Your session has expired. Please log in.';
             $location.path('/login');
+            flash.to('alert-general').warning = 'Your session has expired. Please log in.';
         });
         $rootScope.$on(AUTH_EVENTS.notAuthenticated, function() {
-            flash.to('alert-log-in').warning = 'Please log in to continue.';
             $location.path('/login');
+            flash.to('alert-general').warning = 'Please log in to continue.';
         });
         $rootScope.$on(AUTH_EVENTS.notAuthorized, function() {
-            flash.to('alert-log-in').error = 'You can\'t do that as yourself. Log in as someone with more permission than you.';
             $location.path('/login');
+            flash.to('alert-general').error = 'You can\'t do that as yourself. Log in as someone with more permission than you.';
         });
     });
 });
