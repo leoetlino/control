@@ -69,6 +69,10 @@
     width: 30px;
 }
 
+.no-margin-top {
+    margin-top: 0;
+}
+
 /* Fixes */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
