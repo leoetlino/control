@@ -165,7 +165,7 @@ module.exports = function (grunt) {
                 dest: 'src/',
                 options: {
                     scripts: {
-                        controlApp: ['dist/app/control-bundle.min.js', 'dist/app/templates.js']
+                        controlApp: ['dist/app/control-bundle.min.js', 'dist/app/templates.js', 'dist/app/ui-bootstrap-templates.js']
                     },
                     parseTag: 'htmlbuild'
                 }
@@ -182,16 +182,27 @@ module.exports = function (grunt) {
                     removeRedundantAttributes: true,
                     removeScriptTypeAttributes: true,
                     removeStyleLinkTypeAttributes: true
-                },
-                rename: function (moduleName) {
-                    return '/' + moduleName;
                 }
             },
             main: {
                 src: ['src/app/**/partials/**.html'],
-                dest: 'dist/app/templates.js'
+                dest: 'dist/app/templates.js',
+                options: {
+                    rename: function (moduleName) {
+                        return '/' + moduleName;
+                    }
+                }
             },
-        },
+            ngBootstrapTemplates: {
+                src: ['src/app/ui-bootstrap-templates/*/*.html'],
+                dest: 'dist/app/ui-bootstrap-templates.js',
+                options: {
+                    rename: function (moduleName) {
+                        return moduleName.replace('app/ui-bootstrap-templates/', 'template/');
+                    }
+                }
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -225,6 +236,6 @@ module.exports = function (grunt) {
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'ngconstant:production', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupIndexHtml', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreIndexHtml', 'clean:postBuild'
+        'jshint', 'ngconstant:production', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupIndexHtml', 'requirejs', 'html2js:main', 'html2js:ngBootstrapTemplates', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreIndexHtml', 'clean:postBuild'
     ]);
 };
