@@ -60,6 +60,12 @@
     }
 }
 
+@media screen and (max-width: 769px) {
+    .tab-content {
+        margin-top: 10px;
+    }
+}
+
 .ng-enter {
     animation: fadeIn 0.2s both ease-in;
 }
