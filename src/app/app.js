@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
     /* global require, angular, document */
     require.config({
@@ -22,7 +22,7 @@
         'manage/services/ManageService',
         'feedback/services/FeedbackService',
         'requestapp/services/RequestappService'
-    ], function() {
+    ], function () {
         angular.bootstrap(document, ['control']);
     });
-})();
+}());
