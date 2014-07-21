@@ -76,7 +76,7 @@ module.exports = function (grunt) {
             generated: {
                 options: {
                     banner: '/* Control - the place to control everything with us © Copyright Innovate Technologies, 2014 */'
-                },
+                }
             }
         },
         htmlmin: {
