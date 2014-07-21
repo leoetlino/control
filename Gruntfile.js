@@ -195,7 +195,7 @@ module.exports = function (grunt) {
             },
             ngBootstrapTemplates: {
                 src: ['src/app/ui-bootstrap-templates/*/*.html'],
-                dest: 'dist/app/ui-bootstrap-templates.js',
+                dest: 'src/app/ui-bootstrap-templates.js',
                 options: {
                     rename: function (moduleName) {
                         return moduleName.replace('app/ui-bootstrap-templates/', 'template/');
@@ -236,6 +236,6 @@ module.exports = function (grunt) {
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'ngconstant:production', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupIndexHtml', 'requirejs', 'html2js:main', 'html2js:ngBootstrapTemplates', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreIndexHtml', 'clean:postBuild'
+        'jshint', 'ngconstant:production', 'html2js:ngBootstrapTemplates', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupIndexHtml', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreIndexHtml', 'clean:postBuild'
     ]);
 };
