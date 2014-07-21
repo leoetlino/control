@@ -20,6 +20,10 @@ define(['control'], function(control) {
         var originalPath = null;
         $rootScope.$on('$routeChangeStart', function(event, next) {
             var authorizedRoles = next.authorizedRoles;
+            if (!authorizedRoles) {
+                authorizedRoles = [USER_ROLES.all];
+            }
+
             if (!AuthChecker.isAuthorized(authorizedRoles)) {
                 event.preventDefault();
                 if (AuthChecker.isAuthenticated()) {
