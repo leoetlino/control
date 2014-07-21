@@ -112,6 +112,14 @@
     margin-top: 20px;
 }
 
+#alert-general.in {
+    margin-top: 20px;
+}
+
+input[type="file"] {
+    margin-top: 8px;
+}
+
 /* Alert icons */
 .alert-icon-error:before, .alert-icon-warning:before {
     content: "\f071";
