@@ -80,9 +80,19 @@ define([], function () {
                 .when('/feedback', $.extend({}, route.resolve('feedback', 'Feedback'), {
                     authorizedRoles: [USER_ROLES.all]
                 }))
-                .when('/requestapp', $.extend({}, route.resolve('requestapp', 'Request your mobile app'), {
-                    authorizedRoles: [USER_ROLES.all]
-                }))
+                .when('/manage/:username/request-app', {
+                    templateUrl: '/app/request-app/partials/request-app.html',
+                    authorizedRoles: [USER_ROLES.all],
+                    title: 'Request your mobile apps',
+                    controller: 'RequestAppCtrl',
+                    resolve: {
+                        services: function (ManageService) {
+                            return ManageService.getServicesList().then(function (response) {
+                                return response.data;
+                            });
+                        }
+                    }
+                })
                 .otherwise({
                     redirectTo: '/'
                 });

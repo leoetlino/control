@@ -1,0 +1,151 @@
+<h1 class="page-header"><fa name="mobile-phone"></fa> Request your mobile apps</h1>
+<div class="alert alert-info" ng-hide="appSubmitted">
+    <p><fa name="info-circle"></fa> You are requesting mobile apps for your server #{{service.id}} with username <b>{{service.username}}</b>.</p>
+    <p><a href="#/manage" class="btn btn-info btn-sm"><fa name="chevron-left"></fa> Back to Services</a></p>
+</div>
+
+<form class="form-horizontal" role="form" name="form" ng-submit="submit(request)" ng-hide="appSubmitted">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="platform" class="col-sm-3 control-label">Platform</label>
+                <div class="col-sm-9">
+                    <select id="platform" class="form-control" ng-model="request.platform" required>
+                        <option ng-selected="!service.hasiOSApp && !service.hasAndroidApp" ng-disabled="service.hasiOSApp || service.hasAndroidApp" value="Both">Android and iOS (iPhone, iPad and iPod)</option>
+                        <option ng-selected="service.hasiOSApp" ng-disabled="service.hasAndroidApp" value="Android">Android</option>
+                        <option ng-selected="service.hasAndroidApp" ng-disabled="service.hasiOSApp" value="iOS">iOS</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="app-name" class="col-sm-3 control-label">App Name</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-pencil-square-o fa-fw"></i>
+                        </div>
+                        <input id="app-name" class="form-control" type="text" placeholder="App Name" ng-model="request.name" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="app-keywords" class="col-sm-3 control-label">App Keywords</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-tags fa-fw"></i>
+                        </div>
+                        <input id="app-keywords" class="form-control" type="text" placeholder="App Keywords (comma separated)" ng-model="request.keywords" maxlength="100" ng-required="request.platform !== 'Android'" ng-disabled="request.platform === 'Android'">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="app-description" class="col-sm-3 control-label">App Description</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-bars fa-fw"></i>
+                        </div>
+                        <textarea id="app-description" class="form-control" rows="3" placeholder="Please write a description for your app. It shouldn't be too short and should have a minimum of 2 sentences." ng-model="request.description" required></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="website" class="col-sm-3 control-label">Website</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-globe fa-fw"></i>
+                        </div>
+                        <input id="website" class="form-control" type="url" placeholder="Website URL (optional)" ng-model="request.website" ng-change="changeTab()">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="facebook" class="col-sm-3 control-label">Facebook</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-facebook-square fa-fw"></i>
+                        </div>
+                        <input id="facebook" class="form-control" type="text" placeholder="Facebook page URL (optional)" ng-model="request.facebook" ng-change="changeTab()">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="twitter" class="col-sm-3 control-label">Twitter</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-twitter-square fa-fw"></i>
+                        </div>
+                        <input id="twitter" class="form-control" type="text" placeholder="Twitter username (optional)" ng-model="request.twitter" ng-change="changeTab()">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <p class="help-block"><fa name="lightbulb-o"></fa> At least one additional link is required.<br>If you need more than 3 additional links or want to have multiple website links, please open a ticket.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group form-color-picker">
+                <label for="background" class="col-sm-3 control-label">Background</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input id="background" placeholder="Background Colour" colorpicker type="text" class="form-control" ng-model="request.background" required>
+                        <span class="input-group-addon" colorpicker ng-model="request.background" style="background: {{request.background}}" colorpicker-with-input="true">
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form-color-picker">
+                <label for="button-text-colour" class="col-sm-3 control-label">Button &amp; Text Colour</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input id="button-text-colour" placeholder="Tint Colour" colorpicker type="text" class="form-control" ng-model="request.tint" ng-required="request.platform !== 'Android'" ng-disabled="request.platform === 'Android'">
+                        <span class="input-group-addon" colorpicker ng-model="request.tint" style="background: {{request.tint}}" colorpicker-with-input="true">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="icon" class="col-sm-3 control-label">Icon</label>
+                <div class="col-sm-9">
+                    <div class="input-group" ng-file-drop="onIconUpload($files)">
+                        <input id="icon" type="file" ng-file-select="onIconUpload($files)" ng-hide="isUploadingIcon || iconUploaded">
+                        <p class="text-muted" ng-show="isUploadingIcon">Uploading ({{uploadProgressIcon}}%)...</p>
+                        <p class="text-success" ng-show="iconUploaded"><fa name="check"></fa> Uploaded successfully.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="logo" class="col-sm-3 control-label">Logo</label>
+                <div class="col-sm-9">
+                    <div class="input-group" ng-file-drop="onLogoUpload($files)">
+                        <input id="logo" type="file" ng-file-select="onLogoUpload($files)" ng-hide="isUploadingLogo || logoUploaded">
+                        <p class="text-muted" ng-show="isUploadingLogo">Uploading ({{uploadProgressLogo}}%)...</p>
+                        <p class="text-success" ng-show="logoUploaded"><fa name="check"></fa> Uploaded successfully.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <br>
+        <p><button type="submit" class="btn btn-success btn-lg btn-block" ng-disabled="form.$invalid || (!request.website && !request.twitter && !request.facebook) || !request.logo || !request.icon">Request Apps <fa name="chevron-right"></fa></button></p>
+    </div>
+</form>
+
+<div class="alert alert-success" ng-show="appSubmitted">
+    <p><fa name="check"></fa> Your request (for server #{{service.id}}) has been received! We will process it and submit your apps as soon as possible.</p>
+    <p><a href="#/" class="btn btn-success"><i class="fa fa-dashboard"></i> Back to Dashboard</a></p>
+</div>

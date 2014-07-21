@@ -21,7 +21,8 @@
         'manage/controllers/ManageCtrl',
         'manage/services/ManageService',
         'feedback/services/FeedbackService',
-        'requestapp/services/RequestappService'
+        'request-app/controllers/RequestAppCtrl',
+        'request-app/services/RequestAppService'
     ], function () {
         angular.bootstrap(document, ['control']);
     });
