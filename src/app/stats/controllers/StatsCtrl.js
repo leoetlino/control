@@ -1,5 +1,5 @@
 define(['control'], function (control) {
-    control.register.controller('StatsCtrl', function() {
+    control.controller('StatsCtrl', function() {
         // code
     });
 });
