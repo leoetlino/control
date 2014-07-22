@@ -202,6 +202,21 @@ module.exports = function (grunt) {
                     }
                 }
             }
+        },
+        ngAnnotate: {
+            options: {
+                singleQuotes: true,
+                add: true,
+                remove: true
+            },
+            production: {
+                files: [
+                    {
+                        expand: true,
+                        src: ['dist/app/**.js', 'dist/app/**/**.js']
+                    }
+                ]
+            }
         }
     });
 
@@ -220,6 +235,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-html-build');
     grunt.loadNpmTasks('grunt-html2js');
+    grunt.loadNpmTasks('grunt-ng-annotate');
 
     grunt.registerTask('install-hook', function () {
         var fs = require('fs');
@@ -236,6 +252,6 @@ module.exports = function (grunt) {
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'ngconstant:production', 'html2js:ngBootstrapTemplates', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupIndexHtml', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreIndexHtml', 'clean:postBuild'
+        'jshint', 'ngconstant:production', 'html2js:ngBootstrapTemplates', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupIndexHtml', 'ngAnnotate:production', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreIndexHtml', 'clean:postBuild'
     ]);
 };
