@@ -213,7 +213,19 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        src: ['dist/app/**.js', 'dist/app/**/**.js']
+                        src: ['dist/app/**.js', 'dist/app/**/**.js', 'dist/libs/ng*/**.js']
+                    }
+                ]
+            },
+            source: {
+                options: {
+                    remove: true,
+                    add: false
+                },
+                files: [
+                    {
+                        expand: true,
+                        src: ['src/app/**.js', 'src/app/**/**.js']
                     }
                 ]
             }
