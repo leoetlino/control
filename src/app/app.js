@@ -19,7 +19,7 @@
         'dashboard/services/DashService',
         'manage/controllers/ManageCtrl',
         'manage/services/ManageService',
-        'feedback/controllers/FeedbackService',
+        'feedback/controllers/FeedbackCtrl',
         'feedback/services/FeedbackService',
         'request-app/controllers/RequestAppCtrl',
         'request-app/services/RequestAppService',
