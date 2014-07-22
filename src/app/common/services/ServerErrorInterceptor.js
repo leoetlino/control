@@ -1,6 +1,6 @@
 /* global define */
 define(['control'], function (control) {
-    control.factory('ServerErrorInterceptor', ['$rootScope', '$q', '$ngBootbox', function ($rootScope, $q, $ngBootbox) {
+    control.factory('ServerErrorInterceptor', function ($rootScope, $q, $ngBootbox) {
         return {
             responseError: function (response) {
                 if (response.status === 500) {
@@ -12,5 +12,5 @@ define(['control'], function (control) {
                 return $q.reject(response);
             }
         };
-    }]);
+    });
 });
