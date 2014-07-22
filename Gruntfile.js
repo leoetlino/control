@@ -154,7 +154,7 @@ module.exports = function (grunt) {
                     name: 'app',
                     findNestedDependencies: true,
                     uglify: {
-                        no_mangle: false
+                        no_mangle: true
                     }
                 }
             }
@@ -213,7 +213,7 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        src: ['src/app/**.js', 'src/app/**/**.js', 'src/libs/ng*/**.js']
+                        src: ['.tmp/concat/js/control.min.js']
                     }
                 ]
             },
@@ -264,6 +264,6 @@ module.exports = function (grunt) {
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'ngconstant:production', 'html2js:ngBootstrapTemplates', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupSource', 'ngAnnotate:production', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreSource', 'clean:postBuild'
+        'jshint', 'ngconstant:production', 'html2js:ngBootstrapTemplates', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupSource', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'ngAnnotate:production', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreSource', 'clean:postBuild'
     ]);
 };
