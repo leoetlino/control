@@ -11,6 +11,11 @@ AddType font/woff .woff
 SetOutputFilter DEFLATE
 AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript text/javascript application/javascript
 
+# Cache production JS and CSS for 1 month
+<FilesMatch "\.min\.(css|js)$">
+Header set Cache-Control "max-age=2629743, public, must-revalidate"
+</FilesMatch>
+
 <FilesMatch "\.(ttf|otf|eot|woff|css)$">
 <IfModule mod_headers.c>
 Header set Access-Control-Allow-Origin "*"
