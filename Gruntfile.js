@@ -62,7 +62,7 @@ module.exports = function (grunt) {
         uglify: {
             options: {
                 report: 'min',
-                mangle: false
+                mangle: true
             }
         },
         rev: {
@@ -154,7 +154,7 @@ module.exports = function (grunt) {
                     name: 'app',
                     findNestedDependencies: true,
                     uglify: {
-                        no_mangle: true
+                        no_mangle: false
                     }
                 }
             }
