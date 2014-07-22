@@ -31,16 +31,16 @@ module.exports = function (grunt) {
                 src: ['*.{eot,svg,ttf,woff}'],
                 dest: 'dist/fonts/'
             },
-            backupIndexHtml: {
+            backupSource: {
                 expand: true,
                 cwd: 'src/',
-                src: 'index.html',
+                src: '***',
                 dest: 'backup/'
             },
-            restoreIndexHtml: {
+            restoreSource: {
                 expand: true,
                 cwd: 'backup',
-                src: 'index.html',
+                src: '***',
                 dest: 'src/'
             }
         },
@@ -264,6 +264,6 @@ module.exports = function (grunt) {
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'ngconstant:production', 'html2js:ngBootstrapTemplates', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupIndexHtml', 'ngAnnotate:production', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreIndexHtml', 'clean:postBuild'
+        'jshint', 'ngconstant:production', 'html2js:ngBootstrapTemplates', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupSource', 'ngAnnotate:production', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreSource', 'clean:postBuild'
     ]);
 };
