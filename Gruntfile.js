@@ -6,7 +6,7 @@ module.exports = function (grunt) {
         bowerrc: grunt.file.readJSON('.bowerrc'),
         clean: {
             preBuild: ['dist', '.tmp'],
-            postBuild: ['.tmp', 'backup']
+            postBuild: ['.tmp', 'backup', 'dist/app', 'dist/libs']
         },
         dirs: {
             'vendor': '<%= bowerrc.directory %>',
