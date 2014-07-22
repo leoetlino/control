@@ -7,7 +7,6 @@
 
     require([
         'control',
-        'common/services/routeResolver',
         'common/services/HttpTimeoutInterceptor',
         'common/services/ServerErrorInterceptor',
         'login/services/Session',
@@ -20,9 +19,11 @@
         'dashboard/services/DashService',
         'manage/controllers/ManageCtrl',
         'manage/services/ManageService',
+        'feedback/controllers/FeedbackService',
         'feedback/services/FeedbackService',
         'request-app/controllers/RequestAppCtrl',
-        'request-app/services/RequestAppService'
+        'request-app/services/RequestAppService',
+        'stats/controllers/StatsCtrl'
     ], function () {
         angular.bootstrap(document, ['control']);
     });

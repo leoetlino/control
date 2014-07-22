@@ -1,5 +1,5 @@
 define(['control'], function (control) {
-    control.register.controller('FeedbackCtrl', function($scope, FeedbackService) {
+    control.controller('FeedbackCtrl', function($scope, FeedbackService) {
         $scope.form={};
         $scope.fillInAllFields=false;
         $scope.didSend=false;
