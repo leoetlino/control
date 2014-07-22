@@ -8,6 +8,9 @@ AddType font/eot .eot
 AddType font/otf .otf
 AddType font/woff .woff
 
+SetOutputFilter DEFLATE
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript text/javascript application/javascript
+
 <FilesMatch "\.(ttf|otf|eot|woff|css)$">
 <IfModule mod_headers.c>
 Header set Access-Control-Allow-Origin "*"
