@@ -75,8 +75,15 @@ module.exports = function (grunt) {
         htmlmin: {
             dist: {
                 options: {
+                    collapseBooleanAttributes: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true,
                     removeComments: true,
-                    collapseWhitespace: true
+                    removeEmptyAttributes: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true,
+                    minifyCSS: true
                 },
                 files: {
                     'dist/index.html': 'dist/index.html'
@@ -174,7 +181,8 @@ module.exports = function (grunt) {
                     removeEmptyAttributes: true,
                     removeRedundantAttributes: true,
                     removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true
+                    removeStyleLinkTypeAttributes: true,
+                    minifyCSS: true
                 }
             },
             main: {
