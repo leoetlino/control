@@ -222,6 +222,22 @@ module.exports = function (grunt) {
                     }
                 ]
             }
+        },
+        replace: {
+            production: {
+                options: {
+                    patterns: [
+                        {
+                            match: 'control.min.js"></script>',
+                            replacement: 'control.min.js" defer async></script>'
+                        }
+                    ],
+                    usePrefix: false
+                },
+                files: [
+                    { expand: true, src: 'dist/index.html', dest: './' }
+                ]
+            }
         }
     });
 
@@ -241,6 +257,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-html-build');
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-ng-annotate');
+    grunt.loadNpmTasks('grunt-replace');
 
     grunt.registerTask('install-hook', function () {
         var fs = require('fs');
@@ -257,6 +274,6 @@ module.exports = function (grunt) {
 
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'ngconstant:production', 'html2js:ngBootstrapTemplates', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupSource', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'ngAnnotate:production', 'uglify', 'cssmin', 'rev', 'usemin', 'htmlmin', 'ngconstant:development', 'copy:restoreSource', 'clean:postBuild'
+        'jshint', 'ngconstant:production', 'html2js:ngBootstrapTemplates', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupSource', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'ngAnnotate:production', 'uglify', 'cssmin', 'rev', 'usemin', 'replace', 'htmlmin', 'ngconstant:development', 'copy:restoreSource', 'clean:postBuild'
     ]);
 };
