@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="shoutca-st control" lang="en">
+    
     <head>
         <meta charset="utf-8">
         <title ng-bind="pageTitle + ' - Control | SHOUTca.st'">Control | SHOUTca.st</title>
@@ -10,7 +11,8 @@
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
         <base href="/">
         <meta name="keywords" content="shoutcast servers, cheap shoutcast, shoutcast, start an internet radio station, start a radio station, online radio, radio, shout, cast">
-        <link data-noprefix href="https://fonts.googleapis.com/css?family=Montserrat:400|Lato:400" rel="stylesheet">
+        <link data-noprefix href="https://fonts.googleapis.com/css?family=Montserrat:400|Lato:400"
+        rel="stylesheet">
         <!-- build:css css/control.min.css -->
         <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="libs/fontawesome/css/font-awesome.css">
@@ -22,6 +24,7 @@
         <link rel="stylesheet" href="css/loading-bar-green.css">
         <!-- endbuild -->
     </head>
+    
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top" id="topbar" role="navigation">
             <div class="container">
@@ -36,12 +39,24 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-collapse" ng-controller="NavigationCtrl">
                     <ul class="nav navbar-nav navbar-right">
-                        <li ng-class="{ active: isActive('/')}"><a href="#/" title="Dashboard"><i class="fa fa-dashboard"></i> Dash</a></li>
-                        <li ng-class="{ active: isActive('/manage')}"><a href="#/manage" title="Manage your server(s)"><i class="fa fa-sliders"></i> Manage</a></li>
-                        <li ng-class="{ active: isActive('/stats')}"><a href="#/stats" title="Statistics"><i class="fa fa-bar-chart-o"></i> Stats</a></li>
-                        <li><a href="//my.shoutca.st/submitticket.php?step=2&deptid=2" title="Support &amp; Help"><i class="fa fa-question-circle"></i> Support</a></li>
-                        <li ng-class="{ active: isActive('/feedback')}"><a href="#/feedback" title="Feedback"><b>Feedback</b></a></li>
-                        <li ng-show="isAuthenticated"><a title="Log out from Control" ng-click="logout()"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                        <li ng-class="{ active: isActive('/')}">
+                            <a href="#/" title="Dashboard"><i class="fa fa-dashboard"></i> Dash</a>
+                        </li>
+                        <li ng-class="{ active: isActive('/manage')}">
+                            <a href="#/manage" title="Manage your server(s)"><i class="fa fa-sliders"></i> Manage</a>
+                        </li>
+                        <li ng-class="{ active: isActive('/stats')}">
+                            <a href="#/stats" title="Statistics"><i class="fa fa-bar-chart-o"></i> Stats</a>
+                        </li>
+                        <li>
+                            <a href="//my.shoutca.st/submitticket.php?step=2&deptid=2" title="Support &amp; Help"><i class="fa fa-question-circle"></i> Support</a>
+                        </li>
+                        <li ng-class="{ active: isActive('/feedback')}">
+                            <a href="#/feedback" title="Feedback"><b>Feedback</b></a>
+                        </li>
+                        <li ng-show="isAuthenticated">
+                            <a title="Log out from Control" ng-click="logout()"><i class="fa fa-sign-out"></i> Log Out</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -49,12 +64,15 @@
         <div class="container" id="main-container">
             <noscript>
                 <div class="alert alert-danger" style="margin-top: 2em;">
-                    <p><i class="fa fa-warning"></i> <b>This site won't work without JavaScript; please enable it.</b>
+                    <p>
+                        <i class="fa fa-warning"></i>
+                        <b>This site won't work without JavaScript; please enable it.</b>
                     </p>
                 </div>
             </noscript>
             <div id="alert-general" flash-alert active-class="in alert" class="animated-custom fade">
-                <p class="alert-message"><i class="fa alert-icon-{{flash.type}}"></i> {{ flash.message }}</p>
+                <p class="alert-message">
+                    <i class="fa alert-icon-{{flash.type}}"></i>{{ flash.message }}</p>
             </div>
             <div id="content" ng-view>
                 <style>
@@ -68,8 +86,7 @@
                     .loading-block .loading-icon {
                         margin-top: 0.3em;
                     }
-                    nav,
-                    footer {
+                    nav, footer {
                         display: none;
                     }
                 </style>
@@ -84,53 +101,96 @@
                 <div class="row footerlinks">
                     <div class="col-xs-6 col-sm-2">
                         <h5>About Us</h5>
-                        <p>A great place to find SHOUTcast and Icecast servers and start an online station, free mobile apps (iOS and Android) included with any paid plan.</p>
+                        <p>A great place to find SHOUTcast and Icecast servers and start an online
+                            station, free mobile apps (iOS and Android) included with any paid plan.</p>
                     </div>
                     <div class="col-xs-6 col-sm-2">
                         <h5>Get Help</h5>
                         <ul>
-                            <li><a href="mailto:help@shoutca.st" target="_blank">help@shoutca.st</a></li>
-                            <li><a href="mailto:sales@shoutca.st" target="_blank">sales@shoutca.st</a></li>
-                            <li><a href="mailto:abuse@shoutca.st" target="_blank">abuse@shoutca.st</a></li>
-                            <li><i class="fa fa-phone"></i> +44 800 009 6978</li>
-                            <li><i class="fa fa-skype"></i> SHOUTca.st</li>
+                            <li>
+                                <a href="mailto:help@shoutca.st" target="_blank">help@shoutca.st</a>
+                            </li>
+                            <li>
+                                <a href="mailto:sales@shoutca.st" target="_blank">sales@shoutca.st</a>
+                            </li>
+                            <li>
+                                <a href="mailto:abuse@shoutca.st" target="_blank">abuse@shoutca.st</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-phone"></i>+44 800 009 6978</li>
+                            <li>
+                                <i class="fa fa-skype"></i>SHOUTca.st</li>
                         </ul>
                     </div>
                     <div class="col-xs-6 col-sm-2">
                         <h5>Get Social</h5>
                         <ul>
-                            <li><a href="//twitter.com/shoutca_st" target="_blank"><i class="fa fa-twitter-square"></i> Follow us on Twitter</a></li>
-                            <li><a href="//facebook.com/shoutcastsolutions" target="_blank"><i class="fa fa-facebook-square"></i> Like us on Facebook</a></li>
+                            <li>
+                                <a href="//twitter.com/shoutca_st" target="_blank"><i class="fa fa-twitter-square"></i> Follow us on Twitter</a>
+                            </li>
+                            <li>
+                                <a href="//facebook.com/shoutcastsolutions" target="_blank"><i class="fa fa-facebook-square"></i> Like us on Facebook</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-xs-6 col-sm-2">
                         <h5>Get Info</h5>
                         <ul>
-                            <li><a href="https://my.shoutca.st/knowledgebase">FAQ</a></li>
-                            <li><a href="https://my.shoutca.st">Client Area</a></li>
-                            <li><a href="http://innovatetechnologi.es">Innovate Technologies</a></li>
-                            <li><a href="https://blog.shoutca.st">Blog</a></li>
-                            <li><a href="//shoutca.st/careers.php">Careers</a></li>
+                            <li>
+                                <a href="https://my.shoutca.st/knowledgebase">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="https://my.shoutca.st">Client Area</a>
+                            </li>
+                            <li>
+                                <a href="http://innovatetechnologi.es">Innovate Technologies</a>
+                            </li>
+                            <li>
+                                <a href="https://blog.shoutca.st">Blog</a>
+                            </li>
+                            <li>
+                                <a href="//shoutca.st/careers.php">Careers</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-xs-6 col-sm-2">
                         <h5>Resources</h5>
                         <ul>
-                            <li><a href="//shoutca.st/about.php">About Internet Radio</a></li>
-                            <li><a href="//shoutca.st/radioresourcepod">Radio Resource Pod</a></li>
-                            <li><a href="//shoutca.st/station-promo">Station Promotion</a></li>
-                            <li><a href="//shoutca.st/tos.php">Terms Of Service</a></li>
-                            <li><a href="//shoutca.st/privacy.php">Privacy Policy</a></li>
+                            <li>
+                                <a href="//shoutca.st/about.php">About Internet Radio</a>
+                            </li>
+                            <li>
+                                <a href="//shoutca.st/radioresourcepod">Radio Resource Pod</a>
+                            </li>
+                            <li>
+                                <a href="//shoutca.st/station-promo">Station Promotion</a>
+                            </li>
+                            <li>
+                                <a href="//shoutca.st/tos.php">Terms Of Service</a>
+                            </li>
+                            <li>
+                                <a href="//shoutca.st/privacy.php">Privacy Policy</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-xs-6 col-sm-2">
                         <h5>More</h5>
                         <ul>
-                            <li><a href="//shoutca.st/getstarted/which-server.php">Which server am I on?</a></li>
-                            <li><a href="//shoutca.st/testimonials.php">Testimonials</a></li>
-                            <li><a href="//shoutca.st/ios-apps.php"><i class="fa fa-apple"></i> iPhone/iOS App</a></li>
-                            <li><a href="//shoutca.st/android-apps.php"><i class="fa fa-android"></i> Android App</a></li>
-                            <li><a href="//shoutca.st/web-hosting.php">Web Hosting</a></li>
+                            <li>
+                                <a href="//shoutca.st/getstarted/which-server.php">Which server am I on?</a>
+                            </li>
+                            <li>
+                                <a href="//shoutca.st/testimonials.php">Testimonials</a>
+                            </li>
+                            <li>
+                                <a href="//shoutca.st/ios-apps.php"><i class="fa fa-apple"></i> iPhone/iOS App</a>
+                            </li>
+                            <li>
+                                <a href="//shoutca.st/android-apps.php"><i class="fa fa-android"></i> Android App</a>
+                            </li>
+                            <li>
+                                <a href="//shoutca.st/web-hosting.php">Web Hosting</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -139,23 +199,31 @@
                 </div>
             </div>
         </footer>
-        <div id="cookie-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div id="cookie-modal" class="modal fade" tabindex="-1" role="dialog"
+        data-backdrop="static" data-keyboard="false" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Cookies</h4>
                     </div>
                     <div class="modal-body">
-                        <p>This site uses cookies to store information on your device. These are essential for our site and help us to improve by giving us some insight into how the site is being used.</p>
-                        <p>For more information, you can read our <a data-target="#privacy-modal" data-toggle="modal" href="privacy.php">Privacy Policy</a>.</p>
+                        <p>This site uses cookies to store information on your device. These are
+                            essential for our site and help us to improve by giving us some insight
+                            into how the site is being used.</p>
+                        <p>For more information, you can read our
+                            <a data-target="#privacy-modal"
+                            data-toggle="modal" href="privacy.php">Privacy Policy</a>.</p>
                         <br>
                         <div class="alert alert-warning">
-                            <p><b><i class="icon-warning-sign"></i> The site won't work properly without cookies.</b>
+                            <p>
+                                <b>
+                                    <i class="icon-warning-sign"></i>The site won't work properly without cookies.</b>
                             </p>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal"><i class="icon-ok-sign"></i> Accept and continue</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal">
+                            <i class="icon-ok-sign"></i>Accept and continue</button>
                     </div>
                 </div>
             </div>
@@ -168,7 +236,9 @@
                         <h4 class="modal-title">Oops...</h4>
                     </div>
                     <div class="modal-body">
-                        <p class="text-danger"><i class="icon-warning-sign"></i>  <span id="specific-error">Sorry, an error has occurred. Please try again.</span>
+                        <p class="text-danger">
+                            <i class="icon-warning-sign"></i>
+                            <span id="specific-error">Sorry, an error has occurred. Please try again.</span>
                         </p>
                     </div>
                     <div class="modal-footer">
@@ -202,13 +272,17 @@
         <script src="app/config.js"></script>
         <script src="js/piwik.js"></script>
         <!-- htmlbuild:script controlApp -->
-        <script>angular.module('templates-main', []);</script>
+        <script>
+            angular.module('templates-main', []);
+        </script>
         <script src="app/ui-bootstrap-templates.js"></script>
         <script src="app/app.js"></script>
         <!-- /htmlbuild -->
         <!-- endbuild -->
         <noscript>
-            <img src="//piwik.shoutca.st/piwik.php?idsite=1" style="border: 0;" alt="Piwik" />
+            <img src="//piwik.shoutca.st/piwik.php?idsite=1" style="border: 0;" alt="Piwik"
+            />
         </noscript>
     </body>
+
 </html>
