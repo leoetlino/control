@@ -52,10 +52,10 @@ module.exports = function (grunt) {
             html: 'dist/index.html',
             css: ['dist/css/**.css', 'dist/libs/*/**.css'],
             options: {
-                patterns: {
-                    css: [
-                        [/(image\.png)/, 'Replacing reference to image.png']
-                    ]
+                blockReplacements: {
+                    js: function (block) {
+                        return '<script defer async src="' + block.dest + '"></script>';
+                    }
                 }
             }
         },
