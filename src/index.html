@@ -56,7 +56,28 @@
             <div id="alert-general" flash-alert active-class="in alert" class="animated-custom fade">
                 <p class="alert-message"><i class="fa alert-icon-{{flash.type}}"></i> {{ flash.message }}</p>
             </div>
-            <div id="content" ng-view></div>
+            <div id="content" ng-view>
+                <style>
+                    body {
+                        background: #232a31;
+                    }
+                    .loading-block {
+                        margin-top: 10em;
+                        color: white;
+                    }
+                    .loading-block .loading-icon {
+                        margin-top: 0.3em;
+                    }
+                    nav,
+                    footer {
+                        display: none;
+                    }
+                </style>
+                <div class="loading-block center-block text-center">
+                    <h1 class="brand font-diavlo">SHOUTca.st Control</h1>
+                    <i class="loading-icon fa fa-spinner fa-spin fa-4x"></i>
+                </div>
+            </div>
         </div>
         <footer class="footer" id="main-footer">
             <div class="container">
