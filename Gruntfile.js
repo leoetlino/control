@@ -50,14 +50,7 @@ module.exports = function (grunt) {
         },
         usemin: {
             html: 'dist/index.html',
-            css: ['dist/css/**.css', 'dist/libs/*/**.css'],
-            options: {
-                blockReplacements: {
-                    js: function (block) {
-                        return '<script defer async src="' + block.dest + '"></script>';
-                    }
-                }
-            }
+            css: ['dist/css/**.css', 'dist/libs/*/**.css']
         },
         uglify: {
             options: {
