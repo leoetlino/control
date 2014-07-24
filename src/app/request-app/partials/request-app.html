@@ -121,9 +121,9 @@
                 <label for="icon" class="col-sm-3 control-label">Icon</label>
                 <div class="col-sm-9">
                     <div class="input-group" ng-file-drop="onIconUpload($files)">
-                        <input id="icon" type="file" ng-file-select="onIconUpload($files)" ng-hide="isUploadingIcon || iconUploaded">
-                        <p class="text-muted" ng-show="isUploadingIcon">Uploading ({{uploadProgressIcon}}%)...</p>
-                        <p class="text-success" ng-show="iconUploaded"><fa name="check"></fa> Uploaded successfully.</p>
+                        <fa name="upload"></fa>&nbsp;&nbsp;<input id="icon" type="file" ng-file-select="onIconUpload($files)">
+                        <span class="text-muted" ng-show="isUploadingIcon"> ({{uploadProgressIcon}}%)...</span>
+                        <span class="text-success" ng-hide="isUploadingIcon || !iconUploaded"> <fa name="check"></fa></span>
                     </div>
                 </div>
             </div>
@@ -131,9 +131,9 @@
                 <label for="logo" class="col-sm-3 control-label">Logo</label>
                 <div class="col-sm-9">
                     <div class="input-group" ng-file-drop="onLogoUpload($files)">
-                        <input id="logo" type="file" ng-file-select="onLogoUpload($files)" ng-hide="isUploadingLogo || logoUploaded">
-                        <p class="text-muted" ng-show="isUploadingLogo">Uploading ({{uploadProgressLogo}}%)...</p>
-                        <p class="text-success" ng-show="logoUploaded"><fa name="check"></fa> Uploaded successfully.</p>
+                        <fa name="upload"></fa>&nbsp;&nbsp;<input id="logo" type="file" ng-file-select="onLogoUpload($files)">
+                        <span class="text-muted" ng-show="isUploadingLogo"> ({{uploadProgressLogo}}%)...</span>
+                        <span class="text-success" ng-hide="isUploadingLogo || !logoUploaded"> <fa name="check"></fa></span>
                     </div>
                 </div>
             </div>
