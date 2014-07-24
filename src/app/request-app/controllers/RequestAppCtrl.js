@@ -49,7 +49,17 @@ define(['control'], function (control) {
         $scope.appSubmitted = false;
         $scope.request = {};
 
+        // workaround for form validation
+        $scope.$watch('form', function () {
+            $scope.form.upload = {};
+            $scope.form.upload.$invalid = false;
+        });
+
         $scope.submit = function (request) {
+            $scope.$broadcast('show-errors-check-validity');
+            if ($scope.form.$invalid) {
+                return;
+            }
             request.username = $scope.service.username;
             switch (request.platform) {
                 case 'Both':
@@ -67,6 +77,10 @@ define(['control'], function (control) {
 
         // upload stuff
         $scope.onIconUpload = function ($files) {
+            if ($files[0] === undefined) {
+                return;
+            }
+            $scope.request.icon = null;
             $scope.isUploadingIcon = true;
             $scope.uploadProgressIcon = 0;
             $scope.upload = $upload.upload({
@@ -86,6 +100,10 @@ define(['control'], function (control) {
         };
 
         $scope.onLogoUpload = function ($files) {
+            if ($files[0] === undefined) {
+                return;
+            }
+            $scope.request.logo = null;
             $scope.isUploadingLogo = true;
             $scope.uploadProgressLogo = 0;
             $scope.upload = $upload.upload({
