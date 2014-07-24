@@ -59,7 +59,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-globe fa-fw"></i>
                         </div>
-                        <input id="website" class="form-control" type="url" placeholder="Website URL (optional)" ng-model="request.website">
+                        <input id="website" class="form-control" type="url" placeholder="Website URL (optional)" ng-model="request.website" ng-required="!request.facebook && !request.twitter">
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-facebook-square fa-fw"></i>
                         </div>
-                        <input id="facebook" class="form-control" type="text" placeholder="Facebook page URL (optional)" ng-model="request.facebook">
+                        <input id="facebook" class="form-control" type="text" placeholder="Facebook page URL (optional)" ng-model="request.facebook" ng-required="!request.website && !request.twitter">
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-twitter-square fa-fw"></i>
                         </div>
-                        <input id="twitter" class="form-control" type="text" placeholder="Twitter username (optional)" ng-model="request.twitter">
+                        <input id="twitter" class="form-control" type="text" placeholder="Twitter username (optional)" ng-model="request.twitter" ng-required="!request.website && !request.facebook">
                     </div>
                 </div>
             </div>
