@@ -15,7 +15,7 @@ define(['control'], function(control) {
         };
 
         $scope.isActive = function (viewLocation) {
-            return viewLocation === $location.path();
+            return $location.path().indexOf(viewLocation) > -1;
         };
         var originalPath = null;
         $rootScope.$on('$routeChangeStart', function(event, next) {
