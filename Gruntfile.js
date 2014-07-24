@@ -83,7 +83,8 @@ module.exports = function (grunt) {
                     removeRedundantAttributes: true,
                     removeScriptTypeAttributes: true,
                     removeStyleLinkTypeAttributes: true,
-                    minifyCSS: true
+                    minifyCSS: true,
+                    conservativeCollapse: true
                 },
                 files: {
                     'dist/index.html': 'dist/index.html'
@@ -182,7 +183,8 @@ module.exports = function (grunt) {
                     removeRedundantAttributes: true,
                     removeScriptTypeAttributes: true,
                     removeStyleLinkTypeAttributes: true,
-                    minifyCSS: true
+                    minifyCSS: true,
+                    conservativeCollapse: true
                 }
             },
             main: {

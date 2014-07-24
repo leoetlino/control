@@ -120,11 +120,6 @@ input[type="file"] {
     margin-top: 8px;
 }
 
-.fa[name] {
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
 /* Alert icons */
 .alert-icon-error:before, .alert-icon-warning:before {
     content: "\f071";
