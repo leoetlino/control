@@ -47,6 +47,11 @@ define([], function () {
                             return DashService.getInfo().then(function (response) {
                                 return response.data;
                             });
+                        },
+                        services: function (ManageService) {
+                            return ManageService.getServicesList().then(function (response) {
+                                return response.data;
+                            });
                         }
                     },
                     controller: 'DashboardCtrl'
