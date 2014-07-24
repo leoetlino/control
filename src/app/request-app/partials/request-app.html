@@ -4,7 +4,7 @@
     <p><a href="#/manage" class="btn btn-info btn-sm"><fa name="chevron-left"></fa> Back to Services</a></p>
 </div>
 
-<form class="form-horizontal" role="form" name="form" ng-submit="submit(request)" ng-hide="appSubmitted">
+<form class="form-horizontal" role="form" name="form" ng-submit="submit(request)" ng-hide="appSubmitted || unauthorised">
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">

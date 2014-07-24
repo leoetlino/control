@@ -3,6 +3,7 @@ define(['control'], function (control) {
     control.controller('RequestAppCtrl', function ($scope, RequestAppService, $upload, ENV, $routeParams, services, $location, flash) {
 
         var rejectRequest = function (message) {
+            $scope.unauthorised = true;
             $location.path('/manage');
             flash.to('alert-general').error = message;
         };
