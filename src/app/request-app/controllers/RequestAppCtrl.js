@@ -23,6 +23,7 @@ define(['control'], function (control) {
 
         if (!canRequest) {
             rejectRequest('You don\'t have permission to do that.');
+            return;
         }
 
         if ($scope.service.name === 'Free') {
