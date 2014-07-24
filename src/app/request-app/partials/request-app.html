@@ -1,10 +1,10 @@
 <h1 class="page-header"><fa name="mobile-phone"></fa> Request your mobile apps</h1>
-<div class="alert alert-info" ng-hide="appSubmitted">
-    <p><fa name="info-circle"></fa> You are requesting mobile apps for your server #{{service.id}} with username <b>{{service.username}}</b>.</p>
-    <p><a href="#/manage" class="btn btn-info btn-sm"><fa name="chevron-left"></fa> Back to Services</a></p>
-</div>
 
 <form class="form-horizontal" role="form" name="form" ng-submit="submit(request)" ng-hide="appSubmitted || unauthorised">
+    <div class="alert alert-info">
+        <p><fa name="info-circle"></fa> You are requesting mobile apps for your server #{{service.id}} with username <b>{{service.username}}</b>.</p>
+        <p><a href="#/manage" class="btn btn-info btn-sm"><fa name="chevron-left"></fa> Back to Services</a></p>
+    </div>
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
