@@ -40,6 +40,11 @@
     text-align: center;
 }
 
+.dashboard-box .large-number {
+    font-size: 72px;
+    font-family: 'Diavlo Light';
+}
+
 #main-footer {
     margin-top: 10em;
 }
