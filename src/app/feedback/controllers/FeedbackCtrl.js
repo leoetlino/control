@@ -1,17 +1,19 @@
 define(['control'], function (control) {
-    control.controller('FeedbackCtrl', function($scope, FeedbackService) {
-        $scope.form={};
-        $scope.fillInAllFields=false;
-        $scope.didSend=false;
-        $scope.submit=function(){
-            if ($scope.form.title.length<=0 || $scope.form.feedback.length<=0){
-                $scope.fillInAllFields=true;
+    control.controller('FeedbackCtrl', function ($scope, FeedbackService, flash) {
+        $scope.sent = false;
+        $scope.submit = function () {
+            $scope.$broadcast('show-errors-check-validity');
+            if ($scope.feedbackForm.$invalid) {
                 return;
             }
-            FeedbackService.send($scope.form.title,$scope.form.feedback);
-            $scope.fillInAllFields=false;
-            $scope.didSend=true;
-            $scope.form={};
+            $scope.sending = true;
+            FeedbackService.send($scope.form.subject, $scope.form.feedback).then(function () {
+                $scope.sent = true;
+                $scope.sending = false;
+            }, function () {
+                flash.to('alert-general').error = 'Something went wrong while sending your feedback. Please try again.';
+                $scope.sending = false;
+            });
         };
     });
 });

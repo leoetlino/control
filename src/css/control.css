@@ -84,6 +84,15 @@
     margin-top: 0;
 }
 
+.panel-standalone {
+    margin-top: 3.5em;
+}
+
+.panel-actions {
+    text-align: right;
+    padding: 15px;
+}
+
 /* Fixes */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 

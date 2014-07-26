@@ -1,12 +1,27 @@
-<h1 class="page-header"><i class="fa fa-comments"></i> Feedback</h1>
-<div class="alert alert-danger" role="alert" ng-show="fillInAllFields">You have to fill in all fields!</div>
-<div class="alert alert-success" role="alert" ng-show="didSend">Thank you for your feedback!</div>
-<form role="form" ng-submit="submit()">
-  <div class="form-group">
-    <input ng-model="form.title" type="text" class="form-control" id="title" placeholder="Title" />
-  </div>
-  <div class="form-group">
-  <textarea class="form-control" rows="3" id="message" placeholder="Your feedback" ng-model="form.feedback"></textarea>
-  </div>
-  <button type="submit" class="btn btn-default">Submit Feedback</button>
-</form>
+<div class="panel panel-default panel-standalone">
+    <div class="panel-heading">
+        <h3 class="panel-title"><fa name="comments-o"></fa> Feedback</h3>
+    </div>
+    <div class="panel-body">
+        <p>We would love to hear feedback from our customers, so please do not hesitate to let us know if you have any enquiries about Control!<br>You can also report any issues or bugs using this form.</p>
+        <p>For general support, please <a href="https://my.shoutca.st/submitticket.php?step=2&deptid=2">create a support ticket in your client area</a>.</p>
+        <hr>
+        <form id="feedback-form" novalidate name="feedbackForm" role="form" ng-submit="submit(form)" ng-hide="sent">
+            <fieldset ng-disabled="sending">
+                <div class="form-group" show-errors>
+                    <label for="subject" class="control-label">Subject</label>
+                    <input ng-model="form.title" type="text" name="subject" class="form-control" id="subject" placeholder="What's this about?" required>
+                </div>
+                <div class="form-group" show-errors>
+                    <label for="message" class="control-label">Message</label>
+                    <textarea class="form-control" rows="3" name="message" id="message" placeholder="Be more precise about it!" ng-model="form.feedback" required></textarea>
+                </div>
+            </fieldset>
+        </form>
+        <p class="text-success" ng-show="sent"><b><fa name="check"></fa> Thank you for your feedback!</b> We'll get back to you as soon as possible.</p>
+    </div>
+    <div class="panel-footer panel-actions">
+        <button type="submit" form="feedback-form" class="btn btn-primary" ng-hide="sent" ng-disabled="sending">Send Feedback <fa name="check"></fa></button>
+        <a href="#/" class="btn" ng-class="{'btn-default': !sent, 'btn-success': sent, 'disabled': sending}">Take me back to my dashboard</a>
+    </div>
+</div>
