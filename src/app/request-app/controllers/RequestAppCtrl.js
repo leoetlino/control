@@ -22,7 +22,7 @@ define(['control'], function (control) {
         }
 
         if (!canRequest) {
-            rejectRequest('You don\'t have permission to do that.');
+            rejectRequest('The service was not found.');
             return;
         }
 
