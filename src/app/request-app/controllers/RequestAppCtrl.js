@@ -121,5 +121,28 @@ define(['control'], function (control) {
                 $scope.request.logo = data.name;
             });
         };
+
+        $scope.onFeatureGraphicUpload = function ($files) {
+            if ($files[0] === undefined) {
+                return;
+            }
+            $scope.request.featureGraphic = null;
+            $scope.isUploadingFeatureGraphic = true;
+            $scope.uploadProgressFeatureGraphic = 0;
+            $scope.upload = $upload.upload({
+                url: 'https://' + ENV.apiEndpoint + '/control/apps/featureGraphicUpload/',
+                method: 'POST',
+                data: {},
+                file: $files[0]
+            })
+            .progress(function (evt) {
+                $scope.uploadProgressFeatureGraphic = parseInt(100.0 * evt.loaded / evt.total, 10);
+            })
+            .success(function (data) {
+                $scope.isUploadingFeatureGraphic = false;
+                $scope.featureGraphicUploaded = true;
+                $scope.request.featureGraphic = data.name;
+            });
+        };
     });
 });

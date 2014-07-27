@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group" show-errors>
+            <div class="form-group" show-errors ng-show="request.platform !== 'Android'">
                 <label for="app-keywords" class="col-sm-3 control-label">App Keywords</label>
                 <div class="col-sm-9">
                     <div class="input-group">
@@ -38,6 +38,17 @@
                             <i class="fa fa-tags fa-fw"></i>
                         </div>
                         <input id="app-keywords" class="form-control" type="text" name="app-keywords" placeholder="App Keywords (comma separated)" ng-model="request.keywords" maxlength="100" ng-required="request.platform !== 'Android'" ng-disabled="request.platform === 'Android'">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" show-errors ng-show="request.platform !== 'iOS'">
+                <label for="short-description" class="col-sm-3 control-label">Short Description</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-bars fa-fw"></i>
+                        </div>
+                        <textarea maxlength="80" id="short-description" class="form-control" rows="2" name="short-description" placeholder="Short description (80 characters maximum)" ng-model="request.shortDescription" ng-required="request.platform !== 'iOS'"></textarea>
                     </div>
                 </div>
             </div>
@@ -107,7 +118,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group form-color-picker" show-errors>
+            <div class="form-group form-color-picker" show-errors ng-show="request.platform !== 'Android'">
                 <label for="button-text-colour" class="col-sm-3 control-label">Button &amp; Text Colour</label>
                 <div class="col-sm-9">
                     <div class="input-group">
@@ -138,6 +149,17 @@
                         <i class="fa fa-upload"></i>&nbsp;&nbsp;<input id="logo" required accept="image/x-png" type="file" ng-file-select="onLogoUpload($files)">
                         <span class="text-muted" ng-show="isUploadingLogo"> ({{uploadProgressLogo}}%)...</span>
                         <span class="text-success" ng-hide="isUploadingLogo || !logoUploaded"> <fa name="check"></fa></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" show-errors ng-show="request.platform !== 'iOS'">
+                <label for="feature-graphic" class="col-sm-3 control-label">Feature Graphic</label>
+                <div class="col-sm-9">
+                    <div class="input-group" ng-file-drop="onFeatureGraphicUpload($files)">
+                        <input type="hidden" value="{{request.featureGraphic}}" ng-model="request.featureGraphic" name="feature-graphic" ng-required="request.platform !== 'iOS'">
+                        <i class="fa fa-upload"></i>&nbsp;&nbsp;<input id="feature-graphic" ng-required="request.platform !== 'iOS'" accept="image/x-png" type="file" ng-file-select="onFeatureGraphicUpload($files)">
+                        <span class="text-muted" ng-show="isUploadingFeatureGraphic"> ({{uploadProgressFeatureGraphic}}%)...</span>
+                        <span class="text-success" ng-hide="isUploadingFeatureGraphic || !featureGraphicUploaded"> <fa name="check"></fa></span>
                     </div>
                 </div>
             </div>
