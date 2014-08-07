@@ -82,7 +82,7 @@ define([], function () {
                     controller: 'FeedbackCtrl'
                 })
                 .when('/manage/:username/request-app', {
-                    templateUrl: '/app/request-app/partials/request-app.html',
+                    templateUrl: '/app/manage/partials/request-app.html',
                     authorizedRoles: [USER_ROLES.all],
                     title: 'Request your mobile apps',
                     controller: 'RequestAppCtrl',
