@@ -5,8 +5,8 @@
         <tab-heading><fa name="gear"></fa> {{product.group}} - {{product.name}}<br><i>{{product.username}}</i> <span class="label" ng-class="{'label-danger': (['Terminated', 'Suspended', 'Cancelled'].indexOf(product.status) > -1), 'label-warning': (product.status === 'Pending'), 'label-success': (product.status === 'Active')}">{{product.status}}</span></tab-heading>
         <h2 class="page-header no-margin-top">Service #{{product.id}}</h2>
         <!-- Warnings -->
-        <div class="alert alert-danger" ng-show="(['Terminated', 'Suspended'].indexOf(product.status) > -1)">
-            <p><fa name="warning"></fa> This service has been terminated or suspended. No action can be taken on it.</p>
+        <div class="alert alert-danger" ng-show="isInactive(product)">
+            <p><fa name="warning"></fa> This service has been terminated, suspended, cancelled or is still pending. No action can be taken on it.</p>
         </div>
         <div class="alert alert-warning" ng-show="product.name === 'Free'">
             <p><fa name="warning"></fa> Some features are not available to free users.</p>
@@ -39,7 +39,7 @@
         </div>
         <!-- Actions -->
         <div ng-hide="product.name === 'Free'">
-            <p ng-hide="(['Terminated', 'Suspended', 'Cancelled', 'Pending'].indexOf(product.status) > -1) || (product.group.toLowerCase().indexOf('cast') === -1) || (product.hasAndroidApp && product.hasiOSApp)"><a href="#/manage/{{product.username}}/request-app" class="btn btn-lg btn-default btn-block"><fa name="mobile-phone"></fa> Request Apps</a></p>
+            <p ng-hide="isInactive(product) || isStreamingServer(product) || (product.hasAndroidApp && product.hasiOSApp)"><a href="#/manage/{{product.username}}/request-app" class="btn btn-lg btn-default btn-block"><fa name="mobile-phone"></fa> Request Apps</a></p>
         </div>
         <p><a href="https://my.shoutca.st/clientarea.php?action=productdetails&id={{product.id}}" class="btn btn-lg btn-info btn-block">View Details <fa name="chevron-right"></fa></a></p>
     </tab>
