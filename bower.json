@@ -1,30 +1,33 @@
 {
-    "name": "control",
-    "version": "0.0.1",
-    "description": "The front-end for clients to control their services with SHOUTca.st",
-    "dependencies": {
-        "modernizr": "~2.8.3",
-        "requirejs": "~2.1",
-        "requirejs-domready": "latest",
-        "jquery": "latest",
-        "bootstrap": "~3.2.0",
-        "angular": "~1.3.0",
-        "angular-route": "~1.3.0",
-        "angular-animate": "~1.3.0",
-        "angular-ui-bootstrap-bower": "~0.11.0",
-        "ng-file-upload": "~1.5.1",
-        "angular-local-storage": "~0.0.5",
-        "angular-flash": "~0.1.9",
-        "fontawesome": "~4.1.0",
-        "angular-fontawesome": "~0.1.2",
-        "animate.css": "~3.2.0",
-        "angular-loading-bar": "latest",
-        "angular-bootstrap-colorpicker": "~3.0.7",
-        "prefixfree": "latest",
-        "ngBootbox": "latest",
-        "bootbox": "latest"
-    },
-    "resolutions": {
-        "angular": "~1.3.0"
-    }
+  "name": "control",
+  "version": "0.0.1",
+  "description": "The front-end for clients to control their services with SHOUTca.st",
+  "dependencies": {
+    "modernizr": "~2.8.3",
+    "requirejs": "~2.1",
+    "requirejs-domready": "latest",
+    "jquery": "latest",
+    "bootstrap": "~3.2.0",
+    "angular": "~1.3.0",
+    "angular-route": "~1.3.0",
+    "angular-animate": "~1.3.0",
+    "angular-ui-bootstrap-bower": "~0.11.0",
+    "ng-file-upload": "~1.5.1",
+    "angular-local-storage": "~0.0.5",
+    "angular-flash": "~0.1.9",
+    "fontawesome": "~4.1.0",
+    "angular-fontawesome": "~0.1.2",
+    "animate.css": "~3.2.0",
+    "angular-loading-bar": "latest",
+    "angular-bootstrap-colorpicker": "~3.0.7",
+    "prefixfree": "latest",
+    "ngBootbox": "latest",
+    "bootbox": "latest"
+  },
+  "resolutions": {
+    "angular": "~1.3.0"
+  },
+  "devDependencies": {
+    "angular-bootstrap-switch": "~0.3.0"
+  }
 }
