@@ -20,7 +20,7 @@
 define([], function () {
     'use strict';
 
-    var control = angular.module('control', ['LocalStorageModule', 'angular-loading-bar', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ui.bootstrap', 'ngRoute', 'ngAnimate', 'angularFileUpload', 'colorpicker.module', 'config', 'ngBootbox', 'picardy.fontawesome', 'templates-main', 'ui.bootstrap.showErrors', 'frapontillo.bootstrap-switch']);
+    var control = angular.module('control', ['LocalStorageModule', 'angular-loading-bar', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ui.bootstrap', 'ngRoute', 'ngAnimate', 'angularFileUpload', 'colorpicker.module', 'config', 'ngBootbox', 'picardy.fontawesome', 'templates-main', 'ui.bootstrap.showErrors', 'toggle-switch']);
 
     control.config(function ($routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, USER_ROLES, flashProvider, $httpProvider) {
 
@@ -86,6 +86,19 @@ define([], function () {
                     authorizedRoles: [USER_ROLES.all],
                     title: 'Request your mobile apps',
                     controller: 'RequestAppCtrl',
+                    resolve: {
+                        services: function (ManageService) {
+                            return ManageService.getServicesList().then(function (response) {
+                                return response.data;
+                            });
+                        }
+                    }
+                })
+                .when('/manage/:username/now-playing-tweets', {
+                    templateUrl: '/app/manage/partials/now-playing-tweets.html',
+                    authorizedRoles: [USER_ROLES.all],
+                    title: '#NowPlaying Tweets',
+                    controller: 'NowPlayingTweetsCtrl',
                     resolve: {
                         services: function (ManageService) {
                             return ManageService.getServicesList().then(function (response) {

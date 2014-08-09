@@ -93,6 +93,10 @@
     padding: 15px;
 }
 
+.margin-bottom-10px {
+    margin-bottom: 10px;
+}
+
 /* Fixes */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
@@ -135,19 +139,28 @@ input[type="file"] {
     display: inline;
 }
 
-.bootstrap-switch.bootstrap-switch-large .bootstrap-switch-handle-on, .bootstrap-switch.bootstrap-switch-large .bootstrap-switch-handle-off, .bootstrap-switch.bootstrap-switch-large .bootstrap-switch-label {
+.ats-switch.switch-large .switch-left, .ats-switch.switch-large .switch-right, .ats-switch.switch-large .knob {
     padding-left: 8px;
     padding-right: 8px;
 }
 
-.bootstrap-switch.bootstrap-switch-small .bootstrap-switch-handle-on, .bootstrap-switch.bootstrap-switch-small .bootstrap-switch-handle-off, .bootstrap-switch.bootstrap-switch-small .bootstrap-switch-label {
+.ats-switch.switch-default .switch-left, .ats-switch.switch-default .switch-right, .ats-switch.switch-default .knob {
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-handle-on, .bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-handle-off, .bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-label {
+.ats-switch.switch-small .switch-left, .ats-switch.switch-small .switch-right, .ats-switch.switch-small .knob {
     padding-left: 3px;
     padding-right: 3px;
+}
+
+.ats-switch.switch-disabled, .ats-switch.switch-readonly, .ats-switch.switch-indeterminate {
+    opacity: 1;
+    border-color: #E6E6E6;
+}
+
+.ats-switch.switch-disabled .ats-switch-container, .ats-switch.switch-readonly .ats-switch-container, .ats-switch.switch-indeterminate .ats-switch-container {
+    opacity: 0.5;
 }
 
 /* Alert icons */
