@@ -39,25 +39,12 @@ define(['control'], function (control) {
             rejectRequest('You can\'t manage #NowPlaying for server #' + $scope.service.id + ' as it is not a streaming server.');
         }
 
-        // FIXME: This is currently hardcoded, but can be removed as soon as ITFrame returns the data structured exactly as the following object.
-        $scope.service.nowPlaying = {
-            isEnabled: true,
-            settings: {
-                username: $scope.service.username,
-                token: 'token',
-                secret: 'secret',
-                prefix: '#NowPlaying',
-                suffix: '',
-                interval: 5,
-                twitterHandle: 'itOPENcast'
-            }
-        };
-
         // Initialisation
         var reset, initialiseSettings;
-        $scope.reset = initialiseSettings = reset = function () {
+        initialiseSettings = reset = function () {
             $scope.nowPlayingState = $scope.service.nowPlaying.isEnabled;
             $scope.settings = {};
+            $scope.service.nowPlaying.settings = $scope.service.nowPlaying.settings || {};
             $scope.settings.prefix = $scope.service.nowPlaying.settings.prefix || '#NowPlaying';
             $scope.settings.suffix = $scope.service.nowPlaying.settings.suffix || '';
             $scope.settings.interval = $scope.service.nowPlaying.settings.interval || 1;
@@ -67,11 +54,10 @@ define(['control'], function (control) {
         };
         initialiseSettings();
 
-        $scope.submitted = $scope.submitting = false;
+        $scope.submitting = false;
 
         // Functions
         var changeStateSuccess = function () {
-            $scope.submitted = true;
             $scope.submitting = false;
         };
 
@@ -91,7 +77,6 @@ define(['control'], function (control) {
                 }
 
                 $scope.submitting = true;
-                $scope.submitted = false;
                 if ($scope.nowPlayingState) {
                     NowPlayingTweetsService.enable($scope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
                 } else {
@@ -107,10 +92,9 @@ define(['control'], function (control) {
                 return;
             }
             $scope.submitting = true;
-            $scope.submitted = false;
             NowPlayingTweetsService.submitSettings($scope.service.username, settings).then(function () {
-                $scope.submitted = true;
                 $scope.submitting = false;
+                flash.to('alert-now-playing-box').success = 'Your new settings have been saved.';
             }, function () {
                 flash.to('alert-now-playing-box').error = 'Something went wrong while submitting your settings. Your settings were not saved. Please try again.';
                 $scope.submitting = false;
