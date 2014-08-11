@@ -59,18 +59,13 @@
                             <label for="token" class="col-sm-2 control-label">Token</label>
                             <div class="col-sm-10">
                                 <input type="text" readonly id="token" placeholder="Token" class="form-control" ng-model="settings.token" name="token" required>
-                            </div>
-                        </div>
-                        <div class="form-group" show-errors>
-                            <label for="secret" class="col-sm-2 control-label">Secret</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly id="secret" placeholder="Secret" class="form-control" ng-model="settings.secret" name="secret" required>
-                                <p class="text-warning help-block"><fa name="warning"></fa> Do <b>not</b> share this. Treat this like your password.</p>
+                                <p class="help-block" ng-show="form.token.$invalid"><span class="text-danger"><fa name="warning"></fa> Please authorise SHOUTca.st to post to Twitter.</span></p>
+                                <p class="help-block" ng-show="!!settings.twitterHandle && !!settings.token && !!settings.secret"><span class="text-success"><fa name="check"></fa> You've authorised SHOUTca.st to post as <b>@{{settings.twitterHandle}}</b>.</span></p>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <p><button type="button" class="btn btn-info btn-block" ng-click="getTwitterCredentials()"><fa name="twitter"></fa> Authorise SHOUTca.st to post</button></p>
+                                <p><button type="button" class="btn btn-info btn-block" ng-click="getTwitterCredentials()"><fa name="twitter"></fa> Authorise SHOUTca.st to post<span ng-show="!!settings.twitterHandle && !!settings.token && !!settings.secret"> again</span></button></p>
                                 <p><button type="submit" class="btn btn-block btn-primary"><fa name="save"></fa> Save Settings</button></p>
                                 <p class="help-block" ng-show="triedGettingTwitterCredentials">If you are having issues, please clear your cookies.</p>
                             </div>
