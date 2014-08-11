@@ -38,8 +38,13 @@
             </div>
         </div>
         <!-- Actions -->
-        <div ng-hide="product.name === 'Free'">
-            <p ng-hide="isInactive(product) || isStreamingServer(product) || (product.hasAndroidApp && product.hasiOSApp)"><a href="#/manage/{{product.username}}/request-app" class="btn btn-lg btn-default btn-block"><fa name="mobile-phone"></fa> Request Apps</a></p>
+        <div class="row" ng-hide="product.name === 'Free' || isInactive(product) || isStreamingServer(product)">
+            <div class="col-sm-6">
+                <p><a href="#/manage/{{product.username}}/request-app" class="btn btn-lg btn-default btn-block" ng-class="{'disabled': (product.hasAndroidApp && product.hasiOSApp)}"><fa name="mobile-phone"></fa> Request Apps</a></p>
+            </div>
+            <div class="col-sm-6">
+                <p><a href="#/manage/{{product.username}}/now-playing-tweets" class="btn btn-lg btn-default btn-block"><fa name="twitter" style="color: #55ACEE;"></fa> Manage &#35;NowPlaying</a></p>
+            </div>
         </div>
         <p><a href="https://my.shoutca.st/clientarea.php?action=productdetails&id={{product.id}}" class="btn btn-lg btn-info btn-block">View Details <fa name="chevron-right"></fa></a></p>
     </tab>

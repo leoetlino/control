@@ -1,0 +1,86 @@
+<!-- TODO -->
+<br>
+<form class="form-horizontal" novalidate role="form" name="form" ng-submit="submitSettings(settings)" ng-hide="unauthorised">
+    <fieldset ng-disabled="submitting">
+        <div class="alert alert-info">
+            <p><fa name="info-circle"></fa> You are managing #NowPlaying for your server #{{service.id}} with username <b>{{service.username}}</b>.</p>
+            <p><a href="#/manage" class="btn btn-info btn-sm"><fa name="chevron-left"></fa> Back to Services</a></p>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="pull-left">
+                    <h4>#NowPlaying Tweets</h4>
+                </div>
+                <div class="pull-right">
+                    <div toggle-switch ng-disabled="submitting || form.$invalid" class="switch-success switch-large" model="nowPlayingState" on-label="Enabled" off-label="Disabled"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                <div id="alert-now-playing-box" flash-alert active-class="in alert" class="animated-custom fade">
+                    <p class="alert-message"><i class="fa alert-icon-{{flash.type}}"></i> {{ flash.message }}</p>
+                </div>
+                <div class="alert alert-warning" ng-show="form.$invalid">
+                    <p><fa name="warning"></fa> You need to configure #NowPlaying before it can be enabled.</p>
+                </div>
+                <p>#NowPlaying is a free service that automatically posts your now playing information to Twitter. It allows your listeners to know what you're currently playing and artists to interact with you, directly on Twitter!</p>
+                <p>We recommend enabling it with an interval between 5 and 10.</p>
+                <br>
+                <legend>
+                    <div class="h4">
+                        <fa name="cogs"></fa> Settings
+                    </div>
+                </legend>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group" show-errors>
+                            <label for="prefix" class="col-sm-2 control-label">Prefix</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="prefix" class="form-control" placeholder="This is added before the Tweet's content." ng-model="settings.prefix" name="prefix" required>
+                                <p class="help-block">This is often used for adding hashtags such as #NowPlaying.</p>
+                            </div>
+                        </div>
+                        <div class="form-group" show-errors>
+                            <label for="suffix" class="col-sm-2 control-label">Suffix</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="suffix" class="form-control" placeholder="This is added after the Tweet's content (optional)." ng-model="settings.suffix" name="suffix">
+                            </div>
+                        </div>
+                        <div class="form-group" show-errors ng-class="{'has-warning': (settings.interval === 1)}">
+                            <label for="interval" class="col-sm-2 control-label">Interval</label>
+                            <div class="col-sm-10">
+                                <input type="number" id="interval" step="1" min="1" placeholder="Interval" class="form-control" ng-model="settings.interval" name="interval" required>
+                                <p class="help-block">#NowPlaying Tweets will be sent every {{settings.interval}} song<span ng-show="settings.interval > 1">s</span>.<span ng-show="settings.interval === 1"><br>We don't recommend this if the songs aren't very long.</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group" show-errors>
+                            <label for="token" class="col-sm-2 control-label">Token</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly id="token" placeholder="Token" class="form-control" ng-model="settings.token" name="token" required>
+                                <p class="help-block" ng-show="form.token.$invalid"><span class="text-danger"><fa name="warning"></fa> Please authorise SHOUTca.st to post to Twitter.</span></p>
+                                <p class="help-block" ng-show="!!settings.twitterHandle && !!settings.token && !!settings.secret"><span class="text-success"><fa name="check"></fa> You've authorised SHOUTca.st to post as <b>@{{settings.twitterHandle}}</b>.</span></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <p><button type="button" class="btn btn-info btn-block" ng-click="getTwitterCredentials()"><fa name="twitter"></fa> Authorise SHOUTca.st to post<span ng-show="!!settings.twitterHandle && !!settings.token && !!settings.secret"> again</span></button></p>
+                                <p><button type="submit" class="btn btn-block btn-primary"><fa name="save"></fa> Save Settings</button></p>
+                                <p class="help-block" ng-show="triedGettingTwitterCredentials">If you are having issues, please clear your cookies.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="well no-margin-bottom">
+                    <p>Here's what a #NowPlaying Tweet currently looks like:</p>
+                    <blockquote class="no-margin-bottom">
+                        <p>{{settings.prefix}} Song Name - Artist Name {{settings.suffix}}</p>
+                        <small>@{{settings.twitterHandle || 'signinwithtwitterfirst'}} (preview)</small>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+

@@ -23,6 +23,8 @@
         'feedback/services/FeedbackService',
         'manage/controllers/RequestAppCtrl',
         'manage/services/RequestAppService',
+        'manage/controllers/NowPlayingTweetsCtrl',
+        'manage/services/NowPlayingTweetsService',
         'stats/controllers/StatsCtrl'
     ], function () {
         angular.bootstrap(document, ['control']);
