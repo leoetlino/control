@@ -46,7 +46,7 @@ define(['control'], function (control) {
             $scope.service.nowPlaying.settings = $scope.service.nowPlaying.settings || {};
             $scope.settings.prefix = $scope.service.nowPlaying.settings.prefix || '#NowPlaying';
             $scope.settings.suffix = $scope.service.nowPlaying.settings.suffix || '';
-            $scope.settings.interval = $scope.service.nowPlaying.settings.interval || 1;
+            $scope.settings.interval = $scope.service.nowPlaying.settings.interval || 5;
             $scope.settings.token = $scope.service.nowPlaying.settings.token;
             $scope.settings.secret = $scope.service.nowPlaying.settings.secret;
             $scope.settings.twitterHandle = $scope.service.nowPlaying.settings.twitterHandle || 'signinwithtwitterfirst';
