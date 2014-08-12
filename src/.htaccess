@@ -14,6 +14,9 @@ RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-l
 # ... then pass it to AngularJS.
 RewriteRule ^(.*) /index.html [NC,L]
 
+# Don't allow directories to be listed
+Options -Index
+
 # Font types
 AddType font/ttf .ttf
 AddType font/eot .eot
