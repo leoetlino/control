@@ -103,13 +103,13 @@ define(['control'], function (control) {
         $scope.removeSettings = function () {
             // Reset settings.
             $scope.service.nowPlaying.settings = {};
+            unregisterWatch();
             initialiseSettings();
 
             // Remove settings, server-side.
             $scope.submitting = true;
             NowPlayingTweetsService.removeSettings($scope.service.username).then(function () {
                 $scope.submitting = false;
-                unregisterWatch();
                 $scope.nowPlayingState = false;
                 watchNowPlayingSwitch();
                 flash.to('alert-now-playing-box').success = 'Your #NowPlaying settings have been removed.';
