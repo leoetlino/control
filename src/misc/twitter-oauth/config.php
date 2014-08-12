@@ -14,6 +14,8 @@
  * @copyright Innovate Technologies, 2014.
  */
 
+$protocol = ($_SERVER['HTTP_HOST'] === 'control.shoutca.st') ? 'https' : 'http';
+
 define('CONSUMER_KEY', 'pleLmTOiQ5E1JFambg5FBNeSN');
 define('CONSUMER_SECRET', 'MGLQKpJy0EpbJdxv39N8HyuQ0eSrqrf8AxYfgY54IJGwXXowI9');
-define('OAUTH_CALLBACK', 'http://' . $_SERVER['HTTP_HOST'] . '/misc/twitter-oauth/callback.php');
+define('OAUTH_CALLBACK', $protocol . '://' . $_SERVER['HTTP_HOST'] . '/misc/twitter-oauth/callback.php');
