@@ -4,7 +4,8 @@ define(['control'], function (control) {
         return {
             responseError: function (response) {
                 if (response.status === 500) {
-                    $ngBootbox.alert('Something went wrong... please try again! If this happens again, let us know as soon as possible.');
+                    var errorMessage = (typeof response.data !== 'undefined' && typeof response.data.error !== 'undefined') ? response.data.error : 'Something went wrong... please try again! If this happens again, let us know as soon as possible.';
+                    $ngBootbox.alert(errorMessage);
                 }
                 if (response.status === 503) {
                     $ngBootbox.alert('Control is currently unavailable. Please try again later.');
