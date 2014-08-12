@@ -66,7 +66,14 @@
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
                                 <p><button type="button" class="btn btn-info btn-block" ng-click="getTwitterCredentials()"><fa name="twitter"></fa> Authorise SHOUTca.st to post<span ng-show="!!settings.twitterHandle && !!settings.token && !!settings.secret"> again</span></button></p>
-                                <p><button type="submit" class="btn btn-block btn-primary"><fa name="save"></fa> Save Settings</button></p>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <button type="submit" class="btn btn-block btn-primary"><fa name="save"></fa> Save Settings</button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-danger btn-block" ng-click="removeSettings()"><fa name="trash-o"></fa> Remove Settings</button>
+                                    </div>
+                                </div>
                                 <p class="help-block" ng-show="triedGettingTwitterCredentials">If you are having issues, please clear your cookies.</p>
                             </div>
                         </div>

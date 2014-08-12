@@ -40,8 +40,7 @@ define(['control'], function (control) {
         }
 
         // Initialisation
-        var reset, initialiseSettings;
-        initialiseSettings = reset = function () {
+        var initialiseSettings = function () {
             $scope.nowPlayingState = $scope.service.nowPlaying.isEnabled;
             $scope.settings = {};
             $scope.service.nowPlaying.settings = $scope.service.nowPlaying.settings || {};
@@ -97,6 +96,22 @@ define(['control'], function (control) {
                 flash.to('alert-now-playing-box').success = 'Your new settings have been saved.';
             }, function () {
                 flash.to('alert-now-playing-box').error = 'Something went wrong while submitting your settings. Your settings were not saved. Please try again.';
+                $scope.submitting = false;
+            });
+        };
+
+        $scope.removeSettings = function () {
+            // Reset settings.
+            $scope.service.nowPlaying.settings = {};
+            initialiseSettings();
+
+            // Remove settings, server-side.
+            $scope.submitting = true;
+            NowPlayingTweetsService.removeSettings($scope.service.username).then(function () {
+                $scope.submitting = false;
+                flash.to('alert-now-playing-box').success = 'Your #NowPlaying settings have been removed.';
+            }, function () {
+                flash.to('alert-now-playing-box').error = 'Something went wrong while removing your settings. Your settings were not removed. Please try again.';
                 $scope.submitting = false;
             });
         };

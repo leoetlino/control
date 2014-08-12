@@ -11,6 +11,9 @@ define(['control'], function (control) {
             },
             disable: function (username) {
                 return $http.post('https://' + ENV.apiEndpoint + '/control/now-playing/disable', { username: username });
+            },
+            removeSettings: function (username) {
+                return $http.post('https://' + ENV.apiEndpoint + '/control/now-playing/remove', { username: username });
             }
         };
     });
