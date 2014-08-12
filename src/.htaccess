@@ -15,7 +15,7 @@ RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-l
 RewriteRule ^(.*) /index.html [NC,L]
 
 # Don't allow directories to be listed
-Options -Index
+Options -Indexes
 
 # Font types
 AddType font/ttf .ttf
