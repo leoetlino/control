@@ -48,6 +48,7 @@ define(['control'], function (control) {
 
         $scope.appSubmitted = false;
         $scope.request = {};
+        $scope.request.platform = 'Both';
 
         // workaround for form validation
         $scope.$watch('form', function () {
