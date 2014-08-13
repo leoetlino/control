@@ -52,7 +52,7 @@ define(['control'], function(control) {
             $location.path(originalPath);
         });
         $rootScope.$on(AUTH_EVENTS.loginFailed, function() {
-            flash.to('alert-log-in').error = 'Couldn\'t login. Please check your credentials.';
+            flash.to('alert-log-in').error = 'Couldn\'t log in. Please check your credentials.';
         });
         $rootScope.$on(AUTH_EVENTS.logoutSuccess, function() {
             $location.path('/login');
