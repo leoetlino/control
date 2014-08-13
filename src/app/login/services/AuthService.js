@@ -1,3 +1,4 @@
+/* global define, angular */
 define(['control'], function (control) {
     control.factory('AuthService', function ($http, Session, USER_ROLES, localStorageService, ENV, AuthChecker, $rootScope, $interval, AUTH_EVENTS) {
         var AuthService = {
