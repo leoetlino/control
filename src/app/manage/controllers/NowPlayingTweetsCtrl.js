@@ -115,6 +115,7 @@ define(['control'], function (control) {
                 flash.to('alert-now-playing-box').success = 'Your #NowPlaying settings have been removed.';
             }, function () {
                 flash.to('alert-now-playing-box').error = 'Something went wrong while removing your settings. Your settings were not removed. Please try again.';
+                watchNowPlayingSwitch();
                 $scope.submitting = false;
             });
         };
