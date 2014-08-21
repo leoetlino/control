@@ -1,3 +1,4 @@
+/* global define */
 define(['control'], function (control) {
     control.factory('RequestAppService', function ($http, ENV) {
         return {

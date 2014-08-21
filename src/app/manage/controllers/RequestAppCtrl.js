@@ -1,3 +1,4 @@
+/* global define */
 define(['control'], function (control) {
     'use strict';
     control.controller('RequestAppCtrl', function ($scope, RequestAppService, $upload, ENV, $routeParams, services, $location, flash) {
