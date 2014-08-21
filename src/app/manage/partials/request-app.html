@@ -170,6 +170,19 @@
             </div>
         </div>
     </div>
+    <hr>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="needsAlternativeTuneInURL"> I need to use an alternative stream URL
+        </label>
+        <p class="help-block">Only check this if you <b>must</b> use an alternative stream URL. This is useful when you are using a stream licensing service that forces you to use their stream URL.</p>
+    </div>
+    <div class="form-group" show-errors ng-show="needsAlternativeTuneInURL">
+        <label for="alternative-stream-url" class="col-sm-3 control-label">Alternative Stream URL</label>
+        <div class="col-sm-9">
+            <input id="alternative-stream-url" class="form-control" type="url" name="alternative-stream-url" placeholder="http://..." ng-model="request.alternativeStreamURL" ng-required="needsAlternativeTuneInURL">
+        </div>
+    </div>
     <div class="form-group">
         <br>
         <div class="col-sm-12">
