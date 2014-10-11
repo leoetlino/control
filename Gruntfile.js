@@ -133,7 +133,7 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'development',
-                        apiEndpoint: 'dev-itframe.shoutca.st'
+                        apiEndpoint: 'itframe.shoutca.st'
                     }
                 }
             },
