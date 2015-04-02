@@ -1,6 +1,6 @@
 {
   "name": "angular-toggle-switch",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "main": [
     "angular-toggle-switch.js",
     "style/bootstrap3/angular-toggle-switch-bootstrap-3.css"
@@ -21,14 +21,13 @@
     "package.json",
     ".travis.yml"
   ],
-  "_release": "0.5.1",
+  "_release": "0.5.2",
   "_resolution": {
     "type": "version",
-    "tag": "v0.5.1",
-    "commit": "ef88727191377dd755e08d6bdf4690fe2aff1c35"
+    "tag": "v0.5.2",
+    "commit": "5eca72a2c6d110170e99f0fd11c16053555697bd"
   },
   "_source": "git://github.com/JumpLink/angular-toggle-switch.git",
   "_target": "~0.5.1",
-  "_originalSource": "angular-bootstrap-toggle-switch",
-  "_direct": true
+  "_originalSource": "angular-bootstrap-toggle-switch"
 }

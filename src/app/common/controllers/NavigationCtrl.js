@@ -1,6 +1,6 @@
 /* global define */
 define(['control'], function(control) {
-    control.controller('NavigationCtrl', function($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session) {
+    control.controller('NavigationCtrl', function($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ManageService) {
         $scope.currentUser = null;
         $scope.userRoles = USER_ROLES;
         $scope.isAuthorized = AuthChecker.isAuthorized;
@@ -18,7 +18,7 @@ define(['control'], function(control) {
             return (viewLocation === '/') ? viewLocation === $location.path() : $location.path().indexOf(viewLocation) > -1;
         };
         var originalPath = null;
-        $rootScope.$on('$routeChangeStart', function(event, next) {
+        $rootScope.$on ('$routeChangeStart', function(event, next) {
             var authorizedRoles = next.authorizedRoles;
             if (!authorizedRoles) {
                 authorizedRoles = [USER_ROLES.all];
@@ -30,14 +30,20 @@ define(['control'], function(control) {
                     // user is not allowed
                     if (next.originalPath !== '/login') {
                         $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+                        return;
                     }
                 } else {
                     // user is not logged in
                     if (next.originalPath !== '/login') {
                         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
                         originalPath = next.originalPath;
+                        return;
                     }
                 }
+            }
+
+            if (next.originalPath !== '/login') {
+                $location.search('apiMock', 'true');
             }
         });
         $rootScope.$on('$routeChangeSuccess', function() {
@@ -75,6 +81,27 @@ define(['control'], function(control) {
         $rootScope.$on(AUTH_EVENTS.notAuthorized, function() {
             $location.path('/login');
             flash.to('alert-general').error = 'You can\'t do that as yourself. Log in as someone with more permission than you.';
+        });
+
+        function initServices () {
+            $rootScope.service = null;
+            $rootScope.services = ManageService.getServicesList().then(function (response) {
+                $rootScope.servicesLoaded = true;
+                $rootScope.service = response.data[0].id;
+                return response.data;
+            });
+        }
+
+        $rootScope.$on(AUTH_EVENTS.loginSuccess, initServices);
+        if (AuthChecker.isAuthenticated()) {
+            initServices();
+        }
+
+        $rootScope.$watch('service', function (newId, oldId) {
+            if (!oldId || oldId === newId) {
+                return;
+            }
+            $route.reload();
         });
     });
 });

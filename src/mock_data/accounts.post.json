@@ -1,0 +1,107 @@
+[
+    {
+        "id":"6",
+        "name":"VIP",
+        "group":"SHOUTcast v2 Servers (France)",
+        "server":"Helium",
+        "status":"Terminated",
+        "username":"leoetlino",
+        "price":"0.00",
+        "isReseller":false,
+        "hasAndroidApp":false,
+        "hasiOSApp":false,
+        "nowPlaying":{
+            "isEnabled":false
+        }
+    },
+    {
+        "id":"122",
+        "name":"VIP",
+        "group":"SHOUTcast v2 Servers (France)",
+        "server":"Helium",
+        "status":"Terminated",
+        "username":"testserver",
+        "price":"0.00",
+        "isReseller":false,
+        "hasAndroidApp":false,
+        "hasiOSApp":false,
+        "nowPlaying":{
+            "isEnabled":false
+        }
+    },
+    {
+        "id":"1121",
+        "name":"VIP",
+        "group":"SHOUTcast v2 Servers (France)",
+        "server":"Hubble",
+        "status":"Active",
+        "username":"innovate",
+        "price":"5.00",
+        "isReseller":false,
+        "hasAndroidApp":false,
+        "hasiOSApp":false,
+        "nowPlaying":{
+            "isEnabled":false
+        }
+    },
+    {
+        "id":"1249",
+        "name":"Standard Web Hosting",
+        "group":"Web Hosting",
+        "server":"Spitzer",
+        "status":"Active",
+        "username":"agendade",
+        "price":"4.00",
+        "isReseller":false,
+        "hasAndroidApp":false,
+        "hasiOSApp":false,
+        "nowPlaying":{
+            "isEnabled":false
+        }
+    },
+    {
+        "id":"2882",
+        "name":"VIP",
+        "group":"Icecast Servers (France)",
+        "server":"Centauri",
+        "status":"Active",
+        "username":"leolam",
+        "price":"0.00",
+        "isReseller":false,
+        "hasAndroidApp":true,
+        "hasiOSApp":false,
+        "nowPlaying":{
+            "isEnabled":false
+        }
+    },
+    {
+        "id":"5458",
+        "name":"VIP",
+        "group":"SHOUTcast v2 Servers (Canada)",
+        "server":"Albireo",
+        "status":"Active",
+        "username":"leolam00",
+        "price":"5.00",
+        "isReseller":false,
+        "hasAndroidApp":false,
+        "hasiOSApp":false,
+        "nowPlaying":{
+            "isEnabled":false
+        }
+    },
+    {
+        "id":"5459",
+        "name":"VIP",
+        "group":"Icecast Servers (Canada)",
+        "server":"Albireo",
+        "status":"Active",
+        "username":"leolam01",
+        "price":"5.00",
+        "isReseller":false,
+        "hasAndroidApp":false,
+        "hasiOSApp":false,
+        "nowPlaying":{
+            "isEnabled":false
+        }
+    }
+]

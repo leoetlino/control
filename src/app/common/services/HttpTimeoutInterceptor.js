@@ -1,6 +1,6 @@
 /* global define */
 define(['control'], function (control) {
-    control.factory('HttpTimeoutInterceptor', function ($q, $ngBootbox) {
+    control.factory('HttpTimeoutInterceptor', function ($q, $window) {
         return {
             'request': function(config) {
                 config.timeout = 10000;
@@ -8,7 +8,7 @@ define(['control'], function (control) {
             },
             responseError: function (response) {
                 if (response.status === -1) {
-                    $ngBootbox.alert('Control is currently unavailable. Please try again later. If this occurs again, let us know as soon as possible.');
+                    $window.alert('Control is currently unavailable. Please try again later. If this occurs again, let us know as soon as possible.');
                 }
                 return $q.reject(response);
             }

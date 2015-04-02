@@ -1,6 +1,6 @@
 {
   "name": "angular-bootstrap-colorpicker",
-  "version": "3.0.7",
+  "version": "3.0.13",
   "main": [
     "js/bootstrap-colorpicker-module.js",
     "css/colorpicker.css"
@@ -13,11 +13,11 @@
     "tests"
   ],
   "homepage": "https://github.com/buberdds/angular-bootstrap-colorpicker",
-  "_release": "3.0.7",
+  "_release": "3.0.13",
   "_resolution": {
     "type": "version",
-    "tag": "v3.0.7",
-    "commit": "703e61efd71d2ae63233ffe24e745adb20229cc2"
+    "tag": "v3.0.13",
+    "commit": "16417f4b8e9d24ebc091f7d382792b05450c9b83"
   },
   "_source": "git://github.com/buberdds/angular-bootstrap-colorpicker.git",
   "_target": "~3.0.7",

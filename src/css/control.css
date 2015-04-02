@@ -49,6 +49,43 @@
     margin-top: 10em;
 }
 
+.service-switcher {
+    display: inherit;
+    margin-top: 17px;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+@media screen and (min-width: 1024px) {
+    .service-switcher {
+        width: 200px;
+    }
+
+    .service-switcher .caret {
+        float: right;
+        position: relative;
+        top: 8px;
+    }
+}
+
+.service-switcher .caret {
+    border-top-color: black !important;
+    border-bottom-color: black !important;
+}
+
+.service-switcher > .show-in-dropdown-only {
+    display: none;
+}
+
+.service-switcher + .dropdown-menu li a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.dropdown-menu .active .text-muted, .dropdown-menu li:active .text-muted, .dropdown-menu li:hover .text-muted, .dropdown-menu li:focus .text-muted {
+    color: white !important;
+}
+
 /* Helper classes */
 .font-diavlo {
     font-family: 'Diavlo Light';
