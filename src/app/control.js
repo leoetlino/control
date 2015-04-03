@@ -61,9 +61,14 @@ define([], function () {
             authorizedRoles: [USER_ROLES.all],
             title: 'Manage your servers',
             resolve: {
-                services: function (ManageService) {
+                service: function ($rootScope, ManageService) {
                     return ManageService.getServicesList().then(function (response) {
-                        return response.data;
+                        $rootScope.servicesLoaded = true;
+                        if (!$rootScope.service) {
+                            $rootScope.services = response.data;
+                            $rootScope.service = response.data[0];
+                        }
+                        return $rootScope.service;
                     });
                 }
             },

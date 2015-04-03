@@ -17,8 +17,40 @@ define(['control'], function(control) {
         $scope.isActive = function (viewLocation) {
             return (viewLocation === '/') ? viewLocation === $location.path() : $location.path().indexOf(viewLocation) > -1;
         };
+
+        $rootScope.$on('$routeChangeSuccess', function() {
+            $rootScope.pageTitle = $route.current.title;
+        });
+
+        function initServices () {
+             ManageService.getServicesList().then(function (response) {
+                $rootScope.servicesLoaded = true;
+                if (!$rootScope.service) {
+                    $rootScope.services = response.data;
+                    $rootScope.service = response.data[0];
+                }
+                return response.data;
+            });
+        }
+
+        $rootScope.$on(AUTH_EVENTS.loginSuccess, initServices);
+        if (AuthChecker.isAuthenticated()) {
+            initServices();
+        }
+
+        $rootScope.$watch('service', function (newId, oldId) {
+            if (!oldId || oldId === newId) {
+                return;
+            }
+            $route.reload();
+        });
+
+        ////////////////////////
+        // Authentication system
+        ////////////////////////
+
         var originalPath = null;
-        $rootScope.$on ('$routeChangeStart', function(event, next) {
+        $rootScope.$on('$routeChangeStart', function(event, next) {
             var authorizedRoles = next.authorizedRoles;
             if (!authorizedRoles) {
                 authorizedRoles = [USER_ROLES.all];
@@ -41,16 +73,8 @@ define(['control'], function(control) {
                     }
                 }
             }
-
-            if (next.originalPath !== '/login') {
-                $location.search('apiMock', 'true');
-            }
-        });
-        $rootScope.$on('$routeChangeSuccess', function() {
-            $rootScope.pageTitle = $route.current.title;
         });
 
-        // Authorisation system
         $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
             if (originalPath === 'undefined' || !originalPath || originalPath === '/login') {
                 originalPath = '/';
@@ -81,27 +105,6 @@ define(['control'], function(control) {
         $rootScope.$on(AUTH_EVENTS.notAuthorized, function() {
             $location.path('/login');
             flash.to('alert-general').error = 'You can\'t do that as yourself. Log in as someone with more permission than you.';
-        });
-
-        function initServices () {
-            $rootScope.service = null;
-            $rootScope.services = ManageService.getServicesList().then(function (response) {
-                $rootScope.servicesLoaded = true;
-                $rootScope.service = response.data[0].id;
-                return response.data;
-            });
-        }
-
-        $rootScope.$on(AUTH_EVENTS.loginSuccess, initServices);
-        if (AuthChecker.isAuthenticated()) {
-            initServices();
-        }
-
-        $rootScope.$watch('service', function (newId, oldId) {
-            if (!oldId || oldId === newId) {
-                return;
-            }
-            $route.reload();
         });
     });
 });

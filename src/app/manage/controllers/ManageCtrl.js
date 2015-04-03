@@ -1,6 +1,6 @@
 define(['control'], function (control) {
-    control.controller('ManageCtrl', function ($scope, services) {
-        $scope.products = services;
+    control.controller('ManageCtrl', function ($rootScope, $scope) {
+        $scope.product = $rootScope.service;
         $scope.isInactive = function (product) {
             return (['Terminated', 'Suspended', 'Cancelled', 'Pending'].indexOf(product.status) > -1);
         };
