@@ -10,8 +10,8 @@ message_file = sys.argv[1]
 def check_format_rules(lineno, line):
     real_lineno = lineno + 1
     if lineno == 0:
-        if len(line) > 50:
-            return "Error %d: First line should be less than 50 characters " \
+        if len(line) > 52:
+            return "Error %d: First line should be less than 53 characters " \
                     "in length." % (real_lineno,)
     #if lineno == 1:
     #    if line:
