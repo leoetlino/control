@@ -1,6 +1,6 @@
 /* global define */
 define(['control'], function(control) {
-    control.controller('NavigationCtrl', function($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ManageService) {
+    control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ManageService) {
         $scope.currentUser = null;
         $scope.userRoles = USER_ROLES;
         $scope.isAuthorized = AuthChecker.isAuthorized;
@@ -23,7 +23,7 @@ define(['control'], function(control) {
         });
 
         function initServices () {
-             ManageService.getServicesList().then(function (response) {
+            return ManageService.getServicesList().then(function (response) {
                 $rootScope.servicesLoaded = true;
                 if (!$rootScope.service) {
                     $rootScope.services = response.data;
@@ -73,6 +73,72 @@ define(['control'], function(control) {
                     }
                 }
             }
+
+            // Sanity checks
+            if (!$rootScope.services) {
+                initServices().then(checkServices);
+            } else {
+                checkServices();
+            }
+
+            function checkServices () {
+                var userServices = $rootScope.services;
+                var selectedService = $rootScope.service;
+                var hasService = false;
+
+                for (var i = 0; i < userServices.length; i++) {
+                    if (userServices[i].username === selectedService.username) {
+                        hasService = true;
+                        break;
+                    }
+                }
+
+                if (!hasService) {
+                    $rootScope.$broadcast('invalid-service');
+                    return;
+                }
+
+                if (next.paidOnly) {
+                    if (selectedService.name === 'Free') {
+                        $rootScope.$broadcast('denied-paid-only');
+                        return;
+                    }
+                }
+
+                if (next.activeOnly) {
+                    if (['Terminated', 'Suspended', 'Cancelled', 'Pending'].indexOf(selectedService.status) > -1) {
+                        $rootScope.$broadcast('denied-active-only');
+                        return;
+                    }
+                }
+
+                if (next.streamingServicesOnly) {
+                    if (selectedService.group.toLowerCase().indexOf('cast') === -1) {
+                        $rootScope.$broadcast('denied-streaming-services-only');
+                        return;
+                    }
+                }
+            }
+        });
+
+        $rootScope.$on('invalid-service', function () {
+            flash.to('alert-general').error = 'Access denied: Invalid service.';
+            $location.path('/');
+        });
+
+        $rootScope.$on('denied-paid-only', function () {
+            flash.to('alert-general').error = 'Access denied: This page is for paid services only. Please consider upgrading.';
+            $location.path('/');
+        });
+
+        $rootScope.$on('denied-active-only', function () {
+            flash.to('alert-general').error = 'Access denied: This page is for active services only.';
+            $location.path('/');
+        });
+
+        $rootScope.$on('denied-streaming-services-only', function () {
+            flash.to('alert-general').error = 'Access denied: This page is for streaming services only.';
+            $location.path('/');
         });
 
         $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
