@@ -83,8 +83,6 @@ define([], function () {
             templateUrl: '/app/manage/partials/request-app.html',
             authorizedRoles: [USER_ROLES.all],
             paidOnly: true,
-            activeOnly: true,
-            streamingServicesOnly: true,
             title: 'Request your mobile apps',
             controller: 'RequestAppCtrl',
             resolve: {
@@ -97,8 +95,6 @@ define([], function () {
             templateUrl: '/app/manage/partials/now-playing-tweets.html',
             authorizedRoles: [USER_ROLES.all],
             paidOnly: true,
-            activeOnly: true,
-            streamingServicesOnly: true,
             title: '#NowPlaying Tweets',
             controller: 'NowPlayingTweetsCtrl',
             resolve: {

@@ -104,20 +104,6 @@ define(['control'], function(control) {
                         return;
                     }
                 }
-
-                if (next.activeOnly) {
-                    if (['Terminated', 'Suspended', 'Cancelled', 'Pending'].indexOf(selectedService.status) > -1) {
-                        $rootScope.$broadcast('denied-active-only');
-                        return;
-                    }
-                }
-
-                if (next.streamingServicesOnly) {
-                    if (selectedService.group.toLowerCase().indexOf('cast') === -1) {
-                        $rootScope.$broadcast('denied-streaming-services-only');
-                        return;
-                    }
-                }
             }
         });
 
@@ -128,16 +114,6 @@ define(['control'], function(control) {
 
         $rootScope.$on('denied-paid-only', function () {
             flash.to('alert-general').error = 'Access denied: This page is for paid services only. Please consider upgrading.';
-            $location.path('/');
-        });
-
-        $rootScope.$on('denied-active-only', function () {
-            flash.to('alert-general').error = 'Access denied: This page is for active services only.';
-            $location.path('/');
-        });
-
-        $rootScope.$on('denied-streaming-services-only', function () {
-            flash.to('alert-general').error = 'Access denied: This page is for streaming services only.';
             $location.path('/');
         });
 
