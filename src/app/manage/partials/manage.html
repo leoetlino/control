@@ -35,21 +35,35 @@
     </tab>
 
     <tab disabled="product.name === 'Free'">
+        <p>Request mobile applications to get more listeners! Below is your current app status.</p>
         <tab-heading><i class="fa fa-fw fa-mobile-phone"></i> Mobile Apps</tab-heading>
         <div class="alert alert-info" ng-show="(product.apps.android && product.apps.iOS)">
             <p>You have already requested your mobile apps.</p>
+        </div>
+        <div class="alert alert-info" ng-show="(product.apps.android || product.apps.iOS)">
+            <p>To request an update, please open a ticket.</p>
         </div>
         <div class="row">
             <div class="col-sm-6">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">Android App</div>
-                    <div class="panel-body"><p class="lead" ng-class="{'text-success': product.apps.android}">{{product.apps.android ? 'Requested' : 'Not requested'}}</p></div>
+                    <div class="panel-body">
+                        <p class="lead" ng-class="{'text-success': product.apps.android}">{{product.apps.android ? 'Requested' : 'Not requested'}}</p>
+                        <div ng-show="product.apps.android">
+                            <p>Current status: <span class="text-{{product.apps.android.status|appStatusRow}}">{{product.apps.android.status|appStatus}}</span></p>
+                            <p><i>{{product.apps.android.status|appStatusExplanation}}</i></p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">iOS App</div>
                     <div class="panel-body"><p class="lead" ng-class="{'text-success': product.apps.iOS}">{{product.apps.iOS ? 'Requested' : 'Not requested'}}</p></div>
+                    <div ng-show="product.apps.iOS">
+                        <p>Current status: <span class="text-{{product.apps.iOS.status|appStatusRow}}">{{product.apps.iOS.status|appStatus}}</span></p>
+                        <p><i>{{product.apps.iOS.status|appStatusExplanation}}</i></p>
+                    </div>
                 </div>
             </div>
         </div>

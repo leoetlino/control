@@ -17,6 +17,7 @@
         'login/controllers/LoginCtrl',
         'dashboard/controllers/DashboardCtrl',
         'dashboard/services/DashService',
+        'manage/filters/appStatus',
         'manage/controllers/ManageCtrl',
         'manage/services/ManageService',
         'feedback/controllers/FeedbackCtrl',
