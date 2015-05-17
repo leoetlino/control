@@ -1,11 +1,14 @@
-<h1 class="page-header"><fa name="mobile-phone"></fa> Request your mobile apps</h1>
+<h2 class="page-header">
+    <span class="pull-left"><fa name="sliders"></fa> Manage #{{service.id}} <small>Request Apps</small></span>
+    <span class="pull-right"><a class="back-to-services-link text-muted" href="/manage">Back</a></span>
+    <div class="clearfix"></div>
+</h2>
 
 <form class="form-horizontal" novalidate role="form" name="form" ng-submit="submit(request)" ng-hide="appSubmitted || unauthorised">
-    <div class="alert alert-info">
-        <p><fa name="info-circle"></fa> You are requesting mobile apps for your server #{{service.id}} with username <b>{{service.username}}</b>.</p>
-        <p>Please read the guidelines for our <a class="alert-link" href="https://shoutca.st/ios-apps">iOS</a> and <a class="alert-link" href="https://shoutca.st/android-apps">Android apps</a> before submitting your app. Invalid requests will be dismissed without notification. Please do not open any ticket asking for your app's status; those will also be dismissed.</p>
+    <div class="alert alert-warning">
+        <p>Please read the guidelines for our <a class="alert-link" href="https://shoutca.st/ios-apps">iOS</a> and <a class="alert-link" href="https://shoutca.st/android-apps">Android apps</a> before submitting your app.</p>
         <p>Upon submission of your request, we'll build and submit your app to the appropriate app stores and then notify you once that's been done. The whole process can take up to a week.</p>
-        <p><a href="/manage" class="btn btn-info btn-sm"><fa name="chevron-left"></fa> Back to Services</a></p>
+        <p>You'll be notified when your apps are ready or if the request is rejected.</p>
     </div>
     <div class="row">
         <div class="col-sm-6">

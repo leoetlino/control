@@ -1,10 +1,11 @@
-<br>
+<h2 class="page-header">
+    <span class="pull-left"><fa name="sliders"></fa> Manage #{{service.id}} <small>#NowPlaying</small></span>
+    <span class="pull-right"><a class="back-to-services-link text-muted" href="/manage">Back</a></span>
+    <div class="clearfix"></div>
+</h2>
+
 <form class="form-horizontal" novalidate role="form" name="form" ng-submit="submitSettings(settings)" ng-hide="unauthorised">
     <fieldset ng-disabled="submitting">
-        <div class="alert alert-info">
-            <p><fa name="info-circle"></fa> You are managing #NowPlaying for your server #{{service.id}} with username <b>{{service.username}}</b>.</p>
-            <p><a href="/manage" class="btn btn-info btn-sm"><fa name="chevron-left"></fa> Back to Services</a></p>
-        </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="pull-left">

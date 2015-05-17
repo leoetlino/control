@@ -134,6 +134,10 @@
     margin-bottom: 10px;
 }
 
+.back-to-services-link {
+    font-size: 15px;
+}
+
 /* Fixes */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 

@@ -1,8 +1,7 @@
-<h1 class="page-header"><fa name="sliders"></fa> Manage your services</h1>
-<h2 class="page-header no-margin-top">Service #{{product.id}}</h2>
-<div class="alert alert-danger" ng-show="isInactive(product)">
-    <p><fa name="warning"></fa> This service has been terminated, suspended, cancelled or is still pending. No action can be taken on it.</p>
-</div>
+<h2 class="page-header">
+    <span><fa name="sliders"></fa> Manage #{{service.id}}</span>
+</h2>
+
 <div class="alert alert-warning" ng-show="product.name === 'Free'">
     <p><fa name="warning"></fa> Some features are not available to free users.</p>
 </div>
