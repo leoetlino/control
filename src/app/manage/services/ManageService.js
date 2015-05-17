@@ -1,8 +1,13 @@
 define(['control'], function (control) {
     control.factory('ManageService', function ($http, ENV, $rootScope) {
         return {
+            promise: null,
             getServicesList: function () {
-                return $http.post('https://' + ENV.apiEndpoint + '/control/accounts/');
+                if (this.promise) {
+                    return this.promise;
+                }
+                this.promise = $http.post('https://' + ENV.apiEndpoint + '/control/accounts/');
+                return this.promise;
             },
             getSelectedService: function () {
                 return this.getServicesList().then(function (response) {
