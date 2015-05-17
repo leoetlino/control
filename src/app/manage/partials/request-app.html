@@ -16,9 +16,9 @@
                 <label for="platform" class="col-sm-3 control-label">Platform</label>
                 <div class="col-sm-9">
                     <select id="platform" class="form-control" ng-model="request.platform" name="platform" required>
-                        <option ng-selected="!service.hasiOSApp && !service.hasAndroidApp" ng-disabled="service.hasiOSApp || service.hasAndroidApp" value="Both">Android and iOS (iPhone, iPad and iPod)</option>
-                        <option ng-selected="service.hasiOSApp" ng-disabled="service.hasAndroidApp" value="Android">Android</option>
-                        <option ng-selected="service.hasAndroidApp" ng-disabled="service.hasiOSApp" value="iOS">iOS</option>
+                        <option ng-selected="!service.apps.iOS && !service.apps.android" ng-disabled="service.apps.iOS || service.apps.android" value="Both">Android and iOS (iPhone, iPad and iPod)</option>
+                        <option ng-selected="service.apps.iOS" ng-disabled="service.apps.android" value="Android">Android</option>
+                        <option ng-selected="service.apps.android" ng-disabled="service.apps.iOS" value="iOS">iOS</option>
                     </select>
                 </div>
             </div>

@@ -36,24 +36,24 @@
 
     <tab disabled="product.name === 'Free'">
         <tab-heading><i class="fa fa-fw fa-mobile-phone"></i> Mobile Apps</tab-heading>
-        <div class="alert alert-info" ng-show="(product.hasAndroidApp && product.hasiOSApp)">
+        <div class="alert alert-info" ng-show="(product.apps.android && product.apps.iOS)">
             <p>You have already requested your mobile apps.</p>
         </div>
         <div class="row">
             <div class="col-sm-6">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">Android App</div>
-                    <div class="panel-body"><p class="lead" ng-class="{'text-success': product.hasAndroidApp}">{{product.hasAndroidApp ? 'Requested' : 'Not requested'}}</p></div>
+                    <div class="panel-body"><p class="lead" ng-class="{'text-success': product.apps.android}">{{product.apps.android ? 'Requested' : 'Not requested'}}</p></div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">iOS App</div>
-                    <div class="panel-body"><p class="lead" ng-class="{'text-success': product.hasiOSApp}">{{product.hasiOSApp ? 'Requested' : 'Not requested'}}</p></div>
+                    <div class="panel-body"><p class="lead" ng-class="{'text-success': product.apps.iOS}">{{product.apps.iOS ? 'Requested' : 'Not requested'}}</p></div>
                 </div>
             </div>
         </div>
-        <p><a href="/manage/request-app" class="btn btn-lg btn-default btn-block" ng-class="{'disabled': (product.hasAndroidApp && product.hasiOSApp)}"><fa name="mobile-phone"></fa> Request Apps</a></p>
+        <p><a href="/manage/request-app" class="btn btn-lg btn-default btn-block" ng-class="{'disabled': (product.apps.android && product.apps.iOS)}"><fa name="mobile-phone"></fa> Request Apps</a></p>
     </tab>
 
     <tab disabled="product.name === 'Free'">

@@ -5,7 +5,7 @@ define(['control'], function (control) {
 
         $scope.service = service;
 
-        if ($scope.service.hasiOSApp && $scope.service.hasAndroidApp) {
+        if ($scope.service.apps.iOS && $scope.service.apps.android) {
             $location.path('/manage');
             flash.to('alert-general').error = 'You have already requested apps for server #' + $scope.service.id + '.';
         }
