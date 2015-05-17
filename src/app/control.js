@@ -3,7 +3,6 @@ define([], function () {
 
     var control = angular.module('control', [
         'config',
-        'apiMock',
         'ngRoute',
         'ngAnimate',
         'ngSanitize',
@@ -22,7 +21,7 @@ define([], function () {
         'templates-main'
     ]);
 
-    control.config(function ($routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, USER_ROLES, flashProvider, $httpProvider, apiMockProvider) {
+    control.config(function ($routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, USER_ROLES, flashProvider, $httpProvider) {
 
         flashProvider.errorClassnames.push('alert-danger');
         flashProvider.warnClassnames.push('alert-warning');
@@ -112,11 +111,6 @@ define([], function () {
         $httpProvider.interceptors.push('AuthInterceptor');
         $httpProvider.interceptors.push('HttpTimeoutInterceptor');
         $httpProvider.interceptors.push('ServerErrorInterceptor');
-
-        apiMockProvider.config({
-            mockDataPath: '/mock_data/',
-            apiPath: 'https://itframe.shoutca.st/control/',
-        });
     });
 
     return control;
