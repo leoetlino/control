@@ -1,6 +1,6 @@
 /* global define */
 define(['control'], function(control) {
-    control.controller('NavigationCtrl', function($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session) {
+    control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ManageService) {
         $scope.currentUser = null;
         $scope.userRoles = USER_ROLES;
         $scope.isAuthorized = AuthChecker.isAuthorized;
@@ -17,6 +17,38 @@ define(['control'], function(control) {
         $scope.isActive = function (viewLocation) {
             return (viewLocation === '/') ? viewLocation === $location.path() : $location.path().indexOf(viewLocation) > -1;
         };
+
+        $rootScope.$on('$routeChangeSuccess', function() {
+            $rootScope.pageTitle = $route.current.title;
+        });
+
+        function initServices () {
+            return ManageService.getServicesList().then(function (response) {
+                $rootScope.servicesLoaded = true;
+                if (!$rootScope.service) {
+                    $rootScope.services = response.data;
+                    $rootScope.service = response.data[0];
+                }
+                return response.data;
+            });
+        }
+
+        $rootScope.$on(AUTH_EVENTS.loginSuccess, initServices);
+        if (AuthChecker.isAuthenticated()) {
+            initServices();
+        }
+
+        $rootScope.$watch('service', function (newId, oldId) {
+            if (!oldId || oldId === newId) {
+                return;
+            }
+            $route.reload();
+        });
+
+        ////////////////////////
+        // Authentication system
+        ////////////////////////
+
         var originalPath = null;
         $rootScope.$on('$routeChangeStart', function(event, next) {
             var authorizedRoles = next.authorizedRoles;
@@ -30,21 +62,61 @@ define(['control'], function(control) {
                     // user is not allowed
                     if (next.originalPath !== '/login') {
                         $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+                        return;
                     }
                 } else {
                     // user is not logged in
                     if (next.originalPath !== '/login') {
                         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
                         originalPath = next.originalPath;
+                        return;
+                    }
+                }
+            }
+
+            // Sanity checks
+            if (!$rootScope.services) {
+                initServices().then(checkServices);
+            } else {
+                checkServices();
+            }
+
+            function checkServices () {
+                var userServices = $rootScope.services;
+                var selectedService = $rootScope.service;
+                var hasService = false;
+
+                for (var i = 0; i < userServices.length; i++) {
+                    if (userServices[i].username === selectedService.username) {
+                        hasService = true;
+                        break;
+                    }
+                }
+
+                if (!hasService) {
+                    $rootScope.$broadcast('invalid-service');
+                    return;
+                }
+
+                if (next.paidOnly) {
+                    if (selectedService.name === 'Free') {
+                        $rootScope.$broadcast('denied-paid-only');
+                        return;
                     }
                 }
             }
         });
-        $rootScope.$on('$routeChangeSuccess', function() {
-            $rootScope.pageTitle = $route.current.title;
+
+        $rootScope.$on('invalid-service', function () {
+            flash.to('alert-general').error = 'Access denied: Invalid service.';
+            $location.path('/');
         });
 
-        // Authorisation system
+        $rootScope.$on('denied-paid-only', function () {
+            flash.to('alert-general').error = 'Access denied: This page is for paid services only. Please consider upgrading.';
+            $location.path('/');
+        });
+
         $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
             if (originalPath === 'undefined' || !originalPath || originalPath === '/login') {
                 originalPath = '/';

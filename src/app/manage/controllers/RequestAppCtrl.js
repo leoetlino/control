@@ -1,46 +1,13 @@
 /* global define */
 define(['control'], function (control) {
     'use strict';
-    control.controller('RequestAppCtrl', function ($scope, RequestAppService, $upload, ENV, $routeParams, services, $location, flash) {
+    control.controller('RequestAppCtrl', function ($scope, RequestAppService, $upload, ENV, $routeParams, service, $location, flash) {
 
-        var rejectRequest = function (message) {
-            $scope.unauthorised = true;
-            $location.path('/manage');
-            flash.to('alert-general').error = message;
-        };
-
-        // Check whether the user is allowed to submit a request for the requested service
-        var username = $routeParams.username,
-            canRequest = false,
-            i;
-
-        for (i = 0; i < services.length; i++) {
-            if (services[i].username === username) {
-                $scope.service = services[i];
-                canRequest = true;
-                break;
-            }
-        }
-
-        if (!canRequest) {
-            rejectRequest('The service was not found.');
-            return;
-        }
-
-        if ($scope.service.name === 'Free') {
-            rejectRequest('Free servers are not eligible for mobile apps. Please consider upgrading!');
-        }
+        $scope.service = service;
 
         if ($scope.service.hasiOSApp && $scope.service.hasAndroidApp) {
-            rejectRequest('You have already requested apps for server #' + $scope.service.id + '.');
-        }
-
-        if (['Terminated', 'Suspended', 'Cancelled', 'Pending'].indexOf($scope.service.status) > -1) {
-            rejectRequest('You can\'t request apps for server #' + $scope.service.id + ' as it is not active.');
-        }
-
-        if ($scope.service.group.toLowerCase().indexOf('cast') === -1) {
-            rejectRequest('You can\'t request apps for server #' + $scope.service.id + ' as it is not a streaming server.');
+            $location.path('/manage');
+            flash.to('alert-general').error = 'You have already requested apps for server #' + $scope.service.id + '.';
         }
 
         var onAppSubmitted = function () {

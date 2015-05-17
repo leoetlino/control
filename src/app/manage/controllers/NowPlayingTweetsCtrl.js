@@ -1,43 +1,9 @@
 /* global define, window */
 define(['control'], function (control) {
     'use strict';
-    control.controller('NowPlayingTweetsCtrl', function ($scope, NowPlayingTweetsService, ENV, $routeParams, services, $location, flash) {
+    control.controller('NowPlayingTweetsCtrl', function ($scope, NowPlayingTweetsService, ENV, $routeParams, service, $location, flash) {
 
-        var rejectRequest = function (message) {
-            $scope.unauthorised = true;
-            $location.path('/manage');
-            flash.to('alert-general').error = message;
-        };
-
-        // Check whether the user is allowed to submit a request for the requested service
-        var username = $routeParams.username,
-            canRequest = false,
-            i;
-
-        for (i = 0; i < services.length; i++) {
-            if (services[i].username === username) {
-                $scope.service = services[i];
-                canRequest = true;
-                break;
-            }
-        }
-
-        if (!canRequest) {
-            rejectRequest('The service was not found.');
-            return;
-        }
-
-        if ($scope.service.name === 'Free') {
-            rejectRequest('Free servers are not eligible for #NowPlaying. Please consider upgrading!');
-        }
-
-        if (['Terminated', 'Suspended', 'Cancelled', 'Pending'].indexOf($scope.service.status) > -1) {
-            rejectRequest('You can\'t manage #NowPlaying for server #' + $scope.service.id + ' as it is not active.');
-        }
-
-        if ($scope.service.group.toLowerCase().indexOf('cast') === -1) {
-            rejectRequest('You can\'t manage #NowPlaying for server #' + $scope.service.id + ' as it is not a streaming server.');
-        }
+        $scope.service = service;
 
         // Initialisation
         var initialiseSettings = function () {
