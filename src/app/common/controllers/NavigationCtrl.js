@@ -1,6 +1,6 @@
 /* global define */
 define(['control'], function(control) {
-    control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ManageService) {
+    control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ManageService, $window) {
         $scope.currentUser = null;
         $scope.userRoles = USER_ROLES;
         $scope.isAuthorized = AuthChecker.isAuthorized;
@@ -122,6 +122,7 @@ define(['control'], function(control) {
                 originalPath = '/';
             }
             $location.path(originalPath);
+            $window.location.reload();
         });
         $rootScope.$on(AUTH_EVENTS.loginFailed, function() {
             flash.to('alert-log-in').error = 'Couldn\'t log in. Please check your credentials.';
