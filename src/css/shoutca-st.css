@@ -313,7 +313,7 @@ a.list-group-item:hover .list-group-item-heading, a.list-group-item:focus .list-
 }
 
 .text-original {
-    text-transform: none;
+    text-transform: none !important;
 }
 
 a:focus:not(.dropdown-toggle), button:focus {
