@@ -9,13 +9,6 @@ message_file = sys.argv[1]
 
 def check_format_rules(lineno, line):
     real_lineno = lineno + 1
-    if lineno == 0:
-        if len(line) > 52:
-            return "Error %d: First line should be less than 53 characters " \
-                    "in length." % (real_lineno,)
-    #if lineno == 1:
-    #    if line:
-    #        return "Error %d: Second line (separating the summary and the body) should be empty." % (real_lineno,)
     if not line.startswith('#'):
         if len(line) > 72:
             return "Error %d: No line should be over 72 characters long." % (
