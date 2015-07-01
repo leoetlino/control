@@ -114,6 +114,11 @@
   line-height: 18px;
   pointer-events: none;
 }
+.ats-switch .switch-left,
+.ats-switch .switch-right,
+.ats-switch .knob {
+  min-height: 28px;
+}
 .ats-switch.switch-mini {
   min-width: 72px;
 }
@@ -124,6 +129,7 @@
   padding-top: 4px;
   font-size: 10px;
   line-height: 9px;
+  min-height: 18px;
 }
 .ats-switch.switch-mini i.switch-mini-icons {
   height: 1.20em;
@@ -144,6 +150,7 @@
   padding-top: 3px;
   font-size: 12px;
   line-height: 18px;
+  min-height: 24px;
 }
 .ats-switch.switch-large {
   min-width: 120px;
@@ -155,6 +162,7 @@
   padding-top: 9px;
   font-size: 16px;
   line-height: normal;
+  min-height: 34px;
 }
 .ats-switch span.switch-left {
   color: #fff;

@@ -1,7 +1,7 @@
 /* global define */
 define(['control'], function (control) {
     'use strict';
-    control.controller('RequestAppCtrl', function ($scope, RequestAppService, $upload, ENV, $routeParams, service, $location, flash) {
+    control.controller('RequestAppCtrl', function ($scope, RequestAppService, Upload, ENV, $routeParams, service, $location, flash) {
 
         $scope.service = service;
 
@@ -52,7 +52,7 @@ define(['control'], function (control) {
             $scope.request.icon = null;
             $scope.isUploadingIcon = true;
             $scope.uploadProgressIcon = 0;
-            $scope.upload = $upload.upload({
+            $scope.upload = Upload.upload({
                 url: 'https://' + ENV.apiEndpoint + '/control/apps/iconupload/',
                 method: 'POST',
                 data: {},
@@ -75,7 +75,7 @@ define(['control'], function (control) {
             $scope.request.logo = null;
             $scope.isUploadingLogo = true;
             $scope.uploadProgressLogo = 0;
-            $scope.upload = $upload.upload({
+            $scope.upload = Upload.upload({
                 url: 'https://' + ENV.apiEndpoint + '/control/apps/logoupload/',
                 method: 'POST',
                 data: {},
@@ -98,7 +98,7 @@ define(['control'], function (control) {
             $scope.request.featureGraphic = null;
             $scope.isUploadingFeatureGraphic = true;
             $scope.uploadProgressFeatureGraphic = 0;
-            $scope.upload = $upload.upload({
+            $scope.upload = Upload.upload({
                 url: 'https://' + ENV.apiEndpoint + '/control/apps/featureGraphicUpload/',
                 method: 'POST',
                 data: {},

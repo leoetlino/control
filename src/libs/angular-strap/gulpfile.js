@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var config = require('ng-factory').use(gulp, {
+  cdn: true,
   src: {
     docsViews: '*/docs/{,*/}*.tpl.{html,jade}'
   },
@@ -9,7 +10,6 @@ var config = require('ng-factory').use(gulp, {
     exclude: /jquery|js\/bootstrap|\.less/
   }
 });
-var paths = config.paths;
 
 //
 // Tasks
@@ -19,11 +19,13 @@ gulp.task('serve', gulp.series('ng:serve'));
 var del = require('del');
 var path = require('path');
 gulp.task('build', gulp.series('ng:build', function afterBuild(done) {
+  var paths = config.paths;
   // Delete useless module.* build files
   del(path.join(paths.dest, 'module.*'), done);
 }));
 
-gulp.task('pages', gulp.series('ng:build', function afterPages(done) {
+gulp.task('pages', gulp.series('ng:pages', function afterPages(done) {
+  var paths = config.docs;
   return gulp.src(['bower_components/highlightjs/styles/github.css'], {cwd: paths.cwd, base: paths.cwd})
     .pipe(gulp.dest(paths.dest));
 }));
@@ -35,6 +37,7 @@ var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 gulp.task('jshint', function() {
+  var paths = config.paths;
   return gulp.src(paths.scripts, {cwd: paths.cwd})
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
@@ -95,6 +98,19 @@ gulp.task('karma:travis~1.2.0', gulp.series('ng:test/templates', function karmaT
     browsers: ['PhantomJS'],
     reporters: ['dots'],
     singleRun: true
+  }, function(code) {
+    gutil.log('Karma has exited with ' + code);
+    process.exit(code);
+  });
+}));
+gulp.task('karma:travis~1.4.0', gulp.series('ng:test/templates', function karmaTravis140() {
+  karma.start({
+    configFile: path.join(__dirname, 'test/~1.4.0/karma.conf.js'),
+    browsers: ['PhantomJS'],
+    reporters: ['dots'],
+    singleRun: true
+    // autoWatch: true,
+    // singleRun: false
   }, function(code) {
     gutil.log('Karma has exited with ' + code);
     process.exit(code);

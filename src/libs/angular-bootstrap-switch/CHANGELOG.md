@@ -1,6 +1,37 @@
 CHANGELOG
 =========
 
+## 0.4.1 (2015-06-15)
+
+- Update to `angular` 1.4.0
+- Add test support for IE
+- Enable indeterminate state
+- Enable generic true value (not just strings)
+
+## 0.4.0 (2015-04-13)
+
+- Alpha to stable with no changes
+
+## 0.4.0-alpha.2 (2015-04-01)
+
+- Add new parameters
+  - `switch-inverse`
+  - `switch-readonly`
+- Fix for radio switches
+- Handle models using getterSetter option
+- `'use strict'` to module-level only
+- Update to `angular` 1.3.15
+
+## 0.4.0-alpha.1 (2014-11-21)
+
+- Update to `bootstrap-switch` 3.2.2
+- Update to `angular` 1.3.3
+- Add new parameters
+  - `switch-label-width`
+  - `switch-handle-width`
+- Multiple bug fixes
+- Code optimization improvements
+
 ## 0.3.0 (2014-06-27)
 
 - Update to `bootstrap-switch` 3.0.2

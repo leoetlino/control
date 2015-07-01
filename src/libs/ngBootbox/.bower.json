@@ -1,7 +1,7 @@
 {
   "name": "ngBootbox",
   "main": "dist/ngBootbox.js",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "homepage": "https://github.com/eriktufvesson/ngBootbox",
   "authors": [
     "eriktufvesson <erik.tufvesson@gmail.com>"
@@ -37,11 +37,11 @@
   "devDependencies": {
     "font-awesome": "~4.2.0"
   },
-  "_release": "0.0.5",
+  "_release": "0.1.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.5",
-    "commit": "5c72b9dd3df6bed920c6b11a6fbcdc76409fbeb0"
+    "tag": "0.1.0",
+    "commit": "80213a5a4c04f1b331ebe4d3cb3bd4ca6e93f10c"
   },
   "_source": "git://github.com/eriktufvesson/ngBootbox.git",
   "_target": "*",

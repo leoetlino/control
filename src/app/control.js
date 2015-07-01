@@ -10,7 +10,7 @@ define([], function () {
         'angular-loading-bar',
         'angular-flash.service',
         'angular-flash.flash-alert-directive',
-        'angularFileUpload',
+        'ngFileUpload',
         'colorpicker.module',
         'ngBootbox',
         'toggle-switch',
