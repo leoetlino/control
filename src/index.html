@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/">Control</a>
-                    <button ng-show="isActive('/manage')" ng-if="servicesLoaded" type="button" class="service-switcher" ng-model="$root.service" data-html="true" bs-options="service as ('<i class=\'fa fa-gear\'></i> #' + service.id + '<span class=\'hidden-992\'> - ' + service.username + '</span><span class=\'text-muted show-in-dropdown-only\'><br>' + service.group + ' - ' + service.name + '</span>') for service in services" bs-select data-placeholder="Choose a service">
+                    <button ng-show="isActive('/manage')" ng-if="servicesLoaded" type="button" class="service-switcher" ng-model="$root.service" data-html="true" bs-options="service as ('<i class=\'fa fa-gear\'></i> #' + service.id + '<span class=\'hidden-in-small-navbar\'> - ' + service.username + '</span><span class=\'text-muted show-in-dropdown-only\'><br>' + service.group + ' - ' + service.name + '</span>') for service in services" bs-select data-placeholder="Choose a service">
                         <i class="fa fa-gear"></i> Choose a service <span class="hidden-xs caret"></span>
                     </button>
                 </div>

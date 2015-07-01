@@ -76,7 +76,7 @@
 }
 
 @media screen and (max-width: 992px) {
-    .hidden-992 {
+    .hidden-in-small-navbar {
         display: none !important;
     }
 }
@@ -118,6 +118,10 @@
     min-width: 400px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+.service-switcher + .dropdown-menu .hidden-in-small-navbar {
+    display: inherit !important;
 }
 
 .service-switcher + .dropdown-menu li a {
