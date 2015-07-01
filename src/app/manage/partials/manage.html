@@ -11,7 +11,7 @@
 <tabset vertical="true" type="pills">
     <tab>
         <tab-heading><i class="fa fa-fw fa-info"></i> Information</tab-heading>
-        <div class="row">
+        <div class="row row-equal-height">
             <div class="col-sm-4">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">Server</div>
@@ -35,15 +35,13 @@
     </tab>
 
     <tab disabled="product.name === 'Free'">
-        <p>Request mobile applications to get more listeners! Below is your current app status.</p>
         <tab-heading><i class="fa fa-fw fa-mobile-phone"></i> Mobile Apps</tab-heading>
-        <div class="alert alert-info" ng-show="(product.apps.android && product.apps.iOS)">
-            <p>You have already requested your mobile apps.</p>
-        </div>
-        <div class="alert alert-info" ng-show="(product.apps.android || product.apps.iOS)">
-            <p>To request an update, please open a ticket.</p>
-        </div>
-        <div class="row">
+        <p class="lead">Request mobile applications to get more listeners!</p>
+        <p>Internet radio is changing massively, your audience are able to listen wherever they are; in the car, in the shower or even on the beach.</p>
+        <p>A mobile app makes that even more possible, so sit back, and let us do all the work for you!</p>
+        <p ng-show="(product.apps.android || product.apps.iOS)">To request an update, please open a ticket.</p>
+        <br>
+        <div class="row row-equal-height">
             <div class="col-sm-6">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">Android App</div>
@@ -72,7 +70,9 @@
 
     <tab disabled="product.name === 'Free'">
         <tab-heading><i class="fa fa-fw fa-twitter"></i> Twitter #NowPlaying</tab-heading>
+        <p class="lead">Get social and interact with your listeners!</p>
         <p>#NowPlaying is a free service that automatically posts your now playing information to Twitter. It allows your listeners to know what you're currently playing and artists to interact with you, directly on Twitter.</p>
+        <br>
         <p><a href="/manage/now-playing-tweets" class="btn btn-lg btn-default btn-block"><fa name="twitter" style="color: #55ACEE;"></fa> Manage &#35;NowPlaying</a></p>
     </tab>
 </tabset>
