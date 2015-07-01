@@ -2,6 +2,10 @@ define(['control'], function (control) {
     control.factory('ManageService', function ($http, ENV, $rootScope) {
         return {
             promise: null,
+            invalidateCache: function () {
+                this.promise = null;
+                return this.getServicesList();
+            },
             getServicesList: function () {
                 if (this.promise) {
                     return this.promise;

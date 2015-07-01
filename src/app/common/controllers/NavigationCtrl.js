@@ -121,8 +121,11 @@ define(['control'], function(control) {
             if (originalPath === 'undefined' || !originalPath || originalPath === '/login') {
                 originalPath = '/';
             }
-            $location.path(originalPath);
-            $window.location.reload();
+            ManageService.invalidateCache().then(function onSuccess () {
+                $location.path(originalPath);
+            }, function onFail () {
+                $window.location.reload();
+            });
         });
         $rootScope.$on(AUTH_EVENTS.loginFailed, function() {
             flash.to('alert-log-in').error = 'Couldn\'t log in. Please check your credentials.';
