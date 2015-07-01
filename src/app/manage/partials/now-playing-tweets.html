@@ -56,16 +56,31 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group" show-errors>
-                            <label for="token" class="col-sm-2 control-label">Token</label>
+                            <label for="consumer-key" class="col-sm-2 control-label">Consumer Key</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly id="token" placeholder="Token" class="form-control" ng-model="settings.token" name="token" required>
-                                <p class="help-block" ng-show="form.token.$invalid"><span class="text-danger"><fa name="warning"></fa> Please authorise SHOUTca.st to post to Twitter.</span></p>
-                                <p class="help-block" ng-show="!!settings.twitterHandle && !!settings.token && !!settings.secret"><span class="text-success"><fa name="check"></fa> You've authorised SHOUTca.st to post as <b>@{{settings.twitterHandle}}</b>.</span></p>
+                                <input type="text" id="consumer-key" placeholder="Consumer Key" class="form-control" ng-model="settings.consumerKey" name="consumer-key" required>
+                            </div>
+                        </div>
+                        <div class="form-group" show-errors>
+                            <label for="consumer-key" class="col-sm-2 control-label">Consumer Secret</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="consumer-secret" placeholder="Consumer Secret" class="form-control" ng-model="settings.consumerSecret" name="consumer-secret" required>
+                            </div>
+                        </div>
+                        <div class="form-group" show-errors>
+                            <label for="access-token" class="col-sm-2 control-label">Access Token</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="access-token" placeholder="Access Token" class="form-control" ng-model="settings.accessToken" name="access-token" required>
+                            </div>
+                        </div>
+                        <div class="form-group" show-errors>
+                            <label for="access-token-secret" class="col-sm-2 control-label">Access Token Secret</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="access-token-secret" placeholder="Access Token Secret" class="form-control" ng-model="settings.accessTokenSecret" name="access-token-secret" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <p><button type="button" class="btn btn-info btn-block" ng-click="getTwitterCredentials()"><fa name="twitter"></fa> Authorise SHOUTca.st to post<span ng-show="!!settings.twitterHandle && !!settings.token && !!settings.secret"> again</span></button></p>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <button type="submit" class="btn btn-block btn-primary"><fa name="save"></fa> Save Settings</button>
@@ -74,7 +89,6 @@
                                         <button type="button" class="btn btn-danger btn-block" ng-click="removeSettings()"><fa name="trash-o"></fa> Remove Settings</button>
                                     </div>
                                 </div>
-                                <p class="help-block" ng-show="triedGettingTwitterCredentials">If you are having issues, please clear your cookies.</p>
                             </div>
                         </div>
                     </div>
@@ -83,11 +97,10 @@
                     <p>Here's what a #NowPlaying Tweet currently looks like:</p>
                     <blockquote class="no-margin-bottom">
                         <p>{{settings.prefix}} Song Name - Artist Name {{settings.suffix}}</p>
-                        <small>@{{settings.twitterHandle || 'signinwithtwitterfirst'}} (preview)</small>
+                        <small>@yourtwitterhandle (preview)</small>
                     </blockquote>
                 </div>
             </div>
         </div>
     </fieldset>
 </form>
-

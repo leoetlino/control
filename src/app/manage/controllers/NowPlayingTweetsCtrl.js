@@ -1,4 +1,4 @@
-/* global define, window */
+/* global define */
 define(['control'], function (control) {
     'use strict';
     control.controller('NowPlayingTweetsCtrl', function ($scope, NowPlayingTweetsService, ENV, $routeParams, service, $location, flash) {
@@ -13,9 +13,10 @@ define(['control'], function (control) {
             $scope.settings.prefix = $scope.service.nowPlaying.settings.prefix || '#NowPlaying';
             $scope.settings.suffix = $scope.service.nowPlaying.settings.suffix || '';
             $scope.settings.interval = $scope.service.nowPlaying.settings.interval || 5;
-            $scope.settings.token = $scope.service.nowPlaying.settings.token;
-            $scope.settings.secret = $scope.service.nowPlaying.settings.secret;
-            $scope.settings.twitterHandle = $scope.service.nowPlaying.settings.twitterHandle || 'signinwithtwitterfirst';
+            $scope.settings.consumerKey = $scope.service.nowPlaying.settings.consumerKey;
+            $scope.settings.consumerSecret = $scope.service.nowPlaying.settings.consumerSecret;
+            $scope.settings.accessToken = $scope.service.nowPlaying.settings.accessToken;
+            $scope.settings.accessTokenSecret = $scope.service.nowPlaying.settings.accessTokenSecret;
         };
         initialiseSettings();
 
@@ -84,12 +85,6 @@ define(['control'], function (control) {
                 watchNowPlayingSwitch();
                 $scope.submitting = false;
             });
-        };
-
-        $scope.getTwitterCredentials = function () {
-            $scope.triedGettingTwitterCredentials = true;
-            window.$windowScope = $scope;
-            window.open('/misc/twitter-oauth/get-credentials.php', '_blank', 'menubar=no,toolbar=no,location=no,resizable=yes,scrollbars=yes,status=no,personalbar=no,width=700,height=480');
         };
     });
 });
