@@ -62,6 +62,29 @@
     color: whitesmoke;
     font-size: 16px;
     transition: all 0.1s linear;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 769px) {
+    .service-switcher + .dropdown-menu {
+        left: 10px !important;
+        right: 10px !important;
+        min-width: inherit !important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .hidden-992 {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .service-switcher {
+        width: 100px;
+    }
 }
 
 .service-switcher:hover:not(:focus) {
