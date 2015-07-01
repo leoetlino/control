@@ -12,7 +12,6 @@ define([], function () {
         'angular-flash.flash-alert-directive',
         'ngFileUpload',
         'colorpicker.module',
-        'ngBootbox',
         'toggle-switch',
         'ui.bootstrap',
         'ui.bootstrap.showErrors',
