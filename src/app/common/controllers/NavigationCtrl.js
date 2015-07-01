@@ -27,7 +27,20 @@ define(['control'], function(control) {
                 $rootScope.servicesLoaded = true;
                 if (!$rootScope.service) {
                     $rootScope.services = response.data;
-                    $rootScope.service = response.data[0];
+
+                    if ($location.search().username) {
+                        ManageService.getBy('username', $location.search().username).then(function (service) {
+                            $rootScope.service = service;
+                        });
+                    }
+                    if ($location.search().serviceId) {
+                        ManageService.getBy('id', $location.search().serviceId).then(function (service) {
+                            $rootScope.service = service;
+                        });
+                    }
+                    if (!$rootScope.service) {
+                        $rootScope.service = response.data[0];
+                    }
                 }
                 return response.data;
             });

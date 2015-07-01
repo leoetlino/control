@@ -22,6 +22,17 @@ define(['control'], function (control) {
                     }
                     return $rootScope.service;
                 });
+            },
+            getBy: function (key, value) {
+                return this.getServicesList().then(function (response) {
+                    var service;
+                    response.data.forEach(function (serviceToCheck) {
+                        if (serviceToCheck[key] === value) {
+                            service = serviceToCheck;
+                        }
+                    });
+                    return service;
+                });
             }
         };
     });
