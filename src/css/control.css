@@ -15,13 +15,51 @@
     font-style: normal;
 }
 
-/* Branding and styling */
+/* Branding */
 .navbar-inverse {
-    background: #232a31;
+    background: #388E3C !important;
     border-color: transparent;
     border-bottom: 0;
 }
 
+.navbar-inverse .nav>li.active>a:not(.btn),
+.navbar-inverse .nav>li.active>a:not(.btn):hover,
+.navbar-inverse .nav>li.active>a:not(.btn):focus,
+.navbar-inverse .nav > li.dropdown-open a {
+    text-decoration: none;
+    color: white !important;
+    outline: none;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.navbar-inverse .nav>li:not(.active):not(.dropdown-menu)>a:not(.btn):hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7) !important;
+    outline: none;
+    background: transparent;
+}
+
+.navbar-inverse .nav>li:not(.active) > a > .caret {
+    transition: all 0.2s ease;
+}
+
+.navbar-inverse .nav>li:not(.active) > a:focus > .caret,
+.navbar-inverse .nav>li:not(.active) > a:hover > .caret {
+    border-top-color: rgba(255, 255, 255, 0.7) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.navbar-inverse .navbar-text,
+.navbar-inverse .nav > li > a {
+    padding-top: 23.5px;
+    padding-bottom: 23.5px;
+}
+
+#topbar .nav {
+    margin-top: 0 !important;
+}
+
+/* Other stuff */
 @media screen and (min-width: 769px) {
     .dashboard-box .panel-body {
         min-height: 12em;
@@ -59,7 +97,7 @@
     background-color: transparent;
     border: 0;
     text-align: left;
-    color: whitesmoke;
+    color: white;
     font-size: 16px;
     transition: all 0.1s linear;
     white-space: nowrap;
@@ -87,14 +125,19 @@
     }
 }
 
-.service-switcher:hover, .service-switcher:focus, .service-switcher:active {
+.glow:hover, .glow:focus, .glow:active,
+.navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active {
     color: white;
     text-shadow: 0 0 3px white;
     font-weight: normal !important;
 }
 
+.service-switcher {
+    font-weight: normal !important;
+}
+
 .service-switcher:focus {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (min-width: 1024px) {

@@ -1,6 +1,6 @@
 /**
  * Main site CSS from commit cbc24a537edb76f963c25fbb69a96c12be7f8388
- * Some URLs have been modified
+ * Some URLs and rules have been modified
  */
 
 ::selection {
@@ -297,11 +297,6 @@ a.list-group-item:hover .list-group-item-heading, a.list-group-item:focus .list-
 .navbar-inverse .caret {
     border-top-color: white !important;
     border-bottom-color: white !important;
-}
-
-.navbar-inverse .nav>li>a:hover .caret, .navbar-inverse .nav>li>a:focus .caret {
-    border-top-color: #2ADF7A !important;
-    border-bottom-color: #2ADF7A !important;
 }
 
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus {
