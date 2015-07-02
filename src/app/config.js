@@ -1,8 +1,3 @@
-angular.module("config", [])
-
-.constant("ENV", {
-	"name": "development",
-	"apiEndpoint": "itframe.shoutca.st"
-})
-
-;
+angular.module('config', []).constant('ENV', {
+    apiEndpoint: 'itframe.shoutca.st'
+});

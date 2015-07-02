@@ -20,6 +20,7 @@
         'manage/filters/appStatus',
         'manage/controllers/ManageCtrl',
         'manage/services/ManageService',
+        'manage/services/AppStatusesService',
         'feedback/controllers/FeedbackCtrl',
         'feedback/services/FeedbackService',
         'manage/controllers/RequestAppCtrl',
