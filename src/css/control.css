@@ -87,9 +87,10 @@
     }
 }
 
-.service-switcher:hover:not(:focus) {
+.service-switcher:hover, .service-switcher:focus, .service-switcher:active {
     color: white;
     text-shadow: 0 0 3px white;
+    font-weight: normal !important;
 }
 
 .service-switcher:focus {
