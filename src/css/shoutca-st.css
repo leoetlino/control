@@ -281,13 +281,6 @@ a.list-group-item:hover .list-group-item-heading, a.list-group-item:focus .list-
     text-transform: uppercase;
 }
 
-.navbar-inverse .nav>li>a:not(.btn):hover, .navbar-inverse .nav>li>a:not(.btn):focus, .navbar-inverse .nav>li.active>a:not(.btn), .navbar-inverse .nav>li.active>a:not(.btn):hover {
-    text-decoration: none;
-    color: #2ADF7A !important;
-    outline: none;
-    background: transparent;
-}
-
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
     color: #fff !important;
     background-color: #47a447 !important;

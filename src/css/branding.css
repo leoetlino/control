@@ -16,7 +16,6 @@ body {
 
 /* Navbar */
 .navbar-inverse {
-    background: #388E3C !important;
     border-color: transparent;
     border-bottom: 0;
 }
@@ -24,11 +23,12 @@ body {
 .navbar-inverse .nav>li.active>a:not(.btn),
 .navbar-inverse .nav>li.active>a:not(.btn):hover,
 .navbar-inverse .nav>li.active>a:not(.btn):focus,
-.navbar-inverse .nav > li.dropdown-open a {
+.navbar-inverse .nav > li.dropdown-open a,
+.navbar-inverse .nav > li.dropdown-open a:focus {
     text-decoration: none;
     color: white !important;
     outline: none;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .navbar-inverse .nav>li:not(.active):not(.dropdown-menu)>a:not(.btn):hover {
