@@ -1,0 +1,54 @@
+.font-diavlo {
+    font-family: 'Diavlo Light';
+}
+
+@media screen and (min-width: 769px) {
+    .row-equal-height, .row-equal-height > div[class*='col-'] {
+        display: flex;
+        flex: 1 1 auto;
+    }
+
+    .row-equal-height > div[class*='col-'] > div {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .tab-content {
+        margin-top: 10px;
+    }
+}
+
+.no-margin-top {
+    margin-top: 0;
+}
+
+.panel-standalone {
+    margin-top: 3.5em;
+}
+
+.panel-actions {
+    text-align: right;
+    padding: 15px;
+}
+
+.margin-bottom-10px {
+    margin-bottom: 10px;
+}
+
+.back-to-services-link {
+    font-size: 15px;
+}
+
+/* Alert icons */
+.alert-icon-error:before, .alert-icon-warning:before {
+    content: "\f071";
+}
+
+.alert-icon-info:before {
+    content: "\f05a";
+}
+
+.alert-icon-success:before {
+    content: "\f058";
+}

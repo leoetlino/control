@@ -1,0 +1,114 @@
+/* Boxes */
+@media screen and (min-width: 769px) {
+    .dashboard-box .panel-body {
+        min-height: 12em;
+    }
+
+    .panel-log-in {
+        width: 30%;
+        margin-top: 5em;
+    }
+}
+
+.panel-log-in .panel-body {
+    padding-bottom: 2em;
+}
+
+.dashboard-box .panel-heading, .dashboard-box .panel-body {
+    text-align: center;
+}
+
+.dashboard-box .large-number {
+    font-size: 72px;
+    font-family: 'Diavlo Light';
+}
+
+/* Service switcher */
+.service-switcher {
+    display: block;
+    padding-top: 22.5px;
+    padding-bottom: 22.5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: transparent;
+    border: 0;
+    text-align: left;
+    color: white;
+    font-size: 16px;
+    transition: all 0.1s linear;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 769px) {
+    .service-switcher + .dropdown-menu {
+        left: 10px !important;
+        right: 10px !important;
+        min-width: inherit !important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .hidden-in-small-navbar {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .service-switcher {
+        width: 120px;
+    }
+}
+
+.service-switcher {
+    font-weight: normal !important;
+}
+
+.service-switcher:focus {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (min-width: 1024px) {
+    .service-switcher .caret {
+        float: right;
+        position: relative;
+        top: 8px;
+    }
+}
+
+.service-switcher .caret {
+    border-top-color: white !important;
+    border-bottom-color: white !important;
+}
+
+.service-switcher > .show-in-dropdown-only {
+    display: none;
+}
+
+.service-switcher + .dropdown-menu {
+    margin-top: -1px;
+    min-width: 400px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.service-switcher + .dropdown-menu .hidden-in-small-navbar {
+    display: inherit !important;
+}
+
+.service-switcher + .dropdown-menu li a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.service-switcher + .dropdown-menu li:not(.active) a:hover,
+.service-switcher + .dropdown-menu li:not(.active) a:focus {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    color: inherit !important;
+}
+
+.dropdown-menu .active .text-muted,
+.dropdown-menu li:focus .text-muted {
+    color: white !important;
+}

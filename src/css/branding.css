@@ -1,0 +1,91 @@
+body {
+    color: #131516;
+    padding-top: 80px;
+}
+
+/* Font */
+@font-face {
+    font-family: 'Diavlo Light';
+    src: url('fonts/Diavlo-Light-Regular.ttf.woff') format('woff'),
+        url('fonts/Diavlo-Light-Regular.ttf.svg#Diavlo-Light-Regular') format('svg'),
+        url('fonts/Diavlo-Light-Regular.ttf.eot'),
+        url('fonts/Diavlo-Light-Regular.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Navbar */
+.navbar-inverse {
+    background: #388E3C !important;
+    border-color: transparent;
+    border-bottom: 0;
+}
+
+.navbar-inverse .nav>li.active>a:not(.btn),
+.navbar-inverse .nav>li.active>a:not(.btn):hover,
+.navbar-inverse .nav>li.active>a:not(.btn):focus,
+.navbar-inverse .nav > li.dropdown-open a {
+    text-decoration: none;
+    color: white !important;
+    outline: none;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.navbar-inverse .nav>li:not(.active):not(.dropdown-menu)>a:not(.btn):hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7) !important;
+    outline: none;
+    background: transparent;
+}
+
+.navbar-inverse .nav>li:not(.active) > a > .caret {
+    transition: all 0.2s ease;
+}
+
+.navbar-inverse .nav>li:not(.active) > a:focus > .caret,
+.navbar-inverse .nav>li:not(.active) > a:hover > .caret {
+    border-top-color: rgba(255, 255, 255, 0.7) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.navbar-inverse .navbar-text,
+.navbar-inverse .nav > li > a {
+    padding-top: 23.5px;
+    padding-bottom: 23.5px;
+}
+
+/* Navbar brand */
+.glow:hover, .glow:focus, .glow:active,
+.navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active {
+    color: white;
+    text-shadow: 0 0 3px white;
+    font-weight: normal !important;
+}
+
+.navbar-brand {
+    font-family: 'Diavlo Light';
+    font-size: 28px;
+    padding-top: 17px;
+    padding-bottom: 50px;
+    line-height: 34px;
+}
+
+@media screen and (max-width: 769px) {
+    .navbar-brand {
+        font-size: 24px;
+        padding-top: 25px;
+        padding-bottom: 45px;
+        line-height: 26px;
+    }
+}
+
+/* Footer */
+#main-footer {
+    margin-top: 6em;
+    text-shadow: 0 0 5px black;
+}
+
+/* Animations */
+.ng-enter {
+    animation: fadeIn 0.2s both ease-in;
+}
