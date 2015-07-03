@@ -1,30 +1,16 @@
 define(['control'], function (control) {
     control.filter('appStatus', function (AppStatusesService) {
-        var statuses, serviceCalled = false;
-
-        function getLabel (input) {
-            return statuses[input];
-        }
-
-        stub.$stateful = true;
-        function stub (input) {
-            if (typeof input === 'undefined') {
-                return;
-            }
-            if (statuses) {
-                return getLabel(input);
-            }
-            if (serviceCalled) {
-                return '…';
-            }
-            serviceCalled = true;
-            AppStatusesService.getStatusesByValue().then(function (data) {
-                statuses = data;
-            });
-            return '…';
-        }
-
-        return stub;
+        var statuses, filterFn;
+        filterFn = function (input) { return input; };
+        AppStatusesService.getStatusesByValue().then(function (data) {
+            statuses = data;
+            filterFn = function (input) { return statuses[input]; };
+        });
+        var wrapperFn = function wrapper (input) {
+            return filterFn(input);
+        };
+        wrapperFn.$stateful = true;
+        return wrapperFn;
     });
 
     control.filter('appStatusRow', function () {
