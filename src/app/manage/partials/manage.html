@@ -1,12 +1,7 @@
-<div class="alert alert-warning" ng-show="product.name === 'Free'">
-    <p><fa name="warning"></fa> Some features are not available to free users.</p>
-</div>
-<div class="alert alert-warning" ng-show="product.isReseller">
-    <p><fa name="warning"></fa> As resellers need to stay white label, most of Control's features are not available for resellers.</p>
-</div>
-<div class="row">
+<div class="row" ng-show="service">
     <nav class="panel panel-default panel-nav col-sm-3 bootcards-list">
         <ul class="panel-body nav nav-pills nav-stacked">
+            <li class="dropdown-header" role="presentation">Extra services</li>
             <li ng-class="{active: ('manage.information'|routeSegmentEqualsTo)}">
                 <a href="{{ 'manage.information' | routeSegmentUrl }}"><fa name="info" fw></fa> Information</a>
             </li>
@@ -20,4 +15,8 @@
     </nav>
     <section class="col-sm-9 bootcards-cards" app-view-segment="1">
     </section>
+</div>
+<div class="alert alert-info" ng-show="!service">
+    <p ng-show="services.length">Select a service to get started.</p>
+    <p ng-show="!services.length">You don't have any services eligible for Control.</p>
 </div>

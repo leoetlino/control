@@ -79,7 +79,7 @@ define([], function () {
             title: 'Manage your servers',
             resolve: {
                 service: function (ManageService) {
-                    return ManageService.getSelectedService();
+                    return ManageService.initAndGetService();
                 }
             },
             controller: 'ManageCtrl',

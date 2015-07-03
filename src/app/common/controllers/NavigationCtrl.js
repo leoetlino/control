@@ -11,7 +11,8 @@ define(['control'], function(control) {
         };
 
         $rootScope.reloadServices = function () {
-            return ManageService.refreshServices();
+            ManageService.invalidateCache();
+            return initServices();
         };
 
         $rootScope.$on('routeSegmentChange', function (event, route) {
@@ -23,26 +24,12 @@ define(['control'], function(control) {
         ////////////
 
         function initServices () {
-            return ManageService.getServicesList().then(function (response) {
+            // returns a promise.
+            return ManageService.initAndGetService().then(function (service) {
                 $rootScope.servicesLoaded = true;
-                if (!$rootScope.service) {
-                    $rootScope.services = response.data;
-
-                    if ($location.search().username) {
-                        ManageService.getBy('username', $location.search().username).then(function (service) {
-                            $rootScope.service = service;
-                        });
-                    }
-                    if ($location.search().serviceId) {
-                        ManageService.getBy('id', $location.search().serviceId).then(function (service) {
-                            $rootScope.service = service;
-                        });
-                    }
-                    if (!$rootScope.service) {
-                        $rootScope.service = response.data[0];
-                    }
-                }
-                return response.data;
+                $rootScope.services = ManageService.getServicesList();
+                $rootScope.service = service;
+                return service;
             });
         }
 
@@ -110,9 +97,7 @@ define(['control'], function(control) {
                 }
             }
 
-            if (!$rootScope.services) {
-                initServices().then(checkServices);
-            } else {
+            if ($rootScope.services) {
                 checkServices();
             }
         });
@@ -122,11 +107,12 @@ define(['control'], function(control) {
             $location.path('/');
         });
 
-        $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
+        $rootScope.$on(AUTH_EVENTS.loginSuccess, function () {
             if (originalPath === 'undefined' || !originalPath || originalPath === '/login') {
                 originalPath = '/';
             }
-            ManageService.invalidateCache().then(function onSuccess () {
+            ManageService.invalidateCache();
+            return initServices().then(function onSuccess () {
                 $location.path(originalPath);
             }, function onFail () {
                 $window.location.reload();
