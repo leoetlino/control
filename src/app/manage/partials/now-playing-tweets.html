@@ -1,40 +1,36 @@
-<h2 class="page-header">
-    <span class="pull-left"><fa name="sliders"></fa> Manage #{{service.id}} <small>#NowPlaying</small></span>
-    <span class="pull-right"><a class="back-to-services-link text-muted" href="/manage">Back</a></span>
-    <div class="clearfix"></div>
-</h2>
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>#NowPlaying Tweets</h4>
+        <p class="service-description">Get social and interact with your listeners!</p>
+        <p>#NowPlaying is a free service that automatically posts your now playing information to Twitter. It allows your listeners to know what you're currently playing and artists to interact with you, directly on Twitter.</p>
+        <p>We recommend enabling it with an interval between 5 and 10.</p>
+    </div>
+</section>
 
-<form class="form-horizontal" novalidate role="form" name="form" ng-submit="submitSettings(settings)" ng-hide="unauthorised">
-    <fieldset ng-disabled="submitting">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="pull-left">
-                    <h4>#NowPlaying Tweets</h4>
-                </div>
-                <div class="pull-right">
-                    <div toggle-switch ng-disabled="submitting || form.$invalid" class="switch-success switch-large" ng-model="nowPlayingState" on-label="Enabled" off-label="Disabled"></div>
-                </div>
-                <div class="clearfix"></div>
+<div id="alert-now-playing-box" flash-alert active-class="in alert" class="animated-custom fade">
+    <p class="alert-message"><i class="fa alert-icon-{{flash.type}}"></i> {{ flash.message }}</p>
+</div>
+<div class="alert alert-info" ng-show="form.$invalid">
+    <p><fa name="warning"></fa> You need to configure #NowPlaying before it can be enabled.</p>
+</div>
+<div class="alert alert-warning" ng-show="(settings.prefix + ' This is a Song Name - Artist Name ' + settings.suffix).length > 140" >
+    <p><fa name="warning"></fa> Your Tweets might be too long and may not be able to be sent. Consider making your prefix and/or suffix shorter.</p>
+</div>
+
+<section class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal" novalidate role="form" name="form" ng-submit="submitSettings(settings)" ng-hide="unauthorised">
+            <h4 class="card-header pull-left">Settings</h4>
+            <div class="pull-right">
+                <div toggle-switch ng-disabled="submitting || form.$invalid" class="switch-success switch-large" ng-model="nowPlayingState" on-label="Enabled" off-label="Disabled"></div>
             </div>
-            <div class="panel-body">
-                <div id="alert-now-playing-box" flash-alert active-class="in alert" class="animated-custom fade">
-                    <p class="alert-message"><i class="fa alert-icon-{{flash.type}}"></i> {{ flash.message }}</p>
-                </div>
-                <div class="alert alert-warning" ng-show="form.$invalid">
-                    <p><fa name="warning"></fa> You need to configure #NowPlaying before it can be enabled.</p>
-                </div>
-                <p>#NowPlaying is a free service that automatically posts your now playing information to Twitter. It allows your listeners to know what you're currently playing and artists to interact with you, directly on Twitter!</p>
-                <p>We recommend enabling it with an interval between 5 and 10.</p>
-                <br>
-                <legend>
-                    <div class="h4">
-                        <fa name="cogs"></fa> Settings
-                    </div>
-                </legend>
+            <div class="clearfix"></div>
+            <br>
+            <fieldset ng-disabled="submitting">
                 <div class="well">
                     <p>Here's what a #NowPlaying Tweet currently looks like:</p>
                     <blockquote class="no-margin-bottom">
-                        <p>{{settings.prefix}} Song Name - Artist Name {{settings.suffix}}</p>
+                        <p class="always-wrap">{{settings.prefix}} This is a Song Name - Artist Name {{settings.suffix}}</p>
                         <small>@yourtwitterhandle (preview)</small>
                     </blockquote>
                 </div>
@@ -63,27 +59,31 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group" show-errors>
-                            <label for="consumer-key" class="col-sm-4 control-label">Consumer Key</label>
-                            <div class="col-sm-8">
+                            <label for="consumer-key" class="col-sm-5 control-label">Consumer Key</label>
+                            <div class="col-sm-7">
                                 <input type="text" id="consumer-key" placeholder="Consumer Key" class="form-control" ng-model="settings.consumerKey" name="consumer-key" required>
                             </div>
                         </div>
                         <div class="form-group" show-errors>
-                            <label for="consumer-secret" class="col-sm-4 control-label">Consumer Secret</label>
-                            <div class="col-sm-8">
+                            <label for="consumer-secret" class="col-sm-5 control-label">Consumer Secret</label>
+                            <div class="col-sm-7">
                                 <input type="text" id="consumer-secret" placeholder="Consumer Secret" class="form-control" ng-model="settings.consumerSecret" name="consumer-secret" required>
                             </div>
                         </div>
                         <div class="form-group" show-errors>
-                            <label for="access-token" class="col-sm-4 control-label">Access Token</label>
-                            <div class="col-sm-8">
+                            <label for="access-token" class="col-sm-5 control-label">Access Token</label>
+                            <div class="col-sm-7">
                                 <input type="text" id="access-token" placeholder="Access Token" class="form-control" ng-model="settings.accessToken" name="access-token" required>
                             </div>
                         </div>
                         <div class="form-group" show-errors>
-                            <label for="access-token-secret" class="col-sm-4 control-label">Access Token Secret</label>
-                            <div class="col-sm-8">
+                            <label for="access-token-secret" class="col-sm-5 control-label">Access Token Secret</label>
+                            <div class="col-sm-7">
                                 <input type="text" id="access-token-secret" placeholder="Access Token Secret" class="form-control" ng-model="settings.accessTokenSecret" name="access-token-secret" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
                                 <p class="help-block">Need help for getting this? <a href="https://community.shoutca.st/topic/56/nowplaying-how-to-generate-your-api-keys">Click here.</a></p>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <br>
-            </div>
-        </div>
-    </fieldset>
-</form>
+            </fieldset>
+        </form>
+    </div>
+</section>

@@ -1,6 +1,7 @@
 body {
     color: #131516;
-    padding-top: 80px;
+    padding-top: 110px;
+    background-color: whitesmoke;
 }
 
 /* Font */
@@ -28,7 +29,7 @@ body {
     text-decoration: none;
     color: white !important;
     outline: none;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .navbar-inverse .nav>li:not(.active):not(.dropdown-menu)>a:not(.btn):hover {

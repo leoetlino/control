@@ -4,6 +4,8 @@ define([], function () {
     var control = angular.module('control', [
         'config',
         'ngRoute',
+        'route-segment',
+        'view-segment',
         'ngAnimate',
         'ngSanitize',
         'LocalStorageModule',
@@ -13,14 +15,13 @@ define([], function () {
         'ngFileUpload',
         'colorpicker.module',
         'toggle-switch',
-        'ui.bootstrap',
         'ui.bootstrap.showErrors',
         'mgcrea.ngStrap',
         'picardy.fontawesome',
         'templates-main'
     ]);
 
-    control.config(function ($routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, USER_ROLES, flashProvider, $httpProvider) {
+    control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, flashProvider, $httpProvider) {
 
         flashProvider.errorClassnames.push('alert-danger');
         flashProvider.warnClassnames.push('alert-warning');
@@ -29,14 +30,26 @@ define([], function () {
 
         control.$httpProvider = $httpProvider;
 
-        $routeProvider
-        .when('/login', {
+        var watchForService = function ($rootScope) {
+            return $rootScope.service;
+        };
+
+        $routeSegmentProvider
+        .when('/log-in', 'login')
+        .when('/', 'dashboard')
+        .when('/feedback', 'feedback')
+        .when('/manage', 'manage')
+        .when('/manage/information', 'manage.information')
+        .when('/manage/request-app', 'manage.requestApp')
+        .when('/manage/now-playing-tweets', 'manage.nowPlayingTweets')
+
+        .segment('login', {
             authorizedRoles: [USER_ROLES.public],
             templateUrl: '/app/login/partials/login.html',
             controller: 'LoginCtrl',
             title: 'Log In'
         })
-        .when('/', {
+        .segment('dashboard', {
             templateUrl: '/app/dashboard/partials/dashboard.html',
             authorizedRoles: [USER_ROLES.all],
             title: 'Dashboard',
@@ -54,7 +67,13 @@ define([], function () {
             },
             controller: 'DashboardCtrl'
         })
-        .when('/manage', {
+        .segment('feedback', {
+            templateUrl: '/app/feedback/partials/feedback.html',
+            authorizedRoles: [USER_ROLES.all],
+            title: 'Send your feedback',
+            controller: 'FeedbackCtrl'
+        })
+        .segment('manage', {
             templateUrl: '/app/manage/partials/manage.html',
             authorizedRoles: [USER_ROLES.all],
             title: 'Manage your servers',
@@ -63,47 +82,42 @@ define([], function () {
                     return ManageService.getSelectedService();
                 }
             },
-            controller: 'ManageCtrl'
+            controller: 'ManageCtrl',
+            watcher: watchForService
         })
-        .when('/stats', {
-            templateUrl: '/app/stats/partials/stats.html',
-            authorizedRoles: [USER_ROLES.all],
-            title: 'Stats',
-            controller: 'StatsCtrl'
-        })
-        .when('/feedback', {
-            templateUrl: '/app/feedback/partials/feedback.html',
-            authorizedRoles: [USER_ROLES.all],
-            title: 'Send your feedback',
-            controller: 'FeedbackCtrl'
-        })
-        .when('/manage/request-app', {
-            templateUrl: '/app/manage/partials/request-app.html',
-            authorizedRoles: [USER_ROLES.all],
-            paidOnly: true,
-            title: 'Request your mobile apps',
-            controller: 'RequestAppCtrl',
-            resolve: {
-                service: function (ManageService) {
-                    return ManageService.getSelectedService();
-                }
-            }
-        })
-        .when('/manage/now-playing-tweets', {
-            templateUrl: '/app/manage/partials/now-playing-tweets.html',
-            authorizedRoles: [USER_ROLES.all],
-            paidOnly: true,
-            title: '#NowPlaying Tweets',
-            controller: 'NowPlayingTweetsCtrl',
-            resolve: {
-                service: function (ManageService) {
-                    return ManageService.getSelectedService();
-                }
-            }
-        })
-        .otherwise({
+            .within()
+            .segment('information', {
+                default: true,
+                templateUrl: '/app/manage/partials/information.html',
+                authorizedRoles: [USER_ROLES.all],
+                title: 'Information',
+                watcher: watchForService
+            })
+            .segment('requestApp', {
+                templateUrl: '/app/manage/partials/request-app.html',
+                authorizedRoles: [USER_ROLES.all],
+                paidOnly: true,
+                title: 'Request your mobile apps',
+                controller: 'RequestAppCtrl',
+                watcher: watchForService
+            })
+            .segment('nowPlayingTweets', {
+                templateUrl: '/app/manage/partials/now-playing-tweets.html',
+                authorizedRoles: [USER_ROLES.all],
+                paidOnly: true,
+                title: '#NowPlaying Tweets',
+                controller: 'NowPlayingTweetsCtrl',
+                watcher: watchForService
+            })
+        .up();
+
+        $routeProvider.otherwise({
             redirectTo: '/'
         });
+        $routeProvider.when('/login', {
+            redirectTo: '/log-in'
+        });
+        $routeSegmentProvider.options.strictMode = true;
 
         $locationProvider.html5Mode(true);
 

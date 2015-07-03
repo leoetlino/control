@@ -4,7 +4,7 @@ define(['control'], function(control) {
         return {
             request: function (config) {
                 config.headers = config.headers || {};
-                if (Session.token) {
+                if (config.url.indexOf('https://itframe.shoutca.st/') !== -1 && Session.token) {
                     config.headers.Authorization = 'Bearer ' + Session.token;
                 }
                 return config;

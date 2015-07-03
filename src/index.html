@@ -19,7 +19,9 @@
         <link rel="stylesheet" href="libs/angular-bootstrap-colorpicker/css/colorpicker.css">
         <link rel="stylesheet" href="libs/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css">
         <link rel="stylesheet" href="libs/angular-bootstrap-toggle-switch/style/bootstrap3/angular-toggle-switch-bootstrap-3.css">
+        <link rel="stylesheet" href="libs/bootcards/dist/css/bootcards-desktop.min.css">
         <link rel="stylesheet" href="css/shoutca-st.css">
+        <link rel="stylesheet" href="css/animations.css">
         <link rel="stylesheet" href="css/components.css">
         <link rel="stylesheet" href="css/helpers.css">
         <link rel="stylesheet" href="css/fixes.css">
@@ -28,7 +30,7 @@
         <link rel="stylesheet" href="css/loading-bar-green.css">
         <!-- endbuild -->
     </head>
-    <body>
+    <body class="bootcards-nofooter">
         <nav class="navbar navbar-inverse navbar-fixed-top" id="topbar" role="navigation" ng-controller="NavigationCtrl">
             <div class="container">
                 <div class="navbar-header">
@@ -39,7 +41,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/">Control</a>
-                    <button ng-show="isActive('/manage')" ng-if="servicesLoaded" type="button" class="service-switcher" ng-model="$root.service" data-html="true" bs-options="service as ('<i class=\'fa fa-gear\'></i> #' + service.id + '<span class=\'hidden-in-small-navbar\'> - ' + service.username + '</span><span class=\'text-muted show-in-dropdown-only\'><br>' + service.group + ' - ' + service.name + '</span>') for service in services" bs-select data-placeholder="Choose a service">
+                    <button ng-show="isActive('/manage')" ng-if="isActive('/manage') && servicesLoaded" type="button" class="service-switcher" ng-cloak ng-model="$root.service" data-html="true" bs-options="service as ('<i class=\'fa fa-gear\'></i> #' + service.id + '<span class=\'hidden-in-small-navbar\'> - ' + service.username + '</span><span class=\'text-muted show-in-dropdown-only\'><br>' + service.group + ' - ' + service.name + '</span>') for service in services" bs-select data-placeholder="Choose a service">
                         <i class="fa fa-gear"></i> Choose a service <span class="hidden-xs caret"></span>
                     </button>
                 </div>
@@ -71,7 +73,7 @@
             <div id="alert-general" flash-alert active-class="in alert" class="animated-custom fade">
                 <p class="alert-message"><i class="fa alert-icon-{{flash.type}}"></i> {{ flash.message }}</p>
             </div>
-            <div id="content" ng-view>
+            <div id="content" app-view-segment="0">
                 <style>
                     body {
                         background: #232a31;
@@ -179,10 +181,13 @@
         <!-- build:js js/control.min.js -->
         <script src="libs/jquery/dist/jquery.js"></script>
         <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="libs/underscore/underscore.js"></script>
+        <script src="libs/bootcards/dist/js/bootcards.min.js"></script>
         <script src="js/cookies.min.js"></script>
         <script src="libs/ng-file-upload/ng-file-upload-shim.js"></script>
         <script src="libs/angular/angular.js"></script>
         <script src="libs/angular-route/angular-route.js"></script>
+        <script src="libs/angular-route-segment/build/angular-route-segment.js"></script>
         <script src="libs/angular-animate/angular-animate.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
         <script src="libs/angular-sanitize/angular-sanitize.js"></script>
@@ -200,7 +205,7 @@
         <script src="libs/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
         <script src="libs/angular-bootstrap-toggle-switch/angular-toggle-switch.js"></script>
         <script src="libs/modernizr/modernizr.js"></script>
-        <script src="libs/prefixfree/prefixfree.min.js"></script>
+        <!--<script src="libs/prefixfree/prefixfree.min.js"></script>-->
         <script src="libs/requirejs/require.js"></script>
         <script src="app/config.js"></script>
         <script src="js/piwik.js"></script>

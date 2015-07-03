@@ -23,6 +23,23 @@
     margin-top: 0;
 }
 
+.no-border-bottom {
+    border-bottom: 0;
+}
+
+.no-border-top {
+    border-top: 0;
+}
+
+.always-wrap {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.never-wrap {
+    white-space: nowrap;
+}
+
 .panel-standalone {
     margin-top: 3.5em;
 }

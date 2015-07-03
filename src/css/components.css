@@ -23,6 +23,100 @@
     font-family: 'Diavlo Light';
 }
 
+/* Navigation */
+.panel-nav {
+    padding: 0 !important;
+}
+
+/* Cards */
+.bootcards-cards .alert-warning {
+    border-color: #E6DABF;
+}
+
+.bootcards-cards .alert-success {
+    border-color: #C3D6B4;
+}
+
+.bootcards-cards .alert-danger {
+    border-color: #CCB1B5;
+}
+
+.bootcards-cards .alert-info {
+    border-color: #A9CED6;
+}
+
+section.panel {
+    padding-bottom: 10px;
+}
+
+section.panel .panel-body > h4,
+.card-header {
+    font-size: 20px;
+    color: #232a31;
+}
+
+section.panel .list-group-item-heading {
+    font-size: 16px;
+}
+
+.service-description {
+    font-size: 15px;
+    color: #5d5d5d;
+}
+
+section.panel[bs-collapse]:not(.not-collapsed) {
+    padding-bottom: 0;
+}
+
+[bs-collapse-toggle] {
+    cursor: pointer;
+}
+
+[bs-collapse-toggle] i {
+    float: right;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    font-size: inherit;
+}
+
+[bs-collapse-toggle] i:before {
+    content: "\f138";
+}
+
+/* List groups */
+.list-group-item {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+a.list-group-item {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* App status colours */
+.pending, .pendingUpdate, option[value="pending"], option[value="pendingUpdate"] {
+    color: #e74c3c;
+}
+
+.inProgress, option[value="inProgress"] {
+    color: #3498db;
+}
+
+.submitted, .submittedUpdate, option[value="submitted"], option[value="submittedUpdate"] {
+    color: #27ae60;
+}
+
+.iOS .submitted, .iOS .submittedUpdate, select.iOS option[value="submitted"], select.iOS option[value="submittedUpdate"] {
+    color: #d35400;
+}
+
+.approved, .approvedUpdate, option[value="approved"], option[value="approvedUpdate"] {
+    color: #27ae60;
+}
+
 /* Service switcher */
 .service-switcher {
     display: block;

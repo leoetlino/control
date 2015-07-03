@@ -33,7 +33,14 @@ define(['control'], function (control) {
                     });
                     return service;
                 });
-            }
+            },
+            refreshServices: function () {
+                return this.invalidateCache().then(function (response) {
+                    $rootScope.services = response.data;
+                    $rootScope.service = _.findWhere(response.data, { id: $rootScope.service.id });
+                    return $rootScope.service;
+                });
+            },
         };
     });
 

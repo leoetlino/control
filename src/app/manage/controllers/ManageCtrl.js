@@ -1,5 +1,5 @@
 define(['control'], function (control) {
-    control.controller('ManageCtrl', function (service, $rootScope, $scope) {
-        $scope.product = service;
+    control.controller('ManageCtrl', function ($scope, service) {
+        $scope.service = service;
     });
 });

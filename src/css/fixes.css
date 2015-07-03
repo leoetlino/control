@@ -53,3 +53,16 @@ input[type="file"] {
 .ats-switch.switch-disabled .ats-switch-container, .ats-switch.switch-readonly .ats-switch-container, .ats-switch.switch-indeterminate .ats-switch-container {
     opacity: 0.5;
 }
+
+[ng-cloak] {
+    display: none !important;
+}
+
+.form-horizontal .form-group div div.input-group-addon {
+    padding: 6px 12px;
+}
+
+.panel-title {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}

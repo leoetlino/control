@@ -1,0 +1,45 @@
+<div class="bootcards-list">
+    <section class="panel panel-default">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>ID</label>
+                        <h4 class="list-group-item-heading">#{{service.id}}</h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Status</label>
+                        <h4 class="list-group-item-heading">{{service.status}}</h4>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Server</label>
+                        <h4 class="list-group-item-heading">{{service.server}}</h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Username</label>
+                        <h4 class="list-group-item-heading">{{service.username}}</h4>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Type</label>
+                        <h4 class="list-group-item-heading">{{service.group}}</h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Plan</label>
+                        <h4 class="list-group-item-heading">{{service.name}}</h4>
+                    </div>
+                </div>
+            </li>
+            <a class="list-group-item" href="https://my.shoutca.st/clientarea.php?action=productdetails&id={{service.id}}">
+                <h4 class="list-group-item-heading">More details</h4>
+            </a>
+        </ul>
+    </section>
+</div>

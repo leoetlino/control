@@ -1,9 +1,7 @@
 /* global define */
 define(['control'], function (control) {
     'use strict';
-    control.controller('NowPlayingTweetsCtrl', function ($scope, NowPlayingTweetsService, ENV, $routeParams, service, $location, flash) {
-
-        $scope.service = service;
+    control.controller('NowPlayingTweetsCtrl', function ($scope, NowPlayingTweetsService, ENV, $routeParams, $location, flash) {
 
         // Initialisation
         var initialiseSettings = function () {

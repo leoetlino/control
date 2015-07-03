@@ -1,26 +1,26 @@
 /* global define */
 define(['control'], function(control) {
     control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ManageService, $window) {
-        $scope.currentUser = null;
-        $scope.userRoles = USER_ROLES;
-        $scope.isAuthorized = AuthChecker.isAuthorized;
-        $scope.isAuthenticated = AuthChecker.isAuthenticated;
-        $scope.currentSession = Session;
-        $scope.logout = function() {
-            AuthService.logout().then(function () {
-                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-            }, function () {
-                $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
-            });
-        };
+
+        ////////////////////
+        // Helper functions
+        ////////////////////
 
         $scope.isActive = function (viewLocation) {
             return (viewLocation === '/') ? viewLocation === $location.path() : $location.path().indexOf(viewLocation) > -1;
         };
 
-        $rootScope.$on('$routeChangeSuccess', function() {
-            $rootScope.pageTitle = $route.current.title;
+        $rootScope.reloadServices = function () {
+            return ManageService.refreshServices();
+        };
+
+        $rootScope.$on('routeSegmentChange', function (event, route) {
+            $rootScope.pageTitle = route.segment.params.title;
         });
+
+        ////////////
+        // Services
+        ////////////
 
         function initServices () {
             return ManageService.getServicesList().then(function (response) {
@@ -51,20 +51,43 @@ define(['control'], function(control) {
             initServices();
         }
 
-        $rootScope.$watch('service', function (newId, oldId) {
-            if (!oldId || oldId === newId) {
+        /////////////////////////
+        // Authentication system
+        /////////////////////////
+
+        $scope.currentUser = null;
+        $scope.userRoles = USER_ROLES;
+        $scope.isAuthorized = AuthChecker.isAuthorized;
+        $scope.isAuthenticated = AuthChecker.isAuthenticated;
+        $scope.currentSession = Session;
+        $scope.logOut = $scope.logout  = function logOut () {
+            AuthService.logout().then(function () {
+                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+            }, function () {
+                $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
+            });
+        };
+
+        function checkServices () {
+            var userServices = $rootScope.services;
+            var selectedService = $rootScope.service;
+            var hasService = false;
+
+            for (var i = 0; i < userServices.length; i++) {
+                if (userServices[i].username === selectedService.username) {
+                    hasService = true;
+                    break;
+                }
+            }
+
+            if (!hasService) {
+                $rootScope.$broadcast('invalid-service');
                 return;
             }
-            $route.reload();
-        });
-
-        ////////////////////////
-        // Authentication system
-        ////////////////////////
-
+        }
         var originalPath = null;
-        $rootScope.$on('$routeChangeStart', function(event, next) {
-            var authorizedRoles = next.authorizedRoles;
+        $rootScope.$on('routeSegmentChange', function (event, route) {
+            var authorizedRoles = route.segment.params.authorizedRoles;
             if (!authorizedRoles) {
                 authorizedRoles = [USER_ROLES.all];
             }
@@ -73,60 +96,29 @@ define(['control'], function(control) {
                 event.preventDefault();
                 if (AuthChecker.isAuthenticated()) {
                     // user is not allowed
-                    if (next.originalPath !== '/login') {
+                    if (route.originalPath !== '/login') {
                         $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
                         return;
                     }
                 } else {
                     // user is not logged in
-                    if (next.originalPath !== '/login') {
+                    if (route.originalPath !== '/login') {
                         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-                        originalPath = next.originalPath;
+                        originalPath = route.originalPath;
                         return;
                     }
                 }
             }
 
-            // Sanity checks
             if (!$rootScope.services) {
                 initServices().then(checkServices);
             } else {
                 checkServices();
             }
-
-            function checkServices () {
-                var userServices = $rootScope.services;
-                var selectedService = $rootScope.service;
-                var hasService = false;
-
-                for (var i = 0; i < userServices.length; i++) {
-                    if (userServices[i].username === selectedService.username) {
-                        hasService = true;
-                        break;
-                    }
-                }
-
-                if (!hasService) {
-                    $rootScope.$broadcast('invalid-service');
-                    return;
-                }
-
-                if (next.paidOnly) {
-                    if (selectedService.name === 'Free') {
-                        $rootScope.$broadcast('denied-paid-only');
-                        return;
-                    }
-                }
-            }
         });
 
         $rootScope.$on('invalid-service', function () {
             flash.to('alert-general').error = 'Access denied: Invalid service.';
-            $location.path('/');
-        });
-
-        $rootScope.$on('denied-paid-only', function () {
-            flash.to('alert-general').error = 'Access denied: This page is for paid services only. Please consider upgrading.';
             $location.path('/');
         });
 

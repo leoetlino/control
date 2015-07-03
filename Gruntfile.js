@@ -107,7 +107,8 @@ module.exports = function (grunt) {
                     jQuery: true,
                     require: true,
                     define: true,
-                    angular: true
+                    angular: true,
+                    _: true
                 }
             },
             all: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'js/**.js']

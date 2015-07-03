@@ -1,22 +1,24 @@
 /* global define */
 define(['control'], function (control) {
     'use strict';
-    control.controller('RequestAppCtrl', function ($scope, RequestAppService, Upload, ENV, $routeParams, service, $location, flash) {
-
-        $scope.service = service;
-
-        if ($scope.service.apps.iOS && $scope.service.apps.android) {
-            $location.path('/manage');
-            flash.to('alert-general').error = 'You have already requested apps for server #' + $scope.service.id + '.';
-        }
+    control.controller('RequestAppCtrl', function ($scope, RequestAppService, Upload, ENV) {
 
         var onAppSubmitted = function () {
-            $scope.appSubmitted = true;
+            $scope.appJustSubmitted = true;
         };
 
-        $scope.appSubmitted = false;
+        $scope.appJustSubmitted = false;
+        $scope.submittingForm = false;
         $scope.request = {};
-        $scope.request.platform = 'Both';
+        if ($scope.service.apps.android) {
+            $scope.request.platform = 'iOS';
+        }
+        if ($scope.service.apps.iOS) {
+            $scope.request.platform = 'Android';
+        }
+        if (!$scope.service.apps.android && !$scope.service.apps.iOS) {
+            $scope.request.platform = 'Both';
+        }
 
         // workaround for form validation
         $scope.$watch('form', function () {
@@ -25,6 +27,7 @@ define(['control'], function (control) {
         });
 
         $scope.submit = function (request) {
+            $scope.submittingForm = true;
             $scope.$broadcast('show-errors-check-validity');
             if ($scope.form.$invalid) {
                 return;
