@@ -55,10 +55,12 @@ define(['control'], function (control) {
             $scope.disableForm = true;
             TuneInIntegrationService.saveSettings($scope.service.username, settings).then(function () {
                 $scope.disableForm = false;
+                $scope.reloadServices();
                 flash.to('alert-now-playing-box').success = 'Your new settings have been saved.';
             }, function () {
-                flash.to('alert-now-playing-box').error = 'Something went wrong while disableForm your settings. Your settings were not saved. Please try again.';
+                flash.to('alert-now-playing-box').error = 'Something went wrong while disabling your settings. Your settings were not saved. Please try again.';
                 $scope.disableForm = false;
+                $scope.reloadServices();
             });
         };
 
