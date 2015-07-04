@@ -31,6 +31,13 @@ define([], function () {
         control.$httpProvider = $httpProvider;
         control.segments = $routeSegmentProvider.segments;
 
+        // ------------------------------------------------------------
+        //                       IMPORTANT
+        // ------------------------------------------------------------
+        // ng-annotate does NOT detect the DI in the routing
+        // So you must use the array syntax and make it minify-friendly
+        // ------------------------------------------------------------
+
         var watchForService = ['$rootScope', function ($rootScope) {
             return $rootScope.service.id;
         }];
@@ -56,14 +63,14 @@ define([], function () {
             authorizedRoles: [USER_ROLES.all],
             title: 'Dashboard',
             resolve: {
-                summary: function (DashService) {
+                summary: ['DashService', function (DashService) {
                     return DashService.getInfo().then(function (response) {
                         return response.data;
                     });
-                },
-                services: function (ManageService) {
+                }],
+                services: ['ManageService', function (ManageService) {
                     return ManageService.initAndGetServices();
-                }
+                }]
             },
             controller: 'DashboardCtrl'
         })
@@ -78,9 +85,9 @@ define([], function () {
             authorizedRoles: [USER_ROLES.all],
             title: 'Manage your servers',
             resolve: {
-                service: function (ManageService) {
+                service: ['ManageService', function (ManageService) {
                     return ManageService.initAndGetService();
-                }
+                }]
             },
             controller: 'ManageCtrl',
             watcher: watchForService
@@ -115,6 +122,13 @@ define([], function () {
                 watcher: watchForService
             })
         .up();
+
+        // ------------------------------------------------------------
+        //                       IMPORTANT
+        // ------------------------------------------------------------
+        // ng-annotate does NOT detect the DI in the routing
+        // So you must use the array syntax and make it minify-friendly
+        // ------------------------------------------------------------
 
         $routeProvider.otherwise({
             redirectTo: '/'
