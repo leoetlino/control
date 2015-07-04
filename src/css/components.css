@@ -72,6 +72,14 @@ section.panel[bs-collapse]:not(.not-collapsed) {
     padding-bottom: 0;
 }
 
+section.panel[bs-collapse] .collapsed-description {
+    display: none;
+}
+
+section.panel[bs-collapse]:not(.not-collapsed) .collapsed-description {
+    display: block;
+}
+
 [bs-collapse-toggle] {
     cursor: pointer;
 }
