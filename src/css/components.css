@@ -42,6 +42,10 @@
     text-transform: uppercase;
 }
 
+.panel-nav .nav-pills:not(:first-child) {
+    padding-top: 0;
+}
+
 /* Cards */
 .bootcards-cards .alert-warning,
 .alert-warning.border-darker, .panel-warning.border-darker {
