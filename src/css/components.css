@@ -29,19 +29,23 @@
 }
 
 /* Cards */
-.bootcards-cards .alert-warning {
+.bootcards-cards .alert-warning,
+.alert-warning.border-darker, .panel-warning.border-darker {
     border-color: #E6DABF;
 }
 
-.bootcards-cards .alert-success {
+.bootcards-cards .alert-success,
+.alert-success.border-darker, .panel-success.border-darker {
     border-color: #C3D6B4;
 }
 
-.bootcards-cards .alert-danger {
+.bootcards-cards .alert-danger,
+.alert-danger.border-darker, .panel-danger.border-darker {
     border-color: #CCB1B5;
 }
 
-.bootcards-cards .alert-info {
+.bootcards-cards .alert-info,
+.alert-info.border-darker, .panel-info.border-darker {
     border-color: #A9CED6;
 }
 
