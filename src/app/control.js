@@ -29,6 +29,7 @@ define([], function () {
         flashProvider.successClassnames.push('alert-success');
 
         control.$httpProvider = $httpProvider;
+        control.segments = $routeSegmentProvider.segments;
 
         var watchForService = function ($rootScope) {
             return $rootScope.service;
@@ -94,7 +95,6 @@ define([], function () {
             .segment('requestApp', {
                 templateUrl: '/app/manage/partials/request-app.html',
                 authorizedRoles: [USER_ROLES.all],
-                paidOnly: true,
                 title: 'Request your mobile apps',
                 controller: 'RequestAppCtrl',
                 watcher: watchForService
@@ -102,12 +102,10 @@ define([], function () {
             .segment('nowPlayingTweets', {
                 templateUrl: '/app/manage/partials/now-playing-tweets.html',
                 authorizedRoles: [USER_ROLES.all],
-                paidOnly: true,
                 title: '#NowPlaying Tweets',
                 controller: 'NowPlayingTweetsCtrl',
                 watcher: watchForService
-            })
-        .up();
+            });
 
         $routeProvider.otherwise({
             redirectTo: '/'

@@ -8,7 +8,6 @@ define(['control'], function (control) {
             invalidateCache: function () {
                 private.promise = null;
                 private.cachedServices = null;
-                return instance.getServicesPromise();
             },
             initAndGetService: function () {
                 return instance.getServicesPromise().then(instance.getSelectedService);
@@ -32,12 +31,21 @@ define(['control'], function (control) {
                 var service;
                 if ($location.search().username) {
                     service = instance.getBy('username', $location.search().username);
+                    if (!service) {
+                        $rootScope.$broadcast('invalid-service');
+                    }
                 }
                 if ($location.search().serviceId) {
                     service = instance.getBy('id', $location.search().serviceId);
+                    if (!service) {
+                        $rootScope.$broadcast('invalid-service');
+                    }
                 }
                 if ($rootScope.service) {
                     service = _.findWhere(instance.getServicesList(), { id: $rootScope.service.id });
+                    if (!service) {
+                        $rootScope.$broadcast('invalid-service');
+                    }
                 }
                 if (!service) {
                     service = instance.getServicesList()[0];
