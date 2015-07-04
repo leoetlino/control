@@ -47,6 +47,11 @@
     padding-top: 0;
 }
 
+.panel-nav .nav-pills > li a,
+.panel-nav .nav-pills > li a:focus {
+    font-weight: normal !important;
+}
+
 /* Cards */
 .bootcards-cards .alert-warning,
 .alert-warning.border-darker, .panel-warning.border-darker {
