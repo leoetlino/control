@@ -56,7 +56,7 @@
                             <label for="interval" class="col-sm-2 control-label">Interval</label>
                             <div class="col-sm-10">
                                 <input type="number" id="interval" step="1" min="1" placeholder="Interval" class="form-control" ng-model="settings.interval" name="interval" required>
-                                <p class="help-block">#NowPlaying Tweets will be sent every {{settings.interval}} song<span ng-show="settings.interval > 1">s</span>.<span ng-show="settings.interval === 1"><br>We don't recommend this if the songs aren't very long.</span></p>
+                                <p class="help-block">Tweets will be sent every {{settings.interval}} song<span ng-show="settings.interval > 1">s</span>.<span ng-show="settings.interval === 1"><br>We don't recommend this if your songs are short.</span></p>
                             </div>
                         </div>
                     </div>
