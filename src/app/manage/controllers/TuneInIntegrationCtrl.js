@@ -53,7 +53,7 @@ define(['control'], function (control) {
                 return;
             }
             $scope.disableForm = true;
-            TuneInIntegrationService.saSettings($scope.service.username, settings).then(function () {
+            TuneInIntegrationService.saveSettings($scope.service.username, settings).then(function () {
                 $scope.disableForm = false;
                 flash.to('alert-now-playing-box').success = 'Your new settings have been saved.';
             }, function () {
