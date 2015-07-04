@@ -60,9 +60,7 @@ define([], function () {
                     });
                 },
                 services: function (ManageService) {
-                    return ManageService.getServicesList().then(function (response) {
-                        return response.data;
-                    });
+                    return ManageService.initAndGetServices();
                 }
             },
             controller: 'DashboardCtrl'

@@ -13,6 +13,9 @@ define(['control'], function (control) {
             initAndGetService: function () {
                 return instance.getServicesPromise().then(instance.getSelectedService);
             },
+            initAndGetServices: function () {
+                return instance.getServicesPromise().then(instance.getServicesList);
+            },
             getServicesPromise: function () {
                 if (private.promise) {
                     return private.promise;
