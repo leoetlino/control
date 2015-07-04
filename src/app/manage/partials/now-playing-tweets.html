@@ -25,7 +25,7 @@
         <form class="form-horizontal" novalidate role="form" name="form" ng-submit="submitSettings(settings)" ng-hide="unauthorised">
             <h4 class="card-header pull-left">Settings</h4>
             <div class="pull-right">
-                <div toggle-switch ng-disabled="submitting || form.$invalid" class="switch-success switch-large" ng-model="nowPlayingState" on-label="Enabled" off-label="Disabled"></div>
+                <div toggle-switch is-disabled="submitting || form.$invalid" class="switch-success switch-large" ng-model="nowPlayingState" on-label="Enabled" off-label="Disabled"></div>
             </div>
             <div class="clearfix"></div>
             <br>
