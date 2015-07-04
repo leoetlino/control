@@ -1,13 +1,12 @@
 /* global define */
 define(['control'], function (control) {
     'use strict';
-    control.controller('RequestAppCtrl', function ($scope, RequestAppService, Upload, ENV) {
+    control.controller('RequestAppCtrl', function ($scope, RequestAppService, Upload, ENV, $timeout) {
 
         var onAppSubmitted = function () {
-            $scope.appJustSubmitted = true;
+            $timeout($scope.reloadServices, 2000);
         };
 
-        $scope.appJustSubmitted = false;
         $scope.submittingForm = false;
         $scope.request = {};
         if ($scope.service.apps.android) {
@@ -30,6 +29,7 @@ define(['control'], function (control) {
             $scope.submittingForm = true;
             $scope.$broadcast('show-errors-check-validity');
             if ($scope.form.$invalid) {
+                $scope.submittingForm = false;
                 return;
             }
             request.username = $scope.service.username;
