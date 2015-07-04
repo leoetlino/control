@@ -156,7 +156,7 @@
                         <label for="button-text-colour" class="col-sm-3 control-label">Tint</label>
                         <div class="col-sm-9">
                             <div class="input-group">
-                                <input id="button-text-colour" placeholder="Tint" colorpicker name="tint" type="text" class="form-control" ng-model="request.tint" ng-required="request.platform === 'iOS'" pattern="^#(?:[0-9a-fA-F]{3}){1,2}$">
+                                <input id="button-text-colour" placeholder="Tint" colorpicker name="tint" type="text" class="form-control" ng-model="request.tint" ng-required="request.platform !== 'Android'" pattern="^#(?:[0-9a-fA-F]{3}){1,2}$">
                                 <span class="input-group-addon" colorpicker ng-model="request.tint" style="background: {{request.tint}}" colorpicker-with-input="true">
                                 </span>
                             </div>
