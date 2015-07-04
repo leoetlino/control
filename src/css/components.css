@@ -26,6 +26,7 @@
 /* Navigation */
 .panel-nav {
     padding: 0 !important;
+    padding-bottom: 20px;
 }
 
 .panel-nav .header {
