@@ -1,0 +1,63 @@
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>TuneIn AIR Integration</h4>
+        <p class="service-description">Get listed on the TuneIn directory!</p>
+        <p>This free integration allows you to be listed on the TuneIn directory. It also fully integrates with the TuneIn AIR API to provide now playing information.</p>
+        <p>Being listed on TuneIn.com makes your station easier to find and allows you to get more listeners.</p>
+    </div>
+</section>
+
+
+<div id="alert-tunein-integration" flash-alert active-class="in alert" class="animated-custom fade">
+    <p class="alert-message"><i class="fa alert-icon-{{flash.type}}"></i> {{ flash.message }}</p>
+</div>
+<div class="alert alert-info" ng-show="!notSupportedByServer && form.$invalid">
+    <p><fa name="warning"></fa> You need to configure the TuneIn integration before it can be enabled.</p>
+</div>
+<div class="alert alert-danger" ng-show="notSupportedByServer">
+    <p><fa name="exclamation-circle"></fa> The TuneIn integration cannot be configured from Control at this time. Please try again later.</p>
+</div>
+
+<section class="panel panel-default">
+    <div class="panel-body">
+        <form novalidate role="form" name="form" ng-submit="saveSettings(settings)">
+            <h4 class="card-header pull-left">Settings</h4>
+            <div class="pull-right">
+                <div toggle-switch is-disabled="disableForm || form.$invalid" class="switch-success switch-large" ng-model="integrationEnabled" on-label="Enabled" off-label="Disabled"></div>
+            </div>
+            <div class="clearfix"></div>
+            <br>
+            <fieldset ng-disabled="disableForm">
+                <div class="row">
+                    <div class="form-group col-sm-4" show-errors>
+                        <label for="station-id" class="control-label">Station ID</label>
+                        <input type="text" id="station-id" placeholder="Station ID" class="form-control" ng-model="settings.stationId" name="station-id" required>
+                        <p class="help-block">Your TuneIn station ID. You must be listed on TuneIn to have this.</p>
+                    </div>
+                    <div class="form-group col-sm-4" show-errors>
+                        <label for="partnerId" class="control-label">Partner ID</label>
+                        <input type="text" id="partner-id" placeholder="Partner ID" class="form-control" ng-model="settings.partnerId" name="partner-id" required>
+                        <p class="help-block">The partner ID given by TuneIn after requesting access to the API.</p>
+                    </div>
+                    <div class="form-group col-sm-4" show-errors>
+                        <label for="partner-key" class="control-label">Partner Key</label>
+                        <input type="text" id="partner-key" placeholder="Partner Key" class="form-control" ng-model="settings.partnerKey" name="partner-key" required>
+                        <p class="help-block">The partner key given by TuneIn after requesting access to the API.</p>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <p class="help-block">This information is required to enable the integration. <a href="https://community.shoutca.st/topic/57/how-to-request-your-tunein-air-keys">Click here</a> for more information on the required fields.</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-block btn-primary"><fa name="save"></fa> Save settings</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="button" class="btn btn-danger btn-block" ng-click="removeSettings()"><fa name="trash-o"></fa> Remove settings</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

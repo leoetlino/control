@@ -13,6 +13,9 @@
             <li ng-class="{active: ('manage.nowPlayingTweets'|routeSegmentEqualsTo)}">
                 <a href="{{ 'manage.nowPlayingTweets' | routeSegmentUrl }}"><fa name="twitter" fw></fa> #NowPlaying</a>
             </li>
+            <li ng-class="{active: ('manage.tuneinIntegration'|routeSegmentEqualsTo)}">
+                <a href="{{ 'manage.tuneinIntegration' | routeSegmentUrl }}"><fa name="headphones" fw></fa> TuneIn Integration</a>
+            </li>
         </ul>
     </nav>
     <section class="col-sm-9 bootcards-cards" app-view-segment="1">

@@ -26,6 +26,8 @@
         'manage/controllers/RequestAppCtrl',
         'manage/services/RequestAppService',
         'manage/controllers/NowPlayingTweetsCtrl',
+        'manage/controllers/TuneInIntegrationCtrl',
+        'manage/services/TuneInIntegrationService',
         'manage/services/NowPlayingTweetsService',
         'stats/controllers/StatsCtrl'
     ], function () {

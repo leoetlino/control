@@ -43,6 +43,7 @@ define([], function () {
         .when('/manage/information', 'manage.information')
         .when('/manage/request-app', 'manage.requestApp')
         .when('/manage/now-playing-tweets', 'manage.nowPlayingTweets')
+        .when('/manage/tunein-integration', 'manage.tuneinIntegration')
 
         .segment('login', {
             authorizedRoles: [USER_ROLES.public],
@@ -105,7 +106,15 @@ define([], function () {
                 title: '#NowPlaying Tweets',
                 controller: 'NowPlayingTweetsCtrl',
                 watcher: watchForService
-            });
+            })
+            .segment('tuneinIntegration', {
+                templateUrl: '/app/manage/partials/tunein-integration.html',
+                authorizedRoles: [USER_ROLES.all],
+                title: 'TuneIn Integration',
+                controller: 'TuneInIntegrationCtrl',
+                watcher: watchForService
+            })
+        .up();
 
         $routeProvider.otherwise({
             redirectTo: '/'
