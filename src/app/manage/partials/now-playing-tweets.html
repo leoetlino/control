@@ -34,7 +34,7 @@
                     <p>Here's what a #NowPlaying Tweet currently looks like:</p>
                     <blockquote class="no-margin-bottom">
                         <p class="always-wrap">{{settings.prefix}} This is a Song Name - Artist Name {{settings.suffix}}</p>
-                        <small>@yourtwitterhandle (preview)</small>
+                        <small>@yourtwitterhandle (preview) <span class="pull-right">{{(settings.prefix + ' This is a Song Name - Artist Name ' + settings.suffix).length}}/140</span></small>
                     </blockquote>
                 </div>
                 <div class="row">
