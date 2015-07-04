@@ -31,9 +31,9 @@ define([], function () {
         control.$httpProvider = $httpProvider;
         control.segments = $routeSegmentProvider.segments;
 
-        var watchForService = function ($rootScope) {
+        var watchForService = ['$rootScope', function ($rootScope) {
             return $rootScope.service.id;
-        };
+        }];
 
         $routeSegmentProvider
         .when('/log-in', 'login')
