@@ -16,6 +16,9 @@
 <div class="alert alert-warning" ng-show="(settings.prefix + ' This is a Song Name - Artist Name ' + settings.suffix).length > 140" >
     <p><fa name="warning"></fa> Your Tweets might be too long and may not be able to be sent. Consider making your prefix and/or suffix shorter.</p>
 </div>
+<div class="alert alert-warning" ng-show="(settings.prefix + ' This is a Song Name - Artist Name ' + settings.suffix).indexOf('http') !== -1" >
+    <p><fa name="warning"></fa> Including an URL might result in getting your Tweets blocked by Twitter (possible spam). Consider removing it.</p>
+</div>
 
 <section class="panel panel-default">
     <div class="panel-body">
