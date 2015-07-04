@@ -32,7 +32,7 @@ define([], function () {
         control.segments = $routeSegmentProvider.segments;
 
         var watchForService = function ($rootScope) {
-            return $rootScope.service;
+            return $rootScope.service.id;
         };
 
         $routeSegmentProvider
