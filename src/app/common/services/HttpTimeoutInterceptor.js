@@ -3,7 +3,7 @@ define(['control'], function (control) {
     control.factory('HttpTimeoutInterceptor', function ($q, $window) {
         return {
             'request': function(config) {
-                config.timeout = 10000;
+                config.timeout = 20000;
                 return config;
             },
             responseError: function (response) {
