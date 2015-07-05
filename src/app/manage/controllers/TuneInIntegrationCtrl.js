@@ -38,9 +38,15 @@ define(['control'], function (control) {
                         return;
                     }
 
+                    $scope.$broadcast('show-errors-check-validity');
+                    if ($scope.form.$invalid) {
+                        flash.to('alert-tunein-integration').error = 'The integration has not yet been configured correctly.';
+                        return;
+                    }
+
                     $scope.disableForm = true;
                     if ($scope.settings.isEnabled) {
-                        TuneInIntegrationService.enable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
+                        TuneInIntegrationService.saveSettings($rootScope.service.username, $scope.settings).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
                     } else {
                         TuneInIntegrationService.disable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
                     }
