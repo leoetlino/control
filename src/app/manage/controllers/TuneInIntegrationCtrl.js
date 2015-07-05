@@ -11,7 +11,6 @@ define(['control'], function (control) {
                 $scope.notSupportedByServer = true;
                 return;
             }
-            $scope.integrationEnabled = $scope.settings.isEnabled || false;
         };
 
         $scope.disableForm = false;
@@ -19,13 +18,15 @@ define(['control'], function (control) {
 
         // Functions
         var changeStateSuccess = function () {
+            $scope.reloadServices();
             $scope.disableForm = false;
         };
 
         var changeStateFailure = function (oldValue) {
             flash.to('alert-tunein-integration').error = 'Something went wrong while enabling or disabling the TuneIn integration. Please try again.';
             unregisterWatch();
-            $scope.integrationEnabled = oldValue;
+            $scope.reloadServices();
+            $scope.settings.isEnabled = oldValue;
             watchTuneInIntegrationSwitch();
             $scope.disableForm = false;
         };
@@ -38,7 +39,7 @@ define(['control'], function (control) {
                     }
 
                     $scope.disableForm = true;
-                    if ($scope.integrationEnabled) {
+                    if ($scope.settings.isEnabled) {
                         TuneInIntegrationService.enable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
                     } else {
                         TuneInIntegrationService.disable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
@@ -74,7 +75,6 @@ define(['control'], function (control) {
             $scope.disableForm = true;
             TuneInIntegrationService.removeSettings($rootScope.service.username).then(function () {
                 $scope.disableForm = false;
-                $scope.integrationEnabled = false;
                 watchTuneInIntegrationSwitch();
                 flash.to('alert-tunein-integration').success = 'Your TuneIn integration settings have been removed.';
             }, function () {
