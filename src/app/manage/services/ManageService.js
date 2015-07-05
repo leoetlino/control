@@ -25,7 +25,11 @@ define(['control'], function (control) {
                 });
             },
             getServicesList: function () {
-                return private.cachedServices;
+                return _.filter(private.cachedServices, function (service) {
+                    return (service.status === 'Active') &&
+                        (service.group.toLowerCase().indexOf('servers') !== -1) &&
+                        (service.name.toLowerCase().indexOf('free') === -1);
+                });
             },
             getSelectedService: function () {
                 var service;
