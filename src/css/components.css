@@ -172,6 +172,11 @@ a.list-group-item {
 }
 
 @media screen and (max-width: 769px) {
+    .service-switcher {
+        font-size: 18px;
+        padding-bottom: 17px;
+        padding-top: 25px;
+    }
     .service-switcher + .dropdown-menu {
         left: 10px !important;
         right: 10px !important;
