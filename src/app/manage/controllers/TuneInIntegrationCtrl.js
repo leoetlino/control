@@ -11,8 +11,13 @@ define(['control'], function (control) {
                 $scope.notSupportedByServer = true;
                 return;
             }
-            $scope.integrationEnabled = $scope.settings.isEnabled || false;
+            $scope.integrationEnabled = $scope.settings.isEnabled;
         };
+
+        $rootScope.$watch('service.tuneinIntegration', function (newValue) {
+            $scope.settings = newValue;
+            $scope.integrationEnabled = $scope.settings.isEnabled;
+        });
 
         $scope.disableForm = false;
         initialiseSettings();
@@ -46,7 +51,7 @@ define(['control'], function (control) {
                     $scope.disableForm = true;
                     $scope.settings.isEnabled = $scope.integrationEnabled;
                     if ($scope.integrationEnabled) {
-                        TuneInIntegrationService.saveSettings($rootScope.service.username, $scope.settings).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
+                        TuneInIntegrationService.enable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
                     } else {
                         TuneInIntegrationService.disable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
                     }
