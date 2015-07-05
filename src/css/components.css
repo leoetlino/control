@@ -1,5 +1,5 @@
 /* Boxes */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
     .dashboard-box .panel-body {
         min-height: 12em;
     }
@@ -50,6 +50,12 @@
 .panel-nav .nav-pills > li a,
 .panel-nav .nav-pills > li a:focus {
     font-weight: normal !important;
+}
+
+@media screen and (max-width: 767px) {
+    .panel-nav {
+        margin-top: -40px;
+    }
 }
 
 /* Cards */
@@ -171,7 +177,7 @@ a.list-group-item {
     overflow: hidden;
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 767px) {
     .service-switcher {
         font-size: 18px;
         padding-bottom: 17px;

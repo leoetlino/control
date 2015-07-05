@@ -66,3 +66,9 @@ input[type="file"] {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }
+
+@media screen and (max-width: 767px) {
+    .row > [class^="col-sm-"]:not(:first-child) {
+        margin-top: 10px;
+    }
+}
