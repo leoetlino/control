@@ -221,6 +221,8 @@ a.list-group-item {
     min-width: 400px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    overflow-y: scroll;
+    max-height: 350px;
 }
 
 .service-switcher + .dropdown-menu .hidden-in-small-navbar {
