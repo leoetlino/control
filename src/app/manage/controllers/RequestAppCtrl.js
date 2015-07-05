@@ -1,7 +1,7 @@
 /* global define */
 define(['control'], function (control) {
     'use strict';
-    control.controller('RequestAppCtrl', function ($scope, RequestAppService, Upload, ENV, $timeout) {
+    control.controller('RequestAppCtrl', function ($rootScope, $scope, RequestAppService, Upload, ENV, $timeout) {
 
         var onAppSubmitted = function () {
             $timeout($scope.reloadServices, 2000);
@@ -9,13 +9,13 @@ define(['control'], function (control) {
 
         $scope.submittingForm = false;
         $scope.request = {};
-        if ($scope.service.apps.android) {
+        if ($rootScope.service.apps.android) {
             $scope.request.platform = 'iOS';
         }
-        if ($scope.service.apps.iOS) {
+        if ($rootScope.service.apps.iOS) {
             $scope.request.platform = 'Android';
         }
-        if (!$scope.service.apps.android && !$scope.service.apps.iOS) {
+        if (!$rootScope.service.apps.android && !$rootScope.service.apps.iOS) {
             $scope.request.platform = 'Both';
         }
 
@@ -32,7 +32,7 @@ define(['control'], function (control) {
                 $scope.submittingForm = false;
                 return;
             }
-            request.username = $scope.service.username;
+            request.username = $rootScope.service.username;
             switch (request.platform) {
                 case 'Both':
                     RequestAppService.submit('Android', request).then(onAppSubmitted);

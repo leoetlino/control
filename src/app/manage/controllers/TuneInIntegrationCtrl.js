@@ -1,11 +1,11 @@
 /* global define */
 define(['control'], function (control) {
     'use strict';
-    control.controller('TuneInIntegrationCtrl', function ($scope, TuneInIntegrationService, ENV, $routeParams, $location, flash) {
+    control.controller('TuneInIntegrationCtrl', function ($rootScope, $scope, TuneInIntegrationService, ENV, $routeParams, $location, flash) {
 
         // Initialisation
         var initialiseSettings = function () {
-            $scope.settings = $scope.service.tuneinIntegration;
+            $scope.settings = $rootScope.service.tuneinIntegration;
             if (typeof $scope.settings === 'undefined') {
                 $scope.disableForm = true;
                 $scope.notSupportedByServer = true;
@@ -39,9 +39,9 @@ define(['control'], function (control) {
 
                     $scope.disableForm = true;
                     if ($scope.integrationEnabled) {
-                        TuneInIntegrationService.enable($scope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
+                        TuneInIntegrationService.enable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
                     } else {
-                        TuneInIntegrationService.disable($scope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
+                        TuneInIntegrationService.disable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
                     }
                 });
             };
@@ -53,7 +53,7 @@ define(['control'], function (control) {
                 return;
             }
             $scope.disableForm = true;
-            TuneInIntegrationService.saveSettings($scope.service.username, settings).then(function () {
+            TuneInIntegrationService.saveSettings($rootScope.service.username, settings).then(function () {
                 $scope.disableForm = false;
                 $scope.reloadServices();
                 flash.to('alert-tunein-integration').success = 'Your new settings have been saved.';
@@ -66,13 +66,13 @@ define(['control'], function (control) {
 
         $scope.removeSettings = function () {
             // Reset settings.
-            $scope.service.tuneinIntegration.settings = {};
+            $rootScope.service.tuneinIntegration = { isEnabled: false };
             unregisterWatch();
             initialiseSettings();
 
             // Remove settings, server-side.
             $scope.disableForm = true;
-            TuneInIntegrationService.removeSettings($scope.service.username).then(function () {
+            TuneInIntegrationService.removeSettings($rootScope.service.username).then(function () {
                 $scope.disableForm = false;
                 $scope.integrationEnabled = false;
                 watchTuneInIntegrationSwitch();

@@ -1,20 +1,20 @@
 /* global define */
 define(['control'], function (control) {
     'use strict';
-    control.controller('NowPlayingTweetsCtrl', function ($scope, NowPlayingTweetsService, ENV, $routeParams, $location, flash) {
+    control.controller('NowPlayingTweetsCtrl', function ($rootScope, $scope, NowPlayingTweetsService, ENV, $routeParams, $location, flash) {
 
         // Initialisation
         var initialiseSettings = function () {
-            $scope.nowPlayingState = $scope.service.nowPlaying.isEnabled;
+            $scope.nowPlayingState = $rootScope.service.nowPlaying.isEnabled;
             $scope.settings = {};
-            $scope.service.nowPlaying.settings = $scope.service.nowPlaying.settings || {};
-            $scope.settings.prefix = $scope.service.nowPlaying.settings.prefix || '#NowPlaying';
-            $scope.settings.suffix = $scope.service.nowPlaying.settings.suffix || '';
-            $scope.settings.interval = $scope.service.nowPlaying.settings.interval || 5;
-            $scope.settings.consumerKey = $scope.service.nowPlaying.settings.consumerKey;
-            $scope.settings.consumerSecret = $scope.service.nowPlaying.settings.consumerSecret;
-            $scope.settings.accessToken = $scope.service.nowPlaying.settings.accessToken;
-            $scope.settings.accessTokenSecret = $scope.service.nowPlaying.settings.accessTokenSecret;
+            $rootScope.service.nowPlaying.settings = $rootScope.service.nowPlaying.settings || {};
+            $scope.settings.prefix = $rootScope.service.nowPlaying.settings.prefix || '#NowPlaying';
+            $scope.settings.suffix = $rootScope.service.nowPlaying.settings.suffix || '';
+            $scope.settings.interval = $rootScope.service.nowPlaying.settings.interval || 5;
+            $scope.settings.consumerKey = $rootScope.service.nowPlaying.settings.consumerKey;
+            $scope.settings.consumerSecret = $rootScope.service.nowPlaying.settings.consumerSecret;
+            $scope.settings.accessToken = $rootScope.service.nowPlaying.settings.accessToken;
+            $scope.settings.accessTokenSecret = $rootScope.service.nowPlaying.settings.accessTokenSecret;
         };
         initialiseSettings();
 
@@ -42,9 +42,9 @@ define(['control'], function (control) {
 
                 $scope.submitting = true;
                 if ($scope.nowPlayingState) {
-                    NowPlayingTweetsService.enable($scope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
+                    NowPlayingTweetsService.enable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
                 } else {
-                    NowPlayingTweetsService.disable($scope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
+                    NowPlayingTweetsService.disable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
                 }
             });
         };
@@ -56,7 +56,7 @@ define(['control'], function (control) {
                 return;
             }
             $scope.submitting = true;
-            NowPlayingTweetsService.submitSettings($scope.service.username, settings).then(function () {
+            NowPlayingTweetsService.submitSettings($rootScope.service.username, settings).then(function () {
                 $scope.submitting = false;
                 flash.to('alert-now-playing-box').success = 'Your new settings have been saved.';
             }, function () {
@@ -67,13 +67,13 @@ define(['control'], function (control) {
 
         $scope.removeSettings = function () {
             // Reset settings.
-            $scope.service.nowPlaying.settings = {};
+            $rootScope.service.nowPlaying.settings = {};
             unregisterWatch();
             initialiseSettings();
 
             // Remove settings, server-side.
             $scope.submitting = true;
-            NowPlayingTweetsService.removeSettings($scope.service.username).then(function () {
+            NowPlayingTweetsService.removeSettings($rootScope.service.username).then(function () {
                 $scope.submitting = false;
                 $scope.nowPlayingState = false;
                 watchNowPlayingSwitch();
