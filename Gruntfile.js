@@ -1,6 +1,7 @@
 /* global module, require */
 module.exports = function (grunt) {
     'use strict';
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         bowerrc: grunt.file.readJSON('.bowerrc'),
@@ -19,34 +20,16 @@ module.exports = function (grunt) {
             'js': 'js'
         },
         copy: {
-            main: {
-                expand: true,
-                cwd: 'src/',
-                src: ['.htaccess', '**', 'js/**.js', 'css/**.css', 'css/fonts/**', 'css/images/**', 'app/**.js', 'lib/**.{css,js,eot,svg,ttf,woff}'],
-                dest: 'dist/'
-            },
             fontawesome: {
                 expand: true,
                 cwd: 'src/libs/fontawesome/fonts/',
-                src: ['*.{eot,svg,ttf,woff}'],
+                src: ['*.{eot,svg,ttf,woff,woff2}'],
                 dest: 'dist/fonts/'
-            },
-            backupSource: {
-                expand: true,
-                cwd: 'src/',
-                src: '***',
-                dest: 'backup/'
-            },
-            restoreSource: {
-                expand: true,
-                cwd: 'backup',
-                src: '***',
-                dest: 'src/'
             }
         },
         useminPrepare: {
-            html: 'src/index.html',
-            css: ['src/css/**.css', 'src/libs/*/**.css']
+            html: 'dist/index.html',
+            css: ['dist/css/**.css', 'dist/libs/*/**.css']
         },
         usemin: {
             html: 'dist/index.html',
@@ -61,15 +44,8 @@ module.exports = function (grunt) {
         rev: {
             assets: {
                 files: [{
-                    src: ['dist/js/control-bundle.min.js', 'dist/js/control.min.js', 'dist/css/control.min.css', 'dist/**.js', 'dist/css/**.css', 'dist/libs/*/**.css', 'dist/**.eot', 'dist/**.svg', 'dist/**.ttf', 'dist/**.woff', 'dist/**.jpg', 'dist/**.png']
+                    src: ['dist/js/control.min.js', 'dist/css/control.min.css']
                 }]
-            }
-        },
-        cssmin: {
-            generated: {
-                options: {
-                    banner: '/* Control - the place to control everything with us © Copyright Innovate Technologies, 2014 */'
-                }
             }
         },
         htmlmin: {
@@ -93,84 +69,13 @@ module.exports = function (grunt) {
         },
         jshint: {
             options: {
-                curly: true,
-                eqeqeq: true,
-                eqnull: true,
-                browser: true,
-                indent: 4,
-                quotmark: 'single',
-                undef: true,
-                unused: true,
-                jquery: true,
-                plusplus: false,
-                globals: {
-                    jQuery: true,
-                    require: true,
-                    define: true,
-                    angular: true,
-                    _: true
-                }
+                jshintrc: '.jshintrc'
             },
             all: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'js/**.js']
         },
         githooks: {
             all: {
                 'pre-commit': 'jshint:all'
-            }
-        },
-        ngconstant: {
-            options: {
-                name: 'config',
-                dest: 'src/app/config.js',
-                beautify: {
-                    indent_size: 4,
-                    indent_char: ' ',
-                    indent_level: 0,
-                    indent_with_tabs: false,
-                    space_before_conditional: true
-                }
-            },
-            development: {
-                constants: {
-                    ENV: {
-                        name: 'development',
-                        apiEndpoint: 'itframe.shoutca.st'
-                    }
-                }
-            },
-            production: {
-                constants: {
-                    ENV: {
-                        name: 'production',
-                        apiEndpoint: 'itframe.shoutca.st'
-                    }
-                }
-            }
-        },
-        requirejs: {
-            compile: {
-                options: {
-                    baseUrl: 'dist/app',
-                    mainConfigFile: 'dist/app/app.js',
-                    out: 'dist/app/control-bundle.min.js',
-                    name: 'app',
-                    findNestedDependencies: true,
-                    uglify: {
-                        no_mangle: true
-                    }
-                }
-            }
-        },
-        htmlbuild: {
-            production: {
-                src: 'src/index.html',
-                dest: 'src/',
-                options: {
-                    scripts: {
-                        controlApp: ['dist/app/control-bundle.min.js', 'dist/app/templates.js', 'dist/app/ui-bootstrap-templates.js']
-                    },
-                    parseTag: 'htmlbuild'
-                }
             }
         },
         html2js: {
@@ -188,22 +93,26 @@ module.exports = function (grunt) {
                     conservativeCollapse: true
                 }
             },
-            main: {
-                src: ['src/app/**/partials/**.html'],
-                dest: 'dist/app/templates.js',
+            build: {
+                src: ['dist/app/**/partials/**.html'],
+                dest: 'dist/app/00-templates.js',
                 options: {
+                    base: 'dist',
                     rename: function (moduleName) {
                         return '/' + moduleName;
-                    }
+                    },
+                    module: 'templates'
                 }
             },
-            ngBootstrapTemplates: {
-                src: ['src/app/ui-bootstrap-templates/*/*.html'],
-                dest: 'src/app/ui-bootstrap-templates.js',
+            dev: {
+                src: ['src/app/**/partials/**.html'],
+                dest: 'dev/app/00-templates.js',
                 options: {
+                    base: 'src',
                     rename: function (moduleName) {
-                        return moduleName.replace('app/ui-bootstrap-templates/', 'template/');
-                    }
+                        return '/' + moduleName;
+                    },
+                    module: 'templates'
                 }
             }
         },
@@ -213,41 +122,73 @@ module.exports = function (grunt) {
                 add: true,
                 remove: true
             },
-            production: {
+            build: {
                 files: [
                     {
                         expand: true,
                         src: ['.tmp/concat/js/control.min.js']
                     }
                 ]
-            },
-            source: {
-                options: {
-                    remove: true,
-                    add: false
-                },
-                files: [
-                    {
-                        expand: true,
-                        src: ['src/app/**.js', 'src/app/**/**.js']
-                    }
-                ]
             }
         },
-        replace: {
-            production: {
-                options: {
-                    patterns: [
-                        {
-                            match: 'control.min.js"></script>',
-                            replacement: 'control.min.js" defer async></script>'
-                        }
-                    ],
-                    usePrefix: false
+        includeSource: {
+            build: {
+                files: {
+                    'dist/index.html': 'dist/index.html'
                 },
-                files: [
-                    { expand: true, src: 'dist/index.html', dest: './' }
-                ]
+                options: {
+                    basePath: 'dist/app/',
+                    baseUrl: 'app/',
+                    ordering: 'top-down'
+                },
+            },
+            dev: {
+                files: {
+                    'dev/index.html': 'dev/index.html'
+                },
+                options: {
+                    basePath: 'dev/app/',
+                    baseUrl: 'app/',
+                    ordering: 'top-down'
+                },
+            }
+        },
+        watch: {
+            dev: {
+                files: ['src/*.*', 'src/*/*.*', 'src/app/*.js', 'src/app/*/*.js'],
+                tasks: ['rsync:dev', 'includeSource:dev']
+            },
+        },
+        express: {
+            dev: {
+                options: {
+                    bases: ['dev/'],
+                    port: 5000,
+                    hostname: '*',
+                    server: 'dev-server.js'
+                }
+            }
+        },
+        rsync: {
+            options: {
+                args: ['--update --verbose'],
+                exclude: ['*~'],
+                recursive: true
+            },
+            dev: {
+                options: {
+                    src: 'src/',
+                    dest: 'dev/',
+                    delete: true
+                }
+            },
+            build: {
+                options: {
+                    src: 'src/',
+                    dest: 'dist/',
+                    exclude: ['*~', '*.spec.js'],
+                    delete: true
+                }
             }
         }
     });
@@ -263,12 +204,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-githooks');
-    grunt.loadNpmTasks('grunt-ng-constant');
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-html-build');
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-ng-annotate');
-    grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-include-source');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-express');
+    grunt.loadNpmTasks('grunt-rsync');
 
     grunt.registerTask('install-hook', function () {
         var fs = require('fs');
@@ -277,14 +219,30 @@ module.exports = function (grunt) {
         grunt.task.run('githooks');
     });
 
-    grunt.task.run('install-hook');
-
-    grunt.registerTask('generate-dev-config', function () {
-        grunt.task.run('ngconstant:development');
-    });
-
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'jshint', 'ngconstant:production', 'html2js:ngBootstrapTemplates', 'clean:preBuild', 'copy:main', 'copy:fontawesome', 'copy:backupSource', 'requirejs', 'html2js:main', 'htmlbuild:production', 'useminPrepare', 'concat', 'ngAnnotate:production', 'uglify', 'cssmin', 'rev', 'usemin', 'replace', 'htmlmin', 'ngconstant:development', 'copy:restoreSource', 'clean:postBuild'
+        'jshint', // Run JSHint on the source
+        'clean:preBuild', // Clean up to make sure nothing breaks the build
+        'rsync:build', // Copy the source to dist/ to start the build
+        'copy:fontawesome', // Copy the Font Awesome fonts to dist/
+        'html2js:build', // Convert the templates to a JS cache file
+        'includeSource:build',
+        'useminPrepare',
+        'concat', // Concat all files
+        'ngAnnotate:build', // Add DI annotations
+        'uglify', // Uglify the JS
+        'cssmin', // Uglify the CSS
+        'rev', // Add a revision tag to assets
+        'usemin',
+        'htmlmin', // Minify the HTML
+        'clean:postBuild' // Clean up
     ]);
+
+    grunt.registerTask('dev', [
+        'rsync:dev',
+        'includeSource:dev',
+        'express',
+        'watch'
+    ]);
+
 };

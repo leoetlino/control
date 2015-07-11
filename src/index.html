@@ -30,7 +30,7 @@
         <link rel="stylesheet" href="css/loading-bar-green.css">
         <!-- endbuild -->
     </head>
-    <body class="bootcards-nofooter">
+    <body ng-app="control" class="bootcards-nofooter">
         <nav class="navbar navbar-inverse navbar-fixed-top" id="topbar" role="navigation" ng-controller="NavigationCtrl">
             <div class="container">
                 <div class="navbar-header">
@@ -180,11 +180,11 @@
             </div>
         </div>
         <!-- build:js js/control.min.js -->
+
+        <!-- Libs -->
         <script src="libs/jquery/dist/jquery.js"></script>
         <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
         <script src="libs/underscore/underscore.js"></script>
-        <script src="libs/bootcards/dist/js/bootcards.min.js"></script>
-        <script src="js/cookies.min.js"></script>
         <script src="libs/ng-file-upload/ng-file-upload-shim.js"></script>
         <script src="libs/angular/angular.js"></script>
         <script src="libs/angular-route/angular-route.js"></script>
@@ -202,15 +202,12 @@
         <script src="libs/angular-bootstrap-show-errors/src/showErrors.js"></script>
         <script src="libs/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
         <script src="libs/angular-bootstrap-toggle-switch/angular-toggle-switch.js"></script>
-        <script src="libs/modernizr/modernizr.js"></script>
-        <script src="libs/requirejs/require.js"></script>
-        <script src="app/config.js"></script>
         <script src="js/piwik.js"></script>
-        <!-- htmlbuild:script controlApp -->
-        <script>angular.module('templates-main', []);</script>
-        <script src="app/ui-bootstrap-templates.js"></script>
-        <script src="app/app.js"></script>
-        <!-- /htmlbuild -->
+
+        <!-- App files -->
+        <!-- include: "type": "js", "files": ["*.js", "*/**.js", "*/*/**.js"] -->
+        <!-- /include -->
+
         <!-- endbuild -->
         <noscript>
             <img src="//piwik.shoutca.st/piwik.php?idsite=1" style="border: 0;" alt="Piwik" />

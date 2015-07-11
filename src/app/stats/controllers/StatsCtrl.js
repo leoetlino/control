@@ -1,5 +1,3 @@
-define(['control'], function (control) {
-    control.controller('StatsCtrl', function() {
-        // code
-    });
+control.controller('StatsCtrl', function() {
+    // code
 });

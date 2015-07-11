@@ -1,8 +1,15 @@
-define([], function () {
+/* global control:true */
+
+control = null;
+
+(function () {
     'use strict';
 
-    var control = angular.module('control', [
+    angular.module('config', []).constant('ENV', { apiEndpoint:'itframe.shoutca.st' });
+
+    control = angular.module('control', [
         'config',
+        'templates',
         'ngRoute',
         'route-segment',
         'view-segment',
@@ -17,8 +24,7 @@ define([], function () {
         'toggle-switch',
         'ui.bootstrap.showErrors',
         'mgcrea.ngStrap',
-        'picardy.fontawesome',
-        'templates-main'
+        'picardy.fontawesome'
     ]);
 
     control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, flashProvider, $httpProvider) {
@@ -145,5 +151,4 @@ define([], function () {
         $httpProvider.interceptors.push('ServerErrorInterceptor');
     });
 
-    return control;
-});
+}());

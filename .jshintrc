@@ -10,9 +10,8 @@
     "jquery": true,
     "plusplus": false,
     "globals": {
-        "require": true,
         "angular": true,
-        "define": true,
-        "_": true
+        "_": true,
+        "control": true
     }
 }
