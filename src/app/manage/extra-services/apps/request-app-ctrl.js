@@ -1,4 +1,4 @@
-control.controller('RequestAppCtrl', function ($rootScope, $scope, RequestAppService, Upload, ENV, $timeout) {
+angular.module('control.manage.extra-services').controller('RequestAppCtrl', function ($rootScope, $scope, RequestAppService, Upload, ENV, $timeout) {
 
     var onAppSubmitted = function () {
         $timeout($scope.reloadServices, 2000);

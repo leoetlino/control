@@ -1,4 +1,4 @@
-control.controller('NowPlayingTweetsCtrl', function ($rootScope, $scope, NowPlayingTweetsService, ENV, $routeParams, $location, flash) {
+angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl', function ($rootScope, $scope, NowPlayingTweetsService, ENV, $routeParams, $location, flash) {
 
     // Initialisation
     var initialiseSettings = function () {

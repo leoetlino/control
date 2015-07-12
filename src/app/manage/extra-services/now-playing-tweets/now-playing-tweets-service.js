@@ -1,4 +1,4 @@
-control.factory('NowPlayingTweetsService', function ($http, ENV) {
+angular.module('control.manage.extra-services').factory('NowPlayingTweetsService', function ($http, ENV) {
     return {
         submitSettings: function (username, settings) {
             settings.username = username;

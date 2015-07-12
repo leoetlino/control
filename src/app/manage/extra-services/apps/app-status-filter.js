@@ -1,4 +1,4 @@
-control.filter('appStatus', function (AppStatusesService) {
+angular.module('control.manage.extra-services').filter('appStatus', function (AppStatusesService) {
     var statuses, filterFn;
     filterFn = function (input) { return input; };
     AppStatusesService.getStatusesByValue().then(function (data) {
@@ -12,7 +12,7 @@ control.filter('appStatus', function (AppStatusesService) {
     return wrapperFn;
 });
 
-control.filter('appStatusExplanation', function () {
+angular.module('control.manage.extra-services').filter('appStatusExplanation', function () {
     return function (input, platform) {
         var identifier = platform + '.' + input;
         switch (identifier) {

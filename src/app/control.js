@@ -10,6 +10,7 @@ control = null;
     control = angular.module('control', [
         'config',
         'templates',
+        'control.manage.extra-services',
         'angular-promise-cache',
         'ngRoute',
         'route-segment',
@@ -58,9 +59,6 @@ control = null;
         .when('/feedback', 'feedback')
         .when('/manage', 'manage')
         .when('/manage/information', 'manage.information')
-        .when('/manage/request-app', 'manage.requestApp')
-        .when('/manage/now-playing-tweets', 'manage.nowPlayingTweets')
-        .when('/manage/tunein-integration', 'manage.tuneinIntegration')
 
         .segment('login', {
             authorizedRoles: [USER_ROLES.public],
@@ -108,27 +106,6 @@ control = null;
                 templateUrl: '/app/manage/information-pane.html',
                 authorizedRoles: [USER_ROLES.all],
                 title: 'Information',
-                watcher: watchForService
-            })
-            .segment('requestApp', {
-                templateUrl: '/app/manage/apps/request-app.html',
-                authorizedRoles: [USER_ROLES.all],
-                title: 'Request your mobile apps',
-                controller: 'RequestAppCtrl',
-                watcher: watchForService
-            })
-            .segment('nowPlayingTweets', {
-                templateUrl: '/app/manage/now-playing-tweets/now-playing-tweets.html',
-                authorizedRoles: [USER_ROLES.all],
-                title: '#NowPlaying Tweets',
-                controller: 'NowPlayingTweetsCtrl',
-                watcher: watchForService
-            })
-            .segment('tuneinIntegration', {
-                templateUrl: '/app/manage/tunein-integration/tunein-integration.html',
-                authorizedRoles: [USER_ROLES.all],
-                title: 'TuneIn Integration',
-                controller: 'TuneInIntegrationCtrl',
                 watcher: watchForService
             })
         .up();

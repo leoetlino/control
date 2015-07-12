@@ -1,4 +1,4 @@
-control.factory('TuneInIntegrationService', function ($http, ENV) {
+angular.module('control.manage.extra-services').factory('TuneInIntegrationService', function ($http, ENV) {
     return {
         saveSettings: function (username, settings) {
             settings.username = username;

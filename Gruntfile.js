@@ -71,7 +71,7 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: '.jshintrc'
             },
-            all: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'js/**.js']
+            all: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'src/app/*/*/**.js', 'src/app/*/*/*/**.js', 'js/**.js']
         },
         githooks: {
             all: {
@@ -94,7 +94,7 @@ module.exports = function (grunt) {
                 }
             },
             build: {
-                src: ['dist/app/*/**.html', 'dist/app/*/*/**.html'],
+                src: ['dist/app/*/**.html', 'dist/app/*/*/**.html', 'dist/app/*/*/*/**.html'],
                 dest: 'dist/app/00-templates.js',
                 options: {
                     base: 'dist',
@@ -105,7 +105,7 @@ module.exports = function (grunt) {
                 }
             },
             dev: {
-                src: ['src/app/*/**.html', 'src/app/*/*/**.html'],
+                src: ['src/app/*/**.html', 'src/app/*/*/**.html', 'src/app/*/*/*/**.html'],
                 dest: 'dev/app/00-templates.js',
                 options: {
                     base: 'src',
@@ -226,7 +226,8 @@ module.exports = function (grunt) {
                         'dev/app/00-templates.js',
                         'src/app/**.js',
                         'src/app/*/**.js',
-                        'src/app/*/*/**.js'
+                        'src/app/*/*/**.js',
+                        'src/app/*/*/*/**.js'
                     ]
                 }
             }

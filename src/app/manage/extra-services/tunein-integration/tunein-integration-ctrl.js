@@ -1,4 +1,4 @@
-control.controller('TuneInIntegrationCtrl', function ($rootScope, $scope, TuneInIntegrationService, ENV, $routeParams, $location, flash) {
+angular.module('control.manage.extra-services').controller('TuneInIntegrationCtrl', function ($rootScope, $scope, TuneInIntegrationService, ENV, $routeParams, $location, flash) {
 
     // Initialisation
     var initialiseSettings = function () {

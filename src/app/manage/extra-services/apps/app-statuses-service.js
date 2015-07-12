@@ -1,4 +1,4 @@
-control.factory('AppStatusesService', function ($http) {
+angular.module('control.manage.extra-services').factory('AppStatusesService', function ($http) {
     return {
         getStatuses: function () {
             return $http.get(

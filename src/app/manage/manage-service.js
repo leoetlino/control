@@ -6,6 +6,7 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
         },
         addSection: function (section) {
             sections.push({
+                id: section.id,
                 name: section.name,
                 icon: section.icon,
                 items: []
@@ -20,10 +21,16 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                     name: item.route.name,
                     completeName: 'manage.' + item.route.name,
                     template: item.route.template,
-                    controller: item.route.controller
+                    controller: item.route.controller,
+                    title: item.route.title
                 }
             };
-            sections[item.section].items.push(newItem);
+            var section = _.findWhere(sections, { id: item.sectionId });
+            if (!section) {
+                throw new Error('Could not find associated section: ' + item.sectionId);
+            }
+
+            section.items.push(newItem);
 
             var watchForService = ['$rootScope', function ($rootScope) {
                 return $rootScope.service.id;
@@ -40,5 +47,6 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                 });
         }
     };
+    window.manager = instance;
     return instance;
 });
