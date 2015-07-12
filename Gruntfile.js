@@ -179,6 +179,7 @@ module.exports = function (grunt) {
                 options: {
                     src: 'src/',
                     dest: 'dev/',
+                    exclude: ['*~', '*.tests.js'],
                     delete: true
                 }
             },
@@ -201,29 +202,30 @@ module.exports = function (grunt) {
                     singleRun: true,
                     browsers: ['PhantomJS'],
                     files: [
-                        'dev/libs/jquery/dist/jquery.js',
-                        'dev/libs/underscore/underscore.js',
-                        'dev/libs/angular/angular.js',
-                        'dev/libs/angular-mocks/angular-mocks.js',
-                        'dev/libs/ng-file-upload/ng-file-upload-shim.js',
-                        'dev/libs/angular-route/angular-route.js',
-                        'dev/libs/angular-route-segment/build/angular-route-segment.js',
-                        'dev/libs/angular-animate/angular-animate.js',
-                        'dev/libs/angular-sanitize/angular-sanitize.js',
-                        'dev/libs/angular-strap/dist/angular-strap.js',
-                        'dev/libs/angular-strap/dist/angular-strap.tpl.js',
-                        'dev/libs/angular-local-storage/dist/angular-local-storage.js',
-                        'dev/libs/angular-flash/dist/angular-flash.js',
-                        'dev/libs/angular-loading-bar/build/loading-bar.js',
-                        'dev/libs/ng-file-upload/ng-file-upload.js',
-                        'dev/libs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
-                        'dev/libs/angular-fontawesome/dist/angular-fontawesome.js',
-                        'dev/libs/angular-bootstrap-show-errors/src/showErrors.js',
-                        'dev/libs/bootstrap-switch/dist/js/bootstrap-switch.js',
-                        'dev/libs/angular-bootstrap-toggle-switch/angular-toggle-switch.js',
-                        'dev/app/**.js',
-                        'dev/app/*/**.js',
-                        'dev/app/*/*/**.js'
+                        'src/libs/jquery/dist/jquery.js',
+                        'src/libs/underscore/underscore.js',
+                        'src/libs/angular/angular.js',
+                        'src/libs/angular-mocks/angular-mocks.js',
+                        'src/libs/ng-file-upload/ng-file-upload-shim.js',
+                        'src/libs/angular-route/angular-route.js',
+                        'src/libs/angular-route-segment/build/angular-route-segment.js',
+                        'src/libs/angular-animate/angular-animate.js',
+                        'src/libs/angular-sanitize/angular-sanitize.js',
+                        'src/libs/angular-strap/dist/angular-strap.js',
+                        'src/libs/angular-strap/dist/angular-strap.tpl.js',
+                        'src/libs/angular-local-storage/dist/angular-local-storage.js',
+                        'src/libs/angular-flash/dist/angular-flash.js',
+                        'src/libs/angular-loading-bar/build/loading-bar.js',
+                        'src/libs/ng-file-upload/ng-file-upload.js',
+                        'src/libs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
+                        'src/libs/angular-fontawesome/dist/angular-fontawesome.js',
+                        'src/libs/angular-bootstrap-show-errors/src/showErrors.js',
+                        'src/libs/bootstrap-switch/dist/js/bootstrap-switch.js',
+                        'src/libs/angular-bootstrap-toggle-switch/angular-toggle-switch.js',
+                        'dev/app/00-templates.js',
+                        'src/app/**.js',
+                        'src/app/*/**.js',
+                        'src/app/*/*/**.js'
                     ]
                 }
             }
@@ -288,12 +290,10 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('test', function () {
-        grunt.loadNpmTasks('grunt-rsync');
         grunt.loadNpmTasks('grunt-html2js');
         grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-karma');
         grunt.task.run(
-            'rsync:dev',
             'html2js:dev',
             'jshint',
             'karma'
