@@ -155,7 +155,7 @@ module.exports = function (grunt) {
         },
         watch: {
             dev: {
-                files: ['src/*.*', 'src/*/*.*', 'src/app/*.js', 'src/app/*/*.js', 'src/app/*/*/*.js'],
+                files: ['src/*.*', 'src/*/*.*', 'src/app/*.*', 'src/app/*/*.*', 'src/app/*/*/*.*', 'src/app/*/*/*/*.*'],
                 tasks: ['rsync:dev', 'html2js:dev', 'includeSource:dev']
             },
         },
