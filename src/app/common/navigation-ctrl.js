@@ -1,4 +1,4 @@
-control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ManageService, $window) {
+control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ServicesService, $window) {
 
     ////////////////////
     // Helper functions
@@ -9,7 +9,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
     };
 
     $rootScope.reloadServices = function () {
-        ManageService.invalidateCache();
+        ServicesService.invalidateCache();
         return initServices();
     };
 
@@ -26,9 +26,9 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
 
     function initServices () {
         // returns a promise.
-        return ManageService.initAndGetService().then(function (service) {
+        return ServicesService.initAndGetService().then(function (service) {
             $rootScope.servicesLoaded = true;
-            $rootScope.services = ManageService.getServicesList();
+            $rootScope.services = ServicesService.getServicesList();
             $rootScope.service = service;
             return service;
         });
@@ -111,7 +111,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         if (originalPath === 'undefined' || !originalPath || originalPath === '/log-in') {
             originalPath = '/';
         }
-        ManageService.invalidateCache();
+        ServicesService.invalidateCache();
         return initServices().then(function onSuccess () {
             $location.path(originalPath);
         }, function onFail () {

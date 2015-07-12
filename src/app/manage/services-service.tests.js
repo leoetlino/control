@@ -1,9 +1,9 @@
 /* global describe, module, inject, it, expect, beforeEach, spyOn, jasmine */
 
-describe('ManageService', function () {
+describe('ServicesService', function () {
 
     var fakeLocation = {};
-    var ManageService;
+    var ServicesService;
     var $rootScope;
     var $httpBackend;
     var services = [];
@@ -17,12 +17,12 @@ describe('ManageService', function () {
             }
         });
     }));
-    beforeEach(inject(function (_$rootScope_, _ManageService_, _$httpBackend_) {
-        ManageService = _ManageService_;
+    beforeEach(inject(function (_$rootScope_, _ServicesService_, _$httpBackend_) {
+        ServicesService = _ServicesService_;
         $rootScope = _$rootScope_;
         $httpBackend = _$httpBackend_;
         if (services.length) {
-            ManageService.setServices(services);
+            ServicesService.setServices(services);
         }
         spyOn($rootScope, '$broadcast');
     }));
@@ -30,39 +30,39 @@ describe('ManageService', function () {
     describe('the service', function () {
 
         it('should provide a invalidateCache method', function () {
-            expect(ManageService.invalidateCache).toEqual(jasmine.any(Function));
+            expect(ServicesService.invalidateCache).toEqual(jasmine.any(Function));
         });
 
         it('should provide a initAndGetService method', function () {
-            expect(ManageService.initAndGetService).toEqual(jasmine.any(Function));
+            expect(ServicesService.initAndGetService).toEqual(jasmine.any(Function));
         });
 
         it('should provide a initAndGetServices method', function () {
-            expect(ManageService.initAndGetServices).toEqual(jasmine.any(Function));
+            expect(ServicesService.initAndGetServices).toEqual(jasmine.any(Function));
         });
 
         it('should provide a getServicesPromise method', function () {
-            expect(ManageService.getServicesPromise).toEqual(jasmine.any(Function));
+            expect(ServicesService.getServicesPromise).toEqual(jasmine.any(Function));
         });
 
         it('should provide a getServicesList method', function () {
-            expect(ManageService.getServicesList).toEqual(jasmine.any(Function));
+            expect(ServicesService.getServicesList).toEqual(jasmine.any(Function));
         });
 
         it('should provide a getSelectedService method', function () {
-            expect(ManageService.getSelectedService).toEqual(jasmine.any(Function));
+            expect(ServicesService.getSelectedService).toEqual(jasmine.any(Function));
         });
 
         it('should provide a getBy method', function () {
-            expect(ManageService.getBy).toEqual(jasmine.any(Function));
+            expect(ServicesService.getBy).toEqual(jasmine.any(Function));
         });
 
         it('should provide a setServices method', function () {
-            expect(ManageService.setServices).toEqual(jasmine.any(Function));
+            expect(ServicesService.setServices).toEqual(jasmine.any(Function));
         });
 
         it('should not leak the cached list of services', function () {
-            expect(ManageService.cachedServices).toBeUndefined();
+            expect(ServicesService.cachedServices).toBeUndefined();
         });
 
     });
@@ -140,7 +140,7 @@ describe('ManageService', function () {
 
             $httpBackend.expectPOST('https://itframe.shoutca.st/control/accounts/').respond(200, testResponse);
 
-            ManageService.getServicesPromise().then(function (_services_) {
+            ServicesService.getServicesPromise().then(function (_services_) {
                 services = _services_;
             });
 
@@ -156,7 +156,7 @@ describe('ManageService', function () {
     describe('getServicesList', function () {
 
         it('should return an array of services', function () {
-            filteredServices = ManageService.getServicesList();
+            filteredServices = ServicesService.getServicesList();
             expect(filteredServices).toEqual(jasmine.any(Array));
         });
 
@@ -171,24 +171,24 @@ describe('ManageService', function () {
     describe('getBy', function () {
 
         it('should return the correct service if it exists', function () {
-            var aService = ManageService.getBy('id', '0001');
+            var aService = ServicesService.getBy('id', '0001');
             expect(aService).toBeDefined();
             expect(aService.id).toBe('0001');
 
-            var anotherService = ManageService.getBy('username', 'testing');
+            var anotherService = ServicesService.getBy('username', 'testing');
             expect(anotherService).toBeDefined();
             // Plot twist: it's the same service as `aService`.
             expect(anotherService.id).toBe('0001');
             expect(anotherService.username).toBe('testing');
 
-            var yetAnotherService = ManageService.getBy('username', 'cast');
+            var yetAnotherService = ServicesService.getBy('username', 'cast');
             expect(yetAnotherService).toBeDefined();
             expect(yetAnotherService.id).toBe('0005');
             expect(yetAnotherService.username).toBe('cast');
         });
 
         it('should return undefined otherwise', function () {
-            var service = ManageService.getBy('id', 'xxxx');
+            var service = ServicesService.getBy('id', 'xxxx');
             expect(service).toBeUndefined();
         });
 
@@ -200,22 +200,22 @@ describe('ManageService', function () {
 
         it('should use $location to get the pre-selected service', function () {
             fakeLocation = { username: 'testing' };
-            service = ManageService.getSelectedService();
+            service = ServicesService.getSelectedService();
             expect(service).toBeDefined();
             expect(service.id).toBe('0001');
 
             fakeLocation = { username: 'cast' };
-            service = ManageService.getSelectedService();
+            service = ServicesService.getSelectedService();
             expect(service).toBeDefined();
             expect(service.id).toBe('0005');
 
             fakeLocation = { serviceId: '0001' };
-            service = ManageService.getSelectedService();
+            service = ServicesService.getSelectedService();
             expect(service).toBeDefined();
             expect(service.username).toBe('testing');
 
             fakeLocation = { serviceId: '0005' };
-            service = ManageService.getSelectedService();
+            service = ServicesService.getSelectedService();
             expect(service).toBeDefined();
             expect(service.username).toBe('cast');
         });
@@ -223,12 +223,12 @@ describe('ManageService', function () {
         it('should use $rootScope to get the pre-selected service', function () {
             fakeLocation = {};
             $rootScope.service = { id: '0001' };
-            service = ManageService.getSelectedService();
+            service = ServicesService.getSelectedService();
             expect(service).toBeDefined();
             expect(service.id).toBe('0001');
 
             $rootScope.service = { id: '0005' };
-            service = ManageService.getSelectedService();
+            service = ServicesService.getSelectedService();
             expect(service).toBeDefined();
             expect(service.id).toBe('0005');
         });
@@ -237,13 +237,13 @@ describe('ManageService', function () {
 
             it('should broadcast `invalid-service`', function () {
                 fakeLocation = { serviceId: 'xxx' };
-                service = ManageService.getSelectedService();
+                service = ServicesService.getSelectedService();
                 expect($rootScope.$broadcast).toHaveBeenCalledWith('invalid-service');
             });
 
             it('should default to the first service', function () {
                 fakeLocation = { serviceId: 'xxx' };
-                service = ManageService.getSelectedService();
+                service = ServicesService.getSelectedService();
                 expect(service.id).not.toBe('xxx');
             });
 
@@ -252,7 +252,7 @@ describe('ManageService', function () {
         it('should return the first service by default', function () {
             fakeLocation = {};
 
-            service = ManageService.getSelectedService();
+            service = ServicesService.getSelectedService();
             expect(service).toBeDefined();
         });
 

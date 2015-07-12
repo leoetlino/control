@@ -1,75 +1,43 @@
-control.factory('ManageService', function ($http, ENV, $rootScope, $location, promiseCache) {
-    var internal = {
-        cachedServices: null,
-    };
+control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
+    var sections = [];
     var instance = {
-        invalidateCache: function () {
-            promiseCache.removeAll();
-            internal.cachedServices = null;
+        getSections: function () {
+            return sections;
         },
-        setServices: function (services) {
-            internal.cachedServices = services;
-        },
-        initAndGetService: function () {
-            return instance.getServicesPromise().then(instance.getSelectedService);
-        },
-        initAndGetServices: function () {
-            return instance.getServicesPromise().then(instance.getServicesList);
-        },
-        getServicesPromise: function () {
-            return promiseCache({
-                promise: function () {
-                    return $http
-                        .post('https://' + ENV.apiEndpoint + '/control/accounts/')
-                        .then(function (response) {
-                        internal.cachedServices = response.data;
-                        return response.data;
-                    });
-                },
-                ttl: -1
+        addSection: function (section) {
+            sections.push({
+                name: section.name,
+                icon: section.icon,
+                items: []
             });
         },
-        getServicesList: function () {
-            return _.filter(internal.cachedServices, function (service) {
-                return (service.status === 'Active') &&
-                    ((service.group.toLowerCase().indexOf('servers') !== -1) ||
-                     (service.group.toLowerCase().indexOf('nodes') !== -1)) &&
-                    (service.name.toLowerCase().indexOf('free') === -1);
-            });
-        },
-        getSelectedService: function () {
-            var service;
-            if ($location.search().username) {
-                service = instance.getBy('username', $location.search().username);
-                if (!service) {
-                    $rootScope.$broadcast('invalid-service');
+        addItem: function (item) {
+            var newItem = {
+                name: item.name,
+                icon: item.icon,
+                route: {
+                    subPathName: item.route.subPathName,
+                    name: item.route.name,
+                    completeName: 'manage.' + item.route.name,
+                    template: item.route.template,
+                    controller: item.route.controller
                 }
-            }
-            if ($location.search().serviceId) {
-                service = instance.getBy('id', $location.search().serviceId);
-                if (!service) {
-                    $rootScope.$broadcast('invalid-service');
-                }
-            }
-            if ($rootScope.service) {
-                service = _.findWhere(instance.getServicesList(), { id: $rootScope.service.id });
-                if (!service) {
-                    $rootScope.$broadcast('invalid-service');
-                }
-            }
-            if (!service) {
-                service = instance.getServicesList()[0];
-            }
-            return service;
-        },
-        getBy: function (key, value) {
-            var service;
-            instance.getServicesList().forEach(function (serviceToCheck) {
-                if (serviceToCheck[key] === value) {
-                    service = serviceToCheck;
-                }
-            });
-            return service;
+            };
+            sections[item.section].items.push(newItem);
+
+            var watchForService = ['$rootScope', function ($rootScope) {
+                return $rootScope.service.id;
+            }];
+            $routeSegmentProvider
+                .when('/manage/' + newItem.route.subPathName, newItem.route.completeName)
+                .within('manage')
+                .segment(newItem.route.name, {
+                    templateUrl: newItem.route.template,
+                    authorizedRoles: [USER_ROLES.all],
+                    title: newItem.route.title,
+                    controller: newItem.route.controller,
+                    watcher: watchForService
+                });
         }
     };
     return instance;

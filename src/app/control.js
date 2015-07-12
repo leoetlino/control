@@ -28,7 +28,7 @@ control = null;
         'picardy.fontawesome'
     ]);
 
-    control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, flashProvider, $httpProvider) {
+    control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, flashProvider, $httpProvider, $provide) {
 
         flashProvider.errorClassnames.push('alert-danger');
         flashProvider.warnClassnames.push('alert-warning');
@@ -37,6 +37,9 @@ control = null;
 
         control.$httpProvider = $httpProvider;
         control.segments = $routeSegmentProvider.segments;
+        $provide.factory('$routeSegmentProvider', function () {
+            return $routeSegmentProvider;
+        });
 
         // ------------------------------------------------------------
         //                       IMPORTANT
@@ -75,8 +78,8 @@ control = null;
                         return response.data;
                     });
                 }],
-                services: ['ManageService', function (ManageService) {
-                    return ManageService.initAndGetServices();
+                services: ['ServicesService', function (ServicesService) {
+                    return ServicesService.initAndGetServices();
                 }]
             },
             controller: 'DashboardCtrl'
@@ -92,8 +95,8 @@ control = null;
             authorizedRoles: [USER_ROLES.all],
             title: 'Manage your servers',
             resolve: {
-                service: ['ManageService', function (ManageService) {
-                    return ManageService.initAndGetService();
+                service: ['ServicesService', function (ServicesService) {
+                    return ServicesService.initAndGetService();
                 }]
             },
             controller: 'ManageCtrl',
