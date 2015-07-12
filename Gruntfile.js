@@ -209,6 +209,7 @@ module.exports = function (grunt) {
                         'src/libs/ng-file-upload/ng-file-upload-shim.js',
                         'src/libs/angular-route/angular-route.js',
                         'src/libs/angular-route-segment/build/angular-route-segment.js',
+                        'src/libs/angular-promise-cache/angular-promise-cache.js',
                         'src/libs/angular-animate/angular-animate.js',
                         'src/libs/angular-sanitize/angular-sanitize.js',
                         'src/libs/angular-strap/dist/angular-strap.js',

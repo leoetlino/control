@@ -1,12 +1,14 @@
-control.factory('ManageService', function ($http, ENV, $rootScope, $location) {
+control.factory('ManageService', function ($http, ENV, $rootScope, $location, promiseCache) {
     var internal = {
-        promise: null,
-        cachedServices: null
+        cachedServices: null,
     };
     var instance = {
         invalidateCache: function () {
-            internal.promise = null;
+            promiseCache.removeAll();
             internal.cachedServices = null;
+        },
+        setServices: function (services) {
+            internal.cachedServices = services;
         },
         initAndGetService: function () {
             return instance.getServicesPromise().then(instance.getSelectedService);
@@ -15,19 +17,23 @@ control.factory('ManageService', function ($http, ENV, $rootScope, $location) {
             return instance.getServicesPromise().then(instance.getServicesList);
         },
         getServicesPromise: function () {
-            if (internal.promise) {
-                return internal.promise;
-            }
-            internal.promise = $http.post('https://' + ENV.apiEndpoint + '/control/accounts/');
-            return internal.promise.then(function (response) {
-                internal.cachedServices = response.data;
+            return promiseCache({
+                promise: function () {
+                    return $http
+                        .post('https://' + ENV.apiEndpoint + '/control/accounts/')
+                        .then(function (response) {
+                        internal.cachedServices = response.data;
+                        return response.data;
+                    });
+                },
+                ttl: -1
             });
         },
         getServicesList: function () {
             return _.filter(internal.cachedServices, function (service) {
                 return (service.status === 'Active') &&
                     ((service.group.toLowerCase().indexOf('servers') !== -1) ||
-                    (service.group.toLowerCase().indexOf('nodes') !== -1)) &&
+                     (service.group.toLowerCase().indexOf('nodes') !== -1)) &&
                     (service.name.toLowerCase().indexOf('free') === -1);
             });
         },

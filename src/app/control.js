@@ -10,6 +10,7 @@ control = null;
     control = angular.module('control', [
         'config',
         'templates',
+        'angular-promise-cache',
         'ngRoute',
         'route-segment',
         'view-segment',

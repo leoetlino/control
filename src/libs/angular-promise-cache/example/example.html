@@ -1,0 +1,180 @@
+<html>
+<head>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="prism.css" rel="stylesheet">
+
+  <script src="prism.js"></script>
+  <script src="http://code.angularjs.org/1.2.13/angular.min.js"></script>
+  <script src="../angular-promise-cache.min.js"></script>
+  <script>
+  var Countdown = function(cb, intervalTime) {
+    var interval,
+      cb,
+      active = false;
+
+    function handler() {
+      if (cb() === false) {
+        clearInterval(interval);
+      }
+    }
+
+    this.active = function() {
+      return active;
+    };
+
+    this.start = function() {
+      interval = setInterval(handler, intervalTime);
+      active = true;
+    };
+
+    this.stop = function() {
+      clearInterval(interval);
+      active = false;
+    };
+  }
+  </script>
+</head>
+<body ng-app="myAwesomeApp">
+  <div ng-controller="simpleXHRRequestCtrl" class="well">
+    <script>
+    angular.module('myAwesomeApp', ['angular-promise-cache'])
+      .controller('simpleXHRRequestCtrl', function($scope, $http, $timeout, promiseCache) {
+        var ttl = 5000,
+          countdown = new Countdown(onCountdownTick, 100),
+          // v0.0.5 Stateful information
+          expiresAt = 0;
+
+        function makeXhrRequest() {
+          $scope.numberOfHttpRequests++;
+          // console.warn('makeXhrRequest()');
+          return $http.get('example-data.json');
+        }
+
+        function startCountdown(startTime) {
+          $scope.expirationTime = ttl;
+          countdown.start(startTime, 100, function(since) {
+            var msLeft = ttl - since;
+            $scope.$apply(function() {
+              $scope.expirationTime = Math.max(0, msLeft);
+            });
+            return msLeft < 0;
+          });
+        }
+
+        function onCountdownTick() {
+          var now = new Date().getTime();
+          $scope.$apply(function() {
+            $scope.expirationTime = Math.max(0, expiresAt - now);
+          });
+        }
+
+        // v0.0.5 Events
+        $scope.$on('angular-promise-cache.new', function(evt, key, strPromise) {
+          console.log('angular-promise-cache.new', strPromise);
+          expiresAt = new Date().getTime() + ttl;
+        });
+        $scope.$on('angular-promise-cache.expired', function(evt, key, strPromise) {
+          console.log('angular-promise-cache.expired', key, strPromise);
+          expiresAt = new Date().getTime() + ttl;
+        });
+        $scope.$on('angular-promise-cache.active', function(evt, key, expirationTime, strPromise) {
+          console.log('angular-promise-cache.active', key, expirationTime, strPromise);
+          expiresAt = expirationTime;
+        });
+        $scope.$on('angular-promise-cache.removed', function(evt, key) {
+          console.log('angular-promise-cache.removed', key);
+          expiresAt = 0;
+        });
+
+        // Start the countdown
+        countdown.start();
+
+        // Output
+        $scope.ttl = ttl;
+        $scope.numberOfHttpRequests = 0;
+        $scope.numberOfResolvedPromises = 0;
+        $scope.expirationTime = 0;
+
+        // Actions
+        $scope.send = function() {
+          if (!countdown.active()) {
+            countdown.start();
+          }
+
+          promiseCache({
+            key: 'example',
+            promise: makeXhrRequest,
+            ttl: ttl,
+            // New feature in v0.0.3 - supports forcefully expiring the promise
+            // cache on a failure if this function returns true
+            expireOnFailure: function(request) {
+              return request.status !== 200;
+            },
+            // New feature in v0.0.5 - local storage support
+            localStorageEnabled: true,
+            localStorageKey: 'example.ls'
+          }).then(
+            function() {
+              $scope.numberOfResolvedPromises++;
+            },
+            function() {
+              $scope.numberOfResolvedPromises++;
+            }
+          );
+        };
+        $scope.reset = function() {
+          $scope.numberOfHttpRequests = 0;
+          $scope.numberOfResolvedPromises = 0;
+          $scope.expirationTime = 0;
+          countdown.stop();
+        };
+        $scope.clear = function() {
+          localStorage.removeItem('example.ls');
+        };
+        $scope.remove = function() {
+          promiseCache.remove('example');
+        };
+        $scope.removeAll = function() {
+          promiseCache.removeAll();
+        };
+      });
+    </script>
+    <h2>Simple XHR Request</h2>
+
+    <h3>Code</h3>
+    <pre>
+      <code class="language-javascript">
+        angular.module('myAwesomeApp', ['angular-promise-cache'])
+          .controller('simpleXHRRequestCtrl', function($scope, $http, promiseCache) {
+            var ttl = 5000;
+
+            function makeXhrRequest() {
+              return $http.get('example-data.json');
+            }
+
+            $scope.send = function() {
+              promiseCache({
+                promise: makeXhrRequest,
+                ttl: ttl,
+                // New in v0.0.5!
+                localStorageEnabled: true
+              });
+            };
+          });
+      </code>
+    </pre>
+
+    <h3>Output</h3>
+    <div>Number of HTTP requests: {{ numberOfHttpRequests }}</div>
+    <div>Number of resolved promises: {{ numberOfResolvedPromises }}</div>
+    <div>Expiration time of cached promise (in ms): {{ expirationTime }}</div>
+
+    <h3>Actions</h3>
+    <button class="btn btn-default" ng-click="send()">Send a request</button>
+    <button class="btn btn-default" ng-click="reset()">Reset</button>
+    <button class="btn btn-default" ng-click="remove()">Remove</button>
+    <button class="btn btn-default" ng-click="removeAll()">Remove Everything</button>
+    <button class="btn btn-default" ng-click="clear()">Clear Local Storage</button>
+  </div>
+</body>
+</html>
