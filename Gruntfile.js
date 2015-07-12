@@ -231,69 +231,76 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-usemin');
-    grunt.loadNpmTasks('grunt-rev');
-    grunt.loadNpmTasks('grunt-autoprefixer');
-    grunt.loadNpmTasks('grunt-contrib-htmlmin');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-githooks');
-    grunt.loadNpmTasks('grunt-html-build');
-    grunt.loadNpmTasks('grunt-html2js');
-    grunt.loadNpmTasks('grunt-ng-annotate');
-    grunt.loadNpmTasks('grunt-include-source');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-express');
-    grunt.loadNpmTasks('grunt-rsync');
-    grunt.loadNpmTasks('grunt-karma');
-
     grunt.registerTask('install-hook', function () {
+        grunt.loadNpmTasks('grunt-githooks');
         var fs = require('fs');
         grunt.file.copy('hooks/commit-msg', '.git/hooks/commit-msg');
         fs.chmodSync('.git/hooks/commit-msg', '755');
         grunt.task.run('githooks');
     });
 
-    // Tell Grunt what to do when we type "grunt" into the terminal
-    grunt.registerTask('build', [
-        'test',
-        'clean:preBuild', // Clean up to make sure nothing breaks the build
-        'rsync:build', // Copy the source to dist/ to start the build
-        'copy:fontawesome', // Copy the Font Awesome fonts to dist/
-        'html2js:build', // Convert the templates to a JS cache file
-        'includeSource:build',
-        'useminPrepare',
-        'concat', // Concat all files
-        'ngAnnotate:build', // Add DI annotations
-        'uglify', // Uglify the JS
-        'cssmin', // Uglify the CSS
-        'rev', // Add a revision tag to assets
-        'usemin',
-        'htmlmin', // Minify the HTML
-        'clean:postBuild' // Clean up
-    ]);
+    grunt.registerTask('build', function () {
+        grunt.loadNpmTasks('grunt-contrib-clean');
+        grunt.loadNpmTasks('grunt-contrib-copy');
+        grunt.loadNpmTasks('grunt-contrib-concat');
+        grunt.loadNpmTasks('grunt-contrib-cssmin');
+        grunt.loadNpmTasks('grunt-contrib-uglify');
+        grunt.loadNpmTasks('grunt-usemin');
+        grunt.loadNpmTasks('grunt-rev');
+        grunt.loadNpmTasks('grunt-contrib-htmlmin');
+        grunt.loadNpmTasks('grunt-html2js');
+        grunt.loadNpmTasks('grunt-ng-annotate');
+        grunt.loadNpmTasks('grunt-include-source');
+        grunt.loadNpmTasks('grunt-rsync');
+        grunt.task.run(
+            'test',
+            'clean:preBuild', // Clean up to make sure nothing breaks the build
+            'rsync:build', // Copy the source to dist/ to start the build
+            'copy:fontawesome', // Copy the Font Awesome fonts to dist/
+            'html2js:build', // Convert the templates to a JS cache file
+            'includeSource:build',
+            'useminPrepare',
+            'concat', // Concat all files
+            'ngAnnotate:build', // Add DI annotations
+            'uglify', // Uglify the JS
+            'cssmin', // Uglify the CSS
+            'rev', // Add a revision tag to assets
+            'usemin',
+            'htmlmin', // Minify the HTML
+            'clean:postBuild' // Clean up
+        );
+    });
 
-    grunt.registerTask('dev', [
-        'rsync:dev',
-        'html2js:dev',
-        'includeSource:dev',
-        'express',
-        'watch'
-    ]);
+    grunt.registerTask('dev', function () {
+        grunt.loadNpmTasks('grunt-rsync');
+        grunt.loadNpmTasks('grunt-html2js');
+        grunt.loadNpmTasks('grunt-include-source');
+        grunt.loadNpmTasks('grunt-express');
+        grunt.loadNpmTasks('grunt-contrib-watch');
+        grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-karma');
+        grunt.task.run(
+            'rsync:dev',
+            'html2js:dev',
+            'includeSource:dev',
+            'express',
+            'watch'
+        );
+    });
 
-    grunt.registerTask('test', [
-        'rsync:dev',
-        'html2js:dev',
-        'jshint',
-        'karma'
-    ]);
+    grunt.registerTask('test', function () {
+        grunt.loadNpmTasks('grunt-rsync');
+        grunt.loadNpmTasks('grunt-html2js');
+        grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-karma');
+        grunt.task.run(
+            'rsync:dev',
+            'html2js:dev',
+            'jshint',
+            'karma'
+        );
+    });
 
-    grunt.registerTask('default', [
-        'build'
-    ]);
+    grunt.registerTask('default', ['build']);
 
 };
