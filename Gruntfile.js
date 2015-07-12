@@ -155,8 +155,8 @@ module.exports = function (grunt) {
         },
         watch: {
             dev: {
-                files: ['src/*.*', 'src/*/*.*', 'src/app/*.js', 'src/app/*/*.js'],
-                tasks: ['rsync:dev', 'includeSource:dev']
+                files: ['src/*.*', 'src/*/*.*', 'src/app/*.js', 'src/app/*/*.js', 'src/app/*/*/*.js'],
+                tasks: ['rsync:dev', 'html2js:dev', 'includeSource:dev']
             },
         },
         express: {
@@ -232,6 +232,11 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-rsync');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-html2js');
+    grunt.loadNpmTasks('grunt-include-source');
+
     grunt.registerTask('install-hook', function () {
         grunt.loadNpmTasks('grunt-githooks');
         var fs = require('fs');
@@ -273,11 +278,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('dev', function () {
-        grunt.loadNpmTasks('grunt-rsync');
-        grunt.loadNpmTasks('grunt-html2js');
-        grunt.loadNpmTasks('grunt-include-source');
         grunt.loadNpmTasks('grunt-express');
-        grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-karma');
         grunt.task.run(

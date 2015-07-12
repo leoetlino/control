@@ -12,6 +12,7 @@
     "globals": {
         "angular": true,
         "_": true,
-        "control": true
+        "control": true,
+        "console": true
     }
 }
