@@ -171,7 +171,7 @@ module.exports = function (grunt) {
         },
         rsync: {
             options: {
-                args: ['--update --verbose'],
+                args: ['--update --delete-excluded --verbose'],
                 exclude: ['*~'],
                 recursive: true
             },
