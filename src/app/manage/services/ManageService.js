@@ -26,7 +26,8 @@ control.factory('ManageService', function ($http, ENV, $rootScope, $location) {
         getServicesList: function () {
             return _.filter(private.cachedServices, function (service) {
                 return (service.status === 'Active') &&
-                    (service.group.toLowerCase().indexOf('servers') !== -1) &&
+                    ((service.group.toLowerCase().indexOf('servers') !== -1) ||
+                    (service.group.toLowerCase().indexOf('nodes') !== -1)) &&
                     (service.name.toLowerCase().indexOf('free') === -1);
             });
         },
