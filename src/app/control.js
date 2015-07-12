@@ -61,12 +61,12 @@ control = null;
 
         .segment('login', {
             authorizedRoles: [USER_ROLES.public],
-            templateUrl: '/app/login/partials/login.html',
+            templateUrl: '/app/login/login.html',
             controller: 'LoginCtrl',
             title: 'Log In'
         })
         .segment('dashboard', {
-            templateUrl: '/app/dashboard/partials/dashboard.html',
+            templateUrl: '/app/dashboard/dashboard.html',
             authorizedRoles: [USER_ROLES.all],
             title: 'Dashboard',
             resolve: {
@@ -82,13 +82,13 @@ control = null;
             controller: 'DashboardCtrl'
         })
         .segment('feedback', {
-            templateUrl: '/app/feedback/partials/feedback.html',
+            templateUrl: '/app/feedback/feedback.html',
             authorizedRoles: [USER_ROLES.all],
             title: 'Send your feedback',
             controller: 'FeedbackCtrl'
         })
         .segment('manage', {
-            templateUrl: '/app/manage/partials/manage.html',
+            templateUrl: '/app/manage/manage.html',
             authorizedRoles: [USER_ROLES.all],
             title: 'Manage your servers',
             resolve: {
@@ -102,27 +102,27 @@ control = null;
             .within()
             .segment('information', {
                 default: true,
-                templateUrl: '/app/manage/partials/information.html',
+                templateUrl: '/app/manage/information-pane.html',
                 authorizedRoles: [USER_ROLES.all],
                 title: 'Information',
                 watcher: watchForService
             })
             .segment('requestApp', {
-                templateUrl: '/app/manage/partials/request-app.html',
+                templateUrl: '/app/manage/apps/request-app.html',
                 authorizedRoles: [USER_ROLES.all],
                 title: 'Request your mobile apps',
                 controller: 'RequestAppCtrl',
                 watcher: watchForService
             })
             .segment('nowPlayingTweets', {
-                templateUrl: '/app/manage/partials/now-playing-tweets.html',
+                templateUrl: '/app/manage/now-playing-tweets/now-playing-tweets.html',
                 authorizedRoles: [USER_ROLES.all],
                 title: '#NowPlaying Tweets',
                 controller: 'NowPlayingTweetsCtrl',
                 watcher: watchForService
             })
             .segment('tuneinIntegration', {
-                templateUrl: '/app/manage/partials/tunein-integration.html',
+                templateUrl: '/app/manage/tunein-integration/tunein-integration.html',
                 authorizedRoles: [USER_ROLES.all],
                 title: 'TuneIn Integration',
                 controller: 'TuneInIntegrationCtrl',

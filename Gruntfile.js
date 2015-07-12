@@ -94,7 +94,7 @@ module.exports = function (grunt) {
                 }
             },
             build: {
-                src: ['dist/app/**/partials/**.html'],
+                src: ['dist/app/*/**.html', 'dist/app/*/*/**.html'],
                 dest: 'dist/app/00-templates.js',
                 options: {
                     base: 'dist',
@@ -105,7 +105,7 @@ module.exports = function (grunt) {
                 }
             },
             dev: {
-                src: ['src/app/**/partials/**.html'],
+                src: ['src/app/*/**.html', 'src/app/*/*/**.html'],
                 dest: 'dev/app/00-templates.js',
                 options: {
                     base: 'src',
