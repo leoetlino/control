@@ -1,12 +1,12 @@
 control.factory('ManageService', function ($http, ENV, $rootScope, $location) {
-    var private = {
+    var internal = {
         promise: null,
         cachedServices: null
     };
     var instance = {
         invalidateCache: function () {
-            private.promise = null;
-            private.cachedServices = null;
+            internal.promise = null;
+            internal.cachedServices = null;
         },
         initAndGetService: function () {
             return instance.getServicesPromise().then(instance.getSelectedService);
@@ -15,16 +15,16 @@ control.factory('ManageService', function ($http, ENV, $rootScope, $location) {
             return instance.getServicesPromise().then(instance.getServicesList);
         },
         getServicesPromise: function () {
-            if (private.promise) {
-                return private.promise;
+            if (internal.promise) {
+                return internal.promise;
             }
-            private.promise = $http.post('https://' + ENV.apiEndpoint + '/control/accounts/');
-            return private.promise.then(function (response) {
-                private.cachedServices = response.data;
+            internal.promise = $http.post('https://' + ENV.apiEndpoint + '/control/accounts/');
+            return internal.promise.then(function (response) {
+                internal.cachedServices = response.data;
             });
         },
         getServicesList: function () {
-            return _.filter(private.cachedServices, function (service) {
+            return _.filter(internal.cachedServices, function (service) {
                 return (service.status === 'Active') &&
                     ((service.group.toLowerCase().indexOf('servers') !== -1) ||
                     (service.group.toLowerCase().indexOf('nodes') !== -1)) &&
