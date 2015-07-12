@@ -75,7 +75,7 @@ module.exports = function (grunt) {
         },
         githooks: {
             all: {
-                'pre-commit': 'jshint:all'
+                'pre-commit': 'test'
             }
         },
         html2js: {
@@ -186,8 +186,46 @@ module.exports = function (grunt) {
                 options: {
                     src: 'src/',
                     dest: 'dist/',
-                    exclude: ['*~', '*.spec.js'],
+                    exclude: ['*~', '*.tests.js'],
                     delete: true
+                }
+            }
+        },
+        karma: {
+            unit: {
+                options: {
+                    logLevel: 'ERROR',
+                    reporters: ['spec'],
+                    specReporter: { maxLogLines: 10 },
+                    plugins: ['karma-phantomjs-launcher', 'karma-jasmine', 'karma-spec-reporter'],
+                    frameworks: ['jasmine'],
+                    singleRun: true,
+                    browsers: ['PhantomJS'],
+                    files: [
+                        'dev/libs/jquery/dist/jquery.js',
+                        'dev/libs/underscore/underscore.js',
+                        'dev/libs/angular/angular.js',
+                        'dev/libs/angular-mocks/angular-mocks.js',
+                        'dev/libs/ng-file-upload/ng-file-upload-shim.js',
+                        'dev/libs/angular-route/angular-route.js',
+                        'dev/libs/angular-route-segment/build/angular-route-segment.js',
+                        'dev/libs/angular-animate/angular-animate.js',
+                        'dev/libs/angular-sanitize/angular-sanitize.js',
+                        'dev/libs/angular-strap/dist/angular-strap.js',
+                        'dev/libs/angular-strap/dist/angular-strap.tpl.js',
+                        'dev/libs/angular-local-storage/dist/angular-local-storage.js',
+                        'dev/libs/angular-flash/dist/angular-flash.js',
+                        'dev/libs/angular-loading-bar/build/loading-bar.js',
+                        'dev/libs/ng-file-upload/ng-file-upload.js',
+                        'dev/libs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
+                        'dev/libs/angular-fontawesome/dist/angular-fontawesome.js',
+                        'dev/libs/angular-bootstrap-show-errors/src/showErrors.js',
+                        'dev/libs/bootstrap-switch/dist/js/bootstrap-switch.js',
+                        'dev/libs/angular-bootstrap-toggle-switch/angular-toggle-switch.js',
+                        'dev/app/**.js',
+                        'dev/app/*/**.js',
+                        'dev/app/*/*/**.js'
+                    ]
                 }
             }
         }
@@ -211,6 +249,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-express');
     grunt.loadNpmTasks('grunt-rsync');
+    grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('install-hook', function () {
         var fs = require('fs');
@@ -220,8 +259,8 @@ module.exports = function (grunt) {
     });
 
     // Tell Grunt what to do when we type "grunt" into the terminal
-    grunt.registerTask('default', [
-        'jshint', // Run JSHint on the source
+    grunt.registerTask('build', [
+        'test',
         'clean:preBuild', // Clean up to make sure nothing breaks the build
         'rsync:build', // Copy the source to dist/ to start the build
         'copy:fontawesome', // Copy the Font Awesome fonts to dist/
@@ -240,9 +279,21 @@ module.exports = function (grunt) {
 
     grunt.registerTask('dev', [
         'rsync:dev',
+        'html2js:dev',
         'includeSource:dev',
         'express',
         'watch'
+    ]);
+
+    grunt.registerTask('test', [
+        'rsync:dev',
+        'html2js:dev',
+        'jshint',
+        'karma'
+    ]);
+
+    grunt.registerTask('default', [
+        'build'
     ]);
 
 };
