@@ -9,13 +9,15 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                 id: section.id,
                 name: section.name,
                 icon: section.icon,
-                items: []
+                items: [],
+                visibleForCastOnly: section.visibleForCastOnly || false
             });
         },
         addItem: function (item) {
             var newItem = {
                 name: item.name,
                 icon: item.icon,
+                visibleForCastOnly: item.visibleForCastOnly || false,
                 route: {
                     subPathName: item.route.subPathName,
                     name: item.route.name,

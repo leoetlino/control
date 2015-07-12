@@ -5,9 +5,9 @@
                 <a href="{{ 'manage.information' | routeSegmentUrl }}"><fa name="info" fw></fa> Information</a>
             </li>
         </ul>
-        <ul class="panel-body nav nav-pills nav-stacked" ng-repeat="section in sections">
+        <ul class="panel-body nav nav-pills nav-stacked" ng-repeat="section in sections" ng-hide="section.visibleForCastOnly && service.group.toLowerCase().indexOf('node') === -1">
             <li class="header" role="presentation"><fa ng-if="section.icon" name="section.icon" fw></fa>{{section.name}}</li>
-            <li ng-repeat="item in section.items" ng-class="{active: (item.route.completeName|routeSegmentEqualsTo)}">
+            <li ng-repeat="item in section.items" ng-class="{active: (item.route.completeName|routeSegmentEqualsTo)}" ng-hide="item.visibleForCastOnly && service.group.toLowerCase().indexOf('node') === -1">
                 <a href="{{ item.route.completeName | routeSegmentUrl }}"><fa name="{{item.icon}}" fw></fa> {{item.name}}</a>
             </li>
         </ul>
