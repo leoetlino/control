@@ -195,9 +195,8 @@ module.exports = function (grunt) {
             unit: {
                 options: {
                     logLevel: 'ERROR',
-                    reporters: ['spec'],
-                    specReporter: { maxLogLines: 10 },
-                    plugins: ['karma-phantomjs-launcher', 'karma-jasmine', 'karma-spec-reporter'],
+                    reporters: ['mocha'],
+                    plugins: ['karma-phantomjs-launcher', 'karma-jasmine', 'karma-mocha-reporter'],
                     frameworks: ['jasmine'],
                     singleRun: true,
                     browsers: ['PhantomJS'],
