@@ -165,7 +165,8 @@ module.exports = function (grunt) {
                     bases: ['dev/'],
                     port: 5000,
                     hostname: '*',
-                    server: 'dev-server.js'
+                    server: 'dev-server.js',
+                    livereload: true
                 }
             }
         },
