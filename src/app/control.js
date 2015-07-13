@@ -108,7 +108,8 @@ control = null;
                 title: 'Information',
                 watcher: watchForService
             })
-        .up();
+        .up()
+        .otherwise('/');
 
         // ------------------------------------------------------------
         //                       IMPORTANT
@@ -117,9 +118,6 @@ control = null;
         // So you must use the array syntax and make it minify-friendly
         // ------------------------------------------------------------
 
-        $routeProvider.otherwise({
-            redirectTo: '/'
-        });
         $routeProvider.when('/login', {
             redirectTo: '/log-in'
         });
