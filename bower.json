@@ -3,14 +3,11 @@
   "version": "0.0.1",
   "description": "The front-end for clients to control their services with SHOUTca.st",
   "dependencies": {
-    "modernizr": "~2.8.3",
-    "requirejs": "~2.1",
-    "requirejs-domready": "latest",
     "jquery": "latest",
     "bootstrap": "~3.3.5",
-    "angular": "~1.4.1",
-    "angular-route": "~1.4.1",
-    "angular-animate": "~1.4.1",
+    "angular": "~1.4.2",
+    "angular-route": "~1.4.2",
+    "angular-animate": "~1.4.2",
     "ng-file-upload": "~5.0.9",
     "angular-local-storage": "~0.2.2",
     "angular-flash": "~0.1.9",
@@ -25,13 +22,13 @@
     "angular-bootstrap-show-errors": "~2.3.0",
     "angular-bootstrap-switch": "~0.4.1",
     "angular-file-upload": "~1.1.5",
-    "angular-sanitize": "~1.4.1",
+    "angular-sanitize": "~1.4.2",
     "angular-route-segment": "leoetlino/angular-route-segment#master",
     "underscore": "~1.8.3",
     "angular-mocks": "~1.4.2",
     "angular-promise-cache": "~0.0.12"
   },
   "resolutions": {
-    "angular": "~1.4.1"
+    "angular": "~1.4.0"
   }
 }
