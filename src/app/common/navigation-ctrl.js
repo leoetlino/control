@@ -119,7 +119,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         });
     });
     $rootScope.$on(AUTH_EVENTS.loginFailed, function() {
-        flash.to('alert-log-in').error = 'Couldn\'t log in. Please check your credentials.';
+        flash.to('alert-log-in').error = 'Couldn\'t log in. Please check your credentials. If you forgot your password, you can reset it from the client area.';
     });
     $rootScope.$on(AUTH_EVENTS.logoutSuccess, function() {
         $location.path('/log-in');
