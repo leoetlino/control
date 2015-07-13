@@ -132,6 +132,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         flash.to('alert-general').error = 'Something went wrong. Please try again. If the problem persists, reload the page and contact us.';
     });
     $rootScope.$on(AUTH_EVENTS.sessionTimeout, function() {
+        Session.destroy();
         $location.path('/log-in');
         flash.to('alert-general').warning = 'Your session has expired. Please log in.';
     });
