@@ -5,6 +5,14 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
             return sections;
         },
         addSection: function (section) {
+            if (typeof section === 'undefined') {
+                throw new TypeError('No section object was passed');
+            }
+
+            if (!section.id) {
+                throw new Error('The section object must contain an `id`');
+            }
+
             sections.push({
                 id: section.id,
                 name: section.name,
@@ -14,6 +22,18 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
             });
         },
         addItem: function (item) {
+            if (typeof item === 'undefined') {
+                throw new TypeError('No item object was passed');
+            }
+
+            if (!item.name) {
+                throw new Error('The section object must contain a `name`');
+            }
+
+            if (!item.route) {
+                throw new Error('The section object must contain a `route` object');
+            }
+
             var newItem = {
                 name: item.name,
                 icon: item.icon,
