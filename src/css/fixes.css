@@ -72,3 +72,20 @@ input[type="file"] {
         margin-top: 10px;
     }
 }
+
+.alert.top,
+.alert.top-left,
+.alert.top-right {
+    top: 70px;
+    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+    border-radius: 5px;
+}
+
+@media screen and (min-width: 1024px) {
+    .alert.top,
+    .alert.top-left,
+    .alert-top-right {
+        margin-left: 90px;
+        margin-right: 90px;
+    }
+}
