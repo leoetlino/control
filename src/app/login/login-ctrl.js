@@ -4,13 +4,11 @@ control.controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthS
         password: ''
     };
     $scope.isLoading = false;
-    $scope.login = function(credentials) {
+    $scope.login = function (credentials) {
         $scope.isLoading = true;
-        AuthService.login(credentials).then(function() {
-            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+        AuthService.login(credentials).then(function () {
             $scope.isLoading = false;
-        }, function() {
-            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+        }, function () {
             $scope.isLoading = false;
         });
     };
