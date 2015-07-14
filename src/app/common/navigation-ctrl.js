@@ -147,6 +147,10 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         });
     });
     $rootScope.$on(AUTH_EVENTS.logoutSuccess, function() {
+        ServicesService.invalidateCache();
+        $rootScope.services = null;
+        $rootScope.service = null;
+
         $location.path('/log-in');
         $alert({
             content: 'You have been logged out.',
