@@ -88,7 +88,7 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
             }
 
             if (section.visibleForCastOnly) {
-                item.visibleForCastOnly = true;
+                newItem.route.visibleForCastOnly = true;
             }
 
             section.items.push(newItem);
@@ -103,8 +103,9 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                     templateUrl: newItem.route.template,
                     authorizedRoles: [USER_ROLES.all],
                     title: newItem.route.title,
+                    visibleForCastOnly: newItem.route.visibleForCastOnly;
                     controller: newItem.route.controller,
-                    watcher: watchForService
+                    watcher: watchForService,
                 });
         }
     };
