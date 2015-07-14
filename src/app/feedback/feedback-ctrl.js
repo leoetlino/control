@@ -1,4 +1,4 @@
-control.controller('FeedbackCtrl', function ($scope, FeedbackService, $alert) {
+angular.module('control.feedback').controller('FeedbackCtrl', function ($scope, FeedbackService, $alert) {
     $scope.sent = false;
     $scope.submit = function () {
         $scope.$broadcast('show-errors-check-validity');
