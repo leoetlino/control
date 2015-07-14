@@ -1,6 +1,6 @@
 control.factory('AuthService', function ($http, Session, USER_ROLES, localStorageService, ENV, AuthChecker, $rootScope, $interval, AUTH_EVENTS) {
     var AuthService = {
-        login: function (credentials) {
+        logIn: function (credentials) {
             return $http
                 .post('https://' + ENV.apiEndpoint + '/authenticate', credentials)
                 .then(function (res) {
@@ -10,7 +10,7 @@ control.factory('AuthService', function ($http, Session, USER_ROLES, localStorag
                     $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                 });
         },
-        logout: function () {
+        logOut: function () {
             return $http
                 .post('https://' + ENV.apiEndpoint + '/control/log-out')
                 .then(function () {
