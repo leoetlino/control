@@ -38,6 +38,14 @@ describe('ManageService', function () {
             expect(service.getSections).toEqual(jasmine.any(Function));
         });
 
+        it('should provide a removeAllSections method', function () {
+            expect(service.removeAllSections).toEqual(jasmine.any(Function));
+        });
+
+        it('should provide a removeSection method', function () {
+            expect(service.removeSection).toEqual(jasmine.any(Function));
+        });
+
         it('should not leak the internal list of sections', function () {
             expect(service.sections).toBeUndefined();
         });
@@ -51,6 +59,15 @@ describe('ManageService', function () {
         it('should return an array of sections', function () {
             sections = service.getSections();
             expect(sections).toEqual(jasmine.any(Array), 'as it is a list of sections');
+        });
+
+    });
+
+    describe('removeAllSections', function () {
+
+        it('should remove all sections', function () {
+            service.removeAllSections();
+            expect(service.getSections().length).toBe(0, 'as we just removed all sections');
         });
 
     });
@@ -110,6 +127,22 @@ describe('ManageService', function () {
 
         it('should throw an error when the item object has no route object', function () {
             expect(function () { service.addItem({ name: 'test-item' }); }).toThrow();
+        });
+
+    });
+
+    describe('removeSection', function () {
+
+        it('should remove a section if possible using a selector', function () {
+            var oldLength = service.getSections().length;
+            service.removeSection({ id: 'test-section' });
+            expect(service.getSections().length).toBe(oldLength - 1, 'as we just removed one section');
+        });
+
+        it('should throw an error when the selector matched nothing', function () {
+            expect(function () {
+                service.removeSection({ id: 'does-NOT-exist' });
+            }).toThrow();
         });
 
     });

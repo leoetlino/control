@@ -4,6 +4,20 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
         getSections: function () {
             return sections;
         },
+        removeAllSections: function () {
+            sections = [];
+            return sections;
+        },
+        removeSection: function (sectionSelector) {
+            if (typeof sectionSelector === 'undefined') {
+                throw new TypeError('No section selector was passed');
+            }
+            var section = _.findWhere(sections, sectionSelector);
+            if (!section) {
+                throw new Error('Could not find any section matching the selector: ' + sectionSelector);
+            }
+            sections = _.without(sections, section);
+        },
         addSection: function (section) {
             if (typeof section === 'undefined') {
                 throw new TypeError('No section object was passed');
