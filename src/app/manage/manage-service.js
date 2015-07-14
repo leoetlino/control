@@ -87,6 +87,10 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                 throw new Error('Could not find associated section: ' + item.sectionId);
             }
 
+            if (section.visibleForCastOnly) {
+                item.visibleForCastOnly = true;
+            }
+
             section.items.push(newItem);
 
             var watchForService = ['$rootScope', function ($rootScope) {
