@@ -109,6 +109,7 @@ control = null;
         .up()
         .otherwise('/');
 
+
         // ------------------------------------------------------------
         //                       IMPORTANT
         // ------------------------------------------------------------
@@ -116,11 +117,10 @@ control = null;
         // So you must use the array syntax and make it minify-friendly
         // ------------------------------------------------------------
 
-        $routeProvider.when('/login', {
-            redirectTo: '/log-in'
-        });
-        $routeSegmentProvider.options.strictMode = true;
+        $routeProvider.when('/login', { redirectTo: '/log-in' });
+        $routeProvider.when('/manage/request-app', { redirectTo: '/manage/apps' });
 
+        $routeSegmentProvider.options.strictMode = true;
         $locationProvider.html5Mode(true);
 
         $httpProvider.interceptors.push('AuthInterceptor');
