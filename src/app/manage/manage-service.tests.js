@@ -42,6 +42,10 @@ describe('ManageService', function () {
             expect(service.removeAllSections).toEqual(jasmine.any(Function));
         });
 
+        it('should provide a removeAllItems method', function () {
+            expect(service.removeAllItems).toEqual(jasmine.any(Function));
+        });
+
         it('should provide a removeSection method', function () {
             expect(service.removeSection).toEqual(jasmine.any(Function));
         });
@@ -127,6 +131,91 @@ describe('ManageService', function () {
 
         it('should throw an error when the item object has no route object', function () {
             expect(function () { service.addItem({ name: 'test-item' }); }).toThrow();
+        });
+
+    });
+
+    describe('removeAllItems', function () {
+
+        it('should remove all items from a section if possible using a selector', function () {
+            service.removeAllItems({ id: 'test-section' });
+            var section = _.findWhere(service.getSections(), { id: 'test-section' });
+            expect(section.items.length).toBe(0);
+        });
+
+        it('should throw an error when the selector matched nothing', function () {
+            expect(function () {
+                service.removeAllItems({ id: 'does-NOT-exist2' });
+            }).toThrow();
+        });
+
+    });
+
+    describe('getSections − sorting behaviour', function () {
+
+        it('should return a sorted array by default', function () {
+            service.removeAllItems({ id: 'test-section' });
+            service.addItem({
+                sectionId: 'test-section',
+                name: 'A test item',
+                order: 2,
+                route: {
+                    subPathName: 'test-item',
+                    name: 'testItem',
+                    template: '/does-not-exist.html',
+                    controller: 'NotExistingCtrl',
+                    title: 'A test item'
+                }
+            });
+            service.addItem({
+                sectionId: 'test-section',
+                name: 'XXX Another test item',
+                order: 1,
+                route: {
+                    subPathName: 'test-item',
+                    name: 'testItem',
+                    template: '/does-not-exist.html',
+                    controller: 'NotExistingCtrl',
+                    title: 'A test item'
+                }
+            });
+            var section = _.findWhere(service.getSections(), { id: 'test-section' });
+            expect(section.items.length).toBe(2, 'as we just added two items');
+            expect(section.items[0].name).toBe('XXX Another test item');
+            expect(section.items[1].name).toBe('A test item');
+        });
+
+        it('should return a non-sorted array if doNotSort is true', function () {
+            service.removeAllItems({ id: 'test-section' });
+            service.addItem({
+                sectionId: 'test-section',
+                name: 'A test item',
+                order: 2,
+                route: {
+                    subPathName: 'test-item',
+                    name: 'testItem',
+                    template: '/does-not-exist.html',
+                    controller: 'NotExistingCtrl',
+                    title: 'A test item'
+                }
+            });
+            service.addItem({
+                sectionId: 'test-section',
+                name: 'XXX Another test item',
+                order: 1,
+                route: {
+                    subPathName: 'test-item',
+                    name: 'testItem',
+                    template: '/does-not-exist.html',
+                    controller: 'NotExistingCtrl',
+                    title: 'A test item'
+                }
+            });
+            var section = _.findWhere(service.getSections(true), { id: 'test-section' });
+            expect(section.items.length).toBe(2, 'as we just added two items');
+            // This is the order in which we added the items
+            expect(section.items[0].name).toBe('A test item');
+            expect(section.items[1].name).toBe('XXX Another test item');
         });
 
     });

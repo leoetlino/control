@@ -1,8 +1,16 @@
 control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
     var sections = [];
     var instance = {
-        getSections: function () {
-            return sections;
+        getSections: function (doNotSort) {
+            if (doNotSort) {
+                return sections;
+            }
+
+            sections.forEach(function (section) {
+                section.items = _.sortBy(section.items, 'order');
+            });
+
+            return _.sortBy(sections, 'order');
         },
         removeAllSections: function () {
             sections = [];
@@ -18,6 +26,16 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
             }
             sections = _.without(sections, section);
         },
+        removeAllItems: function (sectionSelector) {
+            if (typeof sectionSelector === 'undefined') {
+                throw new TypeError('No section selector was passed');
+            }
+            var section = _.findWhere(sections, sectionSelector);
+            if (!section) {
+                throw new Error('Could not find any section matching the selector: ' + sectionSelector);
+            }
+            section.items = [];
+        },
         addSection: function (section) {
             if (typeof section === 'undefined') {
                 throw new TypeError('No section object was passed');
@@ -31,6 +49,7 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                 id: section.id,
                 name: section.name,
                 icon: section.icon,
+                order: section.order,
                 items: [],
                 visibleForCastOnly: section.visibleForCastOnly || false
             });
@@ -52,6 +71,7 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                 name: item.name,
                 icon: item.icon,
                 visibleForCastOnly: item.visibleForCastOnly || false,
+                order: item.order,
                 route: {
                     subPathName: item.route.subPathName,
                     name: item.route.name,
