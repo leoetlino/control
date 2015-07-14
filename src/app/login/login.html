@@ -19,7 +19,7 @@
         <div id="alert-log-in" flash-alert active-class="in alert" class="animated-custom fade text-left">
             <p class="alert-message"><i class="fa alert-icon-{{flash.type}}"></i> {{ flash.message }}</p>
         </div>
-        <form id="form-login" name="loginForm" ng-submit="login(credentials)">
+        <form id="form-login" name="loginForm" ng-submit="logIn(credentials)">
             <fieldset ng-disabled="isLoading">
                 <div class="form-group email">
                     <label class="sr-only" for="login-email">Email Address</label>

@@ -4,11 +4,9 @@ control.controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthS
         password: ''
     };
     $scope.isLoading = false;
-    $scope.login = function (credentials) {
+    $scope.logIn = function (credentials) {
         $scope.isLoading = true;
-        AuthService.login(credentials).then(function () {
-            $scope.isLoading = false;
-        }, function () {
+        AuthService.logIn(credentials).then(_.noop, function () {
             $scope.isLoading = false;
         });
     };
