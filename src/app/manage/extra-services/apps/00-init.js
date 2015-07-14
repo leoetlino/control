@@ -4,11 +4,10 @@ angular.module('control.manage.extra-services').run(function (ManageService) {
         name: 'Mobile Apps',
         icon: 'mobile-phone',
         route: {
-            subPathName: 'request-app',
+            subPathName: 'apps',
             name: 'requestApp',
             template: '/app/manage/extra-services/apps/request-app.html',
-            controller: 'RequestAppCtrl',
-            title: 'Request Apps'
+            controller: 'RequestAppCtrl'
         }
     });
 });
