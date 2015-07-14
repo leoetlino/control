@@ -1,4 +1,4 @@
-control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ServicesService, $window) {
+control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ServicesService, $window, $alert) {
 
     ////////////////////
     // Helper functions
@@ -22,7 +22,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
             $rootScope.service.id &&
             route.segment.params.visibleForCastOnly &&
             $rootScope.service.group.toLowerCase().indexOf('nodes') === -1) {
-            $rootScope.$broadcast('invalid-service');
+            $rootScope.$broadcast('cast-only-route');
         }
     });
 
@@ -104,6 +104,16 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
                 }
             }
         }
+    });
+
+    $rootScope.$on('cast-only-route', function () {
+        $alert({
+            content: 'The page you are trying to access is only available for Cast nodes.',
+            type: 'danger',
+            show: true,
+            duration: 5
+        });
+        $location.path('/manage/information');
     });
 
     $rootScope.$on('invalid-service', function () {
