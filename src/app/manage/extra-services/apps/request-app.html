@@ -34,7 +34,7 @@
 
 <section class="panel panel-default" ng-class="{'not-collapsed': (service.apps.android && service.apps.iOS) || requestFormToggle === 0 }" ng-model="requestFormToggle" data-start-collapsed="!service.apps.iOS || !service.apps.android" bs-collapse>
     <div class="panel-body">
-        <h4 bs-collapse-toggle>Submit a request <i ng-class="{'fa-rotate-90': requestFormToggle === 0}" ng-hide="service.apps.android && service.apps.iOS"></i></h4>
+        <h4 bs-collapse-toggle>Submit a request <i class="toggler" ng-class="{'fa-rotate-90': requestFormToggle === 0}" ng-hide="service.apps.android && service.apps.iOS"></i></h4>
         <div class="clearfix"></div>
         <p class="collapsed-description">Submit an app request to get started.</p>
         <div class="collapse" bs-collapse-target ng-hide="service.apps.android && service.apps.iOS">

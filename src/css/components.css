@@ -39,8 +39,13 @@
     white-space: nowrap;
     margin-top: 0;
     margin-bottom: 5px;
-    cursor: default;
     text-transform: uppercase;
+}
+
+.panel-nav .header .toggler {
+    font-size: 14px;
+    position: relative;
+    top: 1px;
 }
 
 .panel-nav .nav-pills:not(:first-child) {
@@ -114,7 +119,7 @@ section.panel[bs-collapse]:not(.not-collapsed) .collapsed-description {
     cursor: pointer;
 }
 
-[bs-collapse-toggle] i {
+[bs-collapse-toggle] .toggler {
     float: right;
     cursor: pointer;
     transition: all 0.2s linear;
@@ -124,7 +129,7 @@ section.panel[bs-collapse]:not(.not-collapsed) .collapsed-description {
     font-size: inherit;
 }
 
-[bs-collapse-toggle] i:before {
+[bs-collapse-toggle] .toggler:before {
     content: "\f138";
 }
 

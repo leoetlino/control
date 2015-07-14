@@ -5,12 +5,14 @@
                 <a href="{{ 'manage.information' | routeSegmentUrl }}"><fa name="info" fw></fa> Information</a>
             </li>
         </ul>
-        <ul class="panel-body nav nav-pills nav-stacked" ng-repeat="section in sections" ng-hide="section.visibleForCastOnly && service.group.toLowerCase().indexOf('node') === -1">
-            <li class="header" role="presentation"><fa ng-if="section.icon" name="section.icon" fw></fa>{{section.name}}</li>
-            <li ng-repeat="item in section.items" ng-class="{active: (item.route.completeName|routeSegmentEqualsTo)}" ng-hide="item.visibleForCastOnly && service.group.toLowerCase().indexOf('node') === -1">
-                <a href="{{ item.route.completeName | routeSegmentUrl }}"><fa name="{{item.icon}}" fw></fa> {{item.name}}</a>
-            </li>
-        </ul>
+        <div class="panel-body nav nav-pills nav-stacked" ng-repeat="section in sections" ng-hide="section.visibleForCastOnly && service.group.toLowerCase().indexOf('node') === -1" ng-model="sectionToggle" ng-init="sectionToggle = 0" bs-collapse start-collapsed="false">
+            <li bs-collapse-toggle class="header" role="presentation"><fa ng-if="section.icon" name="section.icon" fw></fa>{{section.name}} <i class="toggler" ng-class="{'fa-rotate-90': sectionToggle === 0}"></i></li>
+            <ul class="nav nav-pills nav-stacked collapse" bs-collapse-target>
+                <li ng-repeat="item in section.items" ng-class="{active: (item.route.completeName|routeSegmentEqualsTo)}" ng-hide="item.visibleForCastOnly && service.group.toLowerCase().indexOf('node') === -1">
+                    <a href="{{ item.route.completeName | routeSegmentUrl }}"><fa name="{{item.icon}}" fw></fa> {{item.name}}</a>
+                </li>
+            </ul>
+        </div>
     </nav>
     <section class="col-sm-9 bootcards-cards" app-view-segment="1">
     </section>
