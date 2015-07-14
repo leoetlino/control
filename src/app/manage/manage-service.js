@@ -78,7 +78,8 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                     completeName: 'manage.' + item.route.name,
                     template: item.route.template,
                     controller: item.route.controller,
-                    title: item.route.title || item.name
+                    title: item.route.title || item.name,
+                    visibleForCastOnly: item.visibleForCastOnly || false
                 }
             };
             var section = _.findWhere(sections, { id: item.sectionId });
