@@ -1,4 +1,4 @@
-angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl', function ($rootScope, $scope, NowPlayingTweetsService, ENV, $routeParams, $location, flash) {
+angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl', function ($rootScope, $scope, NowPlayingTweetsService, ENV, $routeParams, $location, $alert) {
 
     // Initialisation
     var initialiseSettings = function () {
@@ -23,7 +23,11 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
     };
 
     var changeStateFailure = function (oldValue) {
-        flash.to('alert-now-playing-box').error = 'Something went wrong while enabling or disabling #NowPlaying. Please try again.';
+        $alert({
+            content: 'Something went wrong while enabling or disabling #NowPlaying. Please try again.',
+            type: 'danger',
+            duration: 10
+        });
         unregisterWatch();
         $scope.nowPlayingState = oldValue;
         watchNowPlayingSwitch();
@@ -50,14 +54,27 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
     $scope.submitSettings = function (settings) {
         $scope.$broadcast('show-errors-check-validity');
         if ($scope.form.$invalid) {
+            $alert({
+                content: 'Please fill in all required fields correctly.',
+                type: 'danger',
+                duration: 10
+            });
             return;
         }
         $scope.submitting = true;
         NowPlayingTweetsService.submitSettings($rootScope.service.username, settings).then(function () {
             $scope.submitting = false;
-            flash.to('alert-now-playing-box').success = 'Your new settings have been saved.';
+            $alert({
+                content: 'New settings saved.',
+                type: 'success',
+                duration: 5
+            });
         }, function () {
-            flash.to('alert-now-playing-box').error = 'Something went wrong while submitting your settings. Your settings were not saved. Please try again.';
+            $alert({
+                content: 'Something went wrong while saving your settings. Your settings were not saved. Please try again.',
+                type: 'danger',
+                duration: 10
+            });
             $scope.submitting = false;
         });
     };
@@ -74,9 +91,17 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
             $scope.submitting = false;
             $scope.nowPlayingState = false;
             watchNowPlayingSwitch();
-            flash.to('alert-now-playing-box').success = 'Your #NowPlaying settings have been removed.';
+            $alert({
+                content: 'Your #NowPlaying settings have been removed.',
+                type: 'success',
+                duration: 5
+            });
         }, function () {
-            flash.to('alert-now-playing-box').error = 'Something went wrong while removing your settings. Your settings were not removed. Please try again.';
+            $alert({
+                content: 'Something went wrong while removing your settings. Your settings were not saved. Please try again.',
+                type: 'danger',
+                duration: 10
+            });
             watchNowPlayingSwitch();
             $scope.submitting = false;
         });

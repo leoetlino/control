@@ -1,4 +1,4 @@
-control.controller('LoginCtrl', function($scope, $rootScope, AUTH_EVENTS, AuthService, localStorageService, flash) {
+control.controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthService, localStorageService, $alert) {
     $scope.credentials = {
         email: '',
         password: ''
@@ -19,7 +19,11 @@ control.controller('LoginCtrl', function($scope, $rootScope, AUTH_EVENTS, AuthSe
         if (localStorageService.get('showed-login-help')) {
             return;
         }
-        flash.to('alert-general').info = 'It looks like it is the first time you\'re here! You can log in with your client area credentials.';
+        $alert({
+            content: 'It looks like it is the first time you\'re here! You can log in with your client area credentials.',
+            type: 'info',
+            duration: 10
+        });
         localStorageService.set('showed-login-help', true);
     }());
 
