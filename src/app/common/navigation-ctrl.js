@@ -98,6 +98,12 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
                 }
             }
         }
+
+        if (segment &&
+            segment.params.visibleForCastOnly &&
+            $rootScope.service.group.toLowerCase().indexOf('nodes') === -1) {
+            $rootScope.$broadcast('invalid-service');
+        }
     });
 
     $rootScope.$on('invalid-service', function () {
