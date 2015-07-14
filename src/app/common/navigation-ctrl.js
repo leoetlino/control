@@ -108,7 +108,6 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
 
     $rootScope.$on('cast-only-route', function () {
         $alert({
-            title: 'Access denied.',
             content: 'The page you are trying to access is only available for Cast nodes.',
             type: 'danger',
             duration: 5
@@ -118,7 +117,6 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
 
     $rootScope.$on('invalid-service', function () {
         $alert({
-            title: 'Access denied.',
             content: 'The service does not exist.',
             type: 'danger',
             duration: 5
