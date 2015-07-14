@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="css/branding.css">
         <link rel="stylesheet" href="css/loading-bar.css">
         <link rel="stylesheet" href="css/loading-bar-green.css">
+        <link rel="stylesheet" href="css/spinner.css">
         <!-- endbuild -->
     </head>
     <body ng-app="control" class="bootcards-nofooter">
@@ -91,7 +92,9 @@
                 </style>
                 <div class="loading-block center-block text-center">
                     <h1 class="brand font-diavlo">SHOUTca.st Control</h1>
-                    <i class="loading-icon fa fa-spinner fa-spin fa-4x"></i>
+                    <svg class="spinner with-margin" width="64px" height="64px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                    </svg>
                 </div>
             </div>
         </div>
@@ -156,27 +159,7 @@
                 </div>
             </div>
         </footer>
-        <div id="cookie-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Cookies</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>This site uses cookies to store information on your device. These are essential for our site and help us to improve by giving us some insight into how the site is being used.</p>
-                        <p>For more information, you can read our <a data-target="#privacy-modal" data-toggle="modal" href="privacy.php">Privacy Policy</a>.</p>
-                        <br>
-                        <div class="alert alert-warning">
-                            <p><b><i class="icon-warning-sign"></i> The site won't work properly without cookies.</b>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal"><i class="icon-ok-sign"></i> Accept and continue</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- build:js js/control.min.js -->
 
         <!-- Libs -->

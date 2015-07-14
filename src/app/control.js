@@ -10,6 +10,7 @@ control = null;
     control = angular.module('control', [
         'config',
         'templates',
+        'control.feedback',
         'control.manage.cast',
         'control.manage.extra-services',
         'angular-promise-cache',
@@ -55,7 +56,6 @@ control = null;
         $routeSegmentProvider
         .when('/log-in', 'login')
         .when('/', 'dashboard')
-        .when('/feedback', 'feedback')
         .when('/manage', 'manage')
         .when('/manage/information', 'manage.information')
 
@@ -80,12 +80,6 @@ control = null;
                 }]
             },
             controller: 'DashboardCtrl'
-        })
-        .segment('feedback', {
-            templateUrl: '/app/feedback/feedback.html',
-            authorizedRoles: [USER_ROLES.all],
-            title: 'Send your feedback',
-            controller: 'FeedbackCtrl'
         })
         .segment('manage', {
             templateUrl: '/app/manage/manage.html',
