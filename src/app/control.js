@@ -19,8 +19,6 @@ control = null;
         'ngSanitize',
         'LocalStorageModule',
         'angular-loading-bar',
-        'angular-flash.service',
-        'angular-flash.flash-alert-directive',
         'ngFileUpload',
         'colorpicker.module',
         'toggle-switch',
@@ -29,12 +27,7 @@ control = null;
         'picardy.fontawesome'
     ]);
 
-    control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, flashProvider, $httpProvider, $provide, $alertProvider) {
-
-        flashProvider.errorClassnames.push('alert-danger');
-        flashProvider.warnClassnames.push('alert-warning');
-        flashProvider.infoClassnames.push('alert-info');
-        flashProvider.successClassnames.push('alert-success');
+    control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, $httpProvider, $provide, $alertProvider) {
 
         angular.extend($alertProvider.defaults, {
             animation: 'am-fade-and-slide-top',
