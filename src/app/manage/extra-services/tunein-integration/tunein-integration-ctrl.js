@@ -1,4 +1,4 @@
-angular.module('control.manage.extra-services').controller('TuneInIntegrationCtrl', function ($rootScope, $scope, TuneInIntegrationService, ENV, $routeParams, $location, flash) {
+angular.module('control.manage.extra-services').controller('TuneInIntegrationCtrl', function ($rootScope, $scope, TuneInIntegrationService, ENV, $routeParams, $location, $alert) {
 
     // Initialisation
     var initialiseSettings = function () {
@@ -25,7 +25,11 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
     };
 
     var changeStateFailure = function (oldValue) {
-        flash.to('alert-tunein-integration').error = 'Something went wrong while enabling or disabling the TuneIn integration. Please try again.';
+        $alert({
+            content: 'Something went wrong while enabling or disabling the TuneIn integration. Please try again.',
+            type: 'error',
+            duration: 10
+        });
         unregisterWatch();
         $scope.integrationEnabled = oldValue;
         watchTuneInIntegrationSwitch();
@@ -41,7 +45,11 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
 
                 $scope.$broadcast('show-errors-check-validity');
                 if ($scope.form.$invalid) {
-                    flash.to('alert-tunein-integration').error = 'The integration has not yet been configured correctly.';
+                    $alert({
+                        content: 'The integration has not yet been configured correctly.',
+                        type: 'error',
+                        duration: 10
+                    });
                     return;
                 }
 
@@ -65,9 +73,17 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
         TuneInIntegrationService.saveSettings($rootScope.service.username, settings).then(function () {
             $scope.disableForm = false;
             $scope.reloadServices();
-            flash.to('alert-tunein-integration').success = 'Your new settings have been saved.';
+            $alert({
+                content: 'New settings saved.',
+                type: 'success',
+                duration: 5
+            });
         }, function () {
-            flash.to('alert-tunein-integration').error = 'Something went wrong while disabling your settings. Your settings were not saved. Please try again.';
+            $alert({
+                content: 'Something went wrong while saving your settings. Your settings were not saved. Please try again.',
+                type: 'error',
+                duration: 10
+            });
             $scope.disableForm = false;
             $scope.reloadServices();
         });
@@ -85,9 +101,17 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
             $scope.disableForm = false;
             $scope.integrationEnabled = false;
             watchTuneInIntegrationSwitch();
-            flash.to('alert-tunein-integration').success = 'Your TuneIn integration settings have been removed.';
+            $alert({
+                content: 'Your TuneIn integration settings have been removed.',
+                type: 'success',
+                duration: 5
+            });
         }, function () {
-            flash.to('alert-tunein-integration').error = 'Something went wrong while removing your settings. Your settings were not removed. Please try again.';
+            $alert({
+                content: 'Something went wrong while removing your settings. Your settings were not removed. Please try again.',
+                type: 'error',
+                duration: 10
+            });
             watchTuneInIntegrationSwitch();
             $scope.disableForm = false;
         });

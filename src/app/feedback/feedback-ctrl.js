@@ -1,4 +1,4 @@
-control.controller('FeedbackCtrl', function ($scope, FeedbackService, flash) {
+control.controller('FeedbackCtrl', function ($scope, FeedbackService, $alert) {
     $scope.sent = false;
     $scope.submit = function () {
         $scope.$broadcast('show-errors-check-validity');
@@ -10,7 +10,11 @@ control.controller('FeedbackCtrl', function ($scope, FeedbackService, flash) {
             $scope.sent = true;
             $scope.sending = false;
         }, function () {
-            flash.to('alert-general').error = 'Something went wrong while sending your feedback. Please try again.';
+            $alert({
+                content: 'Something went wrong while sending your feedback. Please try again.',
+                type: 'danger',
+                duration: 10
+            });
             $scope.sending = false;
         });
     };

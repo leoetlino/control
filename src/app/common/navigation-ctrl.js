@@ -1,4 +1,4 @@
-control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, flash, Session, ServicesService, $window, $alert) {
+control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, Session, ServicesService, $window, $alert) {
 
     ////////////////////
     // Helper functions
@@ -108,16 +108,21 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
 
     $rootScope.$on('cast-only-route', function () {
         $alert({
+            title: 'Access denied.',
             content: 'The page you are trying to access is only available for Cast nodes.',
             type: 'danger',
-            show: true,
             duration: 5
         });
         $location.path('/manage/information');
     });
 
     $rootScope.$on('invalid-service', function () {
-        flash.to('alert-general').error = 'Access denied: Invalid service.';
+        $alert({
+            title: 'Access denied.',
+            content: 'The service does not exist.',
+            type: 'danger',
+            duration: 5
+        });
         $location.search('username', null);
         $location.search('serviceId', null);
         $location.path('/');
@@ -135,29 +140,58 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         });
     });
     $rootScope.$on(AUTH_EVENTS.loginFailed, function() {
-        flash.to('alert-log-in').error = 'Couldn\'t log in. Please check your credentials. If you forgot your password, you can reset it from the client area.';
+        $alert({
+            content: 'Couldn\'t log in. Please check your credentials. If you forgot your password, you can reset it from the client area.',
+            type: 'danger',
+            duration: 10
+        });
     });
     $rootScope.$on(AUTH_EVENTS.logoutSuccess, function() {
         $location.path('/log-in');
-        flash.to('alert-general').success = 'You are now logged out!';
+        $alert({
+            content: 'You have been logged out.',
+            type: 'success',
+            duration: 5
+        });
     });
     $rootScope.$on(AUTH_EVENTS.logoutFailed, function() {
-        flash.to('alert-general').error = 'Something went wrong when trying to log out. Please try again. If the problem persists, reload the page and contact us.';
+        $alert({
+            content: 'Couldn\'t log you out. Please try again. If the problem persists, reload the page and contact us.',
+            type: 'danger',
+            duration: 10
+        });
     });
     $rootScope.$on(AUTH_EVENTS.badRequest, function() {
-        flash.to('alert-general').error = 'Something went wrong. Please try again. If the problem persists, reload the page and contact us.';
+        $alert({
+            content: 'Something went wrong. Please try again. If the problem persists, reload the page and contact us.',
+            type: 'danger',
+            duration: 10
+        });
     });
     $rootScope.$on(AUTH_EVENTS.sessionTimeout, function() {
         Session.destroy();
         $location.path('/log-in');
-        flash.to('alert-general').warning = 'Your session has expired. Please log in.';
+        $alert({
+            content: 'Your session has expired, so you have been logged out.',
+            type: 'warning',
+            show: true
+        });
     });
     $rootScope.$on(AUTH_EVENTS.notAuthenticated, function() {
         $location.path('/log-in');
-        flash.to('alert-general').warning = 'Please log in to continue.';
+        $alert({
+            content: 'Please log in to continue.',
+            type: 'warning',
+            duration: 5
+        });
     });
     $rootScope.$on(AUTH_EVENTS.notAuthorized, function() {
         $location.path('/log-in');
-        flash.to('alert-general').error = 'You can\'t do that as yourself. Log in as someone with more permission than you.';
+        $alert({
+            title: 'Access denied.',
+            content: 'You are not authorised to do this.',
+            type: 'warning',
+            duration: 5
+        });
     });
 });
