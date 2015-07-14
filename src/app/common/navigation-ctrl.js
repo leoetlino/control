@@ -18,6 +18,12 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
             return;
         }
         $rootScope.pageTitle = route.segment.params.title;
+        if ($rootScope.service &&
+            $rootScope.service.id &&
+            route.segment.params.visibleForCastOnly &&
+            $rootScope.service.group.toLowerCase().indexOf('nodes') === -1) {
+            $rootScope.$broadcast('invalid-service');
+        }
     });
 
     ////////////
@@ -97,12 +103,6 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
                     return;
                 }
             }
-        }
-
-        if (segment &&
-            segment.params.visibleForCastOnly &&
-            $rootScope.service.group.toLowerCase().indexOf('nodes') === -1) {
-            $rootScope.$broadcast('invalid-service');
         }
     });
 
