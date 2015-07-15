@@ -76,9 +76,6 @@ control = null;
                     return DashService.getInfo().then(function (response) {
                         return response.data;
                     });
-                }],
-                services: ['ServicesService', function (ServicesService) {
-                    return ServicesService.initAndGetServices();
                 }]
             },
             controller: 'DashboardCtrl'
