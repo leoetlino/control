@@ -16,8 +16,14 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>Server</label>
-                        <h4 class="list-group-item-heading">{{service.server}}</h4>
+                        <div ng-if="service.group.toLowerCase().indexOf('node') === -1">
+                            <label>Server</label>
+                            <h4 class="list-group-item-heading">{{service.server}}</h4>
+                        </div>
+                        <div ng-if="service.group.toLowerCase().indexOf('node') !== -1">
+                            <label>Hostname</label>
+                            <h4 class="list-group-item-heading">{{service.username}}.radioca.st</h4>
+                        </div>
                     </div>
                     <div class="col-sm-6">
                         <label>Username</label>
