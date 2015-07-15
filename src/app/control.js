@@ -49,6 +49,9 @@ control = null;
         // ------------------------------------------------------------
 
         var watchForService = ['$rootScope', function ($rootScope) {
+            if (!$rootScope.service) {
+                return;
+            }
             return $rootScope.service.id;
         }];
 

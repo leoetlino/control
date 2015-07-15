@@ -93,9 +93,6 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
 
             section.items.push(newItem);
 
-            var watchForService = ['$rootScope', function ($rootScope) {
-                return $rootScope.service.id;
-            }];
             $routeSegmentProvider
                 .when('/manage/' + newItem.route.subPathName, newItem.route.completeName)
                 .within('manage')
@@ -105,7 +102,12 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                     title: newItem.route.title,
                     visibleForCastOnly: newItem.route.visibleForCastOnly,
                     controller: newItem.route.controller,
-                    watcher: watchForService
+                    watcher: ['$rootScope', function ($rootScope) {
+                        if (!$rootScope.service) {
+                            return;
+                        }
+                        return $rootScope.service.id;
+                    }]
                 });
         }
     };
