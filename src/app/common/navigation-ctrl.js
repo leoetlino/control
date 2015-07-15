@@ -52,10 +52,13 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         }
     });
 
-    $rootScope.$watch('service.id', function (newId) {
+    $rootScope.$watch('service.id', function (newId, oldId) {
         if (newId && $location.search().serviceId && (newId !== $location.search().serviceId)) {
             $location.search('username', null);
             $location.search('serviceId', null);
+        }
+        if (oldId && newId !== oldId) {
+            $rootScope.$broadcast('selected-service-changed');
         }
     });
 
