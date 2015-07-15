@@ -1,4 +1,4 @@
-/* global module, require */
+/* global module, require, process */
 module.exports = function (grunt) {
     'use strict';
 
