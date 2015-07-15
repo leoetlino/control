@@ -175,8 +175,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         $location.path('/log-in');
         $alert({
             content: 'Your session has expired, so you have been logged out.',
-            type: 'warning',
-            show: true
+            type: 'warning'
         });
     });
     $rootScope.$on(AUTH_EVENTS.notAuthenticated, function() {
