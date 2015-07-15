@@ -129,6 +129,14 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         $location.path('/');
     });
 
+    $rootScope.$on('server-error', function onServerError (event, error) {
+        $alert({
+            content: error.message + ' (' + error.code + ')',
+            type: 'danger',
+            duration: error.alertDuration
+        });
+    });
+
     $rootScope.$on(AUTH_EVENTS.loginSuccess, function () {
         if (originalPath === 'undefined' || !originalPath || originalPath === '/log-in') {
             originalPath = '/';
