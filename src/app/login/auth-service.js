@@ -32,10 +32,11 @@ control.factory('AuthService', function ($http, Session, USER_ROLES, localStorag
         AuthService.keepAlivePromise = $interval(AuthService.keepAlive, 1000 * 60 * 15);
     });
     $rootScope.$on('sessionDestroyed', function onSessionDestroyed () {
-        if (angular.isDefined(AuthService.keepAlivePromise)) {
-            $interval.cancel(AuthService.keepAlivePromise);
-            AuthService.keepAlivePromise = null;
+        if (!AuthService.keepAlivePromise) {
+            return;
         }
+        $interval.cancel(AuthService.keepAlivePromise);
+        AuthService.keepAlivePromise = null;
     });
 
     return AuthService;
