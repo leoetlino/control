@@ -69,7 +69,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
     $scope.isAuthenticated = AuthChecker.isAuthenticated;
     $scope.currentSession = Session;
     $scope.logOut = $scope.logout = function logOut () {
-        AuthService.logout().then(function () {
+        AuthService.logOut().then(function () {
             $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
         }, function () {
             $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
