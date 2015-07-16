@@ -9,9 +9,9 @@ control.factory('ServerErrorInterceptor', function ($rootScope, $q) {
                     alertDuration: 30
                 });
             }
-            if (response.status === 503) {
+            if (response.status === 503 || response.status === 502) {
                 $rootScope.$broadcast('server-error', {
-                    code: 503,
+                    code: response.status,
                     message: 'Control is currently unavailable. Please try again later. If this persists, please refer to status.shoutca.st for any known network issue.',
                     alertDuration: 600
                 });
