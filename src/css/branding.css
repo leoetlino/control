@@ -55,6 +55,11 @@ body {
     padding-bottom: 23.5px;
 }
 
+#topbar li.dropdown .dropdown-menu > li > a {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
 /* Navbar brand */
 .glow:hover, .glow:focus, .glow:active,
 .navbar-brand:hover, .navbar-brand:focus, .navbar-brand:active {
