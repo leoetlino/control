@@ -58,7 +58,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
             $location.search('serviceId', null);
         }
         if (oldId && newId !== oldId) {
-            $rootScope.$broadcast('selected-service-changed');
+            $rootScope.$broadcast('selected-service-changed', newId);
         }
     });
 
