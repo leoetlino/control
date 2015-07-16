@@ -13,7 +13,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         return initServices();
     };
 
-    $rootScope.$on('routeSegmentChange', function (index, route) {
+    $rootScope.$on('routeSegmentChange', function (event, route) {
         if (!route.segment) {
             return;
         }
@@ -23,6 +23,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
             route.segment.params.visibleForCastOnly &&
             $rootScope.service.group.toLowerCase().indexOf('nodes') === -1) {
             $rootScope.$broadcast('cast-only-route');
+            throw new Error('Cast-only route');
         }
     });
 
