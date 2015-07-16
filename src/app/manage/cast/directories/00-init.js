@@ -9,7 +9,16 @@ angular.module('control.manage.cast').run(function (ManageService) {
             name: 'directories',
             template: '/app/manage/cast/directories/directories.html',
             controller: 'DirectoriesCtrl',
-            title: 'Directories'
+            controllerAs: 'ctrl',
+            title: 'Directories',
+            resolve: /*@ngInject*/ {
+                config: function (ConfigService) {
+                    return ConfigService.getConfig();
+                },
+                choices: function (DirectoriesService) {
+                    return DirectoriesService.getChoices();
+                }
+            }
         }
     });
 });
