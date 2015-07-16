@@ -9,7 +9,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
     };
 
     $rootScope.reloadServices = function () {
-        ServicesService.invalidateCache();
+        $rootScope.$broadcast('invalidate-cache');
         return initServices();
     };
 

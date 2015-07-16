@@ -72,5 +72,6 @@ control.factory('ServicesService', function ($http, ENV, $rootScope, $location, 
             return service;
         }
     };
+    $rootScope.$on('invalidate-cache', instance.invalidateCache);
     return instance;
 });
