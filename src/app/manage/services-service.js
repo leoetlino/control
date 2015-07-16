@@ -1,4 +1,4 @@
-control.factory('ServicesService', function ($http, ENV, $rootScope, $location, promiseCache, localStorageService) {
+control.factory('ServicesService', function ($http, ENV, $rootScope, $location, promiseCache, localStorageService, Session, $q) {
     var internal = {
         cachedServices: null,
     };
@@ -17,6 +17,9 @@ control.factory('ServicesService', function ($http, ENV, $rootScope, $location, 
             return instance.getServicesPromise().then(instance.getServicesList);
         },
         getServicesPromise: function () {
+            if (!Session.token) {
+                return $q.reject('no valid token');
+            }
             return promiseCache({
                 promise: function () {
                     return $http

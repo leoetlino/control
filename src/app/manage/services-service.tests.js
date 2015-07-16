@@ -16,6 +16,9 @@ describe('ServicesService', function () {
                 return fakeLocation;
             }
         });
+        $provide.value('Session', {
+            token: 'xxxxx-xxxxx'
+        });
     }));
     beforeEach(inject(function (_$rootScope_, _ServicesService_, _$httpBackend_) {
         ServicesService = _ServicesService_;
