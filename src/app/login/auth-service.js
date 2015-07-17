@@ -34,6 +34,9 @@ control.factory('AuthService', function ($http, Session, USER_ROLES, localStorag
     };
 
     $rootScope.$on('sessionCreated', function onSessionCreated () {
+        if (AuthService.keepAlivePromise) {
+            return;
+        }
         AuthService.keepAlivePromise = $interval(AuthService.keepAlive, 1000 * 60 * 15);
     });
     $rootScope.$on('sessionDestroyed', function onSessionDestroyed () {
