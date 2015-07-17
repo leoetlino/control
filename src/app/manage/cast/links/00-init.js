@@ -9,7 +9,13 @@ angular.module('control.manage.cast').run(function (ManageService) {
             name: 'links',
             template: '/app/manage/cast/links/links.html',
             controller: 'LinksCtrl',
-            title: 'Links'
+            controllerAs: 'ctrl',
+            title: 'Links',
+            resolve: /*@ngInject*/ {
+                config: function (ConfigService) {
+                    return ConfigService.getConfig();
+                }
+            }
         }
     });
 });

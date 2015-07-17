@@ -9,7 +9,13 @@ angular.module('control.manage.cast').run(function (ManageService) {
             name: 'connectionInfo',
             template: '/app/manage/cast/connection-info/connection-info.html',
             controller: 'ConnectionInfoCtrl',
-            title: 'Connection Info'
+            controllerAs: 'ctrl',
+            title: 'Connection Info',
+            resolve: /*@ngInject*/ {
+                config: function (ConfigService) {
+                    return ConfigService.getConfig();
+                }
+            }
         }
     });
 });

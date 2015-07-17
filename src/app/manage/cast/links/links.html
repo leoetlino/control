@@ -1,0 +1,69 @@
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>Links</h4>
+        <p>Everything you need to place your stream on your website or to place it somewhere else can be found here.</p>
+    </div>
+</section>
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>Tune In</h4>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+                <h4 class="list-group-item-heading">Cast status page</h4>
+                 <ul>
+                     <li><a ng-href="{{ctrl.config.hostname}}">{{ctrl.config.hostname}}</a></li>
+                 </ul>
+            <div class="clearfix"></div>
+        </li>
+        <li class="list-group-item" ng-repeat="stream in ctrl.config.streams">
+                <h4 class="list-group-item-heading">{{stream.stream}}</h4>
+                 <ul>
+                     <li>Direct: <a ng-href="{{ctrl.config.hostname}}/streams/{{stream.stream}}">{{ctrl.config.hostname}}/streams/{{stream.stream}}</a></li>
+                     <li>PLS: <a ng-href="{{ctrl.config.hostname}}/streams/{{stream.stream}}.pls">{{ctrl.config.hostname}}/streams/{{stream.stream}}.pls</a></li>
+                     <li>M3U: <a ng-href="{{ctrl.config.hostname}}/streams/{{stream.stream}}.m3u">{{ctrl.config.hostname}}/streams/{{stream.stream}}.m3u</a></li>
+                 </ul>
+            <div class="clearfix"></div>
+        </li>
+    </ul>
+    
+</section>
+
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>API endpoints</h4>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+                <h4 class="list-group-item-heading">Cast</h4>
+                 <ul>
+                     <li>List of active streams: <a ng-href="{{ctrl.config.hostname}}/api/list-active-streams">{{ctrl.config.hostname}}/api/list-active-streams</a></li>
+                     <li>Current song: <a ng-href="{{ctrl.config.hostname}}/api/{{ctrl.primaryStream}}/current-metadata">{{ctrl.config.hostname}}/api/{{ctrl.primaryStream}}/current-metadata</a></li>
+                     <li>  
+                        <p style="margin-bottom: 0px;">Last played songs: <a ng-href="{{ctrl.config.hostname}}/api/{{ctrl.primaryStream}}/past-metadata">{{ctrl.config.hostname}}/api/{{ctrl.primaryStream}}/past-metadata</a></p>
+                        <p class="help-block"><fa name="info-circle"></fa> Gives the last 20 songs in an array, where the first object is the current song</p>
+                     </li>
+                     <li>  
+                        <p style="margin-bottom: 0px;">List of listeners: <a ng-href="{{ctrl.config.hostname}}/api/{{ctrl.config.apikey}}/{{ctrl.primaryStream}}/listeners">{{ctrl.config.hostname}}/api/{{ctrl.config.apikey}}/{{ctrl.primaryStream}}/listeners</a></p>
+                        <p class="help-block"><fa name="info-circle"></fa> This link contains your private API key so it shoulde be threated as a password.</p>
+                     </li>
+                 </ul>
+            <div class="clearfix"></div>
+        </li>
+        <li class="list-group-item">
+                <h4 class="list-group-item-heading">SHOUTcast-compatible</h4>
+                 <ul>
+                     <li>v1 statistics: <a ng-href="{{ctrl.config.hostname}}/7.html">{{ctrl.config.hostname}}/7.html</a></li>
+                     <li>v2 statistics: <a ng-href="{{ctrl.config.hostname}}/7.html">{{ctrl.config.hostname}}/statistics</a></li>
+                 </ul>
+            <div class="clearfix"></div>
+        </li>
+        <li class="list-group-item">
+                <h4 class="list-group-item-heading">Icecast-compatible</h4>
+                 <ul>
+                    <li>v2.4+: <a ng-href="{{ctrl.config.hostname}}/status-json.xsl">{{ctrl.config.hostname}}/status-json.xsl</a></li> 
+                 </ul>
+            <div class="clearfix"></div>
+        </li>
+    </ul>
+</section>

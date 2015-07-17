@@ -1,0 +1,56 @@
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>Connection Info</h4>
+        <p>Here is everything you need to go live with your favourite broadcasting software.</p>
+    </div>
+</section>
+<section class="panel panel-default" ng-repeat="stream in ctrl.config.streams">
+    <div class="panel-body">
+        <h4>{{stream.stream}}</h4>
+        <p><strong>Type: </strong>SHOUTcast (v1)</p>
+        <p><strong>Hostname: </strong>{{ctrl.config.username}}.radioca.st</p>
+        <p><strong>Port: </strong>{{ctrl.config.input.SHOUTcast}}</p>
+        <p><strong>Password: </strong><code>{{stream.password}}</code></p>
+    </div>
+</section>
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4><fa name="info-circle"></fa> Notice</h4>
+        <p>Never use the IP linked to the hostname(s) above. They will change frequently and may break your setup completely.</p>
+    </div>
+</section>
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4><fa name="question-circle"></fa> What to broadcast with?</h4>
+        <p>Cast 1.0 will work fine with every SHOUTcast compatible encoder. Not sure which one you like? We listed our favourites below.</p>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+                <h4 class="list-group-item-heading"><fa name="windows"></fa> Windows</h4>
+                 <ul>
+                     <li><a ng-href="http://forums.winamp.com/showthread.php?t=372044">Winamp + SHOUTcast DSP</a></li>
+                     <li><a ng-href="http://www.altacast.com">Altacast</a></li>
+                     <li><a ng-href="http://www.radiodj.ro/">RadioDJ</a></li>
+                     <li><a ng-href="http://spacial.com/sam-broadcaster">SAM Broadcaster</a></li>
+                     <li><a ng-href="http://butt.sourceforge.net">Broadcast Using This Tool</a></li>
+                 </ul>
+            <div class="clearfix"></div>
+        </li>
+        <li class="list-group-item">
+                <h4 class="list-group-item-heading"><fa name="apple"></fa> Mac</h4>
+                 <ul>
+                     <li><a ng-href="https://www.rogueamoeba.com/nicecast/">Nicecast</a></li>
+                     <li><a ng-href="http://butt.sourceforge.net">Broadcast Using This Tool</a></li>
+                 </ul>
+            <div class="clearfix"></div>
+        </li>
+        <li class="list-group-item">
+                <h4 class="list-group-item-heading"><fa name="linux"></fa> Linux</h4>
+                 <ul>
+                     <li><a ng-href="http://idjc.sourceforge.net">Internet DJ Console</a></li>
+                     <li><a ng-href="http://butt.sourceforge.net">Broadcast Using This Tool</a></li>
+                 </ul>
+            <div class="clearfix"></div>
+        </li>
+    </ul>
+</section>
