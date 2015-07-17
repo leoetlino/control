@@ -36,3 +36,7 @@ Header set Cache-Control "max-age=2629743, public, must-revalidate"
 Header set Access-Control-Allow-Origin "*"
 </IfModule>
 </FilesMatch>
+
+Header set X-Frame-Options "DENY"
+Header set Content-Security-Policy "default-src *; script-src 'self' https://piwik.shoutca.st; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;"
+Header set X-Content-Security-Policy "default-src *; script-src 'self' https://piwik.shoutca.st; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;"
