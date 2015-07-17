@@ -9,7 +9,13 @@ angular.module('control.manage.cast').run(function (ManageService) {
             name: 'statistics',
             template: '/app/manage/cast/statistics/statistics.html',
             controller: 'StatisticsCtrl',
-            title: 'Statistics'
+            controllerAs: 'ctrl',
+            title: 'Statistics',
+            resolve: /*@ngInject*/ {
+                config: function (ConfigService) {
+                    return ConfigService.getConfig();
+                }
+            }
         }
     });
 });
