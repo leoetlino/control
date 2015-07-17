@@ -9,7 +9,13 @@ angular.module('control.manage.cast').run(function (ManageService) {
             name: 'streams',
             template: '/app/manage/cast/streams/streams.html',
             controller: 'StreamsCtrl',
-            title: 'Streams'
+            controllerAs: 'ctrl',
+            title: 'Streams',
+            resolve: /*@ngInject*/ {
+                config: function (ConfigService) {
+                    return ConfigService.getConfig();
+                }
+            },
         }
     });
 });

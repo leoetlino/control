@@ -26,7 +26,8 @@ control = null;
         'toggle-switch',
         'ui.bootstrap.showErrors',
         'mgcrea.ngStrap',
-        'picardy.fontawesome'
+        'picardy.fontawesome',
+        'xeditable'
     ]);
 
     control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, $httpProvider, $provide, $alertProvider) {
@@ -121,6 +122,10 @@ control = null;
         $httpProvider.interceptors.push('AuthInterceptor');
         $httpProvider.interceptors.push('HttpTimeoutInterceptor');
         $httpProvider.interceptors.push('ServerErrorInterceptor');
+    });
+
+    control.run(function (editableOptions) {
+        editableOptions.theme = 'bs3';
     });
 
 }());

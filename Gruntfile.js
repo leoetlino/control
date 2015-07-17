@@ -224,6 +224,7 @@ module.exports = function (grunt) {
                         'src/libs/angular-bootstrap-show-errors/src/showErrors.js',
                         'src/libs/bootstrap-switch/dist/js/bootstrap-switch.js',
                         'src/libs/angular-bootstrap-toggle-switch/angular-toggle-switch.js',
+                        'src/libs/angular-xeditable/dist/js/xeditable.js',
                         'dev/app/00-templates.js',
                         'src/app/**.js',
                         'src/app/*/**.js',

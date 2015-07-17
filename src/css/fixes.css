@@ -89,3 +89,38 @@ input[type="file"] {
         margin-right: 90px;
     }
 }
+
+.editable-click {
+    color: inherit;
+    border-bottom: 0;
+}
+
+.editable-wrap, .editable-wrap .editable-input {
+    display: block;
+}
+
+/* Don't use ugly monospace default font */
+code, kbd, pre, samp, .monospace-font {
+    font-family: Menlo, Monaco, Consolas, monospace;
+}
+
+.no-transition, .no-transition * {
+    -webkit-transition: none !important;
+    transition: none !important;
+}
+
+select {
+    font-family: "Lato";
+}
+
+/* Overrides from bootstrap-cards */
+.list-group-item i {
+    opacity: initial;
+    width: initial;
+    text-align: initial;
+    margin-right: initial;
+}
+
+.btn i {
+    margin-right: initial;
+}
