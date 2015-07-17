@@ -42,6 +42,14 @@ control.factory('ServicesService', function ($http, ENV, $rootScope, $location, 
         },
         getSelectedService: function () {
             var service;
+            var lastServiceId = instance.getLastUsedServiceId();
+            if (lastServiceId) {
+                service = _.findWhere(instance.getServicesList(), { id: lastServiceId });
+                if (!service) {
+                    instance.removeLastUsedServiceId();
+                    $rootScope.$broadcast('invalid-service');
+                }
+            }
             if ($location.search().username) {
                 service = instance.getBy('username', $location.search().username);
                 if (!service) {
@@ -60,14 +68,7 @@ control.factory('ServicesService', function ($http, ENV, $rootScope, $location, 
                     $rootScope.$broadcast('invalid-service');
                 }
             }
-            var lastServiceId = instance.getLastUsedServiceId();
-            if (lastServiceId) {
-                service = _.findWhere(instance.getServicesList(), { id: lastServiceId });
-                if (!service) {
-                    instance.removeLastUsedServiceId();
-                    $rootScope.$broadcast('invalid-service');
-                }
-            }
+            // Last resort
             if (!service) {
                 service = instance.getServicesList()[0];
             }
