@@ -5,9 +5,9 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
     };
 
     $scope.logOut = function () {
-        AuthService.logOut().then(function () {
+        AuthService.logOut().then(function onLogoutSuccess () {
             $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-        }, function () {
+        }, function onLogoutFail () {
             $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
         });
     };
@@ -18,7 +18,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
 
     function initServices () {
         // returns a promise.
-        return ServicesService.initAndGetService().then(function (service) {
+        return ServicesService.initAndGetService().then(function onInitServiceSuccess (service) {
             $rootScope.servicesLoaded = true;
             $rootScope.services = ServicesService.getServicesList();
             $rootScope.service = service;
@@ -35,14 +35,20 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         initServices();
     }
 
-    $rootScope.$watch('service.username', function (newUsername) {
+    $rootScope.$watch('service.username', function onSelectedServiceUsernameChange (newUsername) {
+        if (!AuthChecker.isAuthenticated()) {
+            return;
+        }
         if (newUsername && $location.search().username && (newUsername !== $location.search().username)) {
             $location.search('username', null);
             $location.search('serviceId', null);
         }
     });
 
-    $rootScope.$watch('service.id', function (newId, oldId) {
+    $rootScope.$watch('service.id', function onSelectedServiceIdChange (newId, oldId) {
+        if (!AuthChecker.isAuthenticated()) {
+            return;
+        }
         if (newId && $location.search().serviceId && (newId !== $location.search().serviceId)) {
             $location.search('username', null);
             $location.search('serviceId', null);
@@ -52,7 +58,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         }
     });
 
-    $rootScope.$on('cast-only-route', function () {
+    $rootScope.$on('cast-only-route', function onCastOnlyRouteEvent () {
         $alert({
             content: 'The page you are trying to access is only available for Cast nodes.',
             type: 'danger',
@@ -61,7 +67,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         $location.path('/manage/information');
     });
 
-    $rootScope.$on('invalid-service', function () {
+    $rootScope.$on('invalid-service', function onInvalidServiceEvent () {
         $alert({
             content: 'The service does not exist.',
             type: 'danger',

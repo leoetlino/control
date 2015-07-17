@@ -349,6 +349,10 @@ mod.provider( '$routeSegment',
 
         function updateSegment(index, segment) {
 
+            if ($rootScope.$broadcast('routeSegmentChangeStart', index, segment).defaultPrevented) {
+                return $q.reject('segment change prevented');
+            }
+
             if($routeSegment.chain[index] && $routeSegment.chain[index].clearWatcher) {
                 $routeSegment.chain[index].clearWatcher();
             }
@@ -415,7 +419,7 @@ mod.provider( '$routeSegment',
                                 reload: function() {
                                     var originalSegment = getSegmentInChain(index, $routeSegment.name.split("."));
                                     updateSegment(index, originalSegment).then(function(result) {
-                                        if (result.success != undefined) {
+                                        if (result && result.success != undefined) {
                                             broadcast(index);
                                             if (originalSegment.children) {
                                                 broadcast(index + 1);
@@ -458,9 +462,6 @@ mod.provider( '$routeSegment',
                             var newResolve = {error: function() { return $q.when(error); }};
                             return resolve(index, name, angular.extend({resolve: newResolve}, params.resolveFailed));
                         }
-                        else
-                            throw new Error('Resolving failed with a reason `'+error+'`, but no `resolveFailed` ' +
-                                            'provided for segment `'+name+'`');
                     })
         }
 

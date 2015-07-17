@@ -1,20 +1,30 @@
 control.run(function ($rootScope, $location, USER_ROLES, AUTH_EVENTS, AuthChecker) {
 
-    $rootScope.$on('routeSegmentChange', function (event, route) {
-        if (!route.segment) {
+    $rootScope.$on('routeSegmentChangeStart', function onRouteSegmentChangeStart (event, index, segment) {
+        if (!segment) {
             return;
         }
-        $rootScope.pageTitle = route.segment.params.title;
         if ($rootScope.service &&
             $rootScope.service.id &&
-            route.segment.params.visibleForCastOnly &&
+            segment.params.visibleForCastOnly &&
             $rootScope.service.group.toLowerCase().indexOf('nodes') === -1) {
+            event.preventDefault();
             $rootScope.$broadcast('cast-only-route');
         }
+        $rootScope.routeLoading = true;
+    });
+
+    $rootScope.$on('routeSegmentChange', function onRouteSegmentChange (event, args) {
+        if (!args.segment) {
+            return;
+        }
+        $rootScope.pageTitle = args.segment.params.title;
+        $rootScope.routeLoading = false;
     });
 
     var originalPath = null;
-    $rootScope.$on('$routeChangeStart', function (event, next) {
+
+    $rootScope.$on('$routeChangeStart', function onRouteChangeStart (event, next) {
         var segment = control.segments[next.$$route.segment];
         var authorizedRoles;
         if (segment) {
@@ -28,21 +38,21 @@ control.run(function ($rootScope, $location, USER_ROLES, AUTH_EVENTS, AuthChecke
             event.preventDefault();
             if (AuthChecker.isAuthenticated()) {
                 // user is not allowed
-                if (next.originalPath !== '/log-in') {
+                if (next.$$route.originalPath !== '/log-in') {
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
                     return;
                 }
             } else {
                 // user is not logged in
-                if (next.originalPath !== '/log-in') {
+                if (next.$$route.originalPath !== '/log-in') {
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-                    originalPath = next.originalPath;
+                    originalPath = next.$$route.originalPath;
                     return;
                 }
             }
         }
 
-        if (originalPath) {
+        if (originalPath && AuthChecker.isAuthenticated()) {
             $location.path(originalPath).replace();
             originalPath = null;
         }
