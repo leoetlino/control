@@ -11,25 +11,24 @@
     </div>
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="stream in ctrl.config.streams">
-                <h4 class="list-group-item-heading">{{stream.stream}}</h4>
-                <p ng-show="ctrl.listeners[stream.stream].length === 0">No listeners are tuned in at the moment.</p>
-                <table class="table table-striped" ng-hide="ctrl.listeners[stream.stream].length === 0">
-                    <tr>
-                        <th>IP</th>
-                        <th>Client</th>
-                        <th>Tuned In Since</th>
-                    </tr>
-                    <tr ng-repeat="listener in ctrl.listeners[stream.stream]">
-                        <td>{{listener.ip}}</td>
-                        <td>{{listener.client}}</td>
-                        <td>{{listener.starttime * 1000  | date:'HH:mm:ss Z dd/MM '}}</td>
-                    </tr>
-                </table>
-                
+            <h4 class="list-group-item-heading">{{stream.stream}}</h4>
+            <p ng-show="ctrl.listeners[stream.stream].length === 0">No listeners are tuned in at the moment.</p>
+            <table class="table table-striped" ng-hide="ctrl.listeners[stream.stream].length === 0">
+                <tr>
+                    <th>IP</th>
+                    <th>Client</th>
+                    <th>Tuned In Since</th>
+                </tr>
+                <tr ng-repeat="listener in ctrl.listeners[stream.stream]">
+                    <td>{{listener.ip}}</td>
+                    <td>{{listener.client}}</td>
+                    <td>{{listener.starttime * 1000  | date:'HH:mm:ss Z dd/MM '}}</td>
+                </tr>
+            </table>
+
             <div class="clearfix"></div>
         </li>
     </ul>
-    
 </section>
 
 <section class="panel panel-default">
