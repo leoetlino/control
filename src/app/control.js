@@ -27,7 +27,8 @@ control = null;
         'ui.bootstrap.showErrors',
         'mgcrea.ngStrap',
         'picardy.fontawesome',
-        'xeditable'
+        'xeditable',
+        'random-components'
     ]);
 
     control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, $httpProvider, $provide, $alertProvider) {

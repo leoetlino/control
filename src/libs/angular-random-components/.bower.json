@@ -1,0 +1,26 @@
+{
+  "name": "angular-random-components",
+  "homepage": "https://github.com/leoetlino/AngularJS-Components",
+  "authors": [
+    "Dimitris Doukas <doukas.dimitrios+doukasd@gmail.com>"
+  ],
+  "description": "A collection of random reusable drop-in components for AngularJS.",
+  "main": "dd-text-collapse/dd-text-collapse.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "951ebc5ddb",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "951ebc5ddb33e6e53b2a7c6055a29409d3d05c9b"
+  },
+  "_source": "git://github.com/leoetlino/AngularJS-Components.git",
+  "_target": "master",
+  "_originalSource": "leoetlino/AngularJS-Components"
+}

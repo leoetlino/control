@@ -11,18 +11,26 @@
             <h4 class="list-group-item-heading">{{stream.stream}}</h4>
             <div ng-show="!stream.loadingStats">
                 <p ng-show="ctrl.listeners[stream.stream].length === 0">No listeners are tuned in at the moment.</p>
-                <table class="table table-striped" ng-hide="ctrl.listeners[stream.stream].length === 0">
-                    <tr>
-                        <th>IP</th>
-                        <th>Client</th>
-                        <th>Tuned In Since</th>
-                    </tr>
-                    <tr ng-repeat="listener in ctrl.listeners[stream.stream]">
-                        <td>{{listener.ip}}</td>
-                        <td>{{listener.client}}</td>
-                        <td>{{listener.starttime * 1000  | date:'HH:mm:ss Z dd/MM '}}</td>
-                    </tr>
-                </table>
+                <div class="table-responsive" ng-hide="ctrl.listeners[stream.stream].length === 0">
+                    <br>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th>IP</th>
+                            <th>Client</th>
+                            <th>Tuned In Since</th>
+                        </tr>
+                        <tr ng-repeat="listener in ctrl.listeners[stream.stream]">
+                            <td>{{listener.ip}}</td>
+                            <td><span dd-text-collapse dd-text-collapse-max-length="50" dd-text-collapse-text="{{listener.client}}"></span></td>
+                            <td>{{listener.starttime * 1000 |date:'dd/MM/yyyy HH:mm:ss Z'}}</td>
+                        </tr>
+                        <colgroup>
+                            <col style="width: 10%">
+                            <col style="width: 60%">
+                            <col style="width: 30%" class="text-center">
+                        </colgroup>
+                    </table>
+                </div>
             </div>
             <div ng-show="stream.loadingStats">
                 <loading-spinner></loading-spinner>
