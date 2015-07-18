@@ -72,11 +72,7 @@ control.run(function ($rootScope, $location, $window, $alert, $modal, $timeout, 
     });
 
     $rootScope.$on(AUTH_EVENTS.sessionTimeout, function onSessionTimeout () {
-        ServicesService.invalidateCache();
-        $rootScope.services = null;
-        $rootScope.service = null;
         Session.destroy();
-
         $location.path('/log-in');
         $alert({
             content: 'Your session has expired, so you have been logged out.',
