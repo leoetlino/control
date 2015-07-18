@@ -12,6 +12,36 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         });
     };
 
+    //////////////////
+    // Top bar player
+    //////////////////
+
+    var audio;
+    $scope.player = {};
+    $scope.player.states = { stopped: 0, buffering: 1, playing: 2 };
+    $scope.player.state = $scope.player.states.stopped;
+
+    $scope.player.toggle = function (streamUrl) {
+        if ($scope.player.state === $scope.player.states.playing && audio !== null) {
+            audio.pause();
+            audio.src = '';
+            audio = null;
+            $scope.player.state = $scope.player.states.stopped;
+            return;
+        }
+        audio = new Audio(streamUrl);
+        audio.play();
+        audio.addEventListener('playing', function () {
+            $scope.player.state = $scope.player.states.playing;
+            $scope.$apply();
+        });
+        audio.addEventListener('error', function () {
+            $scope.player.state = $scope.player.states.stopped;
+            $scope.$apply();
+        });
+        $scope.player.state = $scope.player.states.buffering;
+    };
+
     ////////////
     // Services
     ////////////

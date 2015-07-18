@@ -11,3 +11,19 @@
 .collapse.am-collapse.in-add {
     animation-name: expand;
 }
+
+@keyframes slow-flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+.slow-flash {
+    animation-name: slow-flash;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+}
