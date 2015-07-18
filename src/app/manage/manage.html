@@ -19,9 +19,7 @@
     </section>
 
     <section class="col-sm-9 bootcards-cards" ng-show="routeLoading">
-        <svg class="spinner with-margin center-block" width="64px" height="64px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-        </svg>
+        <loading-spinner></loading-spinner>
     </section>
 </div>
 <div class="alert alert-info" ng-show="!service">
