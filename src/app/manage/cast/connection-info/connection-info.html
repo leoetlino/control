@@ -4,6 +4,9 @@
         <p>Here is everything you need to go live with your favourite broadcasting software.</p>
     </div>
 </section>
+<div class="alert alert-warning">
+    <p><fa name="warning"></fa> Never use the IP linked to your hostname. The IP address can and will change frequently, so relying on the IP can break your setup completely.</p>
+</div>
 <section class="panel panel-default" ng-repeat="stream in ctrl.config.streams">
     <div class="panel-body">
         <h4>{{stream.stream}}</h4>
@@ -11,12 +14,6 @@
         <p><strong>Hostname: </strong>{{ctrl.config.username}}.radioca.st</p>
         <p><strong>Port: </strong>{{ctrl.config.input.SHOUTcast}}</p>
         <p><strong>Password: </strong><code>{{stream.password}}</code></p>
-    </div>
-</section>
-<section class="panel panel-default">
-    <div class="panel-body">
-        <h4><fa name="info-circle"></fa> Notice</h4>
-        <p>Never use the IP linked to the hostname(s) above. They will change frequently and may break your setup completely.</p>
     </div>
 </section>
 <section class="panel panel-default">
