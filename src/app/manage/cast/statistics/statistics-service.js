@@ -1,12 +1,10 @@
 angular.module('control.manage.cast').factory('StatisticsService', function ($http) {
     var StatisticsService = {};
 
-    /**
-     * Get listeners
-     * @param [Array] listeners - An array of listeners
-     */
-    StatisticsService.getListeners = function (url) {
-        return $http.get(url);
+    StatisticsService.getListeners = function (hostname, stream, apiKey) {
+        return $http.get(hostname + '/api/' + stream + '/' + apiKey + '/listeners').then(function (res) {
+            return res.data;
+        });
     };
 
     return StatisticsService;
