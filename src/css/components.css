@@ -143,6 +143,12 @@ a.list-group-item {
     padding-bottom: 20px;
 }
 
+/* Links */
+.links li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 /* App status colours */
 .pending, .pendingUpdate, option[value="pending"], option[value="pendingUpdate"] {
     color: #e74c3c;
