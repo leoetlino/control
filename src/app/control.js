@@ -28,7 +28,8 @@ control = null;
         'mgcrea.ngStrap',
         'picardy.fontawesome',
         'xeditable',
-        'random-components'
+        'random-components',
+        'smart-table'
     ]);
 
     control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, $httpProvider, $provide, $alertProvider) {

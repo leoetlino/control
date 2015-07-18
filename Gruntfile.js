@@ -226,6 +226,7 @@ module.exports = function (grunt) {
                         'src/libs/angular-bootstrap-toggle-switch/angular-toggle-switch.js',
                         'src/libs/angular-xeditable/dist/js/xeditable.js',
                         'src/libs/angular-random-components/dd-text-collapse/dd-text-collapse.js',
+                        'src/libs/angular-smart-table/dist/smart-table.js',
                         'dev/app/00-templates.js',
                         'src/app/**.js',
                         'src/app/*/**.js',
