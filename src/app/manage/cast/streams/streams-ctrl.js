@@ -2,7 +2,7 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
     var self = this;
 
     self.streamNames = ['32kbps', '64kbps', '96kbps', '128kbps', '192kbps', '256kbps', '320kbps'];
-    self.streams = config.streams || [];
+    self.streams = angular.copy(config.streams) || [];
 
     self.addStream = function () {
         if (self.streams.length === 3) {

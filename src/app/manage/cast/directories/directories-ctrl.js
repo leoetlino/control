@@ -1,8 +1,8 @@
 angular.module('control.manage.cast').controller('DirectoriesCtrl', function ($scope, config, choices, DirectoriesService) {
     var self = this;
 
-    self.config = config;
-    self.directories = choices;
+    self.config = angular.copy(config);
+    self.directories = angular.copy(choices);
 
     self.directories.forEach(function (directory) {
         directory.isEnabled = (config.directories.Icecast.indexOf(directory.url) !== -1);
