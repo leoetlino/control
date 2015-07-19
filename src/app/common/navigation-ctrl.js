@@ -1,30 +1,46 @@
 control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $route, USER_ROLES, AUTH_EVENTS, AuthChecker, AuthService, Session, ServicesService, $window, $alert) {
 
-    ////////////////////
-    // Helper functions
-    ////////////////////
-
     $scope.isActive = function (viewLocation) {
         return (viewLocation === '/') ? viewLocation === $location.path() : $location.path().indexOf(viewLocation) > -1;
     };
 
-    $rootScope.reloadServices = function () {
-        ServicesService.invalidateCache();
-        return initServices();
+    $scope.logOut = function () {
+        AuthService.logOut().then(function onLogoutSuccess () {
+            $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+        }, function onLogoutFail () {
+            $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
+        });
     };
 
-    $rootScope.$on('routeSegmentChange', function (index, route) {
-        if (!route.segment) {
+    //////////////////
+    // Top bar player
+    //////////////////
+
+    var audio;
+    $scope.player = {};
+    $scope.player.states = { stopped: 0, buffering: 1, playing: 2 };
+    $scope.player.state = $scope.player.states.stopped;
+
+    $scope.player.toggle = function (streamUrl) {
+        if ($scope.player.state === $scope.player.states.playing && audio !== null) {
+            audio.pause();
+            audio.src = '';
+            audio = null;
+            $scope.player.state = $scope.player.states.stopped;
             return;
         }
-        $rootScope.pageTitle = route.segment.params.title;
-        if ($rootScope.service &&
-            $rootScope.service.id &&
-            route.segment.params.visibleForCastOnly &&
-            $rootScope.service.group.toLowerCase().indexOf('nodes') === -1) {
-            $rootScope.$broadcast('cast-only-route');
-        }
-    });
+        audio = new Audio(streamUrl);
+        audio.play();
+        audio.addEventListener('playing', function () {
+            $scope.player.state = $scope.player.states.playing;
+            $scope.$apply();
+        });
+        audio.addEventListener('error', function () {
+            $scope.player.state = $scope.player.states.stopped;
+            $scope.$apply();
+        });
+        $scope.player.state = $scope.player.states.buffering;
+    };
 
     ////////////
     // Services
@@ -32,7 +48,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
 
     function initServices () {
         // returns a promise.
-        return ServicesService.initAndGetService().then(function (service) {
+        return ServicesService.initAndGetService().then(function onInitServiceSuccess (service) {
             $rootScope.servicesLoaded = true;
             $rootScope.services = ServicesService.getServicesList();
             $rootScope.service = service;
@@ -40,74 +56,50 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         });
     }
 
-    $rootScope.$on(AUTH_EVENTS.loginSuccess, initServices);
+    $rootScope.invalidateCache = function () {
+        $rootScope.$broadcast('invalidate-cache');
+    };
+
+    $rootScope.reloadServices = function () {
+        $rootScope.invalidateCache();
+        return initServices();
+    };
+
     if (AuthChecker.isAuthenticated()) {
         initServices();
     }
 
-    $rootScope.$watch('service.username', function (newUsername) {
+    $rootScope.$watch('service.username', function onSelectedServiceUsernameChange (newUsername) {
+        if (!AuthChecker.isAuthenticated()) {
+            return;
+        }
         if (newUsername && $location.search().username && (newUsername !== $location.search().username)) {
             $location.search('username', null);
             $location.search('serviceId', null);
         }
     });
 
-    $rootScope.$watch('service.id', function (newId) {
+    $rootScope.$watch('service.id', function onSelectedServiceIdChange (newId, oldId) {
+        if (!AuthChecker.isAuthenticated()) {
+            return;
+        }
         if (newId && $location.search().serviceId && (newId !== $location.search().serviceId)) {
             $location.search('username', null);
             $location.search('serviceId', null);
         }
-    });
-
-    /////////////////////////
-    // Authentication system
-    /////////////////////////
-
-    $scope.currentUser = null;
-    $scope.userRoles = USER_ROLES;
-    $scope.isAuthorized = AuthChecker.isAuthorized;
-    $scope.isAuthenticated = AuthChecker.isAuthenticated;
-    $scope.currentSession = Session;
-    $scope.logOut = $scope.logout = function logOut () {
-        AuthService.logOut().then(function () {
-            $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-        }, function () {
-            $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
-        });
-    };
-
-    var originalPath = null;
-    $rootScope.$on('$routeChangeStart', function (event, next) {
-        var segment = control.segments[next.$$route.segment];
-        var authorizedRoles;
-        if (segment) {
-            authorizedRoles = segment.params.authorizedRoles;
-        }
-        if (!authorizedRoles) {
-            authorizedRoles = [USER_ROLES.all];
-        }
-
-        if (!AuthChecker.isAuthorized(authorizedRoles)) {
-            event.preventDefault();
-            if (AuthChecker.isAuthenticated()) {
-                // user is not allowed
-                if (next.originalPath !== '/log-in') {
-                    $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-                    return;
-                }
-            } else {
-                // user is not logged in
-                if (next.originalPath !== '/log-in') {
-                    $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-                    originalPath = next.originalPath;
-                    return;
-                }
-            }
+        if (oldId && newId !== oldId) {
+            $rootScope.$broadcast('selected-service-changed', newId);
         }
     });
 
-    $rootScope.$on('cast-only-route', function () {
-        $alert({
+    var alert;
+
+    $rootScope.$on('cast-only-route', function onCastOnlyRouteEvent () {
+        $rootScope.routeLoading = false;
+        if (alert) {
+            alert.hide();
+        }
+        alert = $alert({
             content: 'The page you are trying to access is only available for Cast nodes.',
             type: 'danger',
             duration: 5
@@ -115,7 +107,8 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         $location.path('/manage/information');
     });
 
-    $rootScope.$on('invalid-service', function () {
+    $rootScope.$on('invalid-service', function onInvalidServiceEvent () {
+        $rootScope.routeLoading = false;
         $alert({
             content: 'The service does not exist.',
             type: 'danger',
@@ -123,76 +116,15 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         });
         $location.search('username', null);
         $location.search('serviceId', null);
-        $location.path('/');
+        $location.path('/manage');
     });
 
-    $rootScope.$on(AUTH_EVENTS.loginSuccess, function () {
-        if (originalPath === 'undefined' || !originalPath || originalPath === '/log-in') {
-            originalPath = '/';
-        }
-        ServicesService.invalidateCache();
-        return initServices().then(function onSuccess () {
-            $location.path(originalPath);
-        }, function onFail () {
-            $window.location.reload();
-        });
-    });
-    $rootScope.$on(AUTH_EVENTS.loginFailed, function() {
+    $rootScope.$on('server-error', function onServerError (event, error) {
         $alert({
-            content: 'Couldn\'t log in. Please check your credentials. If you forgot your password, you can reset it from the client area.',
+            content: error.message + ' (' + error.code + ')',
             type: 'danger',
-            duration: 10
+            duration: error.alertDuration
         });
     });
-    $rootScope.$on(AUTH_EVENTS.logoutSuccess, function() {
-        ServicesService.invalidateCache();
-        $rootScope.services = null;
-        $rootScope.service = null;
 
-        $location.path('/log-in');
-        $alert({
-            content: 'You have been logged out.',
-            type: 'success',
-            duration: 5
-        });
-    });
-    $rootScope.$on(AUTH_EVENTS.logoutFailed, function() {
-        $alert({
-            content: 'Couldn\'t log you out. Please try again. If the problem persists, reload the page and contact us.',
-            type: 'danger',
-            duration: 10
-        });
-    });
-    $rootScope.$on(AUTH_EVENTS.badRequest, function() {
-        $alert({
-            content: 'Something went wrong. Please try again. If the problem persists, reload the page and contact us.',
-            type: 'danger',
-            duration: 10
-        });
-    });
-    $rootScope.$on(AUTH_EVENTS.sessionTimeout, function() {
-        Session.destroy();
-        $location.path('/log-in');
-        $alert({
-            content: 'Your session has expired, so you have been logged out.',
-            type: 'warning'
-        });
-    });
-    $rootScope.$on(AUTH_EVENTS.notAuthenticated, function() {
-        $location.path('/log-in');
-        $alert({
-            content: 'Please log in to continue.',
-            type: 'warning',
-            duration: 5
-        });
-    });
-    $rootScope.$on(AUTH_EVENTS.notAuthorized, function() {
-        $location.path('/log-in');
-        $alert({
-            title: 'Access denied.',
-            content: 'You are not authorised to do this.',
-            type: 'warning',
-            duration: 5
-        });
-    });
 });

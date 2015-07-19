@@ -1,0 +1,17 @@
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>Directories</h4>
+        <p>Directories are online lists of radio stations where people can browse stations per genre and tune in to. While some directories like TuneIn require a manual registration, others like the SHOUTcast directory only require that you enable them below!</p>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="directory in ctrl.directories">
+            <div class="pull-left">
+                <h4 class="list-group-item-heading">{{directory.name}}</h4>
+            </div>
+            <div class="pull-right">
+                <div toggle-switch is-disabled="ctrl.isSaving" class="switch-success" ng-model="ctrl.getDirectoryByName(directory.name).isEnabled" on-label="On" off-label="Off"></div>
+            </div>
+            <div class="clearfix"></div>
+        </li>
+    </ul>
+</section>

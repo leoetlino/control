@@ -143,6 +143,12 @@ a.list-group-item {
     padding-bottom: 20px;
 }
 
+/* Links */
+.links li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 /* App status colours */
 .pending, .pendingUpdate, option[value="pending"], option[value="pendingUpdate"] {
     color: #e74c3c;
@@ -166,7 +172,7 @@ a.list-group-item {
 
 /* Service switcher */
 .service-switcher {
-    display: block;
+    display: inline;
     padding-top: 22.5px;
     padding-bottom: 22.5px;
     padding-left: 15px;
@@ -182,8 +188,30 @@ a.list-group-item {
     overflow: hidden;
 }
 
+.play-stop-button {
+    display: inline;
+    padding-top: 22.5px;
+    padding-bottom: 22.5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: transparent;
+    border: 0;
+    color: white;
+    font-size: 16px;
+    transition: opacity 0.1s linear;
+}
+
+.play-stop-button:hover {
+    opacity: 0.8;
+}
+
 @media screen and (max-width: 767px) {
     .service-switcher {
+        font-size: 18px;
+        padding-bottom: 17px;
+        padding-top: 25px;
+    }
+    .play-stop-button {
         font-size: 18px;
         padding-bottom: 17px;
         padding-top: 25px;
@@ -204,6 +232,9 @@ a.list-group-item {
 @media screen and (max-width: 380px) {
     .service-switcher {
         width: 120px;
+    }
+    .navbar-brand {
+        display: none;
     }
 }
 
@@ -259,4 +290,9 @@ a.list-group-item {
 .dropdown-menu .active .text-muted,
 .dropdown-menu li:focus .text-muted {
     color: white !important;
+}
+
+/* Tooltips */
+.tooltip {
+    font-family: Lato;
 }

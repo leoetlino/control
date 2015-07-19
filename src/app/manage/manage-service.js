@@ -78,6 +78,8 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                     completeName: 'manage.' + item.route.name,
                     template: item.route.template,
                     controller: item.route.controller,
+                    controllerAs: item.route.controllerAs,
+                    resolve: item.route.resolve,
                     title: item.route.title || item.name,
                     visibleForCastOnly: item.visibleForCastOnly || false
                 }
@@ -93,22 +95,26 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
 
             section.items.push(newItem);
 
+            var routeObject = {
+                templateUrl: newItem.route.template,
+                authorizedRoles: [USER_ROLES.all],
+                title: newItem.route.title,
+                visibleForCastOnly: newItem.route.visibleForCastOnly,
+                watcher: /*@ngInject*/ function ($rootScope) {
+                    if (!$rootScope.service) {
+                        return;
+                    }
+                    return $rootScope.service.id;
+                },
+                resolve: newItem.route.resolve,
+                controller: newItem.route.controller,
+                controllerAs: newItem.route.controllerAs
+            };
+
             $routeSegmentProvider
                 .when('/manage/' + newItem.route.subPathName, newItem.route.completeName)
                 .within('manage')
-                .segment(newItem.route.name, {
-                    templateUrl: newItem.route.template,
-                    authorizedRoles: [USER_ROLES.all],
-                    title: newItem.route.title,
-                    visibleForCastOnly: newItem.route.visibleForCastOnly,
-                    controller: newItem.route.controller,
-                    watcher: ['$rootScope', function ($rootScope) {
-                        if (!$rootScope.service) {
-                            return;
-                        }
-                        return $rootScope.service.id;
-                    }]
-                });
+                .segment(newItem.route.name, routeObject);
         }
     };
     window.manager = instance;

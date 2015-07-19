@@ -1,0 +1,54 @@
+<div class="alert alert-info">
+    <p><fa name="info-circle"></fa> We're working hard to make this page more complete. You'll see more info here very soon.</p>
+</div>
+
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>Listeners <button ng-disabled="ctrl.config.streams[ctrl.config.streams.length - 1].loadingStats" class="btn btn-xs btn-default no-transition" type="button" ng-click="ctrl.updateStats()"><fa name="refresh"></fa></button></h4>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="stream in ctrl.config.streams">
+            <h4 class="list-group-item-heading">{{stream.stream}}</h4>
+            <div ng-show="!stream.loadingStats && !stream.failedLoading">
+                <p ng-show="ctrl.listeners[stream.stream].length === 0">No listeners are tuned in at the moment.</p>
+                <div class="table-responsive" ng-if="true" ng-hide="ctrl.listeners[stream.stream].length === 0" ng-init="listenersShownAtMost = 20">
+                    <br>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>IP</th>
+                                <th>Client</th>
+                                <th>Tuned In Since</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="listener in ctrl.listeners[stream.stream] | limitTo: listenersShownAtMost">
+                                <td>{{listener.ip}}</td>
+                                <td><span dd-text-collapse dd-text-collapse-max-length="50" dd-text-collapse-text="{{listener.client}}"></span></td>
+                                <td>{{listener.starttime * 1000 |date:'dd/MM/yyyy HH:mm:ss Z'}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr ng-show="ctrl.listeners[stream.stream].length > listenersShownAtMost" class="am-fade">
+                                <td class="text-center" colspan="3">
+                                    <p><button type="button" class="btn btn-default" ng-click="listenersShownAtMost = listenersShownAtMost + 20"><i class="fa fa-ellipsis-h"></i> Show more</button> <button type="button" class="btn btn-default" ng-click="listenersShownAtMost = ctrl.listeners[stream.stream].length">Show all</button></p>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        <colgroup>
+                            <col style="width: 10%">
+                            <col style="width: 60%">
+                            <col style="width: 30%" class="text-center">
+                        </colgroup>
+                    </table>
+                </div>
+            </div>
+            <div ng-show="stream.loadingStats">
+                <loading-spinner></loading-spinner>
+            </div>
+            <div ng-show="stream.failedLoading">
+                <p class="text-danger">Failed while loading the list. Please try again.</p>
+            </div>
+        </li>
+    </ul>
+</section>

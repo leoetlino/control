@@ -27,7 +27,7 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
     var changeStateFailure = function (oldValue) {
         $alert({
             content: 'Something went wrong while enabling or disabling the TuneIn integration. Please try again.',
-            type: 'danger',
+            type: 'error',
             duration: 10
         });
         unregisterWatch();
@@ -47,7 +47,7 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
                 if ($scope.form.$invalid) {
                     $alert({
                         content: 'The integration has not yet been configured correctly.',
-                        type: 'danger',
+                        type: 'error',
                         duration: 10
                     });
                     return;
@@ -81,7 +81,7 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
         }, function () {
             $alert({
                 content: 'Something went wrong while saving your settings. Your settings were not saved. Please try again.',
-                type: 'danger',
+                type: 'error',
                 duration: 10
             });
             $scope.disableForm = false;
@@ -109,7 +109,7 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
         }, function () {
             $alert({
                 content: 'Something went wrong while removing your settings. Your settings were not removed. Please try again.',
-                type: 'danger',
+                type: 'error',
                 duration: 10
             });
             watchTuneInIntegrationSwitch();

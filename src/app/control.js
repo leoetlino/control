@@ -11,6 +11,7 @@ control = null;
         'config',
         'templates',
         'control.feedback',
+        'control.manage.cast',
         'control.manage.extra-services',
         'angular-promise-cache',
         'ngRoute',
@@ -25,7 +26,10 @@ control = null;
         'toggle-switch',
         'ui.bootstrap.showErrors',
         'mgcrea.ngStrap',
-        'picardy.fontawesome'
+        'picardy.fontawesome',
+        'xeditable',
+        'random-components',
+        'smart-table'
     ]);
 
     control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, $httpProvider, $provide, $alertProvider) {
@@ -120,6 +124,10 @@ control = null;
         $httpProvider.interceptors.push('AuthInterceptor');
         $httpProvider.interceptors.push('HttpTimeoutInterceptor');
         $httpProvider.interceptors.push('ServerErrorInterceptor');
+    });
+
+    control.run(function (editableOptions) {
+        editableOptions.theme = 'bs3';
     });
 
 }());

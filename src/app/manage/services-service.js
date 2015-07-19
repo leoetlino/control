@@ -1,4 +1,4 @@
-control.factory('ServicesService', function ($http, ENV, $rootScope, $location, promiseCache) {
+control.factory('ServicesService', function ($http, ENV, $rootScope, $location, promiseCache, localStorageService) {
     var internal = {
         cachedServices: null,
     };
@@ -39,6 +39,14 @@ control.factory('ServicesService', function ($http, ENV, $rootScope, $location, 
         },
         getSelectedService: function () {
             var service;
+            var lastServiceId = instance.getLastUsedServiceId();
+            if (lastServiceId) {
+                service = _.findWhere(instance.getServicesList(), { id: lastServiceId });
+                if (!service) {
+                    instance.removeLastUsedServiceId();
+                    $rootScope.$broadcast('invalid-service');
+                }
+            }
             if ($location.search().username) {
                 service = instance.getBy('username', $location.search().username);
                 if (!service) {
@@ -57,6 +65,7 @@ control.factory('ServicesService', function ($http, ENV, $rootScope, $location, 
                     $rootScope.$broadcast('invalid-service');
                 }
             }
+            // Last resort
             if (!service) {
                 service = instance.getServicesList()[0];
             }
@@ -70,7 +79,20 @@ control.factory('ServicesService', function ($http, ENV, $rootScope, $location, 
                 }
             });
             return service;
+        },
+        saveLastUsedServiceId: function (serviceId) {
+            return localStorageService.set('serviceId', serviceId);
+        },
+        getLastUsedServiceId: function () {
+            return localStorageService.get('serviceId');
+        },
+        removeLastUsedServiceId: function () {
+            return localStorageService.remove('serviceId');
         }
     };
+    $rootScope.$on('invalidate-cache', instance.invalidateCache);
+    $rootScope.$on('selected-service-changed', function (event, serviceId) {
+        instance.saveLastUsedServiceId(serviceId);
+    });
     return instance;
 });

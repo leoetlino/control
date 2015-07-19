@@ -1,5 +1,6 @@
 {
   "name": "angular-route-segment",
+  "license": "MIT",
   "main": "build/angular-route-segment.js",
   "ignore": [
     "**/.*",
@@ -17,11 +18,11 @@
     "**/*.min.js"
   ],
   "homepage": "https://github.com/leoetlino/angular-route-segment",
-  "_release": "592b85a7d7",
+  "_release": "faa9b15650",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "592b85a7d7ab822eab72855d3c410ed74b624a36"
+    "commit": "faa9b15650b5de8b4b4ffe5fbbd9fa80eb27c03f"
   },
   "_source": "git://github.com/leoetlino/angular-route-segment.git",
   "_target": "master",

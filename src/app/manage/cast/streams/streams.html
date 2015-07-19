@@ -1,0 +1,46 @@
+<form editable-form name="editableForm" onbeforesave="ctrl.beforeSave()" onaftersave="ctrl.save()" onshow="ctrl.onEdit()" oncancel="ctrl.onCancel()">
+    <fieldset ng-disabled="disableForm">
+        <section class="panel panel-default">
+            <div class="panel-body">
+                <h4>
+                    Streams
+                    <button class="btn btn-xs btn-default no-transition" type="button" ng-hide="!editableForm.$visible" ng-click="ctrl.addStream()" ng-disabled="ctrl.streams.length === 3"><i class="fa fa-plus"></i></button>
+                </h4>
+            </div>
+            <div class="list-group">
+                <div class="list-group-item" ng-repeat="stream in ctrl.streams">
+                    <h4 class="list-group-item-heading">
+                        <span editable-select="stream.stream" e-ng-options="streamName as streamName for streamName in ctrl.streamNames" e-style="display: inline-block !important; width: 95%; float: left;" e-required>
+                            {{stream.stream}}
+                            <span class="label label-info pull-right" ng-show="stream.primary"><fa name="check-circle-o" fw></fa> Primary</span>
+                        </span>
+                        <button class="btn btn-default pull-right no-transition" type="button" ng-hide="!editableForm.$visible" ng-click="ctrl.removeStream(stream)"><i class="fa fa-trash-o"></i></button>
+                        <div class="clearfix"></div>
+                    </h4>
+                    <p><span editable-text="stream.password" e-placeholder="Password" e-required>Password: <code>{{stream.password}}</code></span></p>
+                    <p ng-show="editableForm.$visible"><span editable-checkbox="stream.primary" e-title="Primary"></span></p>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row" ng-show="editableForm.$visible">
+                    <div class="col-sm-12">
+                        <p class="help-block"><fa name="info-circle"></fa> The primary stream will be used on Cast's home page and will have stream ID 1 when using the SHOUTcast-compatible APIs. It will also be used as the metadata source by the APIs.</p>
+                        <p class="help-block">You can currently only have 3 streams at most.</p>
+                        <br>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-block btn-primary" ng-disabled="editableForm.$waiting"><i class="fa fa-save"></i> Save</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="button" class="btn btn-block btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel</button>
+                    </div>
+                </div>
+                <div class="row" ng-show="!editableForm.$visible">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-block btn-default" ng-click="editableForm.$show()"><i class="fa fa-edit"></i> Edit</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </fieldset>
+</form>

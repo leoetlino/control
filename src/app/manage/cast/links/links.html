@@ -1,0 +1,68 @@
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>Links</h4>
+        <p>Everything you need to place your stream on your website or somewhere else can be found here.</p>
+    </div>
+</section>
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>Tune In</h4>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h4 class="list-group-item-heading">Cast status page</h4>
+            <ul class="list-unstyled links">
+                <li><a link="{{ctrl.config.hostname}}"></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </li>
+        <li class="list-group-item" ng-repeat="stream in ctrl.config.streams">
+            <h4 class="list-group-item-heading">{{stream.stream}}</h4>
+            <ul class="list-unstyled links">
+                <li>Direct: <a link="{{ctrl.config.hostname}}/streams/{{stream.stream}}"></a></li>
+                <li>PLS: <a link="{{ctrl.config.hostname}}/streams/{{stream.stream}}.pls"></a></li>
+                <li>M3U: <a link="{{ctrl.config.hostname}}/streams/{{stream.stream}}.m3u"></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </li>
+    </ul>
+
+</section>
+
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>API endpoints</h4>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h4 class="list-group-item-heading">Cast</h4>
+            <ul class="list-unstyled links">
+                <li>List of active streams: <a link="{{ctrl.config.hostname}}/api/list-active-streams"></a></li>
+                <li>Current song: <a link="{{ctrl.config.hostname}}/api/{{ctrl.primaryStream}}/current-metadata"></a></li>
+                <li>Last played songs: <a link="{{ctrl.config.hostname}}/api/{{ctrl.primaryStream}}/past-metadata"></a>
+                    <br><span class="text-muted"><fa name="info-circle"></fa> Gives the last 20 songs in an array, where the first object is the current song.</span>
+                </li>
+                <li>
+                    List of listeners: <a link="{{ctrl.config.hostname}}/api/{{ctrl.primaryStream}}/{{ctrl.config.apikey}}/listeners"></a>
+                    <br><span class="text-warning"><fa name="warning"></fa> This link contains your private API key so it should be treated as a password.</span>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </li>
+        <li class="list-group-item">
+            <h4 class="list-group-item-heading">SHOUTcast-compatible</h4>
+            <ul class="list-unstyled links">
+                <li>v1 statistics: <a link="{{ctrl.config.hostname}}/7.html"></a></li>
+                <li>v2 statistics: <a link="{{ctrl.config.hostname}}/statistics"></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </li>
+        <li class="list-group-item">
+            <h4 class="list-group-item-heading">Icecast-compatible</h4>
+            <ul class="list-unstyled links">
+                <li>v2.4+: <a link="{{ctrl.config.hostname}}/status-json.xsl"></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </li>
+    </ul>
+</section>

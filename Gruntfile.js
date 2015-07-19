@@ -1,4 +1,4 @@
-/* global module, require */
+/* global module, require, process */
 module.exports = function (grunt) {
     'use strict';
 
@@ -163,7 +163,7 @@ module.exports = function (grunt) {
             dev: {
                 options: {
                     bases: ['dev/'],
-                    port: 5000,
+                    port: process.env.DEV_PORT || 5000,
                     hostname: '*',
                     server: 'dev-server.js',
                     livereload: true
@@ -224,6 +224,9 @@ module.exports = function (grunt) {
                         'src/libs/angular-bootstrap-show-errors/src/showErrors.js',
                         'src/libs/bootstrap-switch/dist/js/bootstrap-switch.js',
                         'src/libs/angular-bootstrap-toggle-switch/angular-toggle-switch.js',
+                        'src/libs/angular-xeditable/dist/js/xeditable.js',
+                        'src/libs/angular-random-components/dd-text-collapse/dd-text-collapse.js',
+                        'src/libs/angular-smart-table/dist/smart-table.js',
                         'dev/app/00-templates.js',
                         'src/app/**.js',
                         'src/app/*/**.js',
