@@ -36,6 +36,11 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
             $scope.$apply();
         });
         audio.addEventListener('error', function () {
+            $alert({
+                content: 'Failed to play the stream. Please try again later.',
+                type: 'danger',
+                duration: 10
+            });
             $scope.player.state = $scope.player.states.stopped;
             $scope.$apply();
         });
