@@ -9,7 +9,7 @@
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="stream in ctrl.config.streams">
             <h4 class="list-group-item-heading">{{stream.stream}}</h4>
-            <div ng-show="!stream.loadingStats">
+            <div ng-show="!stream.loadingStats && !stream.failedLoading">
                 <p ng-show="ctrl.listeners[stream.stream].length === 0">No listeners are tuned in at the moment.</p>
                 <div class="table-responsive" ng-if="true" ng-hide="ctrl.listeners[stream.stream].length === 0" ng-init="listenersShownAtMost = 20">
                     <br>
@@ -45,6 +45,9 @@
             </div>
             <div ng-show="stream.loadingStats">
                 <loading-spinner></loading-spinner>
+            </div>
+            <div ng-show="stream.failedLoading">
+                <p class="text-danger">Failed while loading the list. Please try again.</p>
             </div>
         </li>
     </ul>
