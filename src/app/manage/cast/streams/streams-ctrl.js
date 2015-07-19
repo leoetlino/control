@@ -89,7 +89,7 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
                 type: 'success',
                 duration: 3
             });
-            $scope.invalidateCache();
+            $scope.$emit('invalidate-cast-config-cache');
             self.disableForm = false;
         }, function onFail () {
             $alert({

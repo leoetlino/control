@@ -90,7 +90,7 @@ control.factory('ServicesService', function ($http, ENV, $rootScope, $location, 
             return localStorageService.remove('serviceId');
         }
     };
-    $rootScope.$on('invalidate-cache', instance.invalidateCache);
+    $rootScope.$on('invalidate-services-cache', instance.invalidateCache);
     $rootScope.$on('selected-service-changed', function (event, serviceId) {
         instance.saveLastUsedServiceId(serviceId);
     });

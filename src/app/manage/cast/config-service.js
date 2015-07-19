@@ -23,7 +23,7 @@ angular.module('control.manage.cast').factory('ConfigService', function ($http, 
     };
 
     $rootScope.$on('selected-service-changed', this.invalidateCache);
-    $rootScope.$on('invalidate-cache', this.invalidateCache);
+    $rootScope.$on('invalidate-cast-config-cache', this.invalidateCache);
 
     return this;
 });

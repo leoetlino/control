@@ -56,12 +56,8 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         });
     }
 
-    $rootScope.invalidateCache = function () {
-        $rootScope.$broadcast('invalidate-cache');
-    };
-
     $rootScope.reloadServices = function () {
-        $rootScope.invalidateCache();
+        $rootScope.$broadcast('invalidate-services-cache');
         return initServices();
     };
 
