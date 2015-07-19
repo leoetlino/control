@@ -124,3 +124,8 @@ select {
 .btn i {
     margin-right: initial;
 }
+
+/* Weird AngularJS .ng-hide fix */
+.ng-hide {
+    display: none !important;
+}
