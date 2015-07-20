@@ -122,7 +122,7 @@ section.panel[bs-collapse]:not(.not-collapsed) .collapsed-description {
 [bs-collapse-toggle] .toggler {
     float: right;
     cursor: pointer;
-    transition: all 0.2s linear;
+    transition: transform 0.2s linear;
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
     text-rendering: auto;
