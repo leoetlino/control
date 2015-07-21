@@ -26,6 +26,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
             return;
         }
         if ($scope.player.state === $scope.player.states.playing && audio !== null) {
+            audio.removeEventListener('error');
             audio.pause();
             audio.src = '';
             audio = null;
@@ -39,8 +40,17 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
             $scope.$apply();
         });
         audio.addEventListener('error', function () {
+            /* global MediaError */
+            if (audio.error.code !== MediaError.MEDIA_ERR_ABORTED) {
+                $alert({
+                    content: 'Failed to play the stream.',
+                    type: 'danger',
+                    duration: 3
+                });
+            }
             $scope.player.state = $scope.player.states.stopped;
             $scope.$apply();
+            audio = null;
         });
         $scope.player.state = $scope.player.states.buffering;
     };
