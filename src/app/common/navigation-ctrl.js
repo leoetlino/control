@@ -22,6 +22,9 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
     $scope.player.state = $scope.player.states.stopped;
 
     $scope.player.toggle = function (streamUrl) {
+        if ($scope.player.state === $scope.player.states.buffering) {
+            return;
+        }
         if ($scope.player.state === $scope.player.states.playing && audio !== null) {
             audio.pause();
             audio.src = '';
