@@ -12,7 +12,7 @@ control.factory('ServerErrorInterceptor', function ($rootScope, $q) {
             if (response.status === 503 || response.status === 502) {
                 $rootScope.$broadcast('server-error', {
                     code: response.status,
-                    message: 'Control is currently unavailable. Please try again later. If this persists, please refer to status.shoutca.st for any known network issue.',
+                    message: 'Your request could not be processed. Please try again later. If this persists, please refer to status.shoutca.st for any known network issue.',
                     alertDuration: 600
                 });
             }
