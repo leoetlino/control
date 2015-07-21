@@ -4,6 +4,10 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
     self.streamNames = ['32kbps', '64kbps', '96kbps', '128kbps', '192kbps', '256kbps', '320kbps'];
     self.streams = angular.copy(config.streams) || [];
 
+    /////////////////
+    // Editable form
+    /////////////////
+
     self.addStream = function () {
         if (self.streams.length === 3) {
             $alert({
@@ -104,6 +108,21 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
     var _streams;
     self.onEdit = function () {
         _streams = angular.copy(self.streams);
+        var primaryCheckboxes = _.where($scope.editableForm.$editables, { name: 'stream.primary' });
+        primaryCheckboxes.forEach(function (item) {
+            item.scope.$watch('$data', function (isPrimary, oldValue) {
+                if (!isPrimary || isPrimary === oldValue) {
+                    return;
+                }
+                var otherCheckboxes = _.without(primaryCheckboxes, item);
+                otherCheckboxes.forEach(function (otherItem) {
+                    if (!otherItem.scope.$data) {
+                        return;
+                    }
+                    otherItem.scope.$data = false;
+                });
+            });
+        });
     };
     self.onCancel = function () {
         self.streams = angular.copy(_streams);
