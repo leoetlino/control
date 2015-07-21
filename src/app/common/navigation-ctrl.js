@@ -93,7 +93,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
     $rootScope.$on('cast-only-route', function onCastOnlyRouteEvent () {
         $rootScope.routeLoading = false;
         if (alert) {
-            alert.hide();
+            alert.destroy();
         }
         alert = $alert({
             content: 'The page you are trying to access is only available for Cast nodes.',
@@ -105,7 +105,10 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
 
     $rootScope.$on('invalid-service', function onInvalidServiceEvent () {
         $rootScope.routeLoading = false;
-        $alert({
+        if (alert) {
+            alert.destroy();
+        }
+        alert = $alert({
             content: 'The service does not exist.',
             type: 'danger',
             duration: 5
@@ -116,7 +119,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
     });
 
     $rootScope.$on('server-error', function onServerError (event, error) {
-        $alert({
+        alert = $alert({
             content: error.message + ' (' + error.code + ')',
             type: 'danger',
             duration: error.alertDuration
