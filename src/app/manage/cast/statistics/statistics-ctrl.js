@@ -1,4 +1,4 @@
-angular.module('control.manage.cast').controller('StatisticsCtrl', function (config, StatisticsService, $alert) {
+angular.module('control.manage.cast').controller('StatisticsCtrl', function (config, StatisticsService) {
     var self = this;
     self.config = angular.copy(config);
     self.primaryStream = _.findWhere(config.streams, {
@@ -17,11 +17,6 @@ angular.module('control.manage.cast').controller('StatisticsCtrl', function (con
             }, function onFail () {
                 entry.failedLoading = true;
                 entry.loadingStats = false;
-                $alert({
-                    content: 'Failed to get a list of your listeners. Please try again.',
-                    type: 'danger',
-                    duration: 5
-                });
             });
         });
     };
