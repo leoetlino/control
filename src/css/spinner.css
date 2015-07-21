@@ -44,7 +44,7 @@
 
 @-webkit-keyframes colors {
     0% {
-        stroke: #27f25d;
+        stroke: #26e359;
     }
     25% {
         stroke: #27ae60;
@@ -53,16 +53,16 @@
         stroke: #276f2b;
     }
     75% {
-        stroke: #276f2b;
+        stroke: #26e359;
     }
     100% {
-        stroke: #27ae60;
+        stroke: #276f2b;
     }
 }
 
 @keyframes colors {
     0% {
-        stroke: #27f25d;
+        stroke: #26e359;
     }
     25% {
         stroke: #27ae60;
@@ -71,10 +71,10 @@
         stroke: #276f2b;
     }
     75% {
-        stroke: #276f2b;
+        stroke: #26e359;
     }
     100% {
-        stroke: #27ae60;
+        stroke: #276f2b;
     }
 }
 @-webkit-keyframes dash {
