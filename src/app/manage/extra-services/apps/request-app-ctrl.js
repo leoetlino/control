@@ -1,6 +1,12 @@
-angular.module('control.manage.extra-services').controller('RequestAppCtrl', function ($rootScope, $scope, RequestAppService, Upload, ENV, $timeout) {
+angular.module('control.manage.extra-services').controller('RequestAppCtrl', function ($rootScope, $scope, RequestAppService, Upload, ENV, $timeout, $alert) {
 
     var onAppSubmitted = function () {
+        $alert({
+            content: 'We have received your app request and will process it as soon as we can.',
+            type: 'success',
+            duration: 5
+        });
+        $scope.justSubmitted = true;
         $timeout($scope.reloadServices, 2000);
     };
 

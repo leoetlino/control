@@ -37,7 +37,7 @@
         <h4 bs-collapse-toggle>Submit a request <i class="toggler" ng-class="{'fa-rotate-90': requestFormToggle === 0}" ng-hide="service.apps.android && service.apps.iOS"></i></h4>
         <div class="clearfix"></div>
         <p class="collapsed-description">Submit an app request to get started.</p>
-        <div class="collapse" bs-collapse-target ng-hide="service.apps.android && service.apps.iOS">
+        <div class="collapse" bs-collapse-target ng-hide="(service.apps.android && service.apps.iOS) || justSubmitted">
             <form class="form-horizontal" novalidate role="form" name="form" ng-submit="submit(request)">
                 <fieldset ng-disabled="submittingForm">
                     <br>
@@ -224,8 +224,11 @@
                 </fieldset>
             </form>
         </div>
-        <div ng-show="service.apps.android && service.apps.iOS">
+        <div ng-show="service.apps.android && service.apps.iOS && !justSubmitted">
             <p class="text-success"><fa name="check"></fa> You have already submitted an app request for this service.</p>
+        </div>
+        <div ng-show="justSubmitted">
+            <p class="text-success"><fa name="check"></fa> You have submitted an app request for this service.</p>
         </div>
     </div>
 </section>
