@@ -11,6 +11,10 @@ control.controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthS
         });
     };
 
+    $rootScope.$on(AUTH_EVENTS.loginFailed, function () {
+        $scope.isLoading = false;
+    });
+
     (function showHelpForLoggingIn () {
         if (localStorageService.get('showed-login-help')) {
             return;
