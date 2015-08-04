@@ -20,6 +20,7 @@
     "grunt-contrib-requirejs": "~0.4.4",
     "grunt-contrib-uglify": "~0.9.1",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-eslint": "^17.0.0",
     "grunt-express": "^1.4.1",
     "grunt-githooks": "~0.3.1",
     "grunt-html-build": "~0.5.0",

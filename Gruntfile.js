@@ -71,7 +71,10 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: '.jshintrc'
             },
-            all: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'src/app/*/*/**.js', 'src/app/*/*/*/**.js', 'js/**.js']
+            all: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'src/app/*/*/**.js', 'src/app/*/*/*/**.js', 'js/**.js'],
+        },
+        eslint: {
+            target: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'src/app/*/*/**.js', 'src/app/*/*/*/**.js', 'js/**.js'],
         },
         githooks: {
             all: {
@@ -285,7 +288,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('dev', function () {
         grunt.loadNpmTasks('grunt-express');
-        grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-eslint');
         grunt.loadNpmTasks('grunt-karma');
         grunt.task.run(
             'rsync:dev',
@@ -298,11 +301,11 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', function () {
         grunt.loadNpmTasks('grunt-html2js');
-        grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-eslint');
         grunt.loadNpmTasks('grunt-karma');
         grunt.task.run(
             'html2js:dev',
-            'jshint',
+            'eslint',
             'karma'
         );
     });
