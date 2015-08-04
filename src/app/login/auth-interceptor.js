@@ -1,4 +1,4 @@
-control.factory('AuthInterceptor', function($rootScope, $q, AUTH_EVENTS, Session) {
+control.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS, Session) {
     return {
         request: function (config) {
             config.headers = config.headers || {};
@@ -7,7 +7,7 @@ control.factory('AuthInterceptor', function($rootScope, $q, AUTH_EVENTS, Session
             }
             return config;
         },
-        responseError: function(response) {
+        responseError: function (response) {
             if (response.status === 400) {
                 $rootScope.$broadcast(AUTH_EVENTS.badRequest, response);
             }
@@ -21,6 +21,6 @@ control.factory('AuthInterceptor', function($rootScope, $q, AUTH_EVENTS, Session
                 $rootScope.$broadcast(AUTH_EVENTS.sessionTimeout, response);
             }
             return $q.reject(response);
-        }
+        },
     };
 });

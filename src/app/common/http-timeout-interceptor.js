@@ -1,6 +1,6 @@
 control.factory('HttpTimeoutInterceptor', function ($q, $window) {
     return {
-        'request': function(config) {
+        'request': function (config) {
             config.timeout = 20000;
             return config;
         },
@@ -9,6 +9,6 @@ control.factory('HttpTimeoutInterceptor', function ($q, $window) {
                 $window.alert('Control is currently unavailable. Please try again later. If this occurs again, let us know as soon as possible.');
             }
             return $q.reject(response);
-        }
+        },
     };
 });

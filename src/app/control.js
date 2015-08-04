@@ -5,7 +5,7 @@ control = null;
 (function () {
     'use strict';
 
-    angular.module('config', []).constant('ENV', { apiEndpoint:'itframe.shoutca.st' });
+    angular.module('config', []).constant('ENV', { apiEndpoint: 'itframe.shoutca.st' });
 
     control = angular.module('control', [
         'config',
@@ -29,14 +29,14 @@ control = null;
         'picardy.fontawesome',
         'xeditable',
         'random-components',
-        'smart-table'
+        'smart-table',
     ]);
 
     control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, $httpProvider, $provide, $alertProvider) {
 
         angular.extend($alertProvider.defaults, {
             animation: 'am-fade-and-slide-top',
-            placement: 'top'
+            placement: 'top',
         });
 
         control.$httpProvider = $httpProvider;
@@ -69,7 +69,7 @@ control = null;
             authorizedRoles: [USER_ROLES.public],
             templateUrl: '/app/login/login.html',
             controller: 'LoginCtrl',
-            title: 'Log In'
+            title: 'Log In',
         })
         .segment('dashboard', {
             templateUrl: '/app/dashboard/dashboard.html',
@@ -80,9 +80,9 @@ control = null;
                     return DashService.getInfo().then(function (response) {
                         return response.data;
                     });
-                }]
+                }],
             },
-            controller: 'DashboardCtrl'
+            controller: 'DashboardCtrl',
         })
         .segment('manage', {
             templateUrl: '/app/manage/manage.html',
@@ -91,19 +91,19 @@ control = null;
             resolve: {
                 service: ['ServicesService', function (ServicesService) {
                     return ServicesService.initAndGetService();
-                }]
+                }],
             },
             controller: 'ManageCtrl',
-            watcher: watchForService
+            watcher: watchForService,
         })
-            .within()
-            .segment('information', {
-                default: true,
-                templateUrl: '/app/manage/information-pane.html',
-                authorizedRoles: [USER_ROLES.all],
-                title: 'Information',
-                watcher: watchForService
-            })
+        .within()
+        .segment('information', {
+            default: true,
+            templateUrl: '/app/manage/information-pane.html',
+            authorizedRoles: [USER_ROLES.all],
+            title: 'Information',
+            watcher: watchForService,
+        })
         .up()
         .otherwise('/');
 

@@ -4,7 +4,7 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
     var initialiseSettings = function () {
         $scope.nowPlayingState = $rootScope.service.nowPlaying.isEnabled;
         $scope.settings = {};
-        $rootScope.service.nowPlaying.settings = $rootScope.service.nowPlaying.settings || {};
+        $rootScope.service.nowPlaying.settings = $rootScope.service.nowPlaying.settings || {};
         $scope.settings.prefix = $rootScope.service.nowPlaying.settings.prefix || '#NowPlaying';
         $scope.settings.suffix = $rootScope.service.nowPlaying.settings.suffix || '';
         $scope.settings.interval = $rootScope.service.nowPlaying.settings.interval || 5;
@@ -26,7 +26,7 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
         $alert({
             content: 'Something went wrong while enabling or disabling #NowPlaying. Please try again.',
             type: 'danger',
-            duration: 10
+            duration: 10,
         });
         unregisterWatch();
         $scope.nowPlayingState = oldValue;
@@ -34,8 +34,8 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
         $scope.submitting = false;
     };
 
-    var unregisterWatch,
-        watchNowPlayingSwitch = function () {
+    var unregisterWatch;
+    var watchNowPlayingSwitch = function () {
         unregisterWatch = $scope.$watch('nowPlayingState', function (newValue, oldValue) {
             if (newValue === oldValue) {
                 return;
@@ -57,7 +57,7 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
             $alert({
                 content: 'Please fill in all required fields correctly.',
                 type: 'danger',
-                duration: 10
+                duration: 10,
             });
             return;
         }
@@ -67,13 +67,13 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
             $alert({
                 content: 'New settings saved.',
                 type: 'success',
-                duration: 5
+                duration: 5,
             });
         }, function () {
             $alert({
                 content: 'Something went wrong while saving your settings. Your settings were not saved. Please try again.',
                 type: 'danger',
-                duration: 10
+                duration: 10,
             });
             $scope.submitting = false;
         });
@@ -94,13 +94,13 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
             $alert({
                 content: 'Your #NowPlaying settings have been removed.',
                 type: 'success',
-                duration: 5
+                duration: 5,
             });
         }, function () {
             $alert({
                 content: 'Something went wrong while removing your settings. Your settings were not saved. Please try again.',
                 type: 'danger',
-                duration: 10
+                duration: 10,
             });
             watchNowPlayingSwitch();
             $scope.submitting = false;
