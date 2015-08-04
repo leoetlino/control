@@ -4,7 +4,7 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
         $alert({
             content: 'We have received your app request and will process it as soon as we can.',
             type: 'success',
-            duration: 5
+            duration: 5,
         });
         $scope.justSubmitted = true;
         $timeout($scope.reloadServices, 2000);
@@ -62,7 +62,7 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
             url: 'https://' + ENV.apiEndpoint + '/control/apps/iconupload/',
             method: 'POST',
             data: {},
-            file: $files[0]
+            file: $files[0],
         })
         .progress(function (evt) {
             $scope.uploadProgressIcon = parseInt(100.0 * evt.loaded / evt.total, 10);
@@ -85,7 +85,7 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
             url: 'https://' + ENV.apiEndpoint + '/control/apps/logoupload/',
             method: 'POST',
             data: {},
-            file: $files[0]
+            file: $files[0],
         })
         .progress(function (evt) {
             $scope.uploadProgressLogo = parseInt(100.0 * evt.loaded / evt.total, 10);
@@ -108,7 +108,7 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
             url: 'https://' + ENV.apiEndpoint + '/control/apps/featureGraphicUpload/',
             method: 'POST',
             data: {},
-            file: $files[0]
+            file: $files[0],
         })
         .progress(function (evt) {
             $scope.uploadProgressFeatureGraphic = parseInt(100.0 * evt.loaded / evt.total, 10);

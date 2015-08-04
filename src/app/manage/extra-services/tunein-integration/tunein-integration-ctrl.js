@@ -28,7 +28,7 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
         $alert({
             content: 'Something went wrong while enabling or disabling the TuneIn integration. Please try again.',
             type: 'error',
-            duration: 10
+            duration: 10,
         });
         unregisterWatch();
         $scope.integrationEnabled = oldValue;
@@ -36,8 +36,8 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
         $scope.disableForm = false;
     };
 
-    var unregisterWatch,
-        watchTuneInIntegrationSwitch = function () {
+    var unregisterWatch;
+    var watchTuneInIntegrationSwitch = function () {
             unregisterWatch = $scope.$watch('integrationEnabled', function (newValue, oldValue) {
                 if (newValue === oldValue) {
                     return;
@@ -48,7 +48,7 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
                     $alert({
                         content: 'The integration has not yet been configured correctly.',
                         type: 'error',
-                        duration: 10
+                        duration: 10,
                     });
                     return;
                 }
@@ -76,13 +76,13 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
             $alert({
                 content: 'New settings saved.',
                 type: 'success',
-                duration: 5
+                duration: 5,
             });
         }, function () {
             $alert({
                 content: 'Something went wrong while saving your settings. Your settings were not saved. Please try again.',
                 type: 'error',
-                duration: 10
+                duration: 10,
             });
             $scope.disableForm = false;
             $scope.reloadServices();
@@ -104,13 +104,13 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
             $alert({
                 content: 'Your TuneIn integration settings have been removed.',
                 type: 'success',
-                duration: 5
+                duration: 5,
             });
         }, function () {
             $alert({
                 content: 'Something went wrong while removing your settings. Your settings were not removed. Please try again.',
                 type: 'error',
-                duration: 10
+                duration: 10,
             });
             watchTuneInIntegrationSwitch();
             $scope.disableForm = false;

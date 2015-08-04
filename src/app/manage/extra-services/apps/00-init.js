@@ -7,7 +7,7 @@ angular.module('control.manage.extra-services').run(function (ManageService) {
             subPathName: 'apps',
             name: 'requestApp',
             template: '/app/manage/extra-services/apps/request-app.html',
-            controller: 'RequestAppCtrl'
-        }
+            controller: 'RequestAppCtrl',
+        },
     });
 });

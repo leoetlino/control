@@ -8,7 +8,7 @@ describe('ManageService', function () {
             all: '*',
             admin: 'admin',
             user: 'user',
-            public: 'public'
+            public: 'public',
         });
     }));
 
@@ -82,7 +82,7 @@ describe('ManageService', function () {
             var oldLength = service.getSections().length;
             service.addSection({
                 id: 'test-section',
-                name: 'Test Section'
+                name: 'Test Section',
             });
             expect(service.getSections().length).toBe(oldLength + 1, 'as we have added one section');
             var section = _.findWhere(service.getSections(), { id: 'test-section' });
@@ -113,8 +113,8 @@ describe('ManageService', function () {
                     name: 'testItem',
                     template: '/does-not-exist.html',
                     controller: 'NotExistingCtrl',
-                    title: 'A test item'
-                }
+                    title: 'A test item',
+                },
             });
             section = _.findWhere(service.getSections(), { id: 'test-section' });
             expect(section.items.length).toBe(1, 'as we just added exactly one item');
@@ -164,8 +164,8 @@ describe('ManageService', function () {
                     name: 'testItem',
                     template: '/does-not-exist.html',
                     controller: 'NotExistingCtrl',
-                    title: 'A test item'
-                }
+                    title: 'A test item',
+                },
             });
             service.addItem({
                 sectionId: 'test-section',
@@ -176,8 +176,8 @@ describe('ManageService', function () {
                     name: 'testItem',
                     template: '/does-not-exist.html',
                     controller: 'NotExistingCtrl',
-                    title: 'A test item'
-                }
+                    title: 'A test item',
+                },
             });
             var section = _.findWhere(service.getSections(), { id: 'test-section' });
             expect(section.items.length).toBe(2, 'as we just added two items');
@@ -196,8 +196,8 @@ describe('ManageService', function () {
                     name: 'testItem',
                     template: '/does-not-exist.html',
                     controller: 'NotExistingCtrl',
-                    title: 'A test item'
-                }
+                    title: 'A test item',
+                },
             });
             service.addItem({
                 sectionId: 'test-section',
@@ -208,8 +208,8 @@ describe('ManageService', function () {
                     name: 'testItem',
                     template: '/does-not-exist.html',
                     controller: 'NotExistingCtrl',
-                    title: 'A test item'
-                }
+                    title: 'A test item',
+                },
             });
             var section = _.findWhere(service.getSections(true), { id: 'test-section' });
             expect(section.items.length).toBe(2, 'as we just added two items');

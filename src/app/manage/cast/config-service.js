@@ -18,7 +18,7 @@ angular.module('control.manage.cast').factory('ConfigService', function ($http, 
                 });
             },
             key: 'castConfig',
-            ttl: -1
+            ttl: -1,
         });
     };
 

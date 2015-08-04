@@ -13,7 +13,7 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
             $alert({
                 content: 'You cannot have more than 3 streams.',
                 type: 'danger',
-                duration: 5
+                duration: 5,
             });
             return;
         }
@@ -25,7 +25,7 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
             $alert({
                 content: 'You must have at least one stream.',
                 type: 'danger',
-                duration: 5
+                duration: 5,
             });
             return;
         }
@@ -41,7 +41,7 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
             $alert({
                 content: 'You must have at least one stream.',
                 type: 'danger',
-                duration: 5
+                duration: 5,
             });
             self.disableForm = false;
             return $q.reject();
@@ -51,7 +51,7 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
             $alert({
                 content: 'You cannot have more than 3 streams.',
                 type: 'danger',
-                duration: 5
+                duration: 5,
             });
             self.disableForm = false;
             return $q.reject();
@@ -61,7 +61,7 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
             $alert({
                 content: 'You must have one primary stream.',
                 type: 'danger',
-                duration: 5
+                duration: 5,
             });
             self.disableForm = false;
             return $q.reject();
@@ -71,7 +71,7 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
             $alert({
                 content: 'You must have only one primary stream.',
                 type: 'danger',
-                duration: 5
+                duration: 5,
             });
             self.disableForm = false;
             return $q.reject();
@@ -81,7 +81,7 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
             $alert({
                 content: 'You have not filled in the form correctly.',
                 type: 'danger',
-                duration: 5
+                duration: 5,
             });
             self.disableForm = false;
             return $q.reject();
@@ -91,7 +91,7 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
             $alert({
                 content: 'Successfully saved your stream config.',
                 type: 'success',
-                duration: 3
+                duration: 3,
             });
             $scope.$emit('invalidate-cast-config-cache');
             self.disableForm = false;
@@ -99,7 +99,7 @@ angular.module('control.manage.cast').controller('StreamsCtrl', function (config
             $alert({
                 content: 'Failed to save the new config. Your stream config was not saved. Please try again.',
                 type: 'danger',
-                duration: 5
+                duration: 5,
             });
             self.disableForm = false;
         });

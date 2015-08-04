@@ -51,7 +51,7 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                 icon: section.icon,
                 order: section.order,
                 items: [],
-                visibleForCastOnly: section.visibleForCastOnly || false
+                visibleForCastOnly: section.visibleForCastOnly || false,
             });
         },
         addItem: function (item) {
@@ -81,8 +81,8 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                     controllerAs: item.route.controllerAs,
                     resolve: item.route.resolve,
                     title: item.route.title || item.name,
-                    visibleForCastOnly: item.visibleForCastOnly || false
-                }
+                    visibleForCastOnly: item.visibleForCastOnly || false,
+                },
             };
             var section = _.findWhere(sections, { id: item.sectionId });
             if (!section) {
@@ -108,15 +108,14 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                 },
                 resolve: newItem.route.resolve,
                 controller: newItem.route.controller,
-                controllerAs: newItem.route.controllerAs
+                controllerAs: newItem.route.controllerAs,
             };
 
             $routeSegmentProvider
                 .when('/manage/' + newItem.route.subPathName, newItem.route.completeName)
                 .within('manage')
                 .segment(newItem.route.name, routeObject);
-        }
+        },
     };
-    window.manager = instance;
     return instance;
 });

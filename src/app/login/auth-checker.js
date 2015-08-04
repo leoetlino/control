@@ -31,6 +31,6 @@ control.factory('AuthChecker', function ($http, Session, USER_ROLES, localStorag
             }
             return (this.isAuthenticated() &&
                     authorizedRoles.indexOf(Session.userRole) !== -1);
-        }
+        },
     };
 });

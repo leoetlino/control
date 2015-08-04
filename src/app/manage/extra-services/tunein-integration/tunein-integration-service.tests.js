@@ -38,7 +38,7 @@ describe('TuneInIntegrationService', function () {
                 username: 'test',
                 stationId: 'xxx',
                 partnerId: 'xxx',
-                partnerKey: 'xxx'
+                partnerKey: 'xxx',
             };
             var succeeded;
 

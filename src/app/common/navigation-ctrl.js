@@ -45,7 +45,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
                 $alert({
                     content: 'Failed to play the stream.',
                     type: 'danger',
-                    duration: 3
+                    duration: 3,
                 });
             }
             $scope.player.state = $scope.player.states.stopped;
@@ -111,7 +111,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         alert = $alert({
             content: 'The page you are trying to access is only available for Cast nodes.',
             type: 'danger',
-            duration: 5
+            duration: 5,
         });
         $location.path('/manage/information');
     });
@@ -124,7 +124,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         alert = $alert({
             content: 'The service does not exist.',
             type: 'danger',
-            duration: 5
+            duration: 5,
         });
         $location.search('username', null);
         $location.search('serviceId', null);
@@ -135,7 +135,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
         alert = $alert({
             content: error.message + ' (' + error.code + ')',
             type: 'danger',
-            duration: error.alertDuration
+            duration: error.alertDuration,
         });
     });
 

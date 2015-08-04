@@ -1,5 +1,6 @@
 angular.module('control.manage.extra-services').filter('appStatus', function (AppStatusesService) {
-    var statuses, filterFn;
+    var statuses;
+    var filterFn;
     filterFn = function (input) { return input; };
     AppStatusesService.getStatusesByValue().then(function (data) {
         statuses = data;

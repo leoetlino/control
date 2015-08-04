@@ -8,7 +8,7 @@ angular.module('control.manage.extra-services').run(function (ManageService) {
             name: 'nowPlayingTweets',
             template: '/app/manage/extra-services/now-playing-tweets/now-playing-tweets.html',
             controller: 'NowPlayingTweetsCtrl',
-            title: '#NowPlaying Tweets'
-        }
+            title: '#NowPlaying Tweets',
+        },
     });
 });

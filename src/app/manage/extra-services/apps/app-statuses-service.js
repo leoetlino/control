@@ -15,6 +15,6 @@ angular.module('control.manage.extra-services').factory('AppStatusesService', fu
             ).then(function (data) {
                 return data.data;
             });
-        }
+        },
     };
 });

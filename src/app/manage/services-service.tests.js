@@ -14,10 +14,10 @@ describe('ServicesService', function () {
         $provide.value('$location', {
             search: function () {
                 return fakeLocation;
-            }
+            },
         });
         $provide.value('Session', {
-            token: 'xxxxx-xxxxx'
+            token: 'xxxxx-xxxxx',
         });
     }));
     beforeEach(inject(function (_$rootScope_, _ServicesService_, _$httpBackend_) {
@@ -85,7 +85,7 @@ describe('ServicesService', function () {
                     isReseller: false,
                     tuneinIntegration: { isEnabled: false },
                     nowPlaying: { isEnabled: false },
-                    apps: {}
+                    apps: {},
                 },
                 {
                     id: '0002',
@@ -98,7 +98,7 @@ describe('ServicesService', function () {
                     isReseller: false,
                     tuneinIntegration: { isEnabled: false },
                     nowPlaying: { isEnabled: false },
-                    apps: {}
+                    apps: {},
                 },
                 {
                     id: '0003',
@@ -111,7 +111,7 @@ describe('ServicesService', function () {
                     isReseller: false,
                     tuneinIntegration: { isEnabled: false },
                     nowPlaying: { isEnabled: false },
-                    apps: {}
+                    apps: {},
                 },
                 {
                     id: '0004',
@@ -124,7 +124,7 @@ describe('ServicesService', function () {
                     isReseller: false,
                     tuneinIntegration: { isEnabled: false },
                     nowPlaying: { isEnabled: false },
-                    apps: {}
+                    apps: {},
                 },
                 {
                     id: '0005',
@@ -137,8 +137,8 @@ describe('ServicesService', function () {
                     isReseller: false,
                     tuneinIntegration: { isEnabled: false },
                     nowPlaying: { isEnabled: false },
-                    apps: {}
-                }
+                    apps: {},
+                },
             ];
 
             $httpBackend.expectPOST('https://itframe.shoutca.st/control/accounts/').respond(200, testResponse);

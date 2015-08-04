@@ -12,6 +12,6 @@ angular.module('control.manage.extra-services').factory('NowPlayingTweetsService
         },
         removeSettings: function (username) {
             return $http.post('https://' + ENV.apiEndpoint + '/control/now-playing/remove', { username: username });
-        }
+        },
     };
 });

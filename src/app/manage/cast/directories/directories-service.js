@@ -9,7 +9,7 @@ angular.module('control.manage.cast').factory('DirectoriesService', function ($h
                         return response.data;
                     });
             },
-            ttl: -1
+            ttl: -1,
         });
     };
 

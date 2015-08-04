@@ -5,6 +5,6 @@ angular.module('control.feedback', []).run(function ($routeSegmentProvider, USER
             templateUrl: '/app/feedback/feedback.html',
             authorizedRoles: [USER_ROLES.all],
             title: 'Send your feedback',
-            controller: 'FeedbackCtrl'
+            controller: 'FeedbackCtrl',
         });
 });

@@ -8,8 +8,8 @@ control.factory('DashService', function ($http, ENV, promiseCache, Session, $q) 
                 promise: function () {
                     return $http.post('https://' + ENV.apiEndpoint + '/control/userInfo/');
                 },
-                ttl: -1
+                ttl: -1,
             });
-        }
+        },
     };
 });

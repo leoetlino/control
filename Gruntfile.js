@@ -7,46 +7,46 @@ module.exports = function (grunt) {
         bowerrc: grunt.file.readJSON('.bowerrc'),
         clean: {
             preBuild: ['dist', '.tmp'],
-            postBuild: ['.tmp', 'backup', 'dist/app', 'dist/libs']
+            postBuild: ['.tmp', 'backup', 'dist/app', 'dist/libs'],
         },
         dirs: {
             'vendor': '<%= bowerrc.directory %>',
             'bootstrap': {
                 'js': '<%= dirs.vendor %>/bootstrap/dist/js',
-                'css': '<%= dirs.vendor %>/bootstrap/dist/css'
+                'css': '<%= dirs.vendor %>/bootstrap/dist/css',
             },
             'css': 'css',
             'less': 'less',
-            'js': 'js'
+            'js': 'js',
         },
         copy: {
             fontawesome: {
                 expand: true,
                 cwd: 'src/libs/fontawesome/fonts/',
                 src: ['*.{eot,svg,ttf,woff,woff2}'],
-                dest: 'dist/fonts/'
-            }
+                dest: 'dist/fonts/',
+            },
         },
         useminPrepare: {
             html: 'dist/index.html',
-            css: ['dist/css/**.css', 'dist/libs/*/**.css']
+            css: ['dist/css/**.css', 'dist/libs/*/**.css'],
         },
         usemin: {
             html: 'dist/index.html',
-            css: ['dist/css/**.css', 'dist/libs/*/**.css']
+            css: ['dist/css/**.css', 'dist/libs/*/**.css'],
         },
         uglify: {
             options: {
                 report: 'min',
-                mangle: true
-            }
+                mangle: true,
+            },
         },
         rev: {
             assets: {
                 files: [{
-                    src: ['dist/js/control.min.js', 'dist/css/control.min.css']
-                }]
-            }
+                    src: ['dist/js/control.min.js', 'dist/css/control.min.css'],
+                }],
+            },
         },
         htmlmin: {
             dist: {
@@ -60,16 +60,16 @@ module.exports = function (grunt) {
                     removeScriptTypeAttributes: true,
                     removeStyleLinkTypeAttributes: true,
                     minifyCSS: true,
-                    conservativeCollapse: true
+                    conservativeCollapse: true,
                 },
                 files: {
-                    'dist/index.html': 'dist/index.html'
-                }
-            }
+                    'dist/index.html': 'dist/index.html',
+                },
+            },
         },
         jshint: {
             options: {
-                jshintrc: '.jshintrc'
+                jshintrc: '.jshintrc',
             },
             all: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'src/app/*/*/**.js', 'src/app/*/*/*/**.js', 'js/**.js'],
         },
@@ -78,8 +78,8 @@ module.exports = function (grunt) {
         },
         githooks: {
             all: {
-                'pre-commit': 'test'
-            }
+                'pre-commit': 'test',
+            },
         },
         html2js: {
             options: {
@@ -93,8 +93,8 @@ module.exports = function (grunt) {
                     removeScriptTypeAttributes: true,
                     removeStyleLinkTypeAttributes: true,
                     minifyCSS: true,
-                    conservativeCollapse: true
-                }
+                    conservativeCollapse: true,
+                },
             },
             build: {
                 src: ['dist/app/*/**.html', 'dist/app/*/*/**.html', 'dist/app/*/*/*/**.html'],
@@ -104,8 +104,8 @@ module.exports = function (grunt) {
                     rename: function (moduleName) {
                         return '/' + moduleName;
                     },
-                    module: 'templates'
-                }
+                    module: 'templates',
+                },
             },
             dev: {
                 src: ['src/app/*/**.html', 'src/app/*/*/**.html', 'src/app/*/*/*/**.html'],
@@ -115,51 +115,51 @@ module.exports = function (grunt) {
                     rename: function (moduleName) {
                         return '/' + moduleName;
                     },
-                    module: 'templates'
-                }
-            }
+                    module: 'templates',
+                },
+            },
         },
         ngAnnotate: {
             options: {
                 singleQuotes: true,
                 add: true,
-                remove: true
+                remove: true,
             },
             build: {
                 files: [
                     {
                         expand: true,
-                        src: ['.tmp/concat/js/control.min.js']
-                    }
-                ]
-            }
+                        src: ['.tmp/concat/js/control.min.js'],
+                    },
+                ],
+            },
         },
         includeSource: {
             build: {
                 files: {
-                    'dist/index.html': 'dist/index.html'
+                    'dist/index.html': 'dist/index.html',
                 },
                 options: {
                     basePath: 'dist/app/',
                     baseUrl: 'app/',
-                    ordering: 'top-down'
+                    ordering: 'top-down',
                 },
             },
             dev: {
                 files: {
-                    'dev/index.html': 'dev/index.html'
+                    'dev/index.html': 'dev/index.html',
                 },
                 options: {
                     basePath: 'dev/app/',
                     baseUrl: 'app/',
-                    ordering: 'top-down'
+                    ordering: 'top-down',
                 },
-            }
+            },
         },
         watch: {
             dev: {
                 files: ['src/*.*', 'src/*/*.*', 'src/app/*.*', 'src/app/*/*.*', 'src/app/*/*/*.*', 'src/app/*/*/*/*.*'],
-                tasks: ['rsync:dev', 'html2js:dev', 'includeSource:dev']
+                tasks: ['rsync:dev', 'html2js:dev', 'includeSource:dev'],
             },
         },
         express: {
@@ -169,32 +169,32 @@ module.exports = function (grunt) {
                     port: process.env.DEV_PORT || 5000,
                     hostname: '*',
                     server: 'dev-server.js',
-                    livereload: true
-                }
-            }
+                    livereload: true,
+                },
+            },
         },
         rsync: {
             options: {
                 args: ['--update --delete-excluded --verbose'],
                 exclude: ['*~'],
-                recursive: true
+                recursive: true,
             },
             dev: {
                 options: {
                     src: 'src/',
                     dest: 'dev/',
                     exclude: ['*~', '*.tests.js'],
-                    delete: true
-                }
+                    'delete': true,
+                },
             },
             build: {
                 options: {
                     src: 'src/',
                     dest: 'dist/',
                     exclude: ['*~', '*.tests.js'],
-                    delete: true
-                }
-            }
+                    'delete': true,
+                },
+            },
         },
         karma: {
             unit: {
@@ -234,11 +234,11 @@ module.exports = function (grunt) {
                         'src/app/**.js',
                         'src/app/*/**.js',
                         'src/app/*/*/**.js',
-                        'src/app/*/*/*/**.js'
-                    ]
-                }
-            }
-        }
+                        'src/app/*/*/*/**.js',
+                    ],
+                },
+            },
+        },
     });
 
     grunt.loadNpmTasks('grunt-rsync');
@@ -267,7 +267,7 @@ module.exports = function (grunt) {
         grunt.loadNpmTasks('grunt-ng-annotate');
         grunt.loadNpmTasks('grunt-include-source');
         grunt.loadNpmTasks('grunt-rsync');
-        grunt.task.run(
+        grunt.task.run([
             'test',
             'clean:preBuild', // Clean up to make sure nothing breaks the build
             'rsync:build', // Copy the source to dist/ to start the build
@@ -282,32 +282,32 @@ module.exports = function (grunt) {
             'rev', // Add a revision tag to assets
             'usemin',
             'htmlmin', // Minify the HTML
-            'clean:postBuild' // Clean up
-        );
+            'clean:postBuild', // Clean up
+        ]);
     });
 
     grunt.registerTask('dev', function () {
         grunt.loadNpmTasks('grunt-express');
         grunt.loadNpmTasks('grunt-eslint');
         grunt.loadNpmTasks('grunt-karma');
-        grunt.task.run(
+        grunt.task.run([
             'rsync:dev',
             'html2js:dev',
             'includeSource:dev',
             'express',
-            'watch'
-        );
+            'watch',
+        ]);
     });
 
     grunt.registerTask('test', function () {
         grunt.loadNpmTasks('grunt-html2js');
         grunt.loadNpmTasks('grunt-eslint');
         grunt.loadNpmTasks('grunt-karma');
-        grunt.task.run(
+        grunt.task.run([
             'html2js:dev',
             'eslint',
-            'karma'
-        );
+            'karma',
+        ]);
     });
 
     grunt.registerTask('default', ['build']);

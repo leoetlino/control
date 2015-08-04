@@ -8,7 +8,7 @@ angular.module('control.manage.extra-services').run(function (ManageService) {
             name: 'tuneinIntegration',
             template: '/app/manage/extra-services/tunein-integration/tunein-integration.html',
             controller: 'TuneInIntegrationCtrl',
-            title: 'TuneIn Integration'
-        }
+            title: 'TuneIn Integration',
+        },
     });
 });

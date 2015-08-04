@@ -37,7 +37,7 @@ describe('NowPlayingTweetsService', function () {
             var testData = {
                 username: 'test',
                 prefix: '#NowPlaying',
-                suffix: ''
+                suffix: '',
             };
             var succeeded;
 

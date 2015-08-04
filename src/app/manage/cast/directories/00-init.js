@@ -17,8 +17,8 @@ angular.module('control.manage.cast').run(function (ManageService) {
                 },
                 choices: function (DirectoriesService) {
                     return DirectoriesService.getChoices();
-                }
-            }
-        }
+                },
+            },
+        },
     });
 });

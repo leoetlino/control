@@ -21,6 +21,6 @@ control.service('Session', function (USER_ROLES, localStorageService, $rootScope
             this.userRole = null;
             localStorageService.remove('token');
             $rootScope.$broadcast('sessionDestroyed');
-        }
+        },
     };
 });

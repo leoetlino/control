@@ -13,7 +13,7 @@ angular.module('control.feedback').controller('FeedbackCtrl', function ($scope, 
             $alert({
                 content: 'Something went wrong while sending your feedback. Please try again.',
                 type: 'danger',
-                duration: 10
+                duration: 10,
             });
             $scope.sending = false;
         });

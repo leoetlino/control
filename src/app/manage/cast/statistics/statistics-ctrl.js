@@ -2,7 +2,7 @@ angular.module('control.manage.cast').controller('StatisticsCtrl', function (con
     var self = this;
     self.config = angular.copy(config);
     self.primaryStream = _.findWhere(config.streams, {
-        primary: true
+        primary: true,
     }).stream;
 
     self.listeners = {};

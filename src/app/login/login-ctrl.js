@@ -1,7 +1,7 @@
 control.controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthService, localStorageService, $alert) {
     $scope.credentials = {
         email: '',
-        password: ''
+        password: '',
     };
     $scope.isLoading = false;
     $scope.logIn = function (credentials) {
@@ -22,7 +22,7 @@ control.controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthS
         $alert({
             content: 'It looks like it is the first time you\'re here! You can log in with your client area credentials.',
             type: 'info',
-            duration: 10
+            duration: 10,
         });
         localStorageService.set('showed-login-help', true);
     }());

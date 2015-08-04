@@ -14,8 +14,8 @@ angular.module('control.manage.cast').run(function (ManageService) {
             resolve: /*@ngInject*/ {
                 config: function (ConfigService) {
                     return ConfigService.getConfig();
-                }
-            }
-        }
+                },
+            },
+        },
     });
 });

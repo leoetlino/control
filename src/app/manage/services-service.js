@@ -26,7 +26,7 @@ control.factory('ServicesService', function ($http, ENV, $rootScope, $location, 
                         return response.data;
                     });
                 },
-                ttl: -1
+                ttl: -1,
             });
         },
         getServicesList: function () {
@@ -88,7 +88,7 @@ control.factory('ServicesService', function ($http, ENV, $rootScope, $location, 
         },
         removeLastUsedServiceId: function () {
             return localStorageService.remove('serviceId');
-        }
+        },
     };
     $rootScope.$on('invalidate-services-cache', instance.invalidateCache);
     $rootScope.$on('selected-service-changed', function (event, serviceId) {

@@ -6,12 +6,12 @@ control.constant('AUTH_EVENTS', {
     sessionTimeout: 'auth-session-timeout',
     notAuthenticated: 'auth-not-authenticated',
     notAuthorized: 'auth-not-authorized',
-    badRequest: 'auth-bad-request'
+    badRequest: 'auth-bad-request',
 });
 
 control.constant('USER_ROLES', {
     all: '*',
     admin: 'admin',
     user: 'user',
-    'public': 'public'
+    'public': 'public',
 });
