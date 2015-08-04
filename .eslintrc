@@ -87,7 +87,7 @@
         "callback-return": [2, ["callback", "cb", "next"]],
         "handle-callback-err": [2, "^(err|error)$" ],
         "no-new-require": 2,
-        "no-sync": 1
+        "no-sync": 0
     },
 
     // Environments
