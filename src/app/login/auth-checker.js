@@ -1,23 +1,10 @@
-control.factory('AuthChecker', function ($http, Session, USER_ROLES, localStorageService, ENV) {
+control.factory('AuthChecker', function ($http, Session, USER_ROLES, localStorageService) {
     return {
         isAuthenticated: function () {
             if (localStorageService.get('token') !== 'undefined' && localStorageService.get('token') !== null) {
                 Session.createFromLocalStorage();
             }
             return !!Session.token;
-        },
-        isReallyAuthenticated: function () {
-            var interceptors = control.$httpProvider.interceptors;
-            // temporarily disable AuthInterceptor
-            interceptors.splice(interceptors.indexOf('AuthInterceptor'), 1);
-            return $http.post('https://' + ENV.apiEndpoint + '/control/check/')
-                .then(function () {
-                    interceptors.push('AuthInterceptor');
-                    return true;
-                }, function () {
-                    interceptors.push('AuthInterceptor');
-                    return false;
-                });
         },
         isAuthorized: function (authorizedRoles) {
             if (!angular.isArray(authorizedRoles)) {
