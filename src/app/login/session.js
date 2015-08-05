@@ -8,8 +8,9 @@ control.service('Session', function (USER_ROLES, localStorageService, $rootScope
         },
 
         update: function (token) {
-            this.destroy();
-            this.create(token);
+            this.token = token;
+            localStorageService.set('token', token);
+            $rootScope.$broadcast('sessionUpdated');
         },
 
         createFromLocalStorage: function () {
