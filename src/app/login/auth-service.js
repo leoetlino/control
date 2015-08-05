@@ -5,11 +5,11 @@ control.factory('AuthService', function ($http, Session, USER_ROLES, localStorag
         return $http
             .post('https://' + ENV.apiEndpoint + '/authenticate', credentials)
             .then(function (res) {
-            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-            Session.create(res.data.token);
-        }, function onFail () {
-            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-        });
+                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                Session.create(res.data.token);
+            }, function onFail () {
+                $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+            });
     };
 
     AuthService.logOut = function () {
