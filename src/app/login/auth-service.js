@@ -15,9 +15,12 @@ control.factory('AuthService', function ($http, Session, USER_ROLES, localStorag
     AuthService.logOut = function () {
         return $http
             .post('https://' + ENV.apiEndpoint + '/control/log-out')
-            .then(function () {
-            Session.destroy();
-        });
+            .then(function onLogoutSuccess () {
+                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+                Session.destroy();
+            }, function onLogoutFail () {
+                $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
+            });
     };
 
     AuthService.keepAlivePromise = null;
@@ -25,12 +28,12 @@ control.factory('AuthService', function ($http, Session, USER_ROLES, localStorag
     AuthService.keepAlive = function () {
         $http.post('https://' + ENV.apiEndpoint + '/control/keep-alive')
             .then(function (res) {
-            Session.update(res.data.token);
-        }, function (response) {
-            $rootScope.$broadcast(AUTH_EVENTS.sessionTimeout, response);
-            $interval.cancel(AuthService.keepAlivePromise);
-            AuthService.keepAlivePromise = null;
-        });
+                Session.update(res.data.token);
+            }, function (response) {
+                $rootScope.$broadcast(AUTH_EVENTS.sessionTimeout, response);
+                $interval.cancel(AuthService.keepAlivePromise);
+                AuthService.keepAlivePromise = null;
+            });
     };
 
     $rootScope.$on('sessionCreated', function onSessionCreated () {

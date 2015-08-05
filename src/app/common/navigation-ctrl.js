@@ -5,11 +5,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
     };
 
     $scope.logOut = function () {
-        AuthService.logOut().then(function onLogoutSuccess () {
-            $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-        }, function onLogoutFail () {
-            $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
-        });
+        AuthService.logOut();
     };
 
     //////////////////
