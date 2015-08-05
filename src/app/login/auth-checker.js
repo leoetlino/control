@@ -1,7 +1,7 @@
-control.factory('AuthChecker', function ($http, Session, USER_ROLES, localStorageService) {
+control.factory('AuthChecker', function (Session, USER_ROLES, localStorageService) {
     return {
         isAuthenticated: function () {
-            if (localStorageService.get('token') !== 'undefined' && localStorageService.get('token') !== null) {
+            if (localStorageService.get('token')) {
                 Session.createFromLocalStorage();
             }
             return !!Session.token;
