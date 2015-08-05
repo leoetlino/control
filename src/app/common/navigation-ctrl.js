@@ -59,7 +59,7 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
     // Services
     ////////////
 
-    function initServices () {
+    $scope.initServices = function initServices () {
         // returns a promise.
         return ServicesService.initAndGetService().then(function onInitServiceSuccess (service) {
             $rootScope.servicesLoaded = true;
@@ -67,15 +67,15 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
             $rootScope.service = service;
             return service;
         });
-    }
+    };
 
     $rootScope.reloadServices = function () {
         $rootScope.$broadcast('invalidate-services-cache');
-        return initServices();
+        return $scope.initServices();
     };
 
     if (AuthChecker.isAuthenticated()) {
-        initServices();
+        $scope.initServices();
     }
 
     $rootScope.$watch('service.username', function onSelectedServiceUsernameChange (newUsername) {
