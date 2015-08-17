@@ -4,7 +4,7 @@ describe('FeedbackService', function () {
 
     beforeEach(module('control'));
     beforeEach(module(function ($provide) {
-        $provide.value('ENV', { apiEndpoint: 'itframe.shoutca.st' });
+        $provide.value('ENV', { apiEndpoint: 'itframe.innovatete.ch' });
     }));
     beforeEach(inject(function (FeedbackService, $httpBackend) {
         this.service = FeedbackService;
@@ -25,8 +25,8 @@ describe('FeedbackService', function () {
             var title = 'dummy';
             var message = 'dummy message';
 
-            this.$httpBackend.expectPOST('https://itframe.shoutca.st/control/feedback/', {
-                title: title,
+            this.$httpBackend.expectPOST('https://itframe.innovatete.ch/control/feedback', {
+                subject: title,
                 message: message,
             }).respond(200, { result: 'success' });
 
@@ -44,8 +44,8 @@ describe('FeedbackService', function () {
             var title = 'dummy';
             var message = 'dummy message';
 
-            this.$httpBackend.expectPOST('https://itframe.shoutca.st/control/feedback/', {
-                title: title,
+            this.$httpBackend.expectPOST('https://itframe.innovatete.ch/control/feedback', {
+                subject: title,
                 message: message,
             }).respond(500, { result: 'error' });
 

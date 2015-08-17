@@ -1,8 +1,8 @@
 angular.module('control.feedback').factory('FeedbackService', function ($http, ENV) {
     return {
         send: function (subject, message) {
-            return $http.post('https://' + ENV.apiEndpoint + '/control/feedback/', {
-                title: subject,
+            return $http.post(ENV.apiEndpoint + '/control/feedback', {
+                subject: subject,
                 message: message,
             });
         },

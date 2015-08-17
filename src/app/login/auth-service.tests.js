@@ -9,7 +9,7 @@ describe('AuthService', function () {
 
     beforeEach(module('control'));
     beforeEach(module(function ($provide) {
-        $provide.value('ENV', { apiEndpoint: 'itframe.shoutca.st' });
+        $provide.value('ENV', { apiEndpoint: 'itframe.innovatete.ch' });
     }));
     beforeEach(inject(function (_$rootScope_, _AuthService_, _$httpBackend_, AUTH_EVENTS, _Session_, $interval) {
         this.AUTH_EVENTS = AUTH_EVENTS;
@@ -61,7 +61,7 @@ describe('AuthService', function () {
                 password: 'hackme',
             };
 
-            $httpBackend.expectPOST('https://itframe.shoutca.st/authenticate', credentials).respond(200, {
+            $httpBackend.expectPOST('https://itframe.innovatete.ch/authenticate', credentials).respond(200, {
                 token: 'xxxxx-xxxxx-from-server',
             });
 
@@ -78,7 +78,7 @@ describe('AuthService', function () {
             };
             var token = 'xxxxx-xxxxx-from-server';
 
-            $httpBackend.expectPOST('https://itframe.shoutca.st/authenticate', credentials).respond(200, {
+            $httpBackend.expectPOST('https://itframe.innovatete.ch/authenticate', credentials).respond(200, {
                 token: token,
             });
 
@@ -94,7 +94,7 @@ describe('AuthService', function () {
                 password: 'uhohwrongpassword',
             };
 
-            $httpBackend.expectPOST('https://itframe.shoutca.st/authenticate', credentials).respond(401, {
+            $httpBackend.expectPOST('https://itframe.innovatete.ch/authenticate', credentials).respond(401, {
                 result: 'error',
                 error: 'Incorrect credentials',
             });
@@ -110,7 +110,7 @@ describe('AuthService', function () {
     describe('logOut', function () {
 
         it('should destroy the session client-side when server logout succeeds', function () {
-            $httpBackend.expectPOST('https://itframe.shoutca.st/control/log-out').respond(200, {});
+            $httpBackend.expectPOST('https://itframe.innovatete.ch/control/log-out').respond(200, {});
             AuthService.logOut();
             $httpBackend.flush();
             $rootScope.$digest();
@@ -118,7 +118,7 @@ describe('AuthService', function () {
         });
 
         it('should broadcast AUTH_EVENTS.logoutSuccess when server logout succeeds', function () {
-            $httpBackend.expectPOST('https://itframe.shoutca.st/control/log-out').respond(200, {});
+            $httpBackend.expectPOST('https://itframe.innovatete.ch/control/log-out').respond(200, {});
             AuthService.logOut();
             $httpBackend.flush();
             $rootScope.$digest();
@@ -126,7 +126,7 @@ describe('AuthService', function () {
         });
 
         it('should broadcast AUTH_EVENTS.logoutFailed when server logout fails', function () {
-            $httpBackend.expectPOST('https://itframe.shoutca.st/control/log-out').respond(500, {});
+            $httpBackend.expectPOST('https://itframe.innovatete.ch/control/log-out').respond(500, {});
             AuthService.logOut();
             $httpBackend.flush();
             $rootScope.$digest();

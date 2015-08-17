@@ -6,10 +6,8 @@ angular.module('control.manage.cast').factory('StreamsService', function ($http,
      * @param {Array} config - An array of streams
      */
     StreamsService.saveConfig = function (config) {
-        return $http.post('https://' + ENV.apiEndpoint + '/control/cast/streams/save', {
-            username: $rootScope.service.username,
-            streams: config,
-        });
+        var username = $rootScope.service.username;
+        return $http.put(ENV.apiEndpoint + '/control/cast/streams/' + username, config);
     };
 
     return StreamsService;

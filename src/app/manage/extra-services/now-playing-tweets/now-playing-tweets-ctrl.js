@@ -2,16 +2,16 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
 
     // Initialisation
     var initialiseSettings = function () {
-        $scope.nowPlayingState = $rootScope.service.nowPlaying.isEnabled;
+        $scope.nowPlayingState = $rootScope.service.nowPlayingTweets.isEnabled;
         $scope.settings = {};
-        $rootScope.service.nowPlaying.settings = $rootScope.service.nowPlaying.settings || {};
-        $scope.settings.prefix = $rootScope.service.nowPlaying.settings.prefix || '#NowPlaying';
-        $scope.settings.suffix = $rootScope.service.nowPlaying.settings.suffix || '';
-        $scope.settings.interval = $rootScope.service.nowPlaying.settings.interval || 5;
-        $scope.settings.consumerKey = $rootScope.service.nowPlaying.settings.consumerKey;
-        $scope.settings.consumerSecret = $rootScope.service.nowPlaying.settings.consumerSecret;
-        $scope.settings.accessToken = $rootScope.service.nowPlaying.settings.accessToken;
-        $scope.settings.accessTokenSecret = $rootScope.service.nowPlaying.settings.accessTokenSecret;
+        $rootScope.service.nowPlayingTweets = $rootScope.service.nowPlayingTweets || {};
+        $scope.settings.tweet = $rootScope.service.nowPlayingTweets.tweet || '#NowPlaying %title - %artist';
+        $scope.settings.mode = $rootScope.service.nowPlayingTweets.mode || 'interval';
+        $scope.settings.interval = $rootScope.service.nowPlayingTweets.interval || 5;
+        $scope.settings.consumerKey = $rootScope.service.nowPlayingTweets.consumerKey;
+        $scope.settings.consumerSecret = $rootScope.service.nowPlayingTweets.consumerSecret;
+        $scope.settings.accessToken = $rootScope.service.nowPlayingTweets.accessToken;
+        $scope.settings.accessTokenSecret = $rootScope.service.nowPlayingTweets.accessTokenSecret;
     };
     initialiseSettings();
 
@@ -24,7 +24,7 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
 
     var changeStateFailure = function (oldValue) {
         $alert({
-            content: 'Something went wrong while enabling or disabling #NowPlaying. Please try again.',
+            content: 'Could not enable/disable #NowPlaying. Please try again.',
             type: 'danger',
             duration: 10,
         });
@@ -43,9 +43,9 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
 
             $scope.submitting = true;
             if ($scope.nowPlayingState) {
-                NowPlayingTweetsService.enable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
+                NowPlayingTweetsService.enable($rootScope.service.username, $scope.settings).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
             } else {
-                NowPlayingTweetsService.disable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
+                NowPlayingTweetsService.disable($rootScope.service.username, $scope.settings).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
             }
         });
     };
@@ -81,15 +81,15 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
 
     $scope.removeSettings = function () {
         // Reset settings.
-        $rootScope.service.nowPlaying.settings = {};
+        $rootScope.service.nowPlayingTweets = { isEnabled: false };
         unregisterWatch();
-        initialiseSettings();
 
         // Remove settings, server-side.
         $scope.submitting = true;
         NowPlayingTweetsService.removeSettings($rootScope.service.username).then(function () {
             $scope.submitting = false;
             $scope.nowPlayingState = false;
+            initialiseSettings();
             watchNowPlayingSwitch();
             $alert({
                 content: 'Your #NowPlaying settings have been removed.',

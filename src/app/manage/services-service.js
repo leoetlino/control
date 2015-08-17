@@ -20,11 +20,11 @@ control.factory('ServicesService', function ($http, ENV, $rootScope, $location, 
             return promiseCache({
                 promise: function () {
                     return $http
-                        .post('https://' + ENV.apiEndpoint + '/control/accounts/')
+                        .get(ENV.apiEndpoint + '/control/products')
                         .then(function (response) {
-                        internal.cachedServices = response.data;
-                        return response.data;
-                    });
+                            internal.cachedServices = response.data;
+                            return response.data;
+                        });
                 },
                 ttl: -1,
             });

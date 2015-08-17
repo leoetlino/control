@@ -3,7 +3,7 @@ control.factory('AuthService', function ($http, Session, USER_ROLES, localStorag
 
     AuthService.logIn = function (credentials) {
         return $http
-            .post('https://' + ENV.apiEndpoint + '/authenticate', credentials)
+            .post(ENV.apiEndpoint + '/authenticate', credentials)
             .then(function (res) {
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                 Session.create(res.data.token);
@@ -14,7 +14,7 @@ control.factory('AuthService', function ($http, Session, USER_ROLES, localStorag
 
     AuthService.logOut = function () {
         return $http
-            .post('https://' + ENV.apiEndpoint + '/control/log-out')
+            .post(ENV.apiEndpoint + '/control/log-out')
             .then(function onLogoutSuccess () {
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
                 Session.destroy();
@@ -26,7 +26,7 @@ control.factory('AuthService', function ($http, Session, USER_ROLES, localStorag
     AuthService.keepAlivePromise = null;
 
     AuthService.keepAlive = function () {
-        $http.post('https://' + ENV.apiEndpoint + '/control/keep-alive')
+        $http.post(ENV.apiEndpoint + '/control/keep-alive')
             .then(function (res) {
                 Session.update(res.data.token);
             }, function (response) {

@@ -33,30 +33,29 @@
                 <div class="well">
                     <p>Here's what a #NowPlaying Tweet currently looks like:</p>
                     <blockquote class="no-margin-bottom">
-                        <p class="always-wrap">{{settings.prefix}} This is a Song Name - Artist Name {{settings.suffix}}</p>
-                        <small>@yourtwitterhandle (preview) <span class="pull-right">{{(settings.prefix + ' This is a Song Name - Artist Name ' + settings.suffix).length}}/140</span></small>
+                        <p class="always-wrap">{{settings.tweet.replace("%title", "This is a Song Name").replace("%artist", "Artist Name")}}</p>
+                        <small>@yourtwitterhandle (preview) <span class="pull-right">{{(settings.tweet.replace("%title", "This is a Song Name").replace("%artist", "Artist Name")).length}}/140</span></small>
                     </blockquote>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group" show-errors>
-                            <label for="prefix" class="col-sm-2 control-label">Prefix</label>
+                            <label for="tweet" class="col-sm-2 control-label">Tweet</label>
                             <div class="col-sm-10">
-                                <input type="text" id="prefix" class="form-control" placeholder="This is added before the Tweet's content." ng-model="settings.prefix" name="prefix" required>
-                                <p class="help-block">This is often used for adding hashtags such as #NowPlaying.</p>
+                                <textarea rows="4" id="tweet" class="form-control" ng-model="settings.tweet" name="tweet" required></textarea>
+                                <p class="help-block">Your Tweet content. Use <code>%title</code> and <code>%artist</code> for the song title and the artist name.</p>
                             </div>
                         </div>
                         <div class="form-group" show-errors>
-                            <label for="suffix" class="col-sm-2 control-label">Suffix</label>
-                            <div class="col-sm-10">
-                                <input type="text" id="suffix" class="form-control" placeholder="This is added after the Tweet's content (optional)." ng-model="settings.suffix" name="suffix">
+                            <label for="interval" class="col-sm-2 control-label">Every</label>
+                            <div class="col-sm-4">
+                                <input type="number" id="interval" step="1" min="1" placeholder="Interval" class="form-control text-center" ng-model="settings.interval" name="interval" required>
                             </div>
-                        </div>
-                        <div class="form-group" show-errors ng-class="{'has-warning': (settings.interval === 1)}">
-                            <label for="interval" class="col-sm-2 control-label">Interval</label>
-                            <div class="col-sm-10">
-                                <input type="number" id="interval" step="1" min="1" placeholder="Interval" class="form-control" ng-model="settings.interval" name="interval" required>
-                                <p class="help-block">Tweets will be sent every {{settings.interval}} song<span ng-show="settings.interval > 1">s</span>.<span ng-show="settings.interval === 1"><br>We don't recommend this if your songs are short.</span></p>
+                            <div class="col-sm-6">
+                                <div class="btn-group btn-group-justified" role="group" aria-label="Mode" ng-model="settings.mode" bs-radio-group>
+                                    <label class="btn btn-default"><input type="radio" class="btn btn-default" value="interval"> song<span ng-show="settings.interval !== 1">s</span></label>
+                                    <label class="btn btn-default"><input type="radio" class="btn btn-default" value="time"> minute<span ng-show="settings.interval !== 1">s</span></label>
+                                </div>
                             </div>
                         </div>
                     </div>

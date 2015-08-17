@@ -1,17 +1,24 @@
 angular.module('control.manage.extra-services').factory('NowPlayingTweetsService', function ($http, ENV) {
     return {
         submitSettings: function (username, settings) {
-            settings.username = username;
-            return $http.post('https://' + ENV.apiEndpoint + '/control/now-playing/update-settings', settings);
+            return $http.put(ENV.apiEndpoint + '/control/now-playing-tweets/settings/' + username, settings);
         },
-        enable: function (username) {
-            return $http.post('https://' + ENV.apiEndpoint + '/control/now-playing/enable', { username: username });
+        enable: function (username, settings) {
+            settings.isEnabled = true;
+            return $http.put(
+                ENV.apiEndpoint + '/control/now-playing-tweets/settings/' + username,
+                settings
+            );
         },
-        disable: function (username) {
-            return $http.post('https://' + ENV.apiEndpoint + '/control/now-playing/disable', { username: username });
+        disable: function (username, settings) {
+            settings.isEnabled = false;
+            return $http.put(
+                ENV.apiEndpoint + '/control/now-playing-tweets/settings/' + username,
+                settings
+            );
         },
         removeSettings: function (username) {
-            return $http.post('https://' + ENV.apiEndpoint + '/control/now-playing/remove', { username: username });
+            return $http.delete(ENV.apiEndpoint + '/control/now-playing-tweets/settings/' + username);
         },
     };
 });

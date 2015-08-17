@@ -10,16 +10,38 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
         $timeout($scope.reloadServices, 2000);
     };
 
+    var onFail = function (res) {
+        var error = (res.data && res.data.error) ? res.data.error : 'Could not reach the server.';
+        $alert({
+            content: error + ' If this persists, please let us know.',
+            type: 'danger',
+            duration: 15,
+        });
+        $scope.submittingForm = false;
+        $scope.justSubmitted = false;
+    };
+
+    var onUploadFail = function (data) {
+        var error = (data && data.error) ? data.error : 'could not reach the server';
+        $alert({
+            content: 'Failed to upload your image: ' + error,
+            type: 'danger',
+            duration: 15,
+        });
+        $scope.submittingForm = false;
+        $scope.justSubmitted = false;
+    };
+
     $scope.submittingForm = false;
     $scope.request = {};
     if ($rootScope.service.apps.android) {
-        $scope.request.platform = 'iOS';
+        $scope.platform = 'iOS';
     }
     if ($rootScope.service.apps.iOS) {
-        $scope.request.platform = 'Android';
+        $scope.platform = 'Android';
     }
     if (!$rootScope.service.apps.android && !$rootScope.service.apps.iOS) {
-        $scope.request.platform = 'Both';
+        $scope.platform = 'Both';
     }
 
     // workaround for form validation
@@ -28,7 +50,7 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
         $scope.form.upload.$invalid = false;
     });
 
-    $scope.submit = function (request) {
+    $scope.submit = function (platform, request) {
         $scope.submittingForm = true;
         $scope.$broadcast('show-errors-check-validity');
         if ($scope.form.$invalid) {
@@ -36,16 +58,18 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
             return;
         }
         request.username = $rootScope.service.username;
-        switch (request.platform) {
+
+        switch (platform) {
             case 'Both':
-                RequestAppService.submit('Android', request).then(onAppSubmitted);
-                RequestAppService.submit('iOS', request).then(onAppSubmitted);
+                RequestAppService.submit('android', request).then(function () {
+                    return RequestAppService.submit('iOS', request).then(onAppSubmitted, onFail);
+                }, onFail);
                 break;
             case 'Android':
-                RequestAppService.submit('Android', request).then(onAppSubmitted);
+                RequestAppService.submit('android', request).then(onAppSubmitted, onFail);
                 break;
             case 'iOS':
-                RequestAppService.submit('iOS', request).then(onAppSubmitted);
+                RequestAppService.submit('iOS', request).then(onAppSubmitted, onFail);
                 break;
         }
     };
@@ -59,10 +83,11 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
         $scope.isUploadingIcon = true;
         $scope.uploadProgressIcon = 0;
         $scope.upload = Upload.upload({
-            url: 'https://' + ENV.apiEndpoint + '/control/apps/iconupload/',
+            url: ENV.apiEndpoint + '/control/apps/upload-image?imageType=icon',
             method: 'POST',
             data: {},
             file: $files[0],
+            fileFormDataName: 'image',
         })
         .progress(function (evt) {
             $scope.uploadProgressIcon = parseInt(100.0 * evt.loaded / evt.total, 10);
@@ -70,7 +95,11 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
         .success(function (data) {
             $scope.isUploadingIcon = false;
             $scope.iconUploaded = true;
-            $scope.request.icon = data.name;
+            $scope.request.icon = data.link;
+        })
+        .error(function (data) {
+            $scope.isUploadingIcon = false;
+            onUploadFail(data);
         });
     };
 
@@ -82,10 +111,11 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
         $scope.isUploadingLogo = true;
         $scope.uploadProgressLogo = 0;
         $scope.upload = Upload.upload({
-            url: 'https://' + ENV.apiEndpoint + '/control/apps/logoupload/',
+            url: ENV.apiEndpoint + '/control/apps/upload-image',
             method: 'POST',
             data: {},
             file: $files[0],
+            fileFormDataName: 'image',
         })
         .progress(function (evt) {
             $scope.uploadProgressLogo = parseInt(100.0 * evt.loaded / evt.total, 10);
@@ -93,7 +123,11 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
         .success(function (data) {
             $scope.isUploadingLogo = false;
             $scope.logoUploaded = true;
-            $scope.request.logo = data.name;
+            $scope.request.logo = data.link;
+        })
+        .error(function (data) {
+            $scope.isUploadingLogo = false;
+            onUploadFail(data);
         });
     };
 
@@ -105,10 +139,11 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
         $scope.isUploadingFeatureGraphic = true;
         $scope.uploadProgressFeatureGraphic = 0;
         $scope.upload = Upload.upload({
-            url: 'https://' + ENV.apiEndpoint + '/control/apps/featureGraphicUpload/',
+            url: ENV.apiEndpoint + '/control/apps/upload-image?imageType=featureGraphic',
             method: 'POST',
             data: {},
             file: $files[0],
+            fileFormDataName: 'image',
         })
         .progress(function (evt) {
             $scope.uploadProgressFeatureGraphic = parseInt(100.0 * evt.loaded / evt.total, 10);
@@ -116,7 +151,11 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
         .success(function (data) {
             $scope.isUploadingFeatureGraphic = false;
             $scope.featureGraphicUploaded = true;
-            $scope.request.featureGraphic = data.name;
+            $scope.request.featureGraphic = data.link;
+        })
+        .error(function (data) {
+            $scope.isUploadingFeatureGraphic = false;
+            onUploadFail(data);
         });
     };
 });
