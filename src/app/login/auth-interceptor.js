@@ -1,8 +1,8 @@
-control.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS, Session) {
+control.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS, Session, ENV) {
     return {
         request: function (config) {
             config.headers = config.headers || {};
-            if (config.url.indexOf('https://itframe.shoutca.st/') !== -1 && Session.token) {
+            if (config.url.indexOf(ENV.apiEndpoint) !== -1 && Session.token) {
                 config.headers.Authorization = 'Bearer ' + Session.token;
             }
             return config;

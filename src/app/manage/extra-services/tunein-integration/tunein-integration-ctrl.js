@@ -2,7 +2,7 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
 
     // Initialisation
     var initialiseSettings = function () {
-        $scope.settings = $rootScope.service.tuneinIntegration;
+        $scope.settings = $rootScope.service.tuneInIntegration;
         if (typeof $scope.settings === 'undefined') {
             $scope.disableForm = true;
             $scope.notSupportedByServer = true;
@@ -11,7 +11,7 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
         $scope.integrationEnabled = $scope.settings.isEnabled;
     };
 
-    $rootScope.$watch('service.tuneinIntegration', function (newValue) {
+    $scope.$watch('service.tuneInIntegration', function (newValue) {
         $scope.settings = newValue;
         $scope.integrationEnabled = $scope.settings.isEnabled;
     });
@@ -24,10 +24,10 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
         $scope.disableForm = false;
     };
 
-    var changeStateFailure = function (oldValue) {
+    var changeStateFailure = function (oldValue, error) {
         $alert({
-            content: 'Something went wrong while enabling or disabling the TuneIn integration. Please try again.',
-            type: 'error',
+            content: 'Failed to enable/disable the TuneIn integration (' + error + '). Please try again.',
+            type: 'danger',
             duration: 10,
         });
         unregisterWatch();
@@ -38,30 +38,30 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
 
     var unregisterWatch;
     var watchTuneInIntegrationSwitch = function () {
-            unregisterWatch = $scope.$watch('integrationEnabled', function (newValue, oldValue) {
-                if (newValue === oldValue) {
-                    return;
-                }
+        unregisterWatch = $scope.$watch('integrationEnabled', function (newValue, oldValue) {
+            if (newValue === oldValue) {
+                return;
+            }
 
-                $scope.$broadcast('show-errors-check-validity');
-                if ($scope.form.$invalid) {
-                    $alert({
-                        content: 'The integration has not yet been configured correctly.',
-                        type: 'error',
-                        duration: 10,
-                    });
-                    return;
-                }
+            $scope.$broadcast('show-errors-check-validity');
+            if ($scope.form.$invalid) {
+                $alert({
+                    content: 'The integration has not been configured.',
+                    type: 'warning',
+                    duration: 10,
+                });
+                return;
+            }
 
-                $scope.disableForm = true;
-                $scope.settings.isEnabled = $scope.integrationEnabled;
-                if ($scope.integrationEnabled) {
-                    TuneInIntegrationService.enable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
-                } else {
-                    TuneInIntegrationService.disable($rootScope.service.username).then(changeStateSuccess, function () { changeStateFailure(oldValue); });
-                }
-            });
-        };
+            $scope.disableForm = true;
+            $scope.settings.isEnabled = $scope.integrationEnabled;
+            if ($scope.integrationEnabled) {
+                TuneInIntegrationService.enable($rootScope.service.username, $scope.settings).then(changeStateSuccess, function (res) { changeStateFailure(oldValue, res.data.error); });
+            } else {
+                TuneInIntegrationService.disable($rootScope.service.username, $scope.settings).then(changeStateSuccess, function (res) { changeStateFailure(oldValue, res.data.error); });
+            }
+        });
+    };
     watchTuneInIntegrationSwitch();
 
     $scope.saveSettings = function (settings) {
@@ -78,10 +78,10 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
                 type: 'success',
                 duration: 5,
             });
-        }, function () {
+        }, function (res) {
             $alert({
-                content: 'Something went wrong while saving your settings. Your settings were not saved. Please try again.',
-                type: 'error',
+                content: 'Could not save your settings (' + res.data.error + '). Your settings were not saved. Please try again.',
+                type: 'danger',
                 duration: 10,
             });
             $scope.disableForm = false;
@@ -91,7 +91,7 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
 
     $scope.removeSettings = function () {
         // Reset settings.
-        $rootScope.service.tuneinIntegration = { isEnabled: false };
+        $rootScope.service.tuneInIntegration = { isEnabled: false };
         unregisterWatch();
         initialiseSettings();
 
@@ -106,10 +106,10 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
                 type: 'success',
                 duration: 5,
             });
-        }, function () {
+        }, function (res) {
             $alert({
-                content: 'Something went wrong while removing your settings. Your settings were not removed. Please try again.',
-                type: 'error',
+                content: 'Could not remove your settings (' + res.data.error + '). Your settings were not removed. Please try again.',
+                type: 'danger',
                 duration: 10,
             });
             watchTuneInIntegrationSwitch();

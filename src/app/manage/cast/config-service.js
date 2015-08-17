@@ -12,10 +12,10 @@ angular.module('control.manage.cast').factory('ConfigService', function ($http, 
         return promiseCache({
             promise: function () {
                 return $http
-                    .post('https://' + ENV.apiEndpoint + '/control/cast/configuration', { username: username })
+                    .get(ENV.apiEndpoint + '/control/cast/configuration/' + username)
                     .then(function (response) {
-                    return response.data;
-                });
+                        return response.data;
+                    });
             },
             key: 'castConfig',
             ttl: -1,

@@ -5,8 +5,6 @@ control = null;
 (function () {
     'use strict';
 
-    angular.module('config', []).constant('ENV', { apiEndpoint: 'itframe.shoutca.st' });
-
     control = angular.module('control', [
         'config',
         'templates',

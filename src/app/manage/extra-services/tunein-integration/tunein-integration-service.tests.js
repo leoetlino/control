@@ -4,7 +4,7 @@ describe('TuneInIntegrationService', function () {
 
     beforeEach(module('control'));
     beforeEach(module(function ($provide) {
-        $provide.value('ENV', { apiEndpoint: 'itframe.shoutca.st' });
+        $provide.value('ENV', { apiEndpoint: 'itframe.innovatete.ch' });
     }));
     beforeEach(inject(function (TuneInIntegrationService, $httpBackend) {
         this.service = TuneInIntegrationService;
@@ -42,7 +42,7 @@ describe('TuneInIntegrationService', function () {
             };
             var succeeded;
 
-            this.$httpBackend.expectPOST('https://itframe.shoutca.st/control/tunein-integration/save-settings', testData).respond(200, { result: 'success' });
+            this.$httpBackend.expectPUT('https://itframe.innovatete.ch/control/tunein-air-integration/settings/test', testData).respond(200, { result: 'success' });
 
             this.service.saveSettings(testData.username, testData).then(function () {
                 succeeded = true;
@@ -56,7 +56,7 @@ describe('TuneInIntegrationService', function () {
             var testData = {};
             var succeeded;
 
-            this.$httpBackend.expectPOST('https://itframe.shoutca.st/control/tunein-integration/save-settings', testData).respond(500, { result: 'error', error: 'Missing data' });
+            this.$httpBackend.expectPUT('https://itframe.innovatete.ch/control/tunein-air-integration/settings/', testData).respond(500, { result: 'error', error: 'Missing data' });
 
             this.service.saveSettings('', testData).then(function () {
                 succeeded = true;

@@ -4,7 +4,7 @@ describe('NowPlayingTweetsService', function () {
 
     beforeEach(module('control'));
     beforeEach(module(function ($provide) {
-        $provide.value('ENV', { apiEndpoint: 'itframe.shoutca.st' });
+        $provide.value('ENV', { apiEndpoint: 'itframe.innovatete.ch' });
     }));
     beforeEach(inject(function (NowPlayingTweetsService, $httpBackend) {
         this.service = NowPlayingTweetsService;
@@ -41,7 +41,7 @@ describe('NowPlayingTweetsService', function () {
             };
             var succeeded;
 
-            this.$httpBackend.expectPOST('https://itframe.shoutca.st/control/now-playing/update-settings', testData).respond(200, { result: 'success' });
+            this.$httpBackend.expectPUT('https://itframe.innovatete.ch/control/now-playing-tweets/settings/test', testData).respond(200, { result: 'success' });
 
             this.service.submitSettings(testData.username, testData).then(function () {
                 succeeded = true;
@@ -55,7 +55,7 @@ describe('NowPlayingTweetsService', function () {
             var testData = {};
             var succeeded;
 
-            this.$httpBackend.expectPOST('https://itframe.shoutca.st/control/now-playing/update-settings', testData).respond(500, { result: 'error', error: 'Missing data' });
+            this.$httpBackend.expectPUT('https://itframe.innovatete.ch/control/now-playing-tweets/settings/', testData).respond(500, { result: 'error', error: 'Missing data' });
 
             this.service.submitSettings('', testData).then(function () {
                 succeeded = true;

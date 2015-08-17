@@ -10,7 +10,7 @@ describe('ServicesService', function () {
 
     beforeEach(module('control'));
     beforeEach(module(function ($provide) {
-        $provide.value('ENV', { apiEndpoint: 'itframe.shoutca.st' });
+        $provide.value('ENV', { apiEndpoint: 'itframe.innovatete.ch' });
         $provide.value('$location', {
             search: function () {
                 return fakeLocation;
@@ -82,9 +82,8 @@ describe('ServicesService', function () {
                     status: 'Active',
                     username: 'testing',
                     price: '0.00',
-                    isReseller: false,
-                    tuneinIntegration: { isEnabled: false },
-                    nowPlaying: { isEnabled: false },
+                    tuneInIntegration: { isEnabled: false },
+                    nowPlayingTweets: { isEnabled: false },
                     apps: {},
                 },
                 {
@@ -95,9 +94,8 @@ describe('ServicesService', function () {
                     status: 'Active',
                     username: 'xxx',
                     price: '999.99',
-                    isReseller: false,
-                    tuneinIntegration: { isEnabled: false },
-                    nowPlaying: { isEnabled: false },
+                    tuneInIntegration: { isEnabled: false },
+                    nowPlayingTweets: { isEnabled: false },
                     apps: {},
                 },
                 {
@@ -108,9 +106,8 @@ describe('ServicesService', function () {
                     status: 'Suspended',
                     username: 'xxx',
                     price: '0.00',
-                    isReseller: false,
-                    tuneinIntegration: { isEnabled: false },
-                    nowPlaying: { isEnabled: false },
+                    tuneInIntegration: { isEnabled: false },
+                    nowPlayingTweets: { isEnabled: false },
                     apps: {},
                 },
                 {
@@ -121,9 +118,8 @@ describe('ServicesService', function () {
                     status: 'Active',
                     username: 'xxx',
                     price: '0.00',
-                    isReseller: false,
-                    tuneinIntegration: { isEnabled: false },
-                    nowPlaying: { isEnabled: false },
+                    tuneInIntegration: { isEnabled: false },
+                    nowPlayingTweets: { isEnabled: false },
                     apps: {},
                 },
                 {
@@ -134,14 +130,13 @@ describe('ServicesService', function () {
                     status: 'Active',
                     username: 'cast',
                     price: '5.00',
-                    isReseller: false,
-                    tuneinIntegration: { isEnabled: false },
-                    nowPlaying: { isEnabled: false },
+                    tuneInIntegration: { isEnabled: false },
+                    nowPlayingTweets: { isEnabled: false },
                     apps: {},
                 },
             ];
 
-            $httpBackend.expectPOST('https://itframe.shoutca.st/control/accounts/').respond(200, testResponse);
+            $httpBackend.expectGET('https://itframe.innovatete.ch/control/products').respond(200, testResponse);
 
             ServicesService.getServicesPromise().then(function (_services_) {
                 services = _services_;

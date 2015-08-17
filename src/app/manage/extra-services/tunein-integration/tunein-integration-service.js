@@ -1,17 +1,24 @@
 angular.module('control.manage.extra-services').factory('TuneInIntegrationService', function ($http, ENV) {
     return {
         saveSettings: function (username, settings) {
-            settings.username = username;
-            return $http.post('https://' + ENV.apiEndpoint + '/control/tunein-integration/save-settings', settings);
+            return $http.put(ENV.apiEndpoint + '/control/tunein-air-integration/settings/' + username, settings);
         },
         removeSettings: function (username) {
-            return $http.post('https://' + ENV.apiEndpoint + '/control/tunein-integration/remove-settings', { username: username });
+            return $http.delete(ENV.apiEndpoint + '/control/tunein-air-integration/settings/' + username);
         },
-        enable: function (username) {
-            return $http.post('https://' + ENV.apiEndpoint + '/control/tunein-integration/enable', { username: username });
+        enable: function (username, settings) {
+            settings.isEnabled = true;
+            return $http.put(
+                ENV.apiEndpoint + '/control/tunein-air-integration/settings/' + username,
+                settings
+            );
         },
-        disable: function (username) {
-            return $http.post('https://' + ENV.apiEndpoint + '/control/tunein-integration/disable', { username: username });
+        disable: function (username, settings) {
+            settings.isEnabled = false;
+            return $http.put(
+                ENV.apiEndpoint + '/control/tunein-air-integration/settings/' + username,
+                settings
+            );
         },
     };
 });

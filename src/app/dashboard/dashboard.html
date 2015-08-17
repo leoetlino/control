@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-body">
-        <p><b>Welcome, {{summary.firstname}}!</b> Control is still in development, so things may still change a lot until the final release! <a href="/feedback">We appreciate any feedback you might have.</a></p>
+        <p><b>Welcome, {{summary.firstName}}!</b> Control is still in development, so things may still change a lot until the final release! <a href="/feedback">We appreciate any feedback you might have.</a></p>
     </div>
 </div>
 <div class="row row-equal-height">
@@ -10,7 +10,7 @@
                 <h3 class="panel-title"><i class="fa fa-gears"></i> Servers</h3>
             </div>
             <div class="panel-body">
-                <p class="lead large-number" ng-class="{'text-success': services.length, 'text-error': !services.length}">{{ services.length }}</p>
+                <p class="lead large-number" ng-class="{'text-success': services.length, 'text-error': !services.length}">{{ services.length || '…' }}</p>
                 <p><a href="/manage" class="btn btn-default btn-block"><fa name="sliders"></fa> Manage</a></p>
             </div>
         </div>

@@ -4,7 +4,7 @@ describe('RequestAppService', function () {
 
     beforeEach(module('control'));
     beforeEach(module(function ($provide) {
-        $provide.value('ENV', { apiEndpoint: 'itframe.shoutca.st' });
+        $provide.value('ENV', { apiEndpoint: 'itframe.innovatete.ch' });
     }));
     beforeEach(inject(function (RequestAppService, $httpBackend) {
         this.service = RequestAppService;

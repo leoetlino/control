@@ -6,7 +6,7 @@ control.factory('DashService', function ($http, ENV, promiseCache, Session, $q) 
             }
             return promiseCache({
                 promise: function () {
-                    return $http.post('https://' + ENV.apiEndpoint + '/control/userInfo/');
+                    return $http.get(ENV.apiEndpoint + '/control/user-info');
                 },
                 ttl: -1,
             });
