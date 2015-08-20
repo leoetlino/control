@@ -62,7 +62,10 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
             $rootScope.services = ServicesService.getServicesList();
             $rootScope.service = service;
             return service;
-        }, function onInitServiceFail () {
+        }, function onInitServiceFail (response) {
+            if (response.status === 419) {
+                return;
+            }
             $alert({
                 content: 'Apologies, but something went wrong. Please reload the page and try again. If this persists, please check status.shoutca.st for network issues and let us know.',
                 type: 'danger',
