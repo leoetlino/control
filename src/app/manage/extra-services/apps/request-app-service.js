@@ -13,10 +13,7 @@ angular.module('control.manage.extra-services').factory('RequestAppService', fun
             if (request.twitter) {
                 request.tabs.push({ type: 'twitter', value: request.twitter });
             }
-            delete request.website;
-            delete request.facebook;
-            delete request.twitter;
-            return $http.post(ENV.apiEndpoint + '/control/apps/request', {
+            return $http.post(ENV.apiEndpoint + '/control/apps', {
                 username: request.username,
                 platform: platform,
                 request: request,
