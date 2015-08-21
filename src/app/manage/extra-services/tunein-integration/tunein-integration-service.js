@@ -1,6 +1,7 @@
 angular.module('control.manage.extra-services').factory('TuneInIntegrationService', function ($http, ENV) {
     return {
         saveSettings: function (username, settings) {
+            settings.disableReason = '';
             return $http.put(ENV.apiEndpoint + '/control/tunein-air-integration/settings/' + username, settings);
         },
         removeSettings: function (username) {

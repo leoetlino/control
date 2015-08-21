@@ -1,6 +1,7 @@
 angular.module('control.manage.extra-services').factory('NowPlayingTweetsService', function ($http, ENV) {
     return {
         submitSettings: function (username, settings) {
+            settings.disableReason = '';
             return $http.put(ENV.apiEndpoint + '/control/now-playing-tweets/settings/' + username, settings);
         },
         enable: function (username, settings) {

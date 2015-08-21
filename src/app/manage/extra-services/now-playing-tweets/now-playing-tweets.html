@@ -13,11 +13,16 @@
 <div class="alert alert-info" ng-show="form.$invalid">
     <p><fa name="warning"></fa> You need to configure #NowPlaying before it can be enabled.</p>
 </div>
-<div class="alert alert-warning" ng-show="(settings.prefix + ' This is a Song Name - Artist Name ' + settings.suffix).length > 140" >
+<div class="alert alert-warning" ng-show="(settings.tweet.replace('%title', 'This is a Song Name').replace('%artist', 'Artist Name')).length > 140" >
     <p><fa name="warning"></fa> Your Tweets might be too long and may not be able to be sent. Consider making your prefix and/or suffix shorter.</p>
 </div>
 <div class="alert alert-warning" ng-show="(settings.prefix + ' This is a Song Name - Artist Name ' + settings.suffix).indexOf('http') !== -1" >
     <p><fa name="warning"></fa> Including an URL might result in getting your Tweets blocked by Twitter (possible spam). Consider removing it.</p>
+</div>
+
+<div class="alert alert-warning" ng-show="settings.disableReason">
+    <p><fa name="warning"></fa> Your integration has been disabled because we have detected an issue.</p>
+    <p><b>{{settings.disableReason}}</b></p>
 </div>
 
 <section class="panel panel-default">

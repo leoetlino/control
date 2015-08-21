@@ -17,6 +17,11 @@
     <p><fa name="exclamation-circle"></fa> The TuneIn integration cannot be configured from Control at this time. Please try again later.</p>
 </div>
 
+<div class="alert alert-warning" ng-show="settings.disableReason">
+    <p><fa name="warning"></fa> Your integration has been disabled because we have detected an issue.</p>
+    <p><b>{{settings.disableReason}}</b></p>
+</div>
+
 <section class="panel panel-default">
     <div class="panel-body">
         <form novalidate role="form" name="form" ng-submit="saveSettings(settings)">
