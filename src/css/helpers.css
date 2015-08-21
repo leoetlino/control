@@ -1,3 +1,11 @@
+.dl-taller dt, .dl-taller dd {
+    padding-top: 8px;
+}
+
+.uc-first {
+    text-transform: capitalize;
+}
+
 .font-diavlo {
     font-family: 'Diavlo Light';
 }

@@ -1,0 +1,165 @@
+<div class="panel panel-default" ng-hide="ctrl.app && ctrl.app._id">
+    <div class="panel-body">
+        <h4><a class="back-button" href="/manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps</h4>
+        <p class="text-info">There's no app request for this platform associated to this service.</p>
+        <br>
+    </div>
+</div>
+
+<div class="panel panel-default" ng-show="ctrl.app && ctrl.app._id">
+<div class="panel-body">
+
+<h4 class="pull-left"><a class="back-button" href="/manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps <small><i class="fa" ng-class="{'fa-apple': ctrl.isiOSApp, 'fa-android': ctrl.isAndroidApp}"></i> {{ctrl.app._id}} ({{ctrl.app.username}})</small></h4>
+<div class="pull-right no-transition visible-md visible-lg" ng-hide="editableForm.$visible">
+    <button ng-show="!editableForm.$visible" class="btn btn-default broad-button" ng-click="editableForm.$show()"><i class="fa fa-edit"></i> Edit</button>
+</div>
+<div class="pull-right no-transition visible-md visible-lg" ng-show="editableForm.$visible">
+    <button type="submit" class="btn btn-primary broad-button" ng-disabled="editableForm.$waiting" form="info-form"><i class="fa fa-save"></i> Save</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-default broad-button" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel</button>
+</div>
+
+<div class="clearfix"></div>
+<br>
+
+<form editable-form name="editableForm" id="info-form" onbeforesave="ctrl.beforeSave()" onaftersave="ctrl.save()" onshow="ctrl.onEdit()" oncancel="ctrl.onCancel()">
+    <fieldset ng-disabled="ctrl.disableForm">
+        <section>
+            <dl class="dl-horizontal dl-taller">
+                <dt>Name</dt>
+                <dd><span editable-text="ctrl.app.name">{{ctrl.app.name}}</span></dd>
+                <dt>Description</dt>
+                <dd class="white-space-pre-line"><span editable-textarea="ctrl.app.description" e-msd-elastic>{{ctrl.app.description}}</span></dd>
+                <div ng-show="ctrl.isAndroidApp">
+                    <dt>Short Description</dt>
+                    <dd class="white-space-pre-line"><span editable-textarea="ctrl.app.shortDescription" e-msd-elastic>{{ctrl.app.shortDescription}}</span></dd>
+                </div>
+                <div ng-show="ctrl.isiOSApp">
+                    <dt>Keywords</dt>
+                    <dd><span editable-text="ctrl.app.keywords">{{ctrl.app.keywords}}</span></dd>
+                </div>
+                <dt>Stream URL</dt>
+                <dd>
+                    <a ng-show="!editableForm.$visible" href="{{ctrl.app.streamUrl}}">{{ctrl.app.streamUrl}}</a>
+                    <span ng-hide="!editableForm.$visible"><i>The stream URL will be filled in when you save the app.</i></span>
+                </dd>
+                <div ng-hide="!ctrl.app.alternativeStreamUrl && !editableForm.$visible">
+                    <dt>Alternative Stream URL</dt>
+                    <dd><span editable-url="ctrl.app.alternativeStreamUrl" e-placeholder="Override the stream URL (optional)"><a href="{{ctrl.app.alternativeStreamUrl}}">{{ctrl.app.alternativeStreamUrl}}</a></span></dd>
+                </div>
+            </dl>
+        </section>
+        <section>
+            <hr>
+            <dl class="dl-horizontal dl-taller">
+                <dt>Status</dt>
+                <dd class="{{ctrl.app.status}}">{{ctrl.app.status|appStatus}}</dd>
+                <div ng-hide="ctrl.app.imported">
+                    <dt>Submitted On</dt>
+                    <dd><span data-placement="right" data-title="{{ctrl.app.submittedOn| date:'yyyy-MM-dd HH:mm:ss Z'}}">{{ctrl.app.submittedOn|date:'dd/MM/yyyy HH:mm Z'}}</span></dd>
+                </div>
+                <dt>Last Updated</dt>
+                <dd><span ng-show="ctrl.app.lastUpdated" data-placement="right" data-title="{{ctrl.app.lastUpdated| date:'yyyy-MM-dd HH:mm:ss Z'}}">{{ctrl.app.lastUpdated|date:'dd/MM/yyyy HH:mm Z'}}</span><span ng-show="!ctrl.app.lastUpdated">-</span></dd>
+            </dl>
+        </section>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <section>
+                    <dl class="dl-horizontal dl-taller">
+                        <dt>Background Colour</dt>
+                        <dd>
+                            <span ng-hide="editableForm.$visible">{{ctrl.app.backgroundColour||'none'}} <span class="color-indicator" style="background-color: {{ctrl.app.backgroundColour}}" ng-show="ctrl.app.backgroundColour"></span></span>
+                            <input ng-show="editableForm.$visible" class="form-control" type="text" ng-model="ctrl.app.backgroundColour" colorpicker placeholder="#123456">
+                        </dd>
+                        <div ng-show="ctrl.app.tint || editableForm.$visible">
+                            <dt>Tint</dt>
+                            <dd>
+                                <span ng-hide="editableForm.$visible">{{ctrl.app.tint||'none'}} <span class="color-indicator" style="background-color: {{ctrl.app.tint}}" ng-show="ctrl.app.tint"></span></span>
+                                <input ng-show="editableForm.$visible" class="form-control" type="text" ng-model="ctrl.app.tint" colorpicker placeholder="#123456">
+                            </dd>
+                        </div>
+                        <div ng-show="ctrl.isAndroidApp && (ctrl.app.actionBarColour || editableForm.$visible)">
+                            <dt>Action Bar Colour</dt>
+                            <dd>
+                                <span ng-hide="editableForm.$visible">{{ctrl.app.actionBarColour||'none'}} <span class="color-indicator" style="background-color: {{ctrl.app.actionBarColour}}" ng-show="ctrl.app.actionBarColour"></span></span>
+                                <input ng-show="editableForm.$visible" class="form-control" type="text" ng-model="ctrl.app.actionBarColour" colorpicker placeholder="#123456">
+                            </dd>
+                        </div>
+                    </dl>
+                </section>
+                <section>
+                    <hr>
+                    <div class="row" ng-if="!editableForm.$visible">
+                        <div ng-class="{'col-sm-3': ctrl.isAndroidApp, 'col-sm-5': ctrl.isiOSApp}">
+                            <p><b>Icon</b></p>
+                            <a href="{{ctrl.app.icon}}"><img ng-src="{{ctrl.app.icon}}" class="img-thumbnail img-responsive"></a>
+                        </div>
+                        <div ng-class="{'col-sm-4': ctrl.isAndroidApp, 'col-sm-5': ctrl.isiOSApp}">
+                            <p><b>Logo</b></p>
+                            <a href="{{ctrl.app.logo}}"><img ng-src="{{ctrl.app.logo}}" class="img-thumbnail img-responsive"></a>
+                        </div>
+                        <div class="col-sm-5" ng-show="ctrl.isAndroidApp">
+                            <p><b>Feature Graphic</b></p>
+                            <a href="{{ctrl.app.featureGraphic}}"><img ng-src="{{ctrl.app.featureGraphic}}" class="img-thumbnail img-responsive"></a>
+                        </div>
+                    </div>
+                    <dl class="dl-horizontal dl-taller" ng-if="editableForm.$visible">
+                        <dt>Icon</dt>
+                        <dd class="long-text"><span editable-url="ctrl.app.icon"><a href="{{ctrl.app.icon}}">{{ctrl.app.icon}}</a></span></dd>
+                        <dt>Logo</dt>
+                        <dd class="long-text"><span editable-url="ctrl.app.logo"><a href="{{ctrl.app.logo}}">{{ctrl.app.logo}}</a></span></dd>
+                        <div ng-show="isAndroidApp">
+                            <dt>Feature Graphic</dt>
+                            <dd class="long-text"><span editable-url="ctrl.app.featureGraphic"><a href="{{ctrl.app.featureGraphic}}">{{ctrl.app.featureGraphic}}</a></span></dd>
+                        </div>
+                    </dl>
+                    <div ng-show="ctrl.app.screenshots.length && ctrl.isAndroidApp">
+                        <hr>
+                        <p><b>Screenshots</b></p>
+                        <a style="margin-right: 15px;" ng-repeat="screenshot in ctrl.app.screenshots" href="{{screenshot.dataUrl}}" download="{{app.name}} - Screenshot.png"><img ng-src="{{screenshot.dataUrl}}" height="{{screenshot.dimensions.height*0.1}}" width="{{screenshot.dimensions.width*0.1}}" class="img-thumbnail"></a>
+                        <p>&nbsp;</p>
+                    </div>
+                </section>
+            </div>
+            <div class="col-sm-6">
+                <section>
+                    <p><b>Tabs</b> <span class="badge">{{ctrl.app.tabs.length}}</span> <button class="btn btn-xs btn-default no-transition" type="button" ng-hide="!editableForm.$visible" ng-click="ctrl.addTab()"><i class="fa fa-plus"></i></button></p>
+                    <ul class="list-group" ng-model="ctrl.app.tabs">
+                        <li ng-repeat="tab in ctrl.app.tabs" class="list-group-item" style="padding-left: 15px">
+                            <h5 class="list-group-item-heading no-transition">
+                                <span editable-select="tab.type" e-ng-options="type as type|appTabType for type in ctrl.tabTypes" e-style="display: inline-block !important; width: 88%; float: left;">
+                                    {{tab.type|appTabType}}
+                                    <span class="label label-info" ng-show="tab.label" bs-tooltip data-title="Custom label for {{tab.type|appTabType}}"><i class="fa fa-tag"></i> {{tab.label}}</span>
+                                </span>
+                                <button class="btn btn-default pull-right no-transition" type="button" ng-hide="!editableForm.$visible" ng-click="ctrl.removeTab(tab)"><i class="fa fa-trash-o"></i></button>
+                                <div class="clearfix"></div>
+                            </h5>
+                            <p class="no-transition"><span editable-text="tab.value" e-placeholder="Username only for social tabs; full URL for websites">{{tab.value}}</span></p>
+                            <p class="no-transition" ng-if="ctrl.isAndroidApp" ng-show="editableForm.$visible"><span editable-text="tab.label" e-placeholder="Custom label (optional)">{{tab.label}}</span></p>
+                            <p ng-show="['facebook', 'twitter'].indexOf(tab.type) !== -1 && tab.value.indexOf('http') !== -1" class="text-danger"><b>{{tab.type||tabType}} tabs only need the username.</b></p>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<br>
+
+<div class="no-transition hidden-md hidden-lg" ng-show="editableForm.$visible">
+    <div class="row">
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary btn-block" ng-disabled="editableForm.$waiting" form="info-form"><i class="fa fa-save"></i> Save</button>
+        </div>
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-default btn-block" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel</button>
+        </div>
+    </div>
+</div>
+<div class="no-transition hidden-md hidden-lg" ng-hide="editableForm.$visible">
+    <button ng-show="!editableForm.$visible" class="btn btn-default btn-block" ng-click="editableForm.$show()"><i class="fa fa-edit"></i> Edit</button>
+</div>
+
+<br>
+</div>
+</div>

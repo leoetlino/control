@@ -1,4 +1,6 @@
-angular.module('control.manage.extra-services').controller('RequestAppCtrl', function ($rootScope, $scope, RequestAppService, Upload, ENV, $timeout, $alert) {
+angular.module('control.manage.extra-services').controller('RequestAppCtrl', function ($rootScope, $scope, RequestAppService, Upload, ENV, $timeout, $alert, apps) {
+
+    $scope.apps = angular.copy(apps) || {};
 
     var onAppSubmitted = function () {
         $alert({
@@ -7,7 +9,9 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
             duration: 5,
         });
         $scope.justSubmitted = true;
-        $timeout($scope.reloadServices, 2000);
+        RequestAppService.getAppsObject().then(function (newApps) {
+            $scope.apps = newApps;
+        });
     };
 
     var onFail = function (res) {
@@ -34,13 +38,13 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
 
     $scope.submittingForm = false;
     $scope.request = {};
-    if ($rootScope.service.apps.android) {
+    if (apps.android) {
         $scope.platform = 'iOS';
     }
-    if ($rootScope.service.apps.iOS) {
+    if (apps.iOS) {
         $scope.platform = 'Android';
     }
-    if (!$rootScope.service.apps.android && !$rootScope.service.apps.iOS) {
+    if (!apps.android && !apps.iOS) {
         $scope.platform = 'Both';
     }
 

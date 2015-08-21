@@ -13,31 +13,29 @@
     <ul class="list-group">
         <li class="list-group-item no-border-top">
             <h4 class="list-group-item-heading pull-left">Android App</h4>
-            <h4 class="list-group-item-heading pull-right" ng-class="{'text-success': service.apps.android}">
-                {{service.apps.android ? 'Requested' : 'Not requested'}}
+            <h4 class="list-group-item-heading pull-right" ng-class="{'text-success': apps.android}">
+                {{apps.android ? 'Requested' : 'Not requested'}}
             </h4>
             <div class="clearfix"></div>
-            <p class="list-group-item-text" ng-show="service.apps.android.status">Current status: <span class="{{service.apps.android.status}}">{{service.apps.android.status|appStatus}}</span><br>{{service.apps.android.status|appStatusExplanation:'android'}}</p>
-            <p class="list-group-item-text text-danger" ng-if="service.apps.android._id && !service.apps.android.reviewed">Your app is pending review from our management team.</p>
+            <p class="list-group-item-text" ng-show="apps.android.status">Current status: <span class="{{apps.android.status}}">{{apps.android.status|appStatus}}</span> <b class="text-warning" ng-show="apps.android._id && !apps.android.reviewed">(pending review from our team)</b><br>{{apps.android.status|appStatusExplanation:'android'}} <a href="/manage/apps/view-request/android">More <fa name="chevron-right"></fa></a></p>
         </li>
         <li class="list-group-item iOS">
             <h4 class="list-group-item-heading pull-left">iOS App</h4>
-            <h4 class="list-group-item-heading pull-right" ng-class="{'text-success': service.apps.iOS}">
-                {{service.apps.iOS ? 'Requested' : 'Not requested'}}
+            <h4 class="list-group-item-heading pull-right" ng-class="{'text-success': apps.iOS}">
+                {{apps.iOS ? 'Requested' : 'Not requested'}}
             </h4>
             <div class="clearfix"></div>
-            <p class="list-group-item-text" ng-show="service.apps.iOS.status">Current status: <span class="{{service.apps.iOS.status}}">{{service.apps.iOS.status|appStatus}}</span><br>{{service.apps.iOS.status|appStatusExplanation:'iOS'}}</p>
-            <p class="list-group-item-text text-danger" ng-if="service.apps.iOS._id && !service.apps.iOS.reviewed">Your app is pending review from our management team.</p>
+            <p class="list-group-item-text" ng-show="apps.iOS.status">Current status: <span class="{{apps.iOS.status}}">{{apps.iOS.status|appStatus}}</span> <b class="text-warning" ng-show="apps.iOS._id && !apps.iOS.reviewed">(pending review from our team)</b><br>{{apps.iOS.status|appStatusExplanation:'iOS'}} <a href="/manage/apps/view-request/iOS">More <fa name="chevron-right"></fa></a></p>
         </li>
     </ul>
 </section>
 
-<section class="panel panel-default" ng-class="{'not-collapsed': (service.apps.android && service.apps.iOS) || requestFormToggle === 0 }" ng-model="requestFormToggle" data-start-collapsed="!service.apps.iOS || !service.apps.android" bs-collapse>
+<section class="panel panel-default" ng-class="{'not-collapsed': (apps.android && apps.iOS) || requestFormToggle === 0 }" ng-model="requestFormToggle" data-start-collapsed="!apps.iOS || !apps.android" bs-collapse>
     <div class="panel-body">
-        <h4 bs-collapse-toggle>Submit a request <i class="toggler" ng-class="{'fa-rotate-90': requestFormToggle === 0}" ng-hide="service.apps.android && service.apps.iOS"></i></h4>
+        <h4 bs-collapse-toggle>Submit a request <i class="toggler" ng-class="{'fa-rotate-90': requestFormToggle === 0}" ng-hide="apps.android && apps.iOS"></i></h4>
         <div class="clearfix"></div>
         <p class="collapsed-description">Submit an app request to get started.</p>
-        <div class="collapse" bs-collapse-target ng-hide="(service.apps.android && service.apps.iOS) || justSubmitted">
+        <div class="collapse" bs-collapse-target ng-hide="(apps.android && apps.iOS) || justSubmitted">
             <form class="form-horizontal" novalidate role="form" name="form" ng-submit="submit(platform, request)">
                 <fieldset ng-disabled="submittingForm">
                     <br>
@@ -45,9 +43,9 @@
                         <label for="platform" class="col-sm-3 control-label">Platform</label>
                         <div class="col-sm-9">
                             <select id="platform" class="form-control" ng-model="platform" name="platform" required>
-                                <option ng-disabled="service.apps.iOS || service.apps.android" value="Both">Android and iOS (iPhone, iPad and iPod)</option>
-                                <option ng-disabled="service.apps.android" value="Android">Android</option>
-                                <option ng-disabled="service.apps.iOS" value="iOS">iOS</option>
+                                <option ng-disabled="apps.iOS || apps.android" value="Both">Android and iOS (iPhone, iPad and iPod)</option>
+                                <option ng-disabled="apps.android" value="Android">Android</option>
+                                <option ng-disabled="apps.iOS" value="iOS">iOS</option>
                             </select>
                         </div>
                     </div>
@@ -235,7 +233,7 @@
                 </fieldset>
             </form>
         </div>
-        <div ng-show="service.apps.android && service.apps.iOS && !justSubmitted">
+        <div ng-show="apps.android && apps.iOS && !justSubmitted">
             <p class="text-success"><fa name="check"></fa> You have already submitted an app request for this service.</p>
         </div>
         <div ng-show="justSubmitted">
