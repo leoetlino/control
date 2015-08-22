@@ -1,20 +1,10 @@
-angular.module('control.manage.extra-services').controller('TuneInIntegrationCtrl', function ($rootScope, $scope, TuneInIntegrationService, ENV, $routeParams, $location, $alert) {
+angular.module('control.manage.extra-services').controller('TuneInIntegrationCtrl', function ($rootScope, $scope, TuneInIntegrationService, ENV, $routeParams, $location, $alert, settings) {
 
     // Initialisation
     var initialiseSettings = function () {
-        $scope.settings = $rootScope.service.tuneInIntegration;
-        if (typeof $scope.settings === 'undefined') {
-            $scope.disableForm = true;
-            $scope.notSupportedByServer = true;
-            return;
-        }
+        $scope.settings = angular.copy(settings);
         $scope.integrationEnabled = $scope.settings.isEnabled;
     };
-
-    $scope.$watch('service.tuneInIntegration', function (newValue) {
-        $scope.settings = newValue;
-        $scope.integrationEnabled = $scope.settings.isEnabled;
-    });
 
     $scope.disableForm = false;
     initialiseSettings();
@@ -64,15 +54,14 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
     };
     watchTuneInIntegrationSwitch();
 
-    $scope.saveSettings = function (settings) {
+    $scope.saveSettings = function (newSettings) {
         $scope.$broadcast('show-errors-check-validity');
         if ($scope.form.$invalid) {
             return;
         }
         $scope.disableForm = true;
-        TuneInIntegrationService.saveSettings($rootScope.service.username, settings).then(function () {
+        TuneInIntegrationService.saveSettings($rootScope.service.username, newSettings).then(function () {
             $scope.disableForm = false;
-            $scope.reloadServices();
             $alert({
                 content: 'New settings saved.',
                 type: 'success',
@@ -85,15 +74,14 @@ angular.module('control.manage.extra-services').controller('TuneInIntegrationCtr
                 duration: 10,
             });
             $scope.disableForm = false;
-            $scope.reloadServices();
         });
     };
 
     $scope.removeSettings = function () {
         // Reset settings.
-        $rootScope.service.tuneInIntegration = { isEnabled: false };
+        $scope.settings = { isEnabled: false };
+        $scope.integrationEnabled = false;
         unregisterWatch();
-        initialiseSettings();
 
         // Remove settings, server-side.
         $scope.disableForm = true;

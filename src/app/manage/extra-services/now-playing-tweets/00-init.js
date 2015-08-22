@@ -9,6 +9,15 @@ angular.module('control.manage.extra-services').run(function (ManageService) {
             template: '/app/manage/extra-services/now-playing-tweets/now-playing-tweets.html',
             controller: 'NowPlayingTweetsCtrl',
             title: '#NowPlaying Tweets',
+            resolve: /*@ngInject*/ {
+                settings: function (NowPlayingTweetsService, $q) {
+                    return NowPlayingTweetsService.getSettings().then(function (settings) {
+                        return $q.resolve(settings);
+                    }, function () {
+                        return $q.resolve({});
+                    });
+                },
+            },
         },
     });
 });

@@ -10,11 +10,8 @@
 <div id="alert-tunein-integration" flash-alert active-class="in alert" class="animated-custom fade">
     <p class="alert-message"><i class="fa alert-icon-{{flash.type}}"></i> {{ flash.message }}</p>
 </div>
-<div class="alert alert-info" ng-show="!notSupportedByServer && form.$invalid">
+<div class="alert alert-info" ng-show="form.$invalid">
     <p><fa name="warning"></fa> You need to configure the TuneIn integration before it can be enabled.</p>
-</div>
-<div class="alert alert-danger" ng-show="notSupportedByServer">
-    <p><fa name="exclamation-circle"></fa> The TuneIn integration cannot be configured from Control at this time. Please try again later.</p>
 </div>
 
 <div class="alert alert-warning" ng-show="settings.disableReason">

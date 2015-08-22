@@ -80,6 +80,7 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                     controller: item.route.controller,
                     controllerAs: item.route.controllerAs,
                     resolve: item.route.resolve,
+                    resolveFailed: item.route.resolveFailed,
                     title: item.route.title || item.name,
                     visibleForCastOnly: item.visibleForCastOnly || false,
                 },
@@ -107,6 +108,7 @@ control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
                     return $rootScope.service.id;
                 },
                 resolve: newItem.route.resolve,
+                resolveFailed: newItem.route.resolveFailed,
                 controller: newItem.route.controller,
                 controllerAs: newItem.route.controllerAs,
             };

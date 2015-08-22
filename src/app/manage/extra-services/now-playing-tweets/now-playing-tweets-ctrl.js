@@ -1,17 +1,16 @@
-angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl', function ($rootScope, $scope, NowPlayingTweetsService, ENV, $routeParams, $location, $alert) {
+angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl', function ($rootScope, $scope, NowPlayingTweetsService, ENV, $routeParams, $location, $alert, settings) {
 
     // Initialisation
     var initialiseSettings = function () {
-        $scope.nowPlayingState = $rootScope.service.nowPlayingTweets.isEnabled;
+        $scope.nowPlayingState = settings.isEnabled;
         $scope.settings = {};
-        $rootScope.service.nowPlayingTweets = $rootScope.service.nowPlayingTweets || {};
-        $scope.settings.tweet = $rootScope.service.nowPlayingTweets.tweet || '#NowPlaying %title - %artist';
-        $scope.settings.mode = $rootScope.service.nowPlayingTweets.mode || 'interval';
-        $scope.settings.interval = $rootScope.service.nowPlayingTweets.interval || 5;
-        $scope.settings.consumerKey = $rootScope.service.nowPlayingTweets.consumerKey;
-        $scope.settings.consumerSecret = $rootScope.service.nowPlayingTweets.consumerSecret;
-        $scope.settings.accessToken = $rootScope.service.nowPlayingTweets.accessToken;
-        $scope.settings.accessTokenSecret = $rootScope.service.nowPlayingTweets.accessTokenSecret;
+        $scope.settings.tweet = settings.tweet || '#NowPlaying %title - %artist';
+        $scope.settings.mode = settings.mode || 'interval';
+        $scope.settings.interval = settings.interval || 5;
+        $scope.settings.consumerKey = settings.consumerKey;
+        $scope.settings.consumerSecret = settings.consumerSecret;
+        $scope.settings.accessToken = settings.accessToken;
+        $scope.settings.accessTokenSecret = settings.accessTokenSecret;
     };
     initialiseSettings();
 
@@ -51,7 +50,7 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
     };
     watchNowPlayingSwitch();
 
-    $scope.submitSettings = function (settings) {
+    $scope.submitSettings = function (newSettings) {
         $scope.$broadcast('show-errors-check-validity');
         if ($scope.form.$invalid) {
             $alert({
@@ -62,7 +61,7 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
             return;
         }
         $scope.submitting = true;
-        NowPlayingTweetsService.submitSettings($rootScope.service.username, settings).then(function () {
+        NowPlayingTweetsService.submitSettings($rootScope.service.username, newSettings).then(function () {
             $scope.submitting = false;
             $alert({
                 content: 'New settings saved.',
@@ -81,7 +80,7 @@ angular.module('control.manage.extra-services').controller('NowPlayingTweetsCtrl
 
     $scope.removeSettings = function () {
         // Reset settings.
-        $rootScope.service.nowPlayingTweets = { isEnabled: false };
+        settings = { isEnabled: false };
         unregisterWatch();
 
         // Remove settings, server-side.
