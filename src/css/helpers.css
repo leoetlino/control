@@ -10,6 +10,18 @@
     font-family: 'Diavlo Light';
 }
 
+.always-visible-block {
+    display: block !important;
+}
+
+.always-visible-inline {
+    display: inline !important;
+}
+
+.always-visible-inline-block {
+    display: inline-block !important;
+}
+
 @media screen and (min-width: 769px) {
     .row-equal-height, .row-equal-height > div[class*='col-'] {
         display: flex;
