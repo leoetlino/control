@@ -10,6 +10,8 @@ control.run(function ($rootScope, $location, $window, $alert, $modal, $timeout, 
         });
     }
 
+    var alert;
+
     $rootScope.$on(AUTH_EVENTS.loginSuccess, function () {
         ServicesService.invalidateCache();
         return initServices().then(function onInitSuccess () {
@@ -64,7 +66,10 @@ control.run(function ($rootScope, $location, $window, $alert, $modal, $timeout, 
     });
 
     $rootScope.$on(AUTH_EVENTS.badRequest, function onBadRequest () {
-        $alert({
+        if (alert) {
+            alert.destroy();
+        }
+        alert = $alert({
             content: 'Something went wrong. Please try again. If the problem persists, reload the page and contact us.',
             type: 'danger',
             duration: 10,
@@ -74,7 +79,10 @@ control.run(function ($rootScope, $location, $window, $alert, $modal, $timeout, 
     $rootScope.$on(AUTH_EVENTS.sessionTimeout, function onSessionTimeout () {
         Session.destroy();
         $location.path('/log-in');
-        $alert({
+        if (alert) {
+            alert.destroy();
+        }
+        alert = $alert({
             content: 'Your session has expired, so you have been logged out.',
             type: 'warning',
         });

@@ -138,6 +138,9 @@ control.controller('NavigationCtrl', function ($scope, $location, $rootScope, $r
     });
 
     $rootScope.$on('server-error', function onServerError (event, error) {
+        if (alert) {
+            alert.destroy();
+        }
         alert = $alert({
             content: error.message + ' (' + error.code + ')',
             type: 'danger',
