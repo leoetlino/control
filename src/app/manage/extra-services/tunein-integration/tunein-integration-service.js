@@ -26,9 +26,16 @@ angular.module('control.manage.extra-services').factory('TuneInIntegrationServic
             );
         },
         invalidateCache: function () {
-            promiseCache.remove('tuneInIntegrationSettings');
+            if (!$rootScope.service) {
+                return;
+            }
+            var username = $rootScope.service.username;
+            promiseCache.remove('tuneInIntegrationSettings_' + username);
         },
         getSettings: function () {
+            if (!$rootScope.service) {
+                return;
+            }
             var username = $rootScope.service.username;
             return promiseCache({
                 promise: function () {
@@ -38,12 +45,11 @@ angular.module('control.manage.extra-services').factory('TuneInIntegrationServic
                             return response.data;
                         });
                 },
-                key: 'tuneInIntegrationSettings',
+                key: 'tuneInIntegrationSettings_' + username,
                 ttl: -1,
             });
         },
     };
 
-    $rootScope.$on('selected-service-changed', this.invalidateCache);
     return TuneInIntegrationService;
 });

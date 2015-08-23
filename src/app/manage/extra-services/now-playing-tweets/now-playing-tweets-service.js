@@ -26,9 +26,16 @@ angular.module('control.manage.extra-services').factory('NowPlayingTweetsService
             return $http.delete(ENV.apiEndpoint + '/control/now-playing-tweets/settings/' + username);
         },
         invalidateCache: function () {
-            promiseCache.remove('nowPlayingTweetsSettings');
+            if (!$rootScope.service) {
+                return;
+            }
+            var username = $rootScope.service.username;
+            promiseCache.remove('nowPlayingTweetsSettings_' + username);
         },
         getSettings: function () {
+            if (!$rootScope.service) {
+                return;
+            }
             var username = $rootScope.service.username;
             return promiseCache({
                 promise: function () {
@@ -38,12 +45,11 @@ angular.module('control.manage.extra-services').factory('NowPlayingTweetsService
                             return response.data;
                         });
                 },
-                key: 'nowPlayingTweetsSettings',
+                key: 'nowPlayingTweetsSettings_' + username,
                 ttl: -1,
             });
         },
     };
 
-    $rootScope.$on('selected-service-changed', this.invalidateCache);
     return NowPlayingTweetsService;
 });
