@@ -67,12 +67,6 @@ module.exports = function (grunt) {
                 },
             },
         },
-        jshint: {
-            options: {
-                jshintrc: '.jshintrc',
-            },
-            all: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'src/app/*/*/**.js', 'src/app/*/*/*/**.js', 'js/**.js'],
-        },
         eslint: {
             target: ['Gruntfile.js', 'src/app/**.js', 'src/app/**/**.js', 'src/app/*/*/**.js', 'src/app/*/*/*/**.js', 'js/**.js'],
         },
@@ -159,7 +153,7 @@ module.exports = function (grunt) {
         watch: {
             dev: {
                 files: ['src/*.*', 'src/*/*.*', 'src/app/*.*', 'src/app/*/*.*', 'src/app/*/*/*.*', 'src/app/*/*/*/*.*'],
-                tasks: ['rsync:dev', 'html2js:dev', 'includeSource:dev'],
+                tasks: ['rsync:dev', 'babel:dev', 'html2js:dev', 'includeSource:dev'],
             },
         },
         express: {
@@ -184,6 +178,14 @@ module.exports = function (grunt) {
                     src: 'src/',
                     dest: 'dev/',
                     exclude: ['*~', '*.tests.js'],
+                    'delete': true,
+                },
+            },
+            test: {
+                options: {
+                    src: 'src/',
+                    dest: 'dev/',
+                    exclude: ['*~'],
                     'delete': true,
                 },
             },
@@ -231,20 +233,42 @@ module.exports = function (grunt) {
                         'src/libs/angular-random-components/dd-text-collapse/dd-text-collapse.js',
                         'src/libs/angular-smart-table/dist/smart-table.js',
                         'dev/app/00-templates.js',
-                        'src/app/**.js',
-                        'src/app/*/**.js',
-                        'src/app/*/*/**.js',
-                        'src/app/*/*/*/**.js',
+                        'dev/app/**.js',
+                        'dev/app/*/**.js',
+                        'dev/app/*/*/**.js',
+                        'dev/app/*/*/*/**.js',
                     ],
                 },
             },
         },
+        babel: {
+            options: {
+                sourceMap: true
+            },
+            build: {
+                files: [{
+                    expand: true,
+                    cwd: 'dist/',
+                    src: ['*.js', 'app/*.js', 'app/*/*.js', 'app/*/*/*.js', 'app/*/*/*/*.js'],
+                    dest: 'dist/'
+                }]
+            },
+            dev: {
+                files: [{
+                    expand: true,
+                    cwd: 'dev/',
+                    src: ['*.js', 'app/*.js', 'app/*/*.js', 'app/*/*/*.js', 'app/*/*/*/*.js'],
+                    dest: 'dev/'
+                }]
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-rsync');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-include-source');
+    grunt.loadNpmTasks('grunt-babel');
 
     grunt.registerTask('install-hook', function () {
         grunt.loadNpmTasks('grunt-githooks');
@@ -273,6 +297,7 @@ module.exports = function (grunt) {
             'rsync:build', // Copy the source to dist/ to start the build
             'copy:fontawesome', // Copy the Font Awesome fonts to dist/
             'html2js:build', // Convert the templates to a JS cache file
+            'babel:build', // Convert ES6 to ES5
             'includeSource:build',
             'useminPrepare',
             'concat', // Concat all files
@@ -293,6 +318,7 @@ module.exports = function (grunt) {
         grunt.task.run([
             'rsync:dev',
             'html2js:dev',
+            'babel:dev',
             'includeSource:dev',
             'express',
             'watch',
@@ -304,7 +330,9 @@ module.exports = function (grunt) {
         grunt.loadNpmTasks('grunt-eslint');
         grunt.loadNpmTasks('grunt-karma');
         grunt.task.run([
+            'rsync:test',
             'html2js:dev',
+            'babel:dev',
             'eslint',
             'karma',
         ]);

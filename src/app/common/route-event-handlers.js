@@ -1,4 +1,4 @@
-control.run(function ($rootScope, $location, USER_ROLES, AUTH_EVENTS, AuthChecker) {
+angular.module('control').run(function ($rootScope, $location, USER_ROLES, AUTH_EVENTS, AuthChecker) {
 
     $rootScope.$on('routeSegmentChangeStart', function onRouteSegmentChangeStart (event, index, segment) {
         if (!segment) {
@@ -25,7 +25,7 @@ control.run(function ($rootScope, $location, USER_ROLES, AUTH_EVENTS, AuthChecke
     var originalPath = null;
 
     $rootScope.$on('$routeChangeStart', function onRouteChangeStart (event, next) {
-        var segment = control.segments[next.$$route.segment];
+        var segment = angular.module('control').segments[next.$$route.segment];
         var authorizedRoles;
         if (segment) {
             authorizedRoles = segment.params.authorizedRoles;

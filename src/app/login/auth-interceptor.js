@@ -1,4 +1,4 @@
-control.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS, Session, ENV) {
+angular.module('control').factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS, Session, ENV) {
     return {
         request: function (config) {
             config.headers = config.headers || {};

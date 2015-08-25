@@ -1,4 +1,4 @@
-control.factory('AuthChecker', function (Session, USER_ROLES, localStorageService) {
+angular.module('control').factory('AuthChecker', function (Session, USER_ROLES, localStorageService) {
     return {
         isAuthenticated: function () {
             if (localStorageService.get('token')) {

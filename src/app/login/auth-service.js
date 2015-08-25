@@ -1,4 +1,4 @@
-control.factory('AuthService', function ($http, Session, USER_ROLES, localStorageService, ENV, AuthChecker, $rootScope, $interval, AUTH_EVENTS) {
+angular.module('control').factory('AuthService', function ($http, Session, USER_ROLES, localStorageService, ENV, AuthChecker, $rootScope, $interval, AUTH_EVENTS) {
     var AuthService = {};
 
     AuthService.logIn = function (credentials) {

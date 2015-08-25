@@ -1,4 +1,4 @@
-control.controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthService, localStorageService, $alert) {
+angular.module('control').controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthService, localStorageService, $alert) {
     $scope.credentials = {
         email: '',
         password: '',

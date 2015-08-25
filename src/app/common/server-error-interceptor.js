@@ -1,4 +1,4 @@
-control.factory('ServerErrorInterceptor', function ($rootScope, $q) {
+angular.module('control').factory('ServerErrorInterceptor', function ($rootScope, $q) {
     return {
         responseError: function (response) {
             if (response.status === 500) {

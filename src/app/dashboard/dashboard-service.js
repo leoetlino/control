@@ -1,4 +1,4 @@
-control.factory('DashService', function ($http, ENV, promiseCache, Session, $q) {
+angular.module('control').factory('DashService', function ($http, ENV, promiseCache, Session, $q) {
     return {
         getInfo: function () {
             if (!Session.token) {

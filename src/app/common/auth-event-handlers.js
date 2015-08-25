@@ -1,4 +1,4 @@
-control.run(function ($rootScope, $location, $window, $alert, $modal, $timeout, AUTH_EVENTS, ServicesService, Session) {
+angular.module('control').run(function ($rootScope, $location, $window, $alert, $modal, $timeout, AUTH_EVENTS, ServicesService, Session) {
 
     function initServices () {
         // returns a promise.

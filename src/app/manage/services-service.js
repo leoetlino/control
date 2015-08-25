@@ -1,4 +1,4 @@
-control.factory('ServicesService', function ($http, ENV, $rootScope, $location, promiseCache, localStorageService) {
+angular.module('control').factory('ServicesService', function ($http, ENV, $rootScope, $location, promiseCache, localStorageService) {
     var internal = {
         cachedServices: null,
     };

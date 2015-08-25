@@ -1,4 +1,4 @@
-control.constant('AUTH_EVENTS', {
+angular.module('control').constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
     loginFailed: 'auth-login-failed',
     logoutSuccess: 'auth-logout-success',
@@ -9,7 +9,7 @@ control.constant('AUTH_EVENTS', {
     badRequest: 'auth-bad-request',
 });
 
-control.constant('USER_ROLES', {
+angular.module('control').constant('USER_ROLES', {
     all: '*',
     admin: 'admin',
     user: 'user',

@@ -1,4 +1,4 @@
-control.factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
+angular.module('control').factory('ManageService', function ($routeSegmentProvider, USER_ROLES) {
     var sections = [];
     var instance = {
         getSections: function (doNotSort) {

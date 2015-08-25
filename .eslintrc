@@ -96,7 +96,8 @@
         "browser": true,
         "worker": true,
         "jasmine": true,
-        "jquery": true
+        "jquery": true,
+        "es6": true
     },
 
     // Global variables

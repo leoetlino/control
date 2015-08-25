@@ -1,4 +1,4 @@
-control.factory('HttpTimeoutInterceptor', function ($q, $window) {
+angular.module('control').factory('HttpTimeoutInterceptor', function ($q, $window) {
     return {
         'request': function (config) {
             config.timeout = 20000;

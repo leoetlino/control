@@ -1,11 +1,9 @@
 /* global control:true */
 
-control = null;
-
 (function () {
     'use strict';
 
-    control = angular.module('control', [
+    var control = angular.module('control', [
         'config',
         'templates',
         'control.feedback',

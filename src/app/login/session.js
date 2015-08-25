@@ -1,4 +1,4 @@
-control.service('Session', function (USER_ROLES, localStorageService, $rootScope) {
+angular.module('control').service('Session', function (USER_ROLES, localStorageService, $rootScope) {
     return {
         create: function (token) {
             this.token = token;
