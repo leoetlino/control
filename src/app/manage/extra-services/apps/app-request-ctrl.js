@@ -1,5 +1,7 @@
 angular.module('control.manage.extra-services').controller('AppRequestCtrl', function (
     RequestAppService,
+    Upload,
+    ENV,
     $alert,
     $q,
     $scope,
@@ -16,9 +18,10 @@ angular.module('control.manage.extra-services').controller('AppRequestCtrl', fun
     ctrl.isAndroidApp = (platform === 'android');
     ctrl.appType = (platform === 'iOS') ? 'iOS' : 'Android';
 
-    /////////////////
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     // Editable form
-    /////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     ctrl.addTab = function (type, value) {
         if (ctrl.app.tabs.length === 3) {
@@ -109,11 +112,58 @@ angular.module('control.manage.extra-services').controller('AppRequestCtrl', fun
 
     var _app;
     ctrl.onEdit = function () {
+        ctrl.uploads = {};
         _app = angular.copy(ctrl.app);
     };
     ctrl.onCancel = function () {
         if (_app) {
             ctrl.app = angular.copy(_app);
         }
+    };
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // Uploads
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    const UPLOAD_STATES = {
+        ready: 0,
+        uploading: 1,
+        done: 2,
+        failed: 3,
+    };
+    ctrl.uploadStates = UPLOAD_STATES;
+    ctrl.uploads = {};
+
+    ctrl.onImageUpload = (name, $files) => {
+        if (!$files[0]) {
+            return;
+        }
+        ctrl.app[name] = null;
+        ctrl.uploads[name] = ctrl.uploads[name] || {};
+        ctrl.uploads[name].state = UPLOAD_STATES.uploading;
+        ctrl.uploads[name].progress = 0;
+        Upload.upload({
+            url: ENV.apiEndpoint + '/control/apps/upload-image?imageType=' + name,
+            method: 'POST',
+            data: {},
+            file: $files[0],
+            fileFormDataName: 'image',
+        }).progress(function (evt) {
+            ctrl.uploads[name].progress = parseInt(100.0 * evt.loaded / evt.total, 10);
+        }).success(function (data) {
+            ctrl.uploads[name].state = UPLOAD_STATES.done;
+            ctrl.uploads[name].progress = 100;
+            ctrl.app[name] = data.link;
+        }).error(function (data) {
+            ctrl.uploads[name].state = UPLOAD_STATES.failed;
+            ctrl.uploads[name].progress = 100;
+            var error = (data && data.error) ? data.error : 'could not reach the server';
+            $alert({
+                content: 'Failed to upload your image: ' + error,
+                type: 'danger',
+                duration: 15,
+            });
+        });
     };
 });
