@@ -131,12 +131,6 @@
                             </dd>
                         </div>
                     </dl>
-                    <div ng-show="ctrl.app.screenshots.length && ctrl.isAndroidApp">
-                        <hr>
-                        <p><b>Screenshots</b></p>
-                        <a style="margin-right: 15px;" ng-repeat="screenshot in ctrl.app.screenshots" href="{{screenshot.dataUrl}}" download="{{app.name}} - Screenshot.png"><img ng-src="{{screenshot.dataUrl}}" height="{{screenshot.dimensions.height*0.1}}" width="{{screenshot.dimensions.width*0.1}}" class="img-thumbnail"></a>
-                        <p>&nbsp;</p>
-                    </div>
                 </section>
             </div>
             <div class="col-sm-6">
