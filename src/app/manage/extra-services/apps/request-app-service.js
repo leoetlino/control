@@ -24,10 +24,13 @@ angular.module('control.manage.extra-services').factory('RequestAppService', fun
             });
         },
         update: function (platform, request) {
-            return $http.put(ENV.apiEndpoint + '/control/apps/' + request.username, {
-                username: request.username,
-                platform: platform,
-                request: request,
+            let requestToSend = angular.copy(request);
+            let username = requestToSend.username;
+            delete requestToSend.screenshots;
+            return $http.put(ENV.apiEndpoint + '/control/apps/' + username, {
+                username,
+                platform,
+                request: requestToSend,
             });
         },
 
