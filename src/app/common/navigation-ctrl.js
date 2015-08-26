@@ -112,7 +112,7 @@ angular.module('control').controller('NavigationCtrl', function ($scope, $locati
     $rootScope.$on('cast-only-route', function onCastOnlyRouteEvent () {
         $rootScope.routeLoading = false;
         if (alert) {
-            alert.destroy();
+            alert.hide();
         }
         alert = $alert({
             content: 'The page you are trying to access is only available for Cast nodes.',
@@ -125,7 +125,7 @@ angular.module('control').controller('NavigationCtrl', function ($scope, $locati
     $rootScope.$on('invalid-service', function onInvalidServiceEvent () {
         $rootScope.routeLoading = false;
         if (alert) {
-            alert.destroy();
+            alert.hide();
         }
         alert = $alert({
             content: 'The service does not exist.',
@@ -139,7 +139,7 @@ angular.module('control').controller('NavigationCtrl', function ($scope, $locati
 
     $rootScope.$on('server-error', function onServerError (event, error) {
         if (alert) {
-            alert.destroy();
+            alert.hide();
         }
         alert = $alert({
             content: error.message + ' (' + error.code + ')',
