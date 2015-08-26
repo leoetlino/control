@@ -108,7 +108,7 @@
                         <dd class="long-text">
                             <span editable-url="ctrl.app.icon"><a href="{{ctrl.app.icon}}">{{ctrl.app.icon}}</a></span>
                             <span>or upload</span>
-                            <i class="fa fa-upload"></i>&nbsp;&nbsp;<input required accept="image/png" type="file" ngf-pattern="'image/png'" ngf-select ngf-change="ctrl.onImageUpload('icon', $files)">
+                            <i class="fa fa-upload"></i>&nbsp;&nbsp;<input accept="image/png" type="file" ngf-pattern="'image/png'" ngf-select ngf-change="ctrl.onImageUpload('icon', $files)">
                             <span class="text-muted" ng-show="ctrl.uploads.icon.state === ctrl.uploadStates.uploading"> ({{ctrl.uploads.icon.progress}}%)...</span>
                             <span class="text-success" ng-hide="ctrl.uploads.icon.state !== ctrl.uploadStates.done"> <fa name="check"></fa></span>
                         </dd>
@@ -116,7 +116,7 @@
                         <dd class="long-text">
                             <span editable-url="ctrl.app.logo"><a href="{{ctrl.app.logo}}">{{ctrl.app.logo}}</a></span>
                             <span>or upload</span>
-                            <i class="fa fa-upload"></i>&nbsp;&nbsp;<input required accept="image/png" type="file" ngf-pattern="'image/png'" ngf-select ngf-change="ctrl.onImageUpload('logo', $files)">
+                            <i class="fa fa-upload"></i>&nbsp;&nbsp;<input accept="image/png" type="file" ngf-pattern="'image/png'" ngf-select ngf-change="ctrl.onImageUpload('logo', $files)">
                             <span class="text-muted" ng-show="ctrl.uploads.logo.state === ctrl.uploadStates.uploading"> ({{ctrl.uploads.logo.progress}}%)...</span>
                             <span class="text-success" ng-hide="ctrl.uploads.logo.state !== ctrl.uploadStates.done"> <fa name="check"></fa></span>
                         </dd>
@@ -125,7 +125,7 @@
                             <dd class="long-text">
                                 <span editable-url="ctrl.app.featureGraphic"><a href="{{ctrl.app.featureGraphic}}">{{ctrl.app.featureGraphic}}</a></span>
                                 <span>or upload</span>
-                                <i class="fa fa-upload"></i>&nbsp;&nbsp;<input required accept="image/png" type="file" ngf-pattern="'image/png'" ngf-select ngf-change="ctrl.onImageUpload('featureGraphic', $files)">
+                                <i class="fa fa-upload"></i>&nbsp;&nbsp;<input accept="image/png" type="file" ngf-pattern="'image/png'" ngf-select ngf-change="ctrl.onImageUpload('featureGraphic', $files)">
                                 <span class="text-muted" ng-show="ctrl.uploads.featureGraphic.state === ctrl.uploadStates.uploading"> ({{ctrl.uploads.featureGraphic.progress}}%)...</span>
                                 <span class="text-success" ng-hide="ctrl.uploads.featureGraphic.state !== ctrl.uploadStates.done"> <fa name="check"></fa></span>
                             </dd>
