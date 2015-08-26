@@ -3,3 +3,5 @@ __MACOSX/
 .tmp/
 *~
 dev/
+src/libs/
+node_modules/
