@@ -22,6 +22,18 @@ angular.module('control').run(function ($rootScope, $location, USER_ROLES, AUTH_
         $rootScope.routeLoading = false;
     });
 
+    $rootScope.$on('routeSegmentResolveStart', function onRouteSegmentReloadStart (event, index) {
+        if (index !== 0) {
+            $rootScope.routeResolving = true;
+        }
+    });
+
+    $rootScope.$on('routeSegmentResolve', function onRouteSegmentReload (event, index) {
+        if (index !== 0) {
+            $rootScope.routeResolving = false;
+        }
+    });
+
     var originalPath = null;
 
     $rootScope.$on('$routeChangeStart', function onRouteChangeStart (event, next) {

@@ -15,10 +15,10 @@
         </div>
     </nav>
 
-    <section class="col-sm-9 bootcards-cards" ng-hide="routeLoading" app-view-segment="1">
+    <section class="col-sm-9 bootcards-cards" ng-hide="routeLoading || routeResolving" app-view-segment="1">
     </section>
 
-    <section class="col-sm-9 bootcards-cards" ng-show="routeLoading">
+    <section class="col-sm-9 bootcards-cards" ng-show="routeLoading || routeResolving">
         <loading-spinner></loading-spinner>
     </section>
 </div>
