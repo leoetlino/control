@@ -120,7 +120,7 @@
                             <span class="text-muted" ng-show="ctrl.uploads.logo.state === ctrl.uploadStates.uploading"> ({{ctrl.uploads.logo.progress}}%)...</span>
                             <span class="text-success" ng-hide="ctrl.uploads.logo.state !== ctrl.uploadStates.done"> <fa name="check"></fa></span>
                         </dd>
-                        <div ng-show="isAndroidApp">
+                        <div ng-show="ctrl.isAndroidApp">
                             <dt>Feature Graphic</dt>
                             <dd class="long-text">
                                 <span editable-url="ctrl.app.featureGraphic"><a href="{{ctrl.app.featureGraphic}}">{{ctrl.app.featureGraphic}}</a></span>
