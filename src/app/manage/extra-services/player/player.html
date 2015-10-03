@@ -1,0 +1,118 @@
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>Player</h4>
+        <p class="service-description">Player is a responsive, exclusive player for SHOUTca.st customers. Listen to your station in style.</p>
+        <p>Player allows you to create a responsive and feature-rich player for your listeners. It works with most modern browsers. It’s especially handy for those of you with mobile apps, as you’ll notice the similar look across the board, adding the familiarity your listeners will know and love.</p>
+        <p>Configuring Player and saving the settings will automatically enable it. To disable it, simply remove the settings and leave it unconfigured. The choice is yours!</p>
+    </div>
+</section>
+
+<section class="panel panel-default">
+    <div class="panel-body">
+        <form novalidate role="form" name="form" ng-submit="saveSettings(settings)">
+            <h4 class="card-header">Settings</h4>
+            <br>
+            <fieldset ng-disabled="disableForm">
+                <div class="row">
+                    <div class="form-group col-sm-6" show-errors>
+                        <label for="station-name" class="control-label">Station Name</label>
+                        <input type="text" id="station-name" placeholder="My Station Name" class="form-control" ng-model="settings.name" name="station-name" required>
+                        <p class="help-block">Your station name. It will be shown in the title bar when you use Player as a popup player.</p>
+                    </div>
+                    <div class="form-group col-sm-6" show-errors>
+                        <label for="logo" class="control-label">Logo</label>
+                        <input type="url" id="logo" placeholder="http://example.com/images/logo.png" class="form-control" ng-model="settings.logo" name="logo" required>
+                        <p class="help-block">Direct link to your logo image.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group form-color-picker col-sm-6" show-errors>
+                        <label for="background-colour" class="control-label">Background Colour</label>
+                        <div class="input-group">
+                            <input id="background" placeholder="#123456" name="background" colorpicker type="text" class="form-control" ng-model="settings.backgroundColour" required pattern="^#(?:[0-9a-fA-F]{3}){2}$">
+                            <span class="input-group-addon" colorpicker ng-model="settings.backgroundColour" style="background: {{settings.backgroundColour}}" colorpicker-with-input="true">
+                            </span>
+                        </div>
+                        <p class="help-block">A colour in long hexadecimal form.<br>Will be used for the player's background colour.</p>
+                    </div>
+                    <div class="form-group form-color-picker col-sm-6" show-errors>
+                        <label for="tint" class="control-label">Tint</label>
+                        <div class="input-group">
+                            <input id="tint" placeholder="#123456" name="tint" colorpicker type="text" class="form-control" ng-model="settings.tint" required pattern="^#(?:[0-9a-fA-F]{3}){2}$">
+                            <span class="input-group-addon" colorpicker ng-model="settings.tint" style="background: {{settings.tint}}" colorpicker-with-input="true">
+                            </span>
+                        </div>
+                        <p class="help-block">A colour in long hexadecimal form.<br>Will be used for the player's text and button colour.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="no-margin-bottom form-group col-sm-12">
+                        <hr>
+                        <p><b>Buttons</b> <span class="badge">{{settings.buttons.length}}</span> <button class="btn btn-xs btn-default no-transition" type="button" ng-click="addButton()"><i class="fa fa-plus"></i></button></p>
+                        <ul class="list-group" ng-model="settings.buttons">
+                            <li ng-repeat="button in settings.buttons" class="list-group-item" style="padding-left: 15px">
+                                <h5 class="list-group-item-heading no-transition">
+                                    <div class="btn-group" role="group" aria-label="Type" ng-model="button.icon" bs-radio-group>
+                                        <label class="btn btn-default broad-button"><input type="radio" value="fa-globe"> <fa name="globe"></fa> Website</label>
+                                        <label class="btn btn-default broad-button"><input type="radio" value="fa-facebook-square"> <fa name="facebook-square"></fa> Facebook</label>
+                                        <label class="btn btn-default broad-button"><input type="radio" value="fa-twitter-square"> <fa name="twitter-square"></fa> Twitter</label>
+                                    </div>
+                                    <button class="btn btn-default pull-right no-transition" type="button" ng-click="removeButton(button)"><i class="fa fa-trash-o"></i></button>
+                                    <div class="clearfix"></div>
+                                </h5>
+                                <p><input type="url" placeholder="Full URL (i.e., http://example.com/)" class="form-control" ng-model="button.url" required></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <div class="checkbox">
+                            <hr class="no-margin-top">
+                            <label>
+                                <input type="checkbox" ng-model="settings.autoPlay"> Auto-play the stream
+                            </label>
+                            <p class="help-block">Check this if you want the stream to automatically play on load.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-block btn-primary"><fa name="save"></fa> Save settings</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="button" class="btn btn-danger btn-block" ng-click="removeSettings()" ng-disabled="form.$invalid"><fa name="trash-o"></fa> Remove settings</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>
+
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4 class="card-header">Preview</h4>
+        <br>
+        <div class="transition-all-100ms-linear" ng-style="{ width: previewWidth+'px', height: previewHeight+'px' }" resizable r-directions="['bottom', 'right']" r-width="previewWidth" r-height="previewHeight">
+            <iframe style="height: 100%; width: 100%;" ng-src="{{previewUrl}}" class="img-thumbnail"></iframe>
+        </div>
+        <hr>
+        <p>Player looks great on any screen size and automatically adjusts itself depending on the size of the window it’s opened in. However, we do have some recommended sizes for Player.</p>
+        <p>
+            <button type="button" class="btn btn-default" ng-click="setPreviewSize(300, 60)">300x60 (mini)</button>&nbsp;
+            <button type="button" class="btn btn-default" ng-click="setPreviewSize(300, 150)">300x150 (small)</button>&nbsp;
+            <button type="button" class="btn btn-default" ng-click="setPreviewSize(300, 450)">300x450 (large)</button>&nbsp;
+            <button type="button" class="btn btn-default" ng-click="setPreviewSize(540, 540)">540x540 (full/popup)</button>
+        </p>
+        <p>The current size is <b>{{previewWidth}}×{{previewHeight}}</b>.</p>
+        <hr>
+        <h4 class="card-header">Embedding</h4>
+        <p>Player is designed to be embedded on your website. Below is the HTML tag you need to add to your site for embedding Player.</p>
+        <pre><code>&lt;iframe style="width: {{previewWidth}}px; height: {{previewHeight}}px; border: 0;" src="{{playerUrl}}"&gt;&lt;/iframe&gt;
+</code></pre>
+        <div ng-show="previewWidth >= 540 && previewHeight >= 540">
+            <p>At this size, you can also use Player as a pop-up player. The link you'll need is:</p>
+            <pre><code>{{playerUrl}}</code></pre>
+        </div>
+    </div>
+</section>

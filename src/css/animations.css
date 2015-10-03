@@ -27,3 +27,7 @@
     animation-iteration-count: infinite;
     animation-duration: 2s;
 }
+
+.transition-all-100ms-linear {
+    transition: all 0.1s linear;
+}
