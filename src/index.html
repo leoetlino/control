@@ -97,9 +97,11 @@
                     <h1 class="brand font-diavlo">SHOUTca.st Control</h1>
                     <!-- The loadingSpinner directive cannot be used here, -->
                     <!-- as Angular and the app haven't fully loaded yet   -->
-                    <svg class="spinner with-margin" width="64px" height="64px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" ng-hide="initialLoadError">
-                        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-                    </svg>
+                    <div class="spinner with-margin">
+                      <svg>
+                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+                      </svg>
+                    </div>
                     <div ng-cloak ng-show="initialLoadError">
                         <br>
                         <p>Something went wrong. Please reload the page and try again.</p>
