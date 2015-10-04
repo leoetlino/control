@@ -252,14 +252,6 @@ a.list-group-item {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-@media screen and (min-width: 1024px) {
-    .service-switcher .caret {
-        float: right;
-        position: relative;
-        top: 8px;
-    }
-}
-
 .service-switcher .caret {
     border-top-color: white !important;
     border-bottom-color: white !important;
