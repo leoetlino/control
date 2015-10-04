@@ -29,7 +29,8 @@
     "bootstrap-additions": "~0.3.1",
     "angular-xeditable": "~0.1.9",
     "angular-random-components": "leoetlino/AngularJS-Components#master",
-    "angular-smart-table": "~2.1.1"
+    "angular-smart-table": "~2.1.1",
+    "angular-resizable": "~1.2.0"
   },
   "resolutions": {
     "angular": "~1.4.0"

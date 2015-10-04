@@ -26,6 +26,7 @@
         'xeditable',
         'random-components',
         'smart-table',
+        'angularResizable',
     ]);
 
     control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, $httpProvider, $provide, $alertProvider) {
