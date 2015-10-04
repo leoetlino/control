@@ -1,7 +1,6 @@
 angular.module('control.manage.extra-services').controller('PlayerCtrl', (
     $rootScope,
     $scope,
-    $sce,
     $alert,
     Upload,
     ENV,
@@ -13,9 +12,9 @@ angular.module('control.manage.extra-services').controller('PlayerCtrl', (
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     $scope.playerUrl = `https://player.shoutca.st/?username=${$scope.service.username}`;
-    $scope.previewUrl = $sce.trustAsResourceUrl($scope.playerUrl);
+    $scope.previewUrl = $scope.playerUrl;
     $scope.refreshPreview = () => {
-        $scope.previewUrl = $sce.trustAsResourceUrl($scope.playerUrl + `&t=${new Date().getTime()}`);
+        $scope.previewUrl = $scope.playerUrl + `&t=${new Date().getTime()}`;
     };
     $scope.previewWidth = 300;
     $scope.previewHeight = 150;

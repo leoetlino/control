@@ -103,7 +103,7 @@
         <h4 class="card-header">Preview</h4>
         <br>
         <div class="transition-all-100ms-linear" ng-style="{ width: previewWidth+'px', height: previewHeight+'px' }" resizable r-directions="['bottom', 'right']" r-width="previewWidth" r-height="previewHeight">
-            <iframe style="height: 100%; width: 100%;" ng-src="{{previewUrl}}" class="img-thumbnail" player-config-preview config="settings"></iframe>
+            <iframe style="height: 100%; width: 100%;" class="img-thumbnail" player-config-preview config="settings" player-src="previewUrl"></iframe>
         </div>
         <hr>
         <p>Player looks great on any screen size and automatically adjusts itself depending on the size of the window it’s opened in. However, we do have some recommended sizes for Player.</p>
