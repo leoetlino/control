@@ -17,12 +17,21 @@
                     <div class="form-group col-sm-6" show-errors>
                         <label for="station-name" class="control-label">Station Name</label>
                         <input type="text" id="station-name" placeholder="My Station Name" class="form-control" ng-model="settings.name" name="station-name" required>
-                        <p class="help-block">Your station name. It will be shown in the title bar when you use Player as a popup player.</p>
+                        <p class="help-block">Your station name. It will be shown in the window/tab title when you use Player as a popup player.</p>
                     </div>
                     <div class="form-group col-sm-6" show-errors>
                         <label for="logo" class="control-label">Logo</label>
-                        <input type="url" id="logo" placeholder="http://example.com/images/logo.png" class="form-control" ng-model="settings.logo" name="logo" required>
-                        <p class="help-block">Direct link to your logo image.</p>
+                        <div class="input-group" ngf-drop ngf-change="onLogoUpload($files)">
+                            <input class="form-control hide" type="hidden" value="{{settings.logo}}" ng-model="settings.logo" name="logo">
+                            <p class="text-success" ng-show="settings.logo && !showUploadControls"><fa name="check"></fa> Logo saved <button type="button" ng-click="showUploadControls = true" class="btn btn-link">Upload another one</button> or <button type="button" ng-click="removeLogo()" class="btn btn-link">remove it</button></p>
+                            <span ng-show="!settings.logo || (settings.logo && showUploadControls)">
+                                <i class="fa fa-upload"></i>&nbsp;&nbsp;<input id="logo" accept="image/x-png" type="file" ngf-select ngf-change="onLogoUpload($files)">
+                                <span class="text-muted" ng-show="isUploadingLogo"> ({{uploadProgressLogo}}%)...</span>
+                                <span class="text-success" ng-hide="isUploadingLogo || !logoUploaded"> <fa name="check"></fa></span>
+                                <button ng-show="settings.logo" type="button" ng-click="removeLogo()" class="btn btn-link"><fa name="trash-o" class="text-danger"></fa></button>
+                            </span>
+                        </div>
+                        <p class="help-block">The logo image that will be shown when the player is large enough. Optional.</p>
                     </div>
                 </div>
                 <div class="row">

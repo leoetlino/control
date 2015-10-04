@@ -3,6 +3,8 @@ angular.module('control.manage.extra-services').controller('PlayerCtrl', (
     $scope,
     $sce,
     $alert,
+    Upload,
+    ENV,
     settings,
     PlayerService) => {
 
@@ -95,6 +97,54 @@ angular.module('control.manage.extra-services').controller('PlayerCtrl', (
 
     $scope.removeButton = (button) => {
         $scope.settings.buttons = _.without($scope.settings.buttons, button);
+    };
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // Logo upload
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    $scope.onLogoUpload = ($files) => {
+        if ($files[0] === undefined) {
+            return;
+        }
+        $scope.settings.logo = null;
+        $scope.isUploadingLogo = true;
+        $scope.uploadProgressLogo = 0;
+        $scope.upload = Upload.upload({
+            url: ENV.apiEndpoint + '/control/apps/upload-image',
+            method: 'POST',
+            data: {},
+            file: $files[0],
+            fileFormDataName: 'image',
+        })
+        .progress((evt) => {
+            $scope.uploadProgressLogo = parseInt(100.0 * evt.loaded / evt.total, 10);
+        })
+        .success((data) => {
+            $scope.isUploadingLogo = false;
+            $scope.logoUploaded = true;
+            $scope.showUploadControls = false;
+            $scope.settings.logo = data.link;
+        })
+        .error((data) => {
+            $scope.isUploadingLogo = false;
+            $scope.showUploadControls = true;
+            let error = (data && data.error) ? data.error : 'could not reach the server';
+            $alert({
+                content: 'Failed to upload your image: ' + error,
+                type: 'danger',
+                duration: 15,
+            });
+        });
+    };
+
+    $scope.removeLogo = () => {
+        $scope.settings.logo = null;
+        document.getElementById('logo').value = ''; // XXX: Find a better way to reset the file input
+        $scope.isUploadingLogo = false;
+        $scope.logoUploaded = false;
+        $scope.showUploadControls = true;
+        $scope.uploadProgressLogo = 0;
     };
 
 });
