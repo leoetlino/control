@@ -37,6 +37,8 @@ angular.module('control.manage.extra-services').controller('PlayerCtrl', (
     let initialiseSettings = (sourceSettings = settings) => {
         $scope.settings = angular.copy(sourceSettings) || {};
         $scope.settings.buttons = $scope.settings.buttons || [];
+        $scope.settings.backgroundColour = $scope.settings.backgroundColour || '#000000';
+        $scope.settings.tint = $scope.settings.tint || '#ffffff';
     };
 
     $scope.disableForm = false;
