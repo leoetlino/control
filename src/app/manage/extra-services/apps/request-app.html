@@ -177,11 +177,11 @@
                         <div class="col-sm-9">
                             <div class="input-group" ngf-drop ngf-change="onIconUpload($files)">
                                 <input class="form-control hide" type="hidden" value="{{request.icon}}" ng-model="request.icon" name="icon" required>
-                                <i class="fa fa-upload"></i>&nbsp;&nbsp;<input id="icon" required accept="image/x-png" type="file" ngf-select ngf-change="onIconUpload($files)">
+                                <i class="fa fa-upload"></i>&nbsp;&nbsp;<input id="icon" required accept="image/gif, image/jpeg, image/png" type="file" ngf-select ngf-change="onIconUpload($files)">
                                 <span class="text-muted" ng-show="isUploadingIcon"> ({{uploadProgressIcon}}%)...</span>
                                 <span class="text-success" ng-hide="isUploadingIcon || !iconUploaded"> <fa name="check"></fa></span>
                             </div>
-                            <p class="help-block">The image that will represent your app. Avoid putting too much detail in the app icon. The size <b>must</b> be {{ platform === 'Android' ? '512×512' : '1024×1024' }} or it won't look good. Note: Only PNG images are supported.</p>
+                            <p class="help-block">The image that will represent your app. Avoid putting too much detail in the app icon. The size <b>must</b> be {{ platform === 'Android' ? '512×512' : '1024×1024' }} or it won't look good. (JPG, PNG and GIF only. PNG highly recommended.)</p>
                         </div>
                     </div>
                     <div class="form-group" show-errors>
@@ -189,11 +189,11 @@
                         <div class="col-sm-9">
                             <div class="input-group" ngf-drop ngf-change="onLogoUpload($files)">
                                 <input class="form-control hide" type="hidden" value="{{request.logo}}" ng-model="request.logo" name="logo" required>
-                                <i class="fa fa-upload"></i>&nbsp;&nbsp;<input id="logo" required accept="image/x-png" type="file" ngf-select ngf-change="onLogoUpload($files)">
+                                <i class="fa fa-upload"></i>&nbsp;&nbsp;<input id="logo" required accept="image/gif, image/jpeg, image/png" type="file" ngf-select ngf-change="onLogoUpload($files)">
                                 <span class="text-muted" ng-show="isUploadingLogo"> ({{uploadProgressLogo}}%)...</span>
                                 <span class="text-success" ng-hide="isUploadingLogo || !logoUploaded"> <fa name="check"></fa></span>
                             </div>
-                            <p class="help-block">The image that will represent your station: your station logo. No size limitation, but it shouldn't be too small (or the logo will look blurry). Note: Only PNG images are supported.</p>
+                            <p class="help-block">The image that will represent your station: your station logo. No size limitation, but it shouldn't be too small (or the logo will look blurry). (JPG, PNG and GIF only. PNG highly recommended.)</p>
                         </div>
                     </div>
                     <div class="form-group" show-errors ng-show="platform !== 'iOS'">
@@ -201,11 +201,11 @@
                         <div class="col-sm-9">
                             <div class="input-group" ngf-drop ngf-change="onFeatureGraphicUpload($files)">
                                 <input class="form-control hide" type="hidden" value="{{request.featureGraphic}}" ng-model="request.featureGraphic" name="feature-graphic" ng-required="platform !== 'iOS'">
-                                <i class="fa fa-upload"></i>&nbsp;&nbsp;<input id="feature-graphic" ng-required="platform !== 'iOS'" accept="image/x-png" type="file" ngf-select ngf-change="onFeatureGraphicUpload($files)">
+                                <i class="fa fa-upload"></i>&nbsp;&nbsp;<input id="feature-graphic" ng-required="platform !== 'iOS'" accept="image/gif, image/jpeg, image/png" type="file" ngf-select ngf-change="onFeatureGraphicUpload($files)">
                                 <span class="text-muted" ng-show="isUploadingFeatureGraphic"> ({{uploadProgressFeatureGraphic}}%)...</span>
                                 <span class="text-success" ng-hide="isUploadingFeatureGraphic || !featureGraphicUploaded"> <fa name="check"></fa></span>
                             </div>
-                            <p class="help-block">An image that will be displayed at the top of your app details page in the Play Store. <b>Must</b> be 1024×500 or it won't look good. Note: Only PNG images are supported.</p>
+                            <p class="help-block">An image that will be displayed at the top of your app details page in the Play Store. <b>Must</b> be 1024×500 or it won't look good. (JPG, PNG and GIF only. PNG highly recommended.)</p>
                         </div>
                     </div>
                     <hr>
