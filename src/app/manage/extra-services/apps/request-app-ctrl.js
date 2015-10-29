@@ -1,6 +1,280 @@
-angular.module('control.manage.extra-services').controller('RequestAppCtrl', function ($rootScope, $scope, RequestAppService, Upload, ENV, $timeout, $alert, apps) {
+angular.module('control.manage.extra-services').controller('RequestAppCtrl', function (
+    $rootScope,
+    $scope,
+    RequestAppService,
+    Upload,
+    ENV,
+    $alert,
+    apps,
+    $q
+) {
 
     $scope.apps = angular.copy(apps) || {};
+
+    let areNoPlatformsSelected = (x, y, scope) => {
+        let platforms = scope.fields.filter(field => {
+            return typeof field.key === 'string' && field.key.includes('platforms')
+                && scope.model.platforms[field.key.replace('platforms.', '')];
+        });
+        return platforms.length === 0;
+    };
+
+    $scope.requestFields = [
+        // Platforms
+        {
+            key: 'platforms.android',
+            type: 'fullHorizontalCheckbox',
+            defaultValue: !$scope.apps.android,
+            templateOptions: {
+                label: 'Submit for Android',
+                description: !$scope.apps.android
+                    ? 'Tick this if you want us to build and submit an Android app.'
+                    : 'You have already submitted an Android app request.',
+                disabled: !!$scope.apps.android,
+            },
+            expressionProperties: {
+                'templateOptions.required': areNoPlatformsSelected,
+            },
+        },
+        {
+            key: 'platforms.iOS',
+            type: 'fullHorizontalCheckbox',
+            defaultValue: !$scope.apps.iOS,
+            templateOptions: {
+                label: 'Submit for iOS',
+                description: !$scope.apps.iOS
+                    ? 'Tick this if you want us to build and submit an iOS app (for iPhone, iPad and iPod).'
+                    : 'You have already submitted an iOS app request.',
+                disabled: !!$scope.apps.iOS,
+            },
+            expressionProperties: {
+                'templateOptions.required': areNoPlatformsSelected,
+            },
+        },
+        { template: '<hr><br>' },
+
+        // Base information
+        {
+            key: 'name',
+            type: 'horizontalInput',
+            templateOptions: {
+                type: 'text',
+                label: 'App Name',
+                required: true,
+                maxlength: 30,
+                placeholder: 'My Station Name',
+                description: 'Your application name. Must be shorter than 30 characters.',
+                addonLeft: {
+                    class: 'fa fa-pencil-square-o fa-fw',
+                },
+            },
+        },
+        {
+            key: 'keywords',
+            type: 'horizontalInput',
+            templateOptions: {
+                type: 'text',
+                label: 'App Keywords',
+                required: true,
+                maxlength: 100,
+                description: 'The keywords are separated by commas and must be under 100 characters. This is used for the App Store.',
+                addonLeft: {
+                    class: 'fa fa-tags fa-fw',
+                },
+            },
+            hideExpression: '!model.platforms.iOS',
+        },
+        {
+            key: 'shortDescription',
+            type: 'horizontalTextarea',
+            templateOptions: {
+                type: 'horizontalTextarea',
+                label: 'Short Description',
+                required: true,
+                maxlength: 80,
+                description: 'A short description of your app. This\'ll be the first description the user sees in the Play Store. Must be shorter than 80 characters.',
+                rows: 2,
+                addonLeft: {
+                    class: 'fa fa-bars fa-fw',
+                },
+            },
+            hideExpression: '!model.platforms.android',
+        },
+        {
+            key: 'description',
+            type: 'horizontalTextarea',
+            templateOptions: {
+                type: 'horizontalTextarea',
+                label: 'App Description',
+                required: true,
+                placeholder: 'A description for your app, which shouldn\'t be too short and should have a minimum of 2 sentences.',
+                description: 'Describe your station. Why should someone download the app and listen to it? Avoid excessive keywords and pay attention to the grammar, as your app could get rejected otherwise. Also, do not write in ALL CAPS.',
+                rows: 4,
+                addonLeft: {
+                    class: 'fa fa-bars fa-fw',
+                },
+            },
+        },
+        { template: '<hr><br>' },
+
+        // Tabs
+        {
+            key: 'website',
+            type: 'horizontalInput',
+            templateOptions: {
+                type: 'url',
+                label: 'Website',
+                placeholder: 'https://shoutca.st',
+                description: 'Use HTTPS if your website supports it.',
+                addonLeft: {
+                    class: 'fa fa-globe fa-fw',
+                },
+            },
+            expressionProperties: {
+                'templateOptions.required': '!model.facebook && !model.twitter',
+            },
+        },
+        {
+            key: 'twitter',
+            type: 'horizontalInput',
+            templateOptions: {
+                type: 'text',
+                label: 'Twitter',
+                placeholder: 'shoutca_st',
+                description: 'Only provide the Twitter handle, *without* the @.',
+                addonLeft: {
+                    class: 'fa fa-twitter-square fa-fw',
+                },
+            },
+            expressionProperties: {
+                'templateOptions.required': '!model.facebook && !model.website',
+            },
+        },
+        {
+            key: 'facebook',
+            type: 'horizontalInput',
+            templateOptions: {
+                type: 'text',
+                label: 'Facebook',
+                placeholder: 'shoutcastsolutions',
+                description: 'Only use this for Facebook pages. Groups are not supported. Only provide the page username or page ID.',
+                pattern: '^((?!groups).)*$',
+                addonLeft: {
+                    class: 'fa fa-facebook-square fa-fw',
+                },
+            },
+            expressionProperties: {
+                'templateOptions.required': '!model.twitter && !model.website',
+            },
+        },
+        {
+            template: `<div class="form-group">
+<div class="col-sm-offset-3 col-sm-9">
+    <p class="help-block"><fa name="lightbulb-o"></fa> Only one additional link is required. Please open a ticket <b>immediately after submission</b> if you need more than 3 additional links.</p>
+</div>
+</div>`,
+        },
+        { template: '<hr><br>' },
+
+        // Colours
+        {
+            key: 'backgroundColour',
+            type: 'horizontalColorpicker',
+            templateOptions: {
+                label: 'Background Colour',
+                required: true,
+                placeholder: '#123456',
+                description: 'A colour in long hexadecimal form (example: #123456). This will be used for the app\'s background colour.',
+            },
+        },
+        {
+            key: 'tint',
+            type: 'horizontalColorpicker',
+            templateOptions: {
+                label: 'Tint',
+                placeholder: '#123456',
+                description: 'A colour in long hexadecimal form (example: #123456). Will be used for the app\'s tint (button and text on iOS, volume slider on Android). This is optional on Android; if empty, it will be determined automatically.',
+            },
+            expressionProperties: {
+                'templateOptions.required': 'model.platforms.iOS',
+            },
+        },
+        {
+            key: 'actionBarColour',
+            type: 'horizontalColorpicker',
+            templateOptions: {
+                label: 'Action Bar Colour',
+                placeholder: '#123456',
+                description: 'A colour in long hexadecimal form (example: #123456). Will be used for the app\'s action bar (the top bar); if empty, this will be determined automatically.',
+            },
+            hideExpression: '!model.platforms.android',
+        },
+        // Graphics
+        {
+            key: 'icon',
+            type: 'horizontalUpload',
+            templateOptions: {
+                label: 'Icon',
+                required: true,
+                description: '',
+                accept: 'image/gif, image/jpeg, image/png',
+                fileFormName: 'image',
+                url: ENV.apiEndpoint + '/control/apps/upload-image?imageType=icon',
+            },
+            expressionProperties: {
+                'templateOptions.description': `'The image that will represent your app. Avoid putting too much detail in the app icon. The size must be ' + (model.platforms.iOS ? '1024×1024' : '512×512') + ' or it will not look good. (JPG, PNG and GIF only. PNG highly recommended.)'`,
+            },
+        },
+        {
+            key: 'logo',
+            type: 'horizontalUpload',
+            templateOptions: {
+                label: 'Logo',
+                required: true,
+                description: 'The image that will represent your station: your station logo. No size limitation, but it shouldn\'t be too small (or the logo will look blurry). (JPG, PNG and GIF only. PNG highly recommended.)',
+                accept: 'image/gif, image/jpeg, image/png',
+                fileFormName: 'image',
+                url: ENV.apiEndpoint + '/control/apps/upload-image',
+            },
+        },
+        {
+            key: 'featureGraphic',
+            type: 'horizontalUpload',
+            templateOptions: {
+                label: 'Feature Graphic',
+                required: true,
+                description: 'An image that will be displayed at the top of your app details page in the Play Store. *Must* be 1024×500 or it won\'t look good. (JPG, PNG and GIF only. PNG highly recommended.)',
+                accept: 'image/gif, image/jpeg, image/png',
+                fileFormName: 'image',
+                url: ENV.apiEndpoint + '/control/apps/upload-image?imageType=featureGraphic',
+            },
+            hideExpression: '!model.platforms.android',
+        },
+        { template: '<hr>' },
+
+        // Alternative stream URL
+        {
+            key: 'needsAlternativeStreamUrl',
+            type: 'fullHorizontalCheckbox',
+            defaultValue: false,
+            templateOptions: {
+                label: 'I need to use an alternative stream URL',
+                description: 'Only check this if you must use an alternative stream URL. This is useful when you are using a stream licensing service that forces you to use their stream URL.',
+            },
+        },
+        {
+            key: 'alternativeStreamUrl',
+            type: 'horizontalInput',
+            templateOptions: {
+                label: 'Alternative Stream URL',
+                type: 'url',
+                placeholder: 'http(s)://…',
+                required: true,
+            },
+            hideExpression: '!model.needsAlternativeStreamUrl',
+        },
+    ];
+
 
     var onAppSubmitted = function () {
         $alert({
@@ -25,141 +299,33 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
         $scope.justSubmitted = false;
     };
 
-    var onUploadFail = function (data) {
-        var error = (data && data.error) ? data.error : 'could not reach the server';
-        $alert({
-            content: 'Failed to upload your image: ' + error,
-            type: 'danger',
-            duration: 15,
-        });
-        $scope.submittingForm = false;
-        $scope.justSubmitted = false;
-    };
-
     $scope.submittingForm = false;
     $scope.request = {};
-    if (apps.android) {
-        $scope.platform = 'iOS';
-    }
-    if (apps.iOS) {
-        $scope.platform = 'Android';
-    }
-    if (!apps.android && !apps.iOS) {
-        $scope.platform = 'Both';
-    }
 
-    // workaround for form validation
-    $scope.$watch('form', function () {
-        $scope.form.upload = {};
-        $scope.form.upload.$invalid = false;
-    });
-
-    $scope.submit = function (platform, request) {
+    $scope.submit = (request) => {
         $scope.submittingForm = true;
-        $scope.$broadcast('show-errors-check-validity');
         if ($scope.form.$invalid) {
+            $alert({
+                content: 'Please fill in all required fields correctly.',
+                type: 'danger',
+                duration: 5,
+            });
+            console.warn($scope.form.$error);
             $scope.submittingForm = false;
             return;
         }
+
         request.username = $rootScope.service.username;
-
-        switch (platform) {
-            case 'Both':
-                RequestAppService.submit('android', request).then(function () {
-                    return RequestAppService.submit('iOS', request).then(onAppSubmitted, onFail);
-                }, onFail);
-                break;
-            case 'Android':
-                RequestAppService.submit('android', request).then(onAppSubmitted, onFail);
-                break;
-            case 'iOS':
-                RequestAppService.submit('iOS', request).then(onAppSubmitted, onFail);
-                break;
+        if (!request.needsAlternativeStreamUrl) {
+            request.alternativeStreamUrl = undefined;
         }
-    };
 
-    // upload stuff
-    $scope.onIconUpload = function ($files) {
-        if ($files[0] === undefined) {
-            return;
+        let promises = [];
+        for (let platform in request.platforms) {
+            if (request.platforms.hasOwnProperty(platform) && request.platforms[platform]) {
+                promises.push(RequestAppService.submit(platform, request));
+            }
         }
-        $scope.request.icon = null;
-        $scope.isUploadingIcon = true;
-        $scope.uploadProgressIcon = 0;
-        $scope.upload = Upload.upload({
-            url: ENV.apiEndpoint + '/control/apps/upload-image?imageType=icon',
-            method: 'POST',
-            data: {},
-            file: $files[0],
-            fileFormDataName: 'image',
-        })
-        .progress(function (evt) {
-            $scope.uploadProgressIcon = parseInt(100.0 * evt.loaded / evt.total, 10);
-        })
-        .success(function (data) {
-            $scope.isUploadingIcon = false;
-            $scope.iconUploaded = true;
-            $scope.request.icon = data.link;
-        })
-        .error(function (data) {
-            $scope.isUploadingIcon = false;
-            onUploadFail(data);
-        });
-    };
-
-    $scope.onLogoUpload = function ($files) {
-        if ($files[0] === undefined) {
-            return;
-        }
-        $scope.request.logo = null;
-        $scope.isUploadingLogo = true;
-        $scope.uploadProgressLogo = 0;
-        $scope.upload = Upload.upload({
-            url: ENV.apiEndpoint + '/control/apps/upload-image',
-            method: 'POST',
-            data: {},
-            file: $files[0],
-            fileFormDataName: 'image',
-        })
-        .progress(function (evt) {
-            $scope.uploadProgressLogo = parseInt(100.0 * evt.loaded / evt.total, 10);
-        })
-        .success(function (data) {
-            $scope.isUploadingLogo = false;
-            $scope.logoUploaded = true;
-            $scope.request.logo = data.link;
-        })
-        .error(function (data) {
-            $scope.isUploadingLogo = false;
-            onUploadFail(data);
-        });
-    };
-
-    $scope.onFeatureGraphicUpload = function ($files) {
-        if ($files[0] === undefined) {
-            return;
-        }
-        $scope.request.featureGraphic = null;
-        $scope.isUploadingFeatureGraphic = true;
-        $scope.uploadProgressFeatureGraphic = 0;
-        $scope.upload = Upload.upload({
-            url: ENV.apiEndpoint + '/control/apps/upload-image?imageType=featureGraphic',
-            method: 'POST',
-            data: {},
-            file: $files[0],
-            fileFormDataName: 'image',
-        })
-        .progress(function (evt) {
-            $scope.uploadProgressFeatureGraphic = parseInt(100.0 * evt.loaded / evt.total, 10);
-        })
-        .success(function (data) {
-            $scope.isUploadingFeatureGraphic = false;
-            $scope.featureGraphicUploaded = true;
-            $scope.request.featureGraphic = data.link;
-        })
-        .error(function (data) {
-            $scope.isUploadingFeatureGraphic = false;
-            onUploadFail(data);
-        });
+        $q.all(promises).then(onAppSubmitted, onFail);
     };
 });
