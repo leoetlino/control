@@ -2,7 +2,6 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
     $rootScope,
     $scope,
     RequestAppService,
-    Upload,
     ENV,
     $alert,
     apps,
