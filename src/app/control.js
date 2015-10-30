@@ -29,6 +29,7 @@
         'angularResizable',
         'formly',
         'formlyBootstrap',
+        'ngMessages',
     ]);
 
     control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, $httpProvider, $provide, $alertProvider, formlyConfigProvider) {
@@ -124,8 +125,6 @@
         $httpProvider.interceptors.push('HttpTimeoutInterceptor');
         $httpProvider.interceptors.push('ServerErrorInterceptor');
 
-        formlyConfigProvider.extras.errorExistsAndShouldBeVisibleExpression = 'fc.$touched || form.$submitted';
-
         formlyConfigProvider.setWrapper({
             name: 'horizontalBootstrapLabel',
             template: [
@@ -212,8 +211,16 @@
         });
     });
 
-    control.run(function (editableOptions) {
+    control.run(function (
+        editableOptions,
+        formlyConfig,
+        formlyValidationMessages
+    ) {
         editableOptions.theme = 'bs3';
+        formlyConfig.extras.errorExistsAndShouldBeVisibleExpression = 'form.$submitted || fc.$touched';
+        formlyValidationMessages.addStringMessage('required', 'This field is required');
+        formlyValidationMessages.addStringMessage('color', 'This is not a valid colour');
+        formlyValidationMessages.addStringMessage('url', 'This is not a valid URL');
     });
 
 }());
