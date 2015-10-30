@@ -1,0 +1,7 @@
+<div class="input-group" ngf-drop ngf-change="ctrl.upload($files)" ng-controller="FormUploadCtrl as ctrl">
+    <input class="form-control hide" type="hidden" value="{{model[options.key]}}" ng-model="model[options.key]" name="{{options.key}}">
+    <i class="fa fa-upload"></i>&nbsp;&nbsp;<input accept="{{options.templateOptions.accept}}" type="file" ngf-select ngf-change="ctrl.upload($files)">
+    <span class="text-muted" ng-show="ctrl.isUploading"> ({{ctrl.uploadProgress}}%)...</span>
+    <span class="text-success" ng-hide="ctrl.isUploading || !ctrl.isUploaded"> <fa name="check"></fa></span>
+    <span class="text-danger" ng-show="ctrl.hasError"> <fa name="times"></fa></span>
+</div>

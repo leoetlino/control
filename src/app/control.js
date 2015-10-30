@@ -27,9 +27,11 @@
         'random-components',
         'smart-table',
         'angularResizable',
+        'formly',
+        'formlyBootstrap',
     ]);
 
-    control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, $httpProvider, $provide, $alertProvider) {
+    control.config(function ($routeSegmentProvider, $routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, USER_ROLES, $httpProvider, $provide, $alertProvider, formlyConfigProvider) {
 
         angular.extend($alertProvider.defaults, {
             animation: 'am-fade-and-slide-top',
@@ -121,6 +123,93 @@
         $httpProvider.interceptors.push('AuthInterceptor');
         $httpProvider.interceptors.push('HttpTimeoutInterceptor');
         $httpProvider.interceptors.push('ServerErrorInterceptor');
+
+        formlyConfigProvider.extras.errorExistsAndShouldBeVisibleExpression = 'fc.$touched || form.$submitted';
+
+        formlyConfigProvider.setWrapper({
+            name: 'horizontalBootstrapLabel',
+            template: [
+                '<label for="{{::id}}" class="col-sm-3 control-label">',
+                '{{to.label}} {{!to.required ? "(optional)" : ""}}',
+                '</label>',
+                '<div class="col-sm-9">',
+                '<formly-transclude></formly-transclude>',
+                '</div>',
+            ].join(' '),
+        });
+
+        formlyConfigProvider.setWrapper({
+            name: 'horizontalBootstrapCheckbox',
+            template: [
+                '<div class="col-sm-offset-3 col-sm-9">',
+                '<formly-transclude></formly-transclude>',
+                '</div>',
+            ].join(' '),
+        });
+        formlyConfigProvider.setWrapper({
+            name: 'fullHorizontalBootstrapCheckbox',
+            template: [
+                '<div class="col-sm-12">',
+                '<formly-transclude></formly-transclude>',
+                '</div>',
+            ].join(' '),
+        });
+
+        formlyConfigProvider.setType({
+            name: 'horizontalInput',
+            extends: 'input',
+            wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError'],
+        });
+        formlyConfigProvider.setType({
+            name: 'horizontalTextarea',
+            extends: 'textarea',
+            wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError'],
+        });
+        formlyConfigProvider.setType({
+            name: 'horizontalSelect',
+            extends: 'select',
+            wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError'],
+        });
+
+        formlyConfigProvider.setType({
+            name: 'colorpicker',
+            templateUrl: '/app/common/form-colorpicker.html',
+            extends: 'input',
+            wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+        });
+        formlyConfigProvider.setType({
+            name: 'horizontalColorpicker',
+            extends: 'colorpicker',
+            wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError'],
+        });
+
+        formlyConfigProvider.setType({
+            name: 'horizontalCheckbox',
+            extends: 'checkbox',
+            wrapper: ['horizontalBootstrapCheckbox', 'bootstrapHasError'],
+        });
+        formlyConfigProvider.setType({
+            name: 'fullHorizontalCheckbox',
+            extends: 'checkbox',
+            wrapper: ['fullHorizontalBootstrapCheckbox', 'bootstrapHasError'],
+        });
+        formlyConfigProvider.setType({
+            name: 'horizontalRadio',
+            extends: 'radio',
+            wrapper: ['horizontalBootstrapCheckbox', 'bootstrapHasError'],
+        });
+
+        formlyConfigProvider.setType({
+            name: 'upload',
+            templateUrl: '/app/common/form-upload.html',
+            extends: 'input',
+            wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+        });
+        formlyConfigProvider.setType({
+            name: 'horizontalUpload',
+            extends: 'upload',
+            wrapper: ['horizontalBootstrapLabel', 'bootstrapHasError'],
+        });
     });
 
     control.run(function (editableOptions) {
