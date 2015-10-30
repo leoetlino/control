@@ -210,6 +210,7 @@ module.exports = function (grunt) {
                     files: [
                         'src/libs/jquery/dist/jquery.js',
                         'src/libs/underscore/underscore.js',
+                        'src/libs/api-check/dist/api-check.js',
                         'src/libs/angular/angular.js',
                         'src/libs/angular-mocks/angular-mocks.js',
                         'src/libs/ng-file-upload/ng-file-upload-shim.js',
@@ -233,6 +234,8 @@ module.exports = function (grunt) {
                         'src/libs/angular-random-components/dd-text-collapse/dd-text-collapse.js',
                         'src/libs/angular-resizable/angular-resizable.min.js',
                         'src/libs/angular-smart-table/dist/smart-table.js',
+                        'src/libs/angular-formly/dist/formly.js',
+                        'src/libs/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js',
                         'dev/app/00-templates.js',
                         'dev/app/**.js',
                         'dev/app/*/**.js',
