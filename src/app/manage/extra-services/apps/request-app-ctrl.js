@@ -309,7 +309,6 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
                 type: 'danger',
                 duration: 5,
             });
-            console.warn($scope.form.$error);
             $scope.submittingForm = false;
             return;
         }

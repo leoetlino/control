@@ -219,6 +219,7 @@ module.exports = function (grunt) {
                         'src/libs/angular-promise-cache/angular-promise-cache.js',
                         'src/libs/angular-animate/angular-animate.js',
                         'src/libs/angular-sanitize/angular-sanitize.js',
+                        'src/libs/angular-messages/angular-messages.js',
                         'src/libs/angular-strap/dist/angular-strap.js',
                         'src/libs/angular-strap/dist/angular-strap.tpl.js',
                         'src/libs/angular-local-storage/dist/angular-local-storage.js',
