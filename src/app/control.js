@@ -192,11 +192,6 @@
             extends: 'checkbox',
             wrapper: ['fullHorizontalBootstrapCheckbox', 'bootstrapHasError'],
         });
-        formlyConfigProvider.setType({
-            name: 'horizontalRadio',
-            extends: 'radio',
-            wrapper: ['horizontalBootstrapCheckbox', 'bootstrapHasError'],
-        });
 
         formlyConfigProvider.setType({
             name: 'upload',

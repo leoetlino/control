@@ -36,7 +36,7 @@
         <div class="clearfix"></div>
         <p class="collapsed-description">Submit an app request to get started.</p>
         <div class="collapse" bs-collapse-target ng-hide="(apps.android && apps.iOS) || justSubmitted">
-            <form class="form-horizontal" novalidate role="form" name="form" ng-submit="submit(request)">
+            <form class="form-horizontal" novalidate role="form" name="form" ng-submit="showConfirmForm()" ng-hide="isConfirmStep">
                 <fieldset ng-disabled="submittingForm">
                 <br>
                 <formly-form model="request" fields="requestFields" form="form">
@@ -45,11 +45,50 @@
                             <p class="text-info"><fa name="info-circle"></fa> Upon submission of your request, we'll build and submit your app to the appropriate app stores. You'll be notified whenever your app is submitted. If there's any issue with your request, we will send you an email.</p>
                             <p class="text-info">After submission, it typically takes 12 hours for your Android app to be available on the Play Store; for iOS apps, it takes roughly one week (because of the Apple approval process).</p>
                             <br>
-                            <p><button type="submit" class="btn btn-primary btn-block">Request Apps <fa name="chevron-right"></fa></button></p>
+                            <p><button type="submit" class="btn btn-primary btn-block">Continue <fa name="chevron-right"></fa></button></p>
                         </div>
                     </div>
                 </formly-form>
                 </fieldset>
+            </form>
+            <form novalidate role="form" name="confirmForm" ng-submit="submit(request)" ng-show="isConfirmStep">
+                <fieldset ng-disabled="submittingForm">
+                <p>Please <b>confirm</b> your app request meets our requirements before submitting the form.</p>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p><b>Icon</b></p>
+                        <a href="{{request.icon}}"><img ng-src="{{request.icon}}" class="img-thumbnail img-responsive"></a>
+                    </div>
+                    <div class="col-sm-4">
+                        <p><b>Logo</b></p>
+                        <a href="{{request.logo}}"><img ng-src="{{request.logo}}" class="img-thumbnail img-responsive"></a>
+                    </div>
+                    <div class="col-sm-5" ng-show="request.platforms.android">
+                        <p><b>Feature Graphic</b></p>
+                        <a href="{{request.featureGraphic}}"><img ng-src="{{request.featureGraphic}}" class="img-thumbnail img-responsive"></a>
+                    </div>
+                </div>
+                <br>
+                <formly-form fields="confirmFormFields" form="confirmForm">
+                </formly-form>
+                </fieldset>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <hr>
+                        <p class="text-warning"><fa name="warning"></fa> Not all checkboxes are ticked in the previous section? Do <b>not</b> submit your request. We <b>will</b> reject it. Please go back to the form and fix all issues with your request before continuing.</p>
+                        <p class="text-warning"><b>If you knowingly provide false information, we reserve the right to ban you from our mobile app service.</b></p>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-default btn-block" ng-click="hideConfirmForm()"><fa name="chevron-left"></fa> Back to the form</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="submit" class="btn btn-primary btn-block" ng-disabled="confirmForm.$invalid">Confirm and request apps <fa name="chevron-right"></fa></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
         <div ng-show="apps.android && apps.iOS && !justSubmitted">
