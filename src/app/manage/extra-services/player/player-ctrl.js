@@ -38,6 +38,7 @@ angular.module('control.manage.extra-services').controller('PlayerCtrl', (
         $scope.settings.buttons = $scope.settings.buttons || [];
         $scope.settings.backgroundColour = $scope.settings.backgroundColour || '#000000';
         $scope.settings.tint = $scope.settings.tint || '#ffffff';
+        $scope.needsAlternativeTuneInURL = !!$scope.settings.alternativeStreamUrl;
     };
 
     $scope.disableForm = false;
