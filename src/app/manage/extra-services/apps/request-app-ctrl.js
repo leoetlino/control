@@ -10,6 +10,20 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
 
     $scope.apps = angular.copy(apps) || {};
 
+    $scope.showConfirmForm = () => {
+        if ($scope.form.$invalid) {
+            $alert({
+                content: 'Please fill in all required fields correctly before continuing.',
+                type: 'danger',
+                duration: 5,
+            });
+            $scope.isConfirmStep = false;
+            return;
+        }
+        $scope.isConfirmStep = true;
+    };
+    $scope.hideConfirmForm = () => $scope.isConfirmStep = false;
+
     let areNoPlatformsSelected = (x, y, scope) => {
         let platforms = scope.fields.filter(field => {
             return typeof field.key === 'string' && field.key.includes('platforms')
@@ -17,6 +31,97 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
         });
         return platforms.length === 0;
     };
+
+    $scope.confirmFormFields = [
+        {
+            key: 'logoNotBlurry',
+            type: 'checkbox',
+            templateOptions: {
+                required: true,
+                label: 'My logo is not a blurry mess (dimensions of at least 128×128)',
+            },
+        },
+        {
+            key: 'iconOfCorrectDimensions',
+            type: 'checkbox',
+            templateOptions: {
+                required: true,
+                label: 'My icon respects the guideline dimensions (512×512 for Android, 1024×1024 for iOS or both)',
+            },
+        },
+        { template: '<hr>' },
+        {
+            key: 'isMyImage',
+            type: 'radio',
+            templateOptions: {
+                required: true,
+                label: 'Do I own the images in the app request?',
+                options: [
+                    { value: 'yes', name: 'Yes' },
+                    { value: 'no', name: 'No, I found them on the Internet, generated them online, or someone made them for me' },
+                ],
+            },
+        },
+        {
+            hideExpression: '!model.isMyImage',
+            fieldGroup: [
+                {
+                    type: 'checkbox',
+                    templateOptions: {
+                        required: true,
+                        label: 'I am not using logos I do not own',
+                    },
+                },
+                {
+                    type: 'checkbox',
+                    templateOptions: {
+                        required: true,
+                        label: 'I am not including intellectual property, trademarks or patented material in my images',
+                    },
+                },
+                {
+                    type: 'checkbox',
+                    templateOptions: {
+                        required: true,
+                        label: 'I am not using images of any person (including artists, actors, actresses and DJs)',
+                    },
+                },
+                {
+                    type: 'checkbox',
+                    templateOptions: {
+                        required: true,
+                        label: 'I am allowed to use the images (according to the license) or I have permission from the copyright owner',
+                    },
+                    hideExpression: 'model.isMyImage === "yes"',
+                },
+                {
+                    type: 'checkbox',
+                    templateOptions: {
+                        required: true,
+                        label: 'My image does not contain elements directly taken from other images, unless I have express and written permission',
+                    },
+                    hideExpression: 'model.isMyImage === "no"',
+                },
+                {
+                    type: 'checkbox',
+                    templateOptions: {
+                        required: true,
+                        label: 'I am not using images without a declared and clear license',
+                    },
+                    hideExpression: 'model.isMyImage === "yes"',
+                },
+                {
+                    type: 'checkbox',
+                    templateOptions: {
+                        required: true,
+                        label: 'I am not violating the images\' license',
+                        description: 'What constitutes a violation depends on the images\' license. Most of the time, using the images without proper attribution is a violation.',
+                    },
+                    hideExpression: 'model.isMyImage === "yes"',
+                },
+            ],
+        },
+    ];
 
     $scope.requestFields = [
         // Platforms
@@ -309,6 +414,7 @@ angular.module('control.manage.extra-services').controller('RequestAppCtrl', fun
                 type: 'danger',
                 duration: 5,
             });
+            $scope.hideConfirmForm();
             $scope.submittingForm = false;
             return;
         }
