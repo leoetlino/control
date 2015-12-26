@@ -70,6 +70,7 @@ angular.module('control').factory('ManageService', function ($routeSegmentProvid
             var newItem = {
                 name: item.name,
                 icon: item.icon,
+                iconHtml: item.iconHtml,
                 visibleForCastOnly: item.visibleForCastOnly || false,
                 order: item.order,
                 route: {

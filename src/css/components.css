@@ -300,3 +300,27 @@ a.list-group-item {
     padding-left: 20px;
     padding-right: 20px;
 }
+
+/* GeoLock icon */
+.geolock-icon-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.geolock-icon-container .fa-globe {
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.geolock-icon-container .fa-lock {
+    position: absolute;
+    left: 0;
+    top: -25%;
+    text-shadow: 3px 3px 3px rgba(119, 119, 119, 0.75);
+}
+
+/* ui-select */
+.ui-select-multiple.ui-select-bootstrap {
+    padding: 5px 10px 3px 10px;
+}

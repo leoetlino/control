@@ -237,6 +237,7 @@ module.exports = function (grunt) {
                         'src/libs/angular-smart-table/dist/smart-table.js',
                         'src/libs/angular-formly/dist/formly.js',
                         'src/libs/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js',
+                        'src/libs/ui-select/dist/select.js',
                         'dev/app/00-templates.js',
                         'dev/app/**.js',
                         'dev/app/*/**.js',
