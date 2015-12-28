@@ -1,0 +1,43 @@
+<section class="panel panel-default version-card">
+<div class="panel-body">
+<div class="row row-equal-height">
+    <div class="col-sm-4"><div>
+        <h2 class="font-diavlo cast-logo">Cast</h2>
+    </div></div>
+    <div class="col-sm-8"><div>
+        <h2>Cast</h2>
+        <p class="description">Cast is an open source audio streaming server made to be hackable, compatible and innovative.</p>
+        <p>
+        Revision: {{ctrl.castVersion}}<br>
+        <span ng-show="ctrl.castState === ctrl.castStates.NO_UPDATE" class="text-success">
+            <fa name="check-circle"></fa> Cast is up-to-date.
+        </span>
+        <span ng-show="ctrl.castState === ctrl.castStates.CHECKING" class="text-muted">
+            Checking for updates…
+        </span>
+        <span ng-show="ctrl.castState === ctrl.castStates.UPDATE_AVAILABLE" class="text-warning">
+            A new version is available!
+            <button ng-click="ctrl.updateCast()" class="btn btn-link">Update</button>
+        </span>
+        <span ng-show="ctrl.castState === ctrl.castStates.UPDATING" class="text-info">
+            <fa name="cog" spin></fa> Updating… Cast will automatically restart after the update.
+        </span>
+        <span ng-show="ctrl.castState === ctrl.castStates.UPDATE_ERROR" class="text-danger">
+            <fa name="warning"></fa> Could not update Cast.
+            <button ng-click="ctrl.updateCast()" class="btn btn-link">Try again</button>
+        </span>
+        <span ng-show="ctrl.castState === ctrl.castStates.CHECK_ERROR" class="text-warning">
+            <fa name="warning"></fa> Could not check for updates.
+            <button ng-click="ctrl.checkForCastUpdates()" class="btn btn-link">Try again</button>
+        </span>
+        </p>
+        <p class="project-links">
+            <a href="https://github.com/Innovate-Technologies/Cast/blob/master/LICENSE">License</a> |
+            <a href="https://github.com/Innovate-Technologies/Cast">Repository</a> |
+            <a href="https://github.com/Innovate-Technologies/Cast/graphs/contributors">Authors</a> |
+            <a href="https://cast.readme.io/docs">Documentation</a>
+        </p>
+    </div></div>
+</div>
+</div>
+</section>
