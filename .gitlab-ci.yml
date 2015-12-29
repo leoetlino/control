@@ -6,15 +6,13 @@ test:
   stage: test
   script:
     - npm install
-    - bower install
-    - grunt test
+    - npm test
 
 deploy:
   stage: deploy
   script:
     - npm install
-    - bower install
-    - grunt build
+    - npm run build
     - ./deploy.sh
   only:
     - master

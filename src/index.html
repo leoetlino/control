@@ -1,218 +1,154 @@
 <!DOCTYPE html>
-<html ng-app="control" class="shoutca-st control" lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title ng-bind="pageTitle ? (pageTitle + ' | Control | SHOUTca.st') : 'Control | SHOUTca.st'">Control | SHOUTca.st</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Control all of your streaming servers with us here!">
-        <link rel="icon" href="favicon.ico">
-        <link rel="dns-prefetch" href="https://shoutca.st">
-        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-        <base href="/">
-        <meta name="keywords" content="shoutcast servers, cheap shoutcast, shoutcast, start an internet radio station, start a radio station, online radio, radio, shout, cast">
-        <link data-noprefix href="https://fonts.googleapis.com/css?family=Montserrat:400|Lato:400" rel="stylesheet">
-        <!-- build:css css/control.min.css -->
-        <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
-        <link rel="stylesheet" href="libs/fontawesome/css/font-awesome.css">
-        <link rel="stylesheet" href="libs/animate.css/animate.css">
-        <link rel="stylesheet" href="libs/angular-motion/dist/angular-motion.css">
-        <link rel="stylesheet" href="libs/bootstrap-additions/dist/bootstrap-additions.min.css">
-        <link rel="stylesheet" href="libs/angular-bootstrap-colorpicker/css/colorpicker.css">
-        <link rel="stylesheet" href="libs/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css">
-        <link rel="stylesheet" href="libs/angular-bootstrap-toggle-switch/style/bootstrap3/angular-toggle-switch-bootstrap-3.css">
-        <link rel="stylesheet" href="libs/angular-xeditable/dist/css/xeditable.css">
-        <link rel="stylesheet" href="libs/bootcards/dist/css/bootcards-desktop.min.css">
-        <link rel="stylesheet" href="libs/angular-random-components/dd-text-collapse/main.css">
-        <link rel="stylesheet" href="libs/angular-resizable/angular-resizable.min.css">
-        <link rel="stylesheet" href="libs/ui-select/dist/select.css">
-        <link rel="stylesheet" href="css/shoutca-st.css">
-        <link rel="stylesheet" href="css/animations.css">
-        <link rel="stylesheet" href="css/components.css">
-        <link rel="stylesheet" href="css/helpers.css">
-        <link rel="stylesheet" href="css/fixes.css">
-        <link rel="stylesheet" href="css/branding.css">
-        <link rel="stylesheet" href="css/loading-bar.css">
-        <link rel="stylesheet" href="css/loading-bar-green.css">
-        <link rel="stylesheet" href="css/spinner.css">
-        <!-- endbuild -->
-    </head>
-    <body class="bootcards-nofooter">
-        <nav class="navbar navbar-inverse navbar-fixed-top" id="topbar" role="navigation" ng-controller="NavigationCtrl">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topbar-collapse">
-                        <span class="sr-only">Toggle</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+<html class="shoutca-st control">
+<head>
+    <meta charset="utf-8">
+    <title ng-bind="pageTitle ? (pageTitle + ' | Control | SHOUTca.st') : 'Control | SHOUTca.st'">Control | SHOUTca.st</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stay in control of your SHOUTca.st services with Control">
+    <link rel="icon" href="favicon.ico">
+    <base href="/">
+    <meta name="keywords" content="shoutcast, online radio, cast, dj, control panel, mobile apps">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400|Lato:400" rel="stylesheet">
+</head>
+<body class="bootcards-nofooter">
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="topbar" role="navigation" ng-controller="NavigationCtrl">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topbar-collapse">
+                    <span class="sr-only">Toggle</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/" ng-class="{'always-visible-inline': !isActive('/manage')}">Control</a>
+                <div class="navbar-nav no-margin-never">
+                    <button ng-show="isActive('/manage') && servicesLoaded" type="button" class="service-switcher" ng-cloak ng-model="$root.service" data-html="true" bs-options="service as ('<i class=\'fa fa-gear\'></i> #' + service.id + '<span class=\'hidden-in-small-navbar\'> - ' + service.username + '</span><span class=\'text-muted show-in-dropdown-only\'><br>' + service.group + ' - ' + service.name + '</span>') for service in $root.services" bs-select data-placeholder="Choose a service">
+                        <i class="fa fa-gear"></i> Choose a service <span class="hidden-xs caret"></span>
                     </button>
-                    <a class="navbar-brand" href="/" ng-class="{'always-visible-inline': !isActive('/manage')}">Control</a>
-                    <div class="navbar-nav no-margin-never">
-                        <button ng-show="isActive('/manage') && servicesLoaded" type="button" class="service-switcher" ng-cloak ng-model="$root.service" data-html="true" bs-options="service as ('<i class=\'fa fa-gear\'></i> #' + service.id + '<span class=\'hidden-in-small-navbar\'> - ' + service.username + '</span><span class=\'text-muted show-in-dropdown-only\'><br>' + service.group + ' - ' + service.name + '</span>') for service in $root.services" bs-select data-placeholder="Choose a service">
-                            <i class="fa fa-gear"></i> Choose a service <span class="hidden-xs caret"></span>
-                        </button>
-                        <button ng-show="service.streamUrl && (isActive('/manage') && servicesLoaded) || player.state === player.states.playing" title="Click to play/stop the stream" type="button" class="play-stop-button" ng-click="player.toggle(service.streamUrl)"><i class="fa" ng-class="{'fa-play': (player.state === player.states.stopped || player.state === player.states.buffering), 'fa-stop': (player.state === player.states.playing), 'slow-flash': (player.state === player.states.buffering)}"></i></button>
-                    </div>
-                </div>
-                <div class="collapse navbar-collapse" id="topbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li ng-class="{ active: isActive('/')}"><a data-toggle="collapse" data-target="#topbar-collapse.in" href="/" title="Dashboard"><i class="fa fa-dashboard"></i> Dash</a></li>
-                        <li ng-class="{ active: isActive('/manage')}"><a data-toggle="collapse" data-target="#topbar-collapse.in" href="/manage" title="Manage your server(s)"><i class="fa fa-sliders"></i> Manage</a></li>
-                        <li ng-class="{ active: isActive('/feedback')}"><a data-toggle="collapse" data-target="#topbar-collapse.in" href="/feedback" title="Feedback">Feedback</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> Account <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a class="text-original" href="//my.shoutca.st/submitticket.php?step=2&deptid=2" title="Support &amp; Help"><i class="fa fa-question-circle fa-fw"></i> Support</a></li>
-                                <li><a class="text-original" href="https://community.shoutca.st" title="Community"><i class="fa fa-group fa-fw"></i> Community</a></li>
-                                <li class="divider" role="presentation"></li>
-                                <li><a class="text-original" title="Reload the data" ng-click="reloadServices()"><i class="fa fa-refresh fa-fw"></i> Reload the data</a></li>
-                                <li><a class="text-original" title="Log out from Control" ng-click="logOut()"><i class="fa fa-sign-out fa-fw"></i> Log Out</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <button ng-show="service.streamUrl && (isActive('/manage') && servicesLoaded) || player.state === player.states.playing" title="Click to play/stop the stream" type="button" class="play-stop-button" ng-click="player.toggle(service.streamUrl)"><i class="fa" ng-class="{'fa-play': (player.state === player.states.stopped || player.state === player.states.buffering), 'fa-stop': (player.state === player.states.playing), 'slow-flash': (player.state === player.states.buffering)}"></i></button>
                 </div>
             </div>
-        </nav>
-        <div class="container" id="main-container">
-            <noscript>
-                <div class="alert alert-danger" style="margin-top: 2em;">
-                    <p><i class="fa fa-warning"></i> <b>This site won't work without JavaScript; please enable it.</b>
-                    </p>
+            <div class="collapse navbar-collapse" id="topbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-class="{ active: isActive('/')}"><a data-toggle="collapse" data-target="#topbar-collapse.in" href="/" title="Dashboard"><i class="fa fa-dashboard"></i> Dash</a></li>
+                    <li ng-class="{ active: isActive('/manage')}"><a data-toggle="collapse" data-target="#topbar-collapse.in" href="/manage" title="Manage your server(s)"><i class="fa fa-sliders"></i> Manage</a></li>
+                    <li ng-class="{ active: isActive('/feedback')}"><a data-toggle="collapse" data-target="#topbar-collapse.in" href="/feedback" title="Feedback">Feedback</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a class="text-original" href="//my.shoutca.st/submitticket.php?step=2&deptid=2" title="Support &amp; Help"><i class="fa fa-question-circle fa-fw"></i> Support</a></li>
+                            <li><a class="text-original" href="https://community.shoutca.st" title="Community"><i class="fa fa-group fa-fw"></i> Community</a></li>
+                            <li class="divider" role="presentation"></li>
+                            <li><a class="text-original" title="Reload the data" ng-click="reloadServices()"><i class="fa fa-refresh fa-fw"></i> Reload the data</a></li>
+                            <li><a class="text-original" title="Log out from Control" ng-click="logOut()"><i class="fa fa-sign-out fa-fw"></i> Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" id="main-container">
+        <noscript>
+            <div class="alert alert-danger" style="margin-top: 2em;">
+                <p><i class="fa fa-warning"></i> <b>This site won't work without JavaScript; please enable it.</b>
+                </p>
+            </div>
+        </noscript>
+        <div id="content" app-view-segment="0">
+            <style>
+                body {
+                    background: #232a31;
+                }
+                .loading-block {
+                    margin-top: 12em;
+                    margin-left: auto;
+                    margin-right: auto;
+                    text-align: center;
+                    color: white;
+                }
+                nav,
+                footer,
+                [ng-cloak] {
+                    display: none;
+                }
+            </style>
+            <div class="loading-block">
+                <!-- The loadingSpinner directive cannot be used here, -->
+                <!-- as Angular and the app haven't fully loaded yet   -->
+                <div class="spinner with-margin" ng-show="!initialLoadError">
+                  <svg>
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+                  </svg>
                 </div>
-            </noscript>
-            <div id="content" app-view-segment="0">
-                <style>
-                    body {
-                        background: #232a31;
-                    }
-                    .loading-block {
-                        margin-top: 10em;
-                        color: white;
-                    }
-                    nav,
-                    footer {
-                        display: none;
-                    }
-                </style>
-                <div class="loading-block center-block text-center">
-                    <h1 class="brand font-diavlo">SHOUTca.st Control</h1>
-                    <!-- The loadingSpinner directive cannot be used here, -->
-                    <!-- as Angular and the app haven't fully loaded yet   -->
-                    <div class="spinner with-margin">
-                      <svg>
-                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
-                      </svg>
-                    </div>
-                    <div ng-cloak ng-show="initialLoadError">
-                        <br>
-                        <p>Something went wrong. Please reload the page and try again.</p>
-                    </div>
+                <div ng-cloak ng-if="initialLoadError">
+                <style>.loading-block { margin-top: 6em; }</style>
+                    <fa name="warning" style="font-size: 8em; margin-bottom: 20px"></fa>
+                    <p style="font-size: 1.3em">Something went wrong. Please reload the page and try again.</p>
                 </div>
             </div>
         </div>
-        <footer class="footer" id="main-footer">
-            <div class="container">
-                <div class="row footerlinks">
-                    <div class="col-xs-6 col-sm-2">
-                        <h5>About Us</h5>
-                        <p>A great place to find SHOUTcast and Icecast servers and start an online station, free mobile apps (iOS and Android) included with any paid plan.</p>
-                    </div>
-                    <div class="col-xs-6 col-sm-2">
-                        <h5>Get Help</h5>
-                        <ul>
-                            <li><a href="mailto:help@shoutca.st" target="_blank">help@shoutca.st</a></li>
-                            <li><a href="mailto:sales@shoutca.st" target="_blank">sales@shoutca.st</a></li>
-                            <li><a href="mailto:abuse@shoutca.st" target="_blank">abuse@shoutca.st</a></li>
-                            <li><i class="fa fa-phone"></i> +44 1926 710 346</li>
-                            <li><i class="fa fa-skype"></i> SHOUTca.st</li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-6 col-sm-2">
-                        <h5>Get Social</h5>
-                        <ul>
-                            <li><a href="//twitter.com/shoutca_st" target="_blank"><i class="fa fa-twitter-square"></i> Follow us on Twitter</a></li>
-                            <li><a href="//facebook.com/shoutcastsolutions" target="_blank"><i class="fa fa-facebook-square"></i> Like us on Facebook</a></li>
-                            <li><a href="https://community.shoutca.st">Community</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-6 col-sm-2">
-                        <h5>Get Info</h5>
-                        <ul>
-                            <li><a href="https://my.shoutca.st">Client Area</a></li>
-                            <li><a href="http://innovatetechnologi.es">Innovate Technologies</a></li>
-                            <li><a href="https://blog.shoutca.st">Blog</a></li>
-                            <li><a href="//shoutca.st/careers.php">Careers</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-6 col-sm-2">
-                        <h5>Resources</h5>
-                        <ul>
-                            <li><a href="//shoutca.st/about.php">About Internet Radio</a></li>
-                            <li><a href="//shoutca.st/radioresourcepod">Radio Resource Pod</a></li>
-                            <li><a href="//shoutca.st/tos.php">Terms Of Service</a></li>
-                            <li><a href="//shoutca.st/privacy.php">Privacy Policy</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-6 col-sm-2">
-                        <h5>More</h5>
-                        <ul>
-                            <li><a href="//shoutca.st/getstarted/which-server.php">Which server am I on?</a></li>
-                            <li><a href="//shoutca.st/testimonials.php">Testimonials</a></li>
-                            <li><a href="//shoutca.st/ios-apps.php"><i class="fa fa-apple"></i> iPhone/iOS App</a></li>
-                            <li><a href="//shoutca.st/android-apps.php"><i class="fa fa-android"></i> Android App</a></li>
-                            <li><a href="//shoutca.st/web-hosting.php">Web Hosting</a></li>
-                        </ul>
-                    </div>
+    </div>
+    <footer class="footer" id="main-footer">
+        <div class="container">
+            <div class="row footerlinks">
+                <div class="col-xs-6 col-sm-2">
+                    <h5>About Us</h5>
+                    <p>A great place to find SHOUTcast and Icecast servers and start an online station, free mobile apps (iOS and Android) included with any paid plan.</p>
                 </div>
-                <div class="copyright">
-                    <p>Copyright &copy; 2015. SHOUTca.st</p>
+                <div class="col-xs-6 col-sm-2">
+                    <h5>Get Help</h5>
+                    <ul>
+                        <li><a href="mailto:help@shoutca.st" target="_blank">help@shoutca.st</a></li>
+                        <li><a href="mailto:sales@shoutca.st" target="_blank">sales@shoutca.st</a></li>
+                        <li><a href="mailto:abuse@shoutca.st" target="_blank">abuse@shoutca.st</a></li>
+                        <li><i class="fa fa-phone"></i> +44 1926 710 346</li>
+                        <li><i class="fa fa-skype"></i> SHOUTca.st</li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-2">
+                    <h5>Get Social</h5>
+                    <ul>
+                        <li><a href="//twitter.com/shoutca_st" target="_blank"><i class="fa fa-twitter-square"></i> Follow us on Twitter</a></li>
+                        <li><a href="//facebook.com/shoutcastsolutions" target="_blank"><i class="fa fa-facebook-square"></i> Like us on Facebook</a></li>
+                        <li><a href="https://community.shoutca.st">Community</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-2">
+                    <h5>Get Info</h5>
+                    <ul>
+                        <li><a href="https://my.shoutca.st">Client Area</a></li>
+                        <li><a href="http://innovatetechnologi.es">Innovate Technologies</a></li>
+                        <li><a href="https://blog.shoutca.st">Blog</a></li>
+                        <li><a href="//shoutca.st/careers.php">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-2">
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="//shoutca.st/about.php">About Internet Radio</a></li>
+                        <li><a href="//shoutca.st/radioresourcepod">Radio Resource Pod</a></li>
+                        <li><a href="//shoutca.st/tos.php">Terms Of Service</a></li>
+                        <li><a href="//shoutca.st/privacy.php">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-2">
+                    <h5>More</h5>
+                    <ul>
+                        <li><a href="//shoutca.st/getstarted/which-server.php">Which server am I on?</a></li>
+                        <li><a href="//shoutca.st/testimonials.php">Testimonials</a></li>
+                        <li><a href="//shoutca.st/ios-apps.php"><i class="fa fa-apple"></i> iPhone/iOS App</a></li>
+                        <li><a href="//shoutca.st/android-apps.php"><i class="fa fa-android"></i> Android App</a></li>
+                        <li><a href="//shoutca.st/web-hosting.php">Web Hosting</a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-
-        <!-- build:js js/control.min.js -->
-
-        <!-- Libs -->
-        <script src="libs/jquery/dist/jquery.js"></script>
-        <script src="libs/bootstrap/js/transition.js"></script>
-        <script src="libs/bootstrap/js/dropdown.js"></script>
-        <script src="libs/bootstrap/js/collapse.js"></script>
-        <script src="libs/underscore/underscore.js"></script>
-        <script src="libs/ng-file-upload/ng-file-upload-shim.js"></script>
-        <script src="libs/api-check/dist/api-check.js"></script>
-        <script src="libs/angular/angular.js"></script>
-        <script src="libs/angular-route/angular-route.js"></script>
-        <script src="libs/angular-route-segment/build/angular-route-segment.js"></script>
-        <script src="libs/angular-promise-cache/angular-promise-cache.js"></script>
-        <script src="libs/angular-animate/angular-animate.js"></script>
-        <script src="libs/angular-sanitize/angular-sanitize.js"></script>
-        <script src="libs/angular-messages/angular-messages.js"></script>
-        <script src="libs/angular-strap/dist/angular-strap.js"></script>
-        <script src="libs/angular-strap/dist/angular-strap.tpl.js"></script>
-        <script src="libs/angular-local-storage/dist/angular-local-storage.js"></script>
-        <script src="libs/angular-loading-bar/build/loading-bar.js"></script>
-        <script src="libs/ng-file-upload/ng-file-upload.js"></script>
-        <script src="libs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
-        <script src="libs/angular-fontawesome/dist/angular-fontawesome.js"></script>
-        <script src="libs/angular-bootstrap-show-errors/src/showErrors.js"></script>
-        <script src="libs/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
-        <script src="libs/angular-bootstrap-toggle-switch/angular-toggle-switch.js"></script>
-        <script src="libs/angular-xeditable/dist/js/xeditable.js"></script>
-        <script src="libs/angular-random-components/dd-text-collapse/dd-text-collapse.js"></script>
-        <script src="libs/angular-resizable/angular-resizable.min.js"></script>
-        <script src="libs/angular-smart-table/dist/smart-table.js"></script>
-        <script src="libs/angular-formly/dist/formly.js"></script>
-        <script src="libs/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
-        <script src="libs/ui-select/dist/select.js"></script>
-        <script src="js/piwik.js"></script>
-
-        <!-- App files -->
-        <!-- include: "type": "js", "files": ["*.js", "*/**.js", "*/*/**.js", "*/*/*/**.js"] -->
-        <!-- /include -->
-
-        <!-- endbuild -->
-        <noscript>
-            <img src="//piwik.shoutca.st/piwik.php?idsite=1" style="border: 0;" alt="Piwik" />
-        </noscript>
-    </body>
+            <div class="copyright">
+                <p>Copyright &copy; 2015. SHOUTca.st</p>
+            </div>
+        </div>
+    </footer>
+    <noscript>
+        <img src="//piwik.shoutca.st/piwik.php?idsite=1" style="border: 0;" alt="Piwik" />
+    </noscript>
+</body>
 </html>
