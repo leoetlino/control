@@ -146,9 +146,9 @@ angular.module('control.manage.extra-services').controller('AppRequestCtrl', fun
         Upload.upload({
             url: ENV.apiEndpoint + '/control/apps/upload-image?imageType=' + name,
             method: 'POST',
-            data: {},
-            file: $files[0],
-            fileFormDataName: 'image',
+            data: {
+                image: $files[0],
+            },
         }).progress(function (evt) {
             ctrl.uploads[name].progress = parseInt(100.0 * evt.loaded / evt.total, 10);
         }).success(function (data) {
