@@ -26,12 +26,12 @@ angular.module('control').controller('FormUploadCtrl', function (
         model[options.key] = undefined;
         this.isUploading = true;
         this.uploadProgress = 0;
+        let dataObject = {};
+        dataObject[templateOptions.fileFormName || 'image'] = $files[0];
         Upload.upload({
             url: templateOptions.url,
             method: 'POST',
-            data: {},
-            file: $files[0],
-            fileFormDataName: templateOptions.fileFormName || 'image',
+            data: dataObject,
         })
         .progress(evt => this.uploadProgress = parseInt(100.0 * evt.loaded / evt.total, 10))
         .success(data => {

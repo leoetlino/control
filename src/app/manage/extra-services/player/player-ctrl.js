@@ -115,9 +115,9 @@ angular.module('control.manage.extra-services').controller('PlayerCtrl', (
         $scope.upload = Upload.upload({
             url: ENV.apiEndpoint + '/control/apps/upload-image',
             method: 'POST',
-            data: {},
-            file: $files[0],
-            fileFormDataName: 'image',
+            data: {
+                image: $files[0],
+            },
         })
         .progress((evt) => {
             $scope.uploadProgressLogo = parseInt(100.0 * evt.loaded / evt.total, 10);
