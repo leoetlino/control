@@ -29,6 +29,7 @@
         'angularResizable',
         'formly',
         'formlyBootstrap',
+        'ui.select',
         'ngMessages',
     ]);
 

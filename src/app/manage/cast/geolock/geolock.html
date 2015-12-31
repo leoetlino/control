@@ -1,0 +1,70 @@
+<section class="panel panel-default">
+<div class="panel-body">
+    <h4>GeoLock</h4>
+    <p class="service-description">Restrict access to your stream based on the listener's geographical location</p>
+    <p>Because of legal and licensing issues,
+    some stations may only be able to serve listeners from specific countries.
+    In such a case, GeoLock enables you to restrict access to your stream
+    based on the listener's country.</p>
+</div>
+</section>
+<section class="panel panel-default">
+<div class="panel-body">
+    <form novalidate role="form" name="form" ng-submit="ctrl.saveSettings(ctrl.settings)">
+    <fieldset ng-disabled="ctrl.disableForm">
+        <h4 class="card-header pull-left">Settings</h4>
+        <div class="pull-right">
+            <div toggle-switch
+                is-disabled="ctrl.disableForm || !ctrl.areSettingsValid() || !ctrl.areServerSettingsValid()"
+                ng-model="ctrl.settings.enabled"
+                on-label="Enabled" off-label="Disabled" class="switch-success switch-large"></div>
+        </div>
+        <div class="clearfix"></div><br>
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="mode" class="control-label">Mode</label>
+                <div class="btn-group btn-group-justified" role="group" aria-label="Mode" ng-model="ctrl.settings.mode" bs-radio-group>
+                    <label class="btn btn-default"><input type="radio" class="btn btn-default" value="blacklist">Blacklist</label>
+                    <label class="btn btn-default"><input type="radio" class="btn btn-default" value="whitelist">Whitelist</label>
+                </div>
+                <p class="help-block">Whitelist mode will only allow the selected countries to tune in. Blacklist mode will only prevent the selected countries from tuning in.</p>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="mode" class="control-label">Countries</label>
+                <div ng-show="ctrl.countries.length">
+                <ui-select multiple ng-model="ctrl.settings.countries" theme="bootstrap">
+                    <ui-select-match placeholder="Select countries">{{$item.name}}</ui-select-match>
+                    <ui-select-choices repeat="country in ctrl.countries | filter: $select.search | limitTo: 20">
+                        <div ng-bind-html="country.name | highlight: $select.search"></div>
+                        <small ng-bind-html="country['alpha-2'] | highlight: $select.search"></small>
+                    </ui-select-choices>
+                </ui-select>
+                </div>
+                <div ng-show="!ctrl.countries.length">
+                <p class="text-center text-muted">Loading…</p>
+                </div>
+            </div>
+        </div>
+        <div class="well" ng-show="ctrl.areSettingsValid()">
+            <p>With your current settings, this means that:</p>
+            <ul class="list-unstyled">
+                <li>- Listeners from <b>{{ctrl.settings.countries.map(ctrl.getCountryName).join(', ')}}</b> will be <span class="text-{{ctrl.settings.mode === 'whitelist' ? 'success' : 'danger'}}">{{ctrl.settings.mode === 'whitelist' ? 'allowed to tune in' : 'denied'}}</span></li>
+                <li>- Listeners from other countries will be <span class="text-{{ctrl.settings.mode !== 'whitelist' ? 'success' : 'danger'}}">{{ctrl.settings.mode !== 'whitelist' ? 'allowed to tune in' : 'denied'}}</span></li>
+                <li>- Listeners who cannot be geolocated will be <span class="text-{{ctrl.settings.mode !== 'whitelist' ? 'success' : 'danger'}}">{{ctrl.settings.mode !== 'whitelist' ? 'allowed to tune in' : 'denied'}}</span></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <button type="submit"
+                    ng-disabled="!ctrl.areSettingsValid() || ctrl.areSettingsSaved()"
+                    class="btn btn-block btn-primary"><fa name="save"></fa>
+                    {{ ctrl.areSettingsSaved() ? 'Settings saved' : 'Save settings' }}</button>
+            </div>
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-danger btn-block" ng-click="ctrl.removeSettings()" ng-disabled="!ctrl.areServerSettingsValid()"><fa name="trash-o"></fa> Remove settings</button>
+            </div>
+        </div>
+    </fieldset>
+    </form>
+</div>
+</section>
