@@ -1,0 +1,57 @@
+import lodash from 'lodash';
+import angular from 'angular';
+import angularAnimate from 'angular-animate';
+import 'angular-bootstrap-colorpicker/css/colorpicker.css';
+import 'angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js';
+import angularShowErrors from 'angular-bootstrap-show-errors';
+import angularFontAwesome from 'angular-fontawesome';
+import angularFormly from 'angular-formly';
+import angularFormlyTemplatesBootstrap from 'angular-formly-templates-bootstrap';
+import angularLoadingBar from 'angular-loading-bar';
+import angularLocalStorage from 'angular-local-storage';
+import angularMessages from 'angular-messages';
+import angularPromiseCache from 'angular-promise-cache';
+import angularResizable from 'angular-resizable';
+import angularRoute from 'angular-route';
+import angularRouteSegment from 'angular-route-segment';
+import angularSanitize from 'angular-sanitize';
+import angularSmartTable from 'angular-smart-table';
+import 'angular-bootstrap-toggle-switch/angular-toggle-switch.js';
+import 'angular-bootstrap-toggle-switch/style/bootstrap3/angular-toggle-switch-bootstrap-3.css';
+import 'angular-xeditable/dist/css/xeditable.css';
+import 'angular-xeditable/dist/js/xeditable.js';
+import 'angular-strap/dist/angular-strap.js';
+import 'angular-strap/dist/angular-strap.tpl.js';
+import jQuery from 'jquery';
+import 'ui-select/dist/select.js';
+import 'ui-select/dist/select.css';
+import ngFileUpload from 'ng-file-upload';
+
+import 'animate.css/animate.css';
+import 'api-check';
+import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'angular-motion/dist/angular-motion.css';
+import 'bootstrap-additions/dist/bootstrap-additions.css';
+import 'font-awesome/css/font-awesome.css';
+
+export {
+    lodash,
+    angular,
+    angularAnimate,
+    angularShowErrors,
+    angularFontAwesome,
+    angularFormly,
+    angularFormlyTemplatesBootstrap,
+    angularLoadingBar,
+    angularLocalStorage,
+    angularMessages,
+    angularPromiseCache,
+    angularResizable,
+    angularRoute,
+    angularRouteSegment,
+    angularSanitize,
+    angularSmartTable,
+    jQuery,
+    ngFileUpload,
+};
