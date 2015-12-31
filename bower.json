@@ -5,9 +5,9 @@
   "dependencies": {
     "jquery": "latest",
     "bootstrap": "~3.3.5",
-    "angular": "~1.5.0",
-    "angular-route": "~1.5.0",
-    "angular-animate": "~1.5.0",
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "angular-animate": "~1.4.8",
     "ng-file-upload": "~11.0.0",
     "angular-local-storage": "~0.2.2",
     "fontawesome": "~4.5.0",
@@ -20,10 +20,10 @@
     "angular-motion": "~0.4.2",
     "angular-bootstrap-show-errors": "~2.3.0",
     "angular-bootstrap-switch": "~0.4.1",
-    "angular-sanitize": "~1.5.0",
+    "angular-sanitize": "~1.4.8",
     "angular-route-segment": "leoetlino/angular-route-segment#master",
     "underscore": "~1.8.3",
-    "angular-mocks": "~1.5.0",
+    "angular-mocks": "~1.4.8",
     "angular-promise-cache": "~0.0.12",
     "bootstrap-additions": "~0.3.1",
     "angular-xeditable": "~0.1.9",
@@ -35,6 +35,6 @@
     "angular-messages": "~1.4.7"
   },
   "resolutions": {
-    "angular": "~1.5.0"
+    "angular": "~1.4.8"
   }
 }
