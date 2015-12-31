@@ -7,11 +7,14 @@ test:
   script:
     - npm install
     - npm test
+  except:
+    - master
 
 deploy:
   stage: deploy
   script:
     - npm install
+    - npm test
     - npm run build
     - ./deploy.sh
   only:
