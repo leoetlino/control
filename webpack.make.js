@@ -87,6 +87,18 @@ module.exports = function makeWebpackConfig (options) {
             new HtmlWebpackPlugin({
                 inject: true,
                 template: path.join(APP_ROOT, 'index.html'),
+                minify: BUILD ? {
+                    collapseBooleanAttributes: true,
+                    collapseWhitespace: true,
+                    conservativeCollapse: true,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true,
+                    minifyCSS: true,
+                } : false,
             }),
             new webpack.optimize.CommonsChunkPlugin('vendor', VENDOR_FILE_NAME)
         );
