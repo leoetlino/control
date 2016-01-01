@@ -22,10 +22,10 @@ module.exports = function makeWebpackConfig (options) {
     config.output = TEST ? {} : {
         publicPath: '/',
         path: 'dist',
-        filename: 'control.js',
+        filename: '[name].js',
     };
     if (BUILD) {
-        config.output.filename = 'control-[hash].js';
+        config.output.filename = '[name]-[chunkhash].js';
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Module-specific configuration
@@ -71,8 +71,9 @@ module.exports = function makeWebpackConfig (options) {
     };
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Plugins
-    const VENDOR_FILE_NAME = BUILD ? 'vendor-[hash].js' : 'vendor.js';
+    const VENDOR_FILE_NAME = BUILD ? 'vendor-[chunkhash].js' : 'vendor.js';
     config.plugins = [
+        new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
             IS_PRODUCTION: BUILD,
             API_ENDPOINT: JSON.stringify(process.env.API_ENDPOINT || PRODUCTION_API_ENDPOINT),
@@ -100,7 +101,8 @@ module.exports = function makeWebpackConfig (options) {
                     minifyCSS: true,
                 } : false,
             }),
-            new webpack.optimize.CommonsChunkPlugin('vendor', VENDOR_FILE_NAME)
+            new webpack.optimize.CommonsChunkPlugin('vendor', VENDOR_FILE_NAME),
+            new webpack.optimize.CommonsChunkPlugin({ name: 'loader', chunks: ['vendor'] })
         );
     }
     if (BUILD) {
