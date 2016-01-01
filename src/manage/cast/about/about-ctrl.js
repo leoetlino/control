@@ -29,6 +29,8 @@ export default /*@ngInject*/ function AboutCtrl (
         AboutService.getCastBuildInfo().then(({ version }) => {
             if (version !== this.castVersion) {
                 this.castState = this.castStates.UPDATE_AVAILABLE;
+            } else {
+                this.castState = this.castStates.NO_UPDATE;
             }
         }, () => {
             this.castState = this.castStates.CHECK_ERROR;
