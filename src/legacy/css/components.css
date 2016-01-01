@@ -324,3 +324,35 @@ a.list-group-item {
 .ui-select-multiple.ui-select-bootstrap {
     padding: 5px 10px 3px 10px;
 }
+
+/* about page */
+.cast-logo {
+    font-size: 5em;
+    text-align: center;
+    margin-top: 45px;
+}
+
+.version-card p {
+    font-size: 1.1em;
+}
+
+.version-card .description {
+    font-size: 1.3em;
+}
+
+.version-card .project-links a {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.version-card .project-links a:first-child {
+    margin-left: 0;
+}
+
+.version-card .project-links a:last-child {
+    margin-right: 0;
+}
+
+.version-card .btn-link {
+    margin-top: -2px;
+}
