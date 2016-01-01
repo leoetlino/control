@@ -29,7 +29,9 @@ import ngFileUpload from 'ng-file-upload';
 
 import 'animate.css/animate.css';
 import 'api-check';
-import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/js/collapse.js';
+import 'bootstrap/js/dropdown.js';
+import 'bootstrap/js/transition.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'angular-motion/dist/angular-motion.css';
 import 'bootstrap-additions/dist/bootstrap-additions.css';
