@@ -8,7 +8,7 @@ test:
     - npm install
     - npm test
   except:
-    - master
+    - master@site/control
 
 deploy:
   stage: deploy
@@ -18,4 +18,4 @@ deploy:
     - npm run build
     - ./deploy.sh
   only:
-    - master
+    - master@site/control
