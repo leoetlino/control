@@ -65,4 +65,8 @@ app.config(configHttp);
 app.config(configAngularStrap);
 app.run(configForms);
 
+if (IS_PRODUCTION) {
+    require('./config-production').default(app);
+}
+
 angular.bootstrap(document, ['control'], { strictDi: true });

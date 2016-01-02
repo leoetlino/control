@@ -16,7 +16,7 @@ module.exports = function makeWebpackConfig (options) {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Entry and output
     config.entry = TEST ? {} : {
-        vendor: ['babel-polyfill', path.join(APP_ROOT, 'vendor')],
+        vendor: [path.join(APP_ROOT, 'vendor')],
         app: ['babel-polyfill', path.join(APP_ROOT, 'app')],
     };
     config.output = TEST ? {} : {
@@ -27,6 +27,7 @@ module.exports = function makeWebpackConfig (options) {
     if (BUILD) {
         config.output.filename = '[name]-[chunkhash].js';
     }
+    config.recordsPath = path.join(__dirname, '.webpack-records.json');
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Module-specific configuration
     config.eslint = {
@@ -71,9 +72,7 @@ module.exports = function makeWebpackConfig (options) {
     };
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Plugins
-    const VENDOR_FILE_NAME = BUILD ? 'vendor-[chunkhash].js' : 'vendor.js';
     config.plugins = [
-        new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
             IS_PRODUCTION: BUILD,
             API_ENDPOINT: JSON.stringify(process.env.API_ENDPOINT || PRODUCTION_API_ENDPOINT),
@@ -101,7 +100,7 @@ module.exports = function makeWebpackConfig (options) {
                     minifyCSS: true,
                 } : false,
             }),
-            new webpack.optimize.CommonsChunkPlugin('vendor', VENDOR_FILE_NAME),
+            new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', minChunks: Infinity }),
             new webpack.optimize.CommonsChunkPlugin({ name: 'loader', chunks: ['vendor'] })
         );
     }
@@ -109,6 +108,7 @@ module.exports = function makeWebpackConfig (options) {
         config.plugins.push(
             new webpack.NoErrorsPlugin(),
             new webpack.optimize.DedupePlugin(),
+            new webpack.optimize.OccurenceOrderPlugin(true),
             new webpack.optimize.UglifyJsPlugin()
         );
     }
