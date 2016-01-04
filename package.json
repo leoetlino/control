@@ -76,6 +76,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "scripts": {
+    "install": "chmod +x ./lint.sh && ln -sf ../../lint.sh .git/hooks/pre-commit",
     "start": "webpack-dev-server --hot --inline --progress",
     "build": "webpack --config webpack.build.js --bail --progress",
     "lint": "eslint_d src/ || exit 0",
