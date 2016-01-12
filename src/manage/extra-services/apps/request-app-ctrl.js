@@ -379,6 +379,10 @@ export default /*@ngInject*/ function (
             },
             hideExpression: '!model.needsAlternativeStreamUrl',
         },
+        {
+            template: `<p class="text-warning"><fa name="warning"></fa> For iOS apps, make sure that you are not mentioning other platforms such as Android in your app descriptions or even on your website. Otherwise, Apple may reject your app.</p>`,
+            hideExpression: '!model.platforms.iOS',
+        },
     ];
 
 
