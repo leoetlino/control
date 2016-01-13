@@ -121,6 +121,15 @@ export default /*@ngInject*/ function (
           },
           hideExpression: 'model.isMyImage === "yes"',
         },
+        { template: "<hr>" },
+        {
+          type: "checkbox",
+          templateOptions: {
+            required: true,
+            label: "I agree that my service can be suspended if I do not own all rights on the images",
+            description: "I agree that my service can be suspended without prior warning and compensation if I do not own the rights to use the images. I have to tick this before continuing. I confirm that I *do* have permission to use the images.",
+          },
+        },
       ],
     },
   ];
