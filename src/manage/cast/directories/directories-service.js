@@ -1,6 +1,6 @@
 export default class DirectoriesService {
     /*@ngInject*/
-    constructor ($http, ENV, promiseCache, $rootScope) {
+    constructor($http, ENV, promiseCache, $rootScope) {
       this.getChoices = () => promiseCache({
         promise: () => {
           return $http

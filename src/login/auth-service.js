@@ -1,6 +1,6 @@
 export default class AuthService {
     /*@ngInject*/
-    constructor ($http, Session, USER_ROLES, localStorageService, ENV, AuthChecker, $rootScope, $interval, AUTH_EVENTS) {
+    constructor($http, Session, USER_ROLES, localStorageService, ENV, AuthChecker, $rootScope, $interval, AUTH_EVENTS) {
       this.keepAlivePromise = null;
       this.logIn = function (credentials) {
         return $http
@@ -8,7 +8,7 @@ export default class AuthService {
                 .then(function (res) {
                   $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                   Session.create(res.data.token);
-                }, function onFail () {
+                }, function onFail() {
                   $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                 });
       };
@@ -16,10 +16,10 @@ export default class AuthService {
       this.logOut = function () {
         return $http
                 .post(ENV.apiEndpoint + "/control/log-out")
-                .then(function onLogoutSuccess () {
+                .then(function onLogoutSuccess() {
                   $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
                   Session.destroy();
-                }, function onLogoutFail () {
+                }, function onLogoutFail() {
                   $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
                 });
       };

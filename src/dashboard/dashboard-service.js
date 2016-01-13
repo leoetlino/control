@@ -1,9 +1,9 @@
 export default class DashboardService {
     /*@ngInject*/
-    constructor ($http, ENV, promiseCache, Session, $q) {
+    constructor($http, ENV, promiseCache, Session, $q) {
       Object.assign(this, { $http, ENV, promiseCache, Session, $q });
     }
-    getInfo () {
+    getInfo() {
       if (!this.Session.token) {
         return this.$q.reject("no valid token");
       }

@@ -1,6 +1,6 @@
 export default class ConfigService {
     /*@ngInject*/
-    constructor ($http, ENV, promiseCache, $rootScope, $q) {
+    constructor($http, ENV, promiseCache, $rootScope, $q) {
       this.invalidateCache = function () {
         promiseCache.remove("castConfig");
       };

@@ -1,4 +1,4 @@
-export default /*@ngInject*/ function playerConfigPreview ($timeout) {
+export default /*@ngInject*/ function playerConfigPreview($timeout) {
   return (scope, element, attr) => {
     scope.$watch(attr.config, (newValue) => {
       element[0].contentWindow

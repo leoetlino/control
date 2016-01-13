@@ -2,7 +2,7 @@ import { angular } from "../vendor";
 
 export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_EVENTS, AuthChecker) {
 
-  $rootScope.$on("routeSegmentChangeStart", function onRouteSegmentChangeStart (event, index, segment) {
+  $rootScope.$on("routeSegmentChangeStart", function onRouteSegmentChangeStart(event, index, segment) {
     if (!segment) {
       return;
     }
@@ -16,7 +16,7 @@ export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_E
     $rootScope.routeLoading = true;
   });
 
-  $rootScope.$on("routeSegmentChange", function onRouteSegmentChange (event, args) {
+  $rootScope.$on("routeSegmentChange", function onRouteSegmentChange(event, args) {
     if (!args.segment) {
       return;
     }
@@ -24,13 +24,13 @@ export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_E
     $rootScope.routeLoading = false;
   });
 
-  $rootScope.$on("routeSegmentResolveStart", function onRouteSegmentReloadStart (event, index) {
+  $rootScope.$on("routeSegmentResolveStart", function onRouteSegmentReloadStart(event, index) {
     if (index !== 0) {
       $rootScope.routeResolving = true;
     }
   });
 
-  $rootScope.$on("routeSegmentResolve", function onRouteSegmentReload (event, index) {
+  $rootScope.$on("routeSegmentResolve", function onRouteSegmentReload(event, index) {
     if (index !== 0) {
       $rootScope.routeResolving = false;
     }
@@ -38,7 +38,7 @@ export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_E
 
   var originalPath = null;
 
-  $rootScope.$on("$routeChangeStart", function onRouteChangeStart (event, next) {
+  $rootScope.$on("$routeChangeStart", function onRouteChangeStart(event, next) {
     var segment = angular.module("control").segments[next.$$route.segment];
     var authorizedRoles;
     if (segment) {

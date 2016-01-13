@@ -1,4 +1,4 @@
-export default function Enum (a) {
+export default function Enum(a) {
   let i = Object
         .keys(a)
         .reduce((o, k) => (o[a[k]] = k, o), {});

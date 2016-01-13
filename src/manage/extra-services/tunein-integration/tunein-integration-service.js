@@ -1,4 +1,4 @@
-export default /*@ngInject*/ function TuneInIntegrationServiceFactory ($http, ENV, promiseCache, $rootScope) {
+export default /*@ngInject*/ function TuneInIntegrationServiceFactory($http, ENV, promiseCache, $rootScope) {
   var TuneInIntegrationService = {
     saveSettings: function (username, settings) {
       this.invalidateCache();

@@ -1,6 +1,6 @@
 export default class ServerErrorInterceptor {
     /*@ngInject*/
-    constructor ($rootScope, $q) {
+    constructor($rootScope, $q) {
       this.responseError = (response) => {
         if (response.status === 500) {
           if (typeof response.data !== "undefined" && typeof response.data.error !== "undefined") {
