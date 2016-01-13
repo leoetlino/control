@@ -1,6 +1,6 @@
 import { angular } from "../vendor";
 
-export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_EVENTS, AuthChecker) {
+export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_EVENTS, AuthChecker, featureFlags) {
 
   $rootScope.$on("routeSegmentChangeStart", function onRouteSegmentChangeStart(event, index, segment) {
     if (!segment) {
@@ -12,6 +12,12 @@ export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_E
       $rootScope.service.group.toLowerCase().indexOf("nodes") === -1) {
       event.preventDefault();
       $rootScope.$broadcast("cast-only-route");
+    }
+
+    if (segment.params.featureFlag &&
+      !featureFlags.isOn(segment.params.featureFlag)) {
+      event.preventDefault();
+      $rootScope.$broadcast("route-behind-feature-flag");
     }
     $rootScope.routeLoading = true;
   });

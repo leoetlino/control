@@ -1,9 +1,7 @@
 import { angular } from "../vendor";
 import DashboardCtrl from "./dashboard-ctrl";
-import DashboardService from "./dashboard-service";
 
 export default angular.module("control.dashboard", [])
-    .service("DashboardService", DashboardService)
     .controller("DashboardCtrl", DashboardCtrl)
     .run(/*@ngInject*/ function ($routeSegmentProvider, USER_ROLES) {
       $routeSegmentProvider
@@ -13,7 +11,7 @@ export default angular.module("control.dashboard", [])
               authorizedRoles: [USER_ROLES.all],
               title: "Dashboard",
               resolve: {
-                summary: ["DashboardService", (DashService) => DashService.getInfo()],
+                summary: /*@ngInject*/ (AuthService) => AuthService.getUserInfo(),
               },
               controller: "DashboardCtrl",
             });

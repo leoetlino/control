@@ -55,6 +55,7 @@ export default class ManageService {
         icon: section.icon,
         order: section.order,
         items: [],
+        featureFlag: section.featureFlag || "none",
         visibleForCastOnly: section.visibleForCastOnly || false,
       });
 
@@ -86,6 +87,7 @@ export default class ManageService {
         name: item.name,
         icon: item.icon,
         iconHtml: item.iconHtml,
+        featureFlag: item.featureFlag || "none",
         visibleForCastOnly: item.visibleForCastOnly || false,
         order: item.order,
         route: {
@@ -99,12 +101,16 @@ export default class ManageService {
           resolve: item.route.resolve,
           resolveFailed: item.route.resolveFailed,
           title: item.route.title || item.name,
+          featureFlag: item.featureFlag || "none",
           visibleForCastOnly: item.visibleForCastOnly || false,
         },
       };
 
       if (section.visibleForCastOnly) {
         newItem.route.visibleForCastOnly = true;
+      }
+      if (section.featureFlag && !newItem.route.featureFlag) {
+        newItem.route.featureFlag = section.featureFlag;
       }
 
       section.items.push(newItem);
@@ -114,6 +120,7 @@ export default class ManageService {
         templateUrl: newItem.route.templateUrl,
         authorizedRoles: [USER_ROLES.all],
         title: newItem.route.title,
+        featureFlag: newItem.route.featureFlag,
         visibleForCastOnly: newItem.route.visibleForCastOnly,
         watcher: /*@ngInject*/ function ($rootScope) {
           if (!$rootScope.service) {

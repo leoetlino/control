@@ -11,6 +11,7 @@ import FormUploadCtrl from "./form-upload-ctrl";
 import NavigationCtrl from "./navigation-ctrl";
 import SpinnerComponent from "./spinner-component";
 import TextCollapseDirective from "./text-collapse-directive";
+import ShowIfFeatureFlagDirective from "./show-if-feature-flag-directive";
 import configRouting from "./config-routing";
 
 export default angular.module("control.common", [angularRoute, "route-segment", "view-segment"])
@@ -25,6 +26,7 @@ export default angular.module("control.common", [angularRoute, "route-segment", 
     .run(routeEventHandlers)
     .controller("FormUploadCtrl", FormUploadCtrl)
     .controller("NavigationCtrl", NavigationCtrl)
+    .directive("showIfFeatureFlag", ShowIfFeatureFlagDirective)
     .directive("loadingSpinner", () => SpinnerComponent)
     .directive("ddTextCollapse", TextCollapseDirective)
     .config(configRouting)
