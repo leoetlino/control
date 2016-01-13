@@ -7,9 +7,9 @@ export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_E
       return;
     }
     if ($rootScope.service &&
-            $rootScope.service.id &&
-            segment.params.visibleForCastOnly &&
-            $rootScope.service.group.toLowerCase().indexOf("nodes") === -1) {
+      $rootScope.service.id &&
+      segment.params.visibleForCastOnly &&
+      $rootScope.service.group.toLowerCase().indexOf("nodes") === -1) {
       event.preventDefault();
       $rootScope.$broadcast("cast-only-route");
     }
@@ -51,13 +51,13 @@ export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_E
     if (!AuthChecker.isAuthorized(authorizedRoles)) {
       event.preventDefault();
       if (AuthChecker.isAuthenticated()) {
-                // user is not allowed
+        // user is not allowed
         if (next.$$route.originalPath !== "/log-in") {
           $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
           return;
         }
       } else {
-                // user is not logged in
+        // user is not logged in
         if (next.$$route.originalPath !== "/log-in") {
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
           originalPath = next.$$route.originalPath;
