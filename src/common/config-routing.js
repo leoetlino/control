@@ -1,4 +1,4 @@
-import { angular } from '../vendor';
+import { angular } from "../vendor";
 
 export default /*@ngInject*/ function (
     $httpProvider,
@@ -7,15 +7,15 @@ export default /*@ngInject*/ function (
     $routeSegmentProvider,
     $provide,
 ) {
-    const app = angular.module('control');
+  const app = angular.module("control");
 
-    app.$httpProvider = $httpProvider;
-    app.segments = $routeSegmentProvider.segments;
-    $provide.factory('$routeSegmentProvider', () => $routeSegmentProvider);
+  app.$httpProvider = $httpProvider;
+  app.segments = $routeSegmentProvider.segments;
+  $provide.factory("$routeSegmentProvider", () => $routeSegmentProvider);
 
-    $routeSegmentProvider.options.strictMode = true;
-    $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false,
-    });
+  $routeSegmentProvider.options.strictMode = true;
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false,
+  });
 }
