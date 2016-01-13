@@ -2,7 +2,7 @@ import { lodash as _ } from "../vendor";
 
 export default class ManageService {
     /*@ngInject*/
-    constructor ($routeSegmentProvider, USER_ROLES) {
+    constructor($routeSegmentProvider, USER_ROLES) {
       let sections = [];
       let itemsToAdd = [];
       this.getSections = (doNotSort) => {

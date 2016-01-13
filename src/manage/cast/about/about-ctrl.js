@@ -1,6 +1,6 @@
 import enum from "../../../common/enum-helper";
 
-export default /*@ngInject*/ function AboutCtrl (
+export default /*@ngInject*/ function AboutCtrl(
     $alert,
     $http,
     $scope,

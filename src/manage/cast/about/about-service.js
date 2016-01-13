@@ -1,6 +1,6 @@
 export default class AboutService {
     /*@ngInject*/
-    constructor (
+    constructor(
         $http,
         $rootScope,
         ENV

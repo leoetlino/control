@@ -1,4 +1,4 @@
-export /*@ngInject*/ function appStatus (AppStatusesService) {
+export /*@ngInject*/ function appStatus(AppStatusesService) {
   var statuses;
   var filterFn;
   filterFn = function (input) { return input; };
@@ -6,14 +6,14 @@ export /*@ngInject*/ function appStatus (AppStatusesService) {
     statuses = data;
     filterFn = function (input) { return statuses[input]; };
   });
-  var wrapperFn = function wrapper (input) {
+  var wrapperFn = function wrapper(input) {
     return filterFn(input);
   };
   wrapperFn.$stateful = true;
   return wrapperFn;
 }
 
-export /*@ngInject*/ function appStatusExplanation () {
+export /*@ngInject*/ function appStatusExplanation() {
   return function (input, platform) {
     var identifier = platform + "." + input;
     switch (identifier) {

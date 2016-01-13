@@ -1,8 +1,8 @@
 export default /*@ngInject*/ function ($rootScope, $location, $window, $alert, $modal, $timeout, AUTH_EVENTS, ServicesService, Session) {
 
-  function initServices () {
+  function initServices() {
         // returns a promise.
-    return ServicesService.initAndGetService().then(function onInitServiceSuccess (service) {
+    return ServicesService.initAndGetService().then(function onInitServiceSuccess(service) {
       $rootScope.servicesLoaded = true;
       $rootScope.services = ServicesService.getServicesList();
       $rootScope.service = service;
@@ -14,9 +14,9 @@ export default /*@ngInject*/ function ($rootScope, $location, $window, $alert, $
 
   $rootScope.$on(AUTH_EVENTS.loginSuccess, function () {
     ServicesService.invalidateCache();
-    return initServices().then(function onInitSuccess () {
+    return initServices().then(function onInitSuccess() {
       $location.path("/"); // This will trigger a redirect to originalPath
-    }, function onInitFail () {
+    }, function onInitFail() {
       $location.path("/");
       $alert({
         content: "Something went wrong while getting your service data. The page will reload to try again.",
@@ -29,7 +29,7 @@ export default /*@ngInject*/ function ($rootScope, $location, $window, $alert, $
     });
   });
 
-  $rootScope.$on(AUTH_EVENTS.loginFailed, function onLoginFail () {
+  $rootScope.$on(AUTH_EVENTS.loginFailed, function onLoginFail() {
     $alert({
       content: "Couldn't log in. Please check your credentials. If you forgot your password, you can reset it from the client area.",
       type: "danger",
@@ -37,7 +37,7 @@ export default /*@ngInject*/ function ($rootScope, $location, $window, $alert, $
     });
   });
 
-  $rootScope.$on(AUTH_EVENTS.logoutSuccess, function onLogoutSuccess () {
+  $rootScope.$on(AUTH_EVENTS.logoutSuccess, function onLogoutSuccess() {
     var modal = $modal({
       content: "<style>.modal{display: none !important}</style>",
       backdrop: "static",
@@ -57,7 +57,7 @@ export default /*@ngInject*/ function ($rootScope, $location, $window, $alert, $
     }, 2000);
   });
 
-  $rootScope.$on(AUTH_EVENTS.logoutFailed, function onLogoutFail () {
+  $rootScope.$on(AUTH_EVENTS.logoutFailed, function onLogoutFail() {
     $alert({
       content: "Couldn't log you out. Please try again. If the problem persists, reload the page and contact us.",
       type: "danger",
@@ -65,7 +65,7 @@ export default /*@ngInject*/ function ($rootScope, $location, $window, $alert, $
     });
   });
 
-  $rootScope.$on(AUTH_EVENTS.badRequest, function onBadRequest () {
+  $rootScope.$on(AUTH_EVENTS.badRequest, function onBadRequest() {
     if (alert) {
       alert.destroy();
     }
@@ -76,7 +76,7 @@ export default /*@ngInject*/ function ($rootScope, $location, $window, $alert, $
     });
   });
 
-  $rootScope.$on(AUTH_EVENTS.sessionTimeout, function onSessionTimeout () {
+  $rootScope.$on(AUTH_EVENTS.sessionTimeout, function onSessionTimeout() {
     Session.destroy();
     $location.path("/log-in");
     if (alert) {
@@ -88,7 +88,7 @@ export default /*@ngInject*/ function ($rootScope, $location, $window, $alert, $
     });
   });
 
-  $rootScope.$on(AUTH_EVENTS.notAuthenticated, function onNotAuthenticatedEvent () {
+  $rootScope.$on(AUTH_EVENTS.notAuthenticated, function onNotAuthenticatedEvent() {
     $location.path("/log-in");
     $alert({
       content: "Please log in to continue.",
@@ -97,7 +97,7 @@ export default /*@ngInject*/ function ($rootScope, $location, $window, $alert, $
     });
   });
 
-  $rootScope.$on(AUTH_EVENTS.notAuthorized, function onNotAuthorizedEvent () {
+  $rootScope.$on(AUTH_EVENTS.notAuthorized, function onNotAuthorizedEvent() {
     $location.path("/log-in");
     $alert({
       title: "Access denied.",

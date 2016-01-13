@@ -1,32 +1,32 @@
-export default /*@ngInject*/ function PlayerServiceFactory (
+export default /*@ngInject*/ function PlayerServiceFactory(
     $rootScope,
     $http,
     ENV,
     promiseCache) {
 
   let PlayerService = {
-    saveSettings (username, settings) {
+    saveSettings(username, settings) {
       this.invalidateCache();
       return $http.put(ENV.apiEndpoint + "/control/player/settings/" + username, settings);
     },
-    removeSettings (username) {
+    removeSettings(username) {
       this.invalidateCache();
       return $http.delete(ENV.apiEndpoint + "/control/player/settings/" + username);
     },
-    invalidateCache () {
+    invalidateCache() {
       if (!$rootScope.service) {
         return;
       }
       let username = $rootScope.service.username;
       promiseCache.remove("playerSettings_" + username);
     },
-    getSettings () {
+    getSettings() {
       if (!$rootScope.service) {
         return;
       }
       let username = $rootScope.service.username;
       return promiseCache({
-        promise () {
+        promise() {
           return $http
                         .get(ENV.apiEndpoint + "/control/player/settings/" + username)
                         .then(response => response.data);

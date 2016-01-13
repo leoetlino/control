@@ -17,7 +17,7 @@ export default /*@ngInject*/ function ($scope, $rootScope, AUTH_EVENTS, AuthServ
     $scope.isLoading = false;
   });
 
-  (function showHelpForLoggingIn () {
+  (function showHelpForLoggingIn() {
     if (localStorageService.get("showed-login-help")) {
       return;
     }

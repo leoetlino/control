@@ -1,4 +1,4 @@
-export default /*@ngInject*/ function NowPlayingTweetsServiceFactory ($http, ENV, promiseCache, $rootScope) {
+export default /*@ngInject*/ function NowPlayingTweetsServiceFactory($http, ENV, promiseCache, $rootScope) {
   var NowPlayingTweetsService = {
     submitSettings: function (username, settings) {
       this.invalidateCache();

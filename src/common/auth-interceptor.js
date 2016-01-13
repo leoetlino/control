@@ -1,6 +1,6 @@
 export default class AuthInterceptor {
     /*@ngInject*/
-    constructor ($rootScope, $q, AUTH_EVENTS, Session, ENV) {
+    constructor($rootScope, $q, AUTH_EVENTS, Session, ENV) {
       this.request = (config) => {
         config.headers = config.headers || {};
         if (config.url.indexOf(ENV.apiEndpoint) !== -1 && Session.token) {

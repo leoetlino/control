@@ -1,6 +1,6 @@
 export default class AppStatusesService {
     /*@ngInject*/
-    constructor ($http) {
+    constructor($http) {
       this.getStatuses = () => {
         return $http.get(
                 "https://apps.shoutca.st/internal/statuses",

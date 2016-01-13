@@ -55,14 +55,14 @@ export default /*@ngInject*/ function ($scope, $location, $rootScope, $route, US
     // Services
     ////////////
 
-  $scope.initServices = function initServices () {
+  $scope.initServices = function initServices() {
         // returns a promise.
-    return ServicesService.initAndGetService().then(function onInitServiceSuccess (service) {
+    return ServicesService.initAndGetService().then(function onInitServiceSuccess(service) {
       $rootScope.servicesLoaded = true;
       $rootScope.services = ServicesService.getServicesList();
       $rootScope.service = service;
       return service;
-    }, function onInitServiceFail (response) {
+    }, function onInitServiceFail(response) {
       if (response.status === 419) {
         return;
       }
@@ -84,7 +84,7 @@ export default /*@ngInject*/ function ($scope, $location, $rootScope, $route, US
     $scope.initServices();
   }
 
-  $rootScope.$watch("service.username", function onSelectedServiceUsernameChange (newUsername) {
+  $rootScope.$watch("service.username", function onSelectedServiceUsernameChange(newUsername) {
     if (!AuthChecker.isAuthenticated()) {
       return;
     }
@@ -94,7 +94,7 @@ export default /*@ngInject*/ function ($scope, $location, $rootScope, $route, US
     }
   });
 
-  $rootScope.$watch("service.id", function onSelectedServiceIdChange (newId, oldId) {
+  $rootScope.$watch("service.id", function onSelectedServiceIdChange(newId, oldId) {
     if (!AuthChecker.isAuthenticated()) {
       return;
     }
@@ -109,7 +109,7 @@ export default /*@ngInject*/ function ($scope, $location, $rootScope, $route, US
 
   var alert;
 
-  $rootScope.$on("cast-only-route", function onCastOnlyRouteEvent () {
+  $rootScope.$on("cast-only-route", function onCastOnlyRouteEvent() {
     $rootScope.routeLoading = false;
     if (alert) {
       alert.hide();
@@ -122,7 +122,7 @@ export default /*@ngInject*/ function ($scope, $location, $rootScope, $route, US
     $location.path("/manage/information");
   });
 
-  $rootScope.$on("invalid-service", function onInvalidServiceEvent () {
+  $rootScope.$on("invalid-service", function onInvalidServiceEvent() {
     $rootScope.routeLoading = false;
     if (alert) {
       alert.hide();
@@ -137,7 +137,7 @@ export default /*@ngInject*/ function ($scope, $location, $rootScope, $route, US
     $location.path("/manage");
   });
 
-  $rootScope.$on("server-error", function onServerError (event, error) {
+  $rootScope.$on("server-error", function onServerError(event, error) {
     if (alert) {
       alert.hide();
     }

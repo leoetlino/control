@@ -1,7 +1,7 @@
 import { lodash as _ } from "../vendor";
 
 /*@ngInject*/
-export default function ServicesService ($http, ENV, $rootScope, $location, promiseCache, localStorageService) {
+export default function ServicesService($http, ENV, $rootScope, $location, promiseCache, localStorageService) {
   var internal = {
     cachedServices: null,
   };

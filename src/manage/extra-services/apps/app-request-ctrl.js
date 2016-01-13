@@ -88,7 +88,7 @@ export default /*@ngInject*/ function (
       return $q.reject();
     }
 
-    return RequestAppService.update(platform, ctrl.app).then(function onSuccess () {
+    return RequestAppService.update(platform, ctrl.app).then(function onSuccess() {
       $alert({
         content: "Successfully updated your app request. It is now pending review from our team.",
         type: "success",
@@ -98,7 +98,7 @@ export default /*@ngInject*/ function (
       return RequestAppService.getRequest(platform).then(function (newApp) {
         ctrl.app = newApp;
       });
-    }, function onFail (response) {
+    }, function onFail(response) {
       var errorMessage = response.data.error + " Your updates were not saved. Please try again.";
       if (response.data.error.indexOf("INVALID") !== -1) {
         errorMessage = "Your app request is invalid. Please fill in all required fields correctly.";

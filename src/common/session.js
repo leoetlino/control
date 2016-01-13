@@ -1,6 +1,6 @@
 export default class Session {
   /*@ngInject*/
-  constructor (USER_ROLES, localStorageService, $rootScope) {
+  constructor(USER_ROLES, localStorageService, $rootScope) {
     Object.assign(this, { USER_ROLES, localStorageService, $rootScope });
   }
 
