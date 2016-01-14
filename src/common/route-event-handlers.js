@@ -1,17 +1,23 @@
 import { angular } from "../vendor";
 
-export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_EVENTS, AuthChecker) {
+export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_EVENTS, AuthChecker, featureFlags) {
 
   $rootScope.$on("routeSegmentChangeStart", function onRouteSegmentChangeStart(event, index, segment) {
     if (!segment) {
       return;
     }
     if ($rootScope.service &&
-            $rootScope.service.id &&
-            segment.params.visibleForCastOnly &&
-            $rootScope.service.group.toLowerCase().indexOf("nodes") === -1) {
+      $rootScope.service.id &&
+      segment.params.visibleForCastOnly &&
+      $rootScope.service.group.toLowerCase().indexOf("nodes") === -1) {
       event.preventDefault();
       $rootScope.$broadcast("cast-only-route");
+    }
+
+    if (segment.params.featureFlag &&
+      !featureFlags.isOn(segment.params.featureFlag)) {
+      event.preventDefault();
+      $rootScope.$broadcast("route-behind-feature-flag");
     }
     $rootScope.routeLoading = true;
   });
@@ -51,13 +57,13 @@ export default /*@ngInject*/ function ($rootScope, $location, USER_ROLES, AUTH_E
     if (!AuthChecker.isAuthorized(authorizedRoles)) {
       event.preventDefault();
       if (AuthChecker.isAuthenticated()) {
-                // user is not allowed
+        // user is not allowed
         if (next.$$route.originalPath !== "/log-in") {
           $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
           return;
         }
       } else {
-                // user is not logged in
+        // user is not logged in
         if (next.$$route.originalPath !== "/log-in") {
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
           originalPath = next.$$route.originalPath;

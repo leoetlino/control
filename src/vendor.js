@@ -7,6 +7,7 @@ import angularShowErrors from "angular-bootstrap-show-errors";
 import angularFontAwesome from "angular-fontawesome";
 import angularFormly from "angular-formly";
 import angularFormlyTemplatesBootstrap from "angular-formly-templates-bootstrap";
+import "angular-feature-flags/dist/featureFlags.js";
 import angularLoadingBar from "angular-loading-bar";
 import angularLocalStorage from "angular-local-storage";
 import angularMessages from "angular-messages";

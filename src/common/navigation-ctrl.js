@@ -122,6 +122,19 @@ export default /*@ngInject*/ function ($scope, $location, $rootScope, $route, US
     $location.path("/manage/information");
   });
 
+  $rootScope.$on("route-behind-feature-flag", () => {
+    $rootScope.routeLoading = false;
+    if (alert) {
+      alert.hide();
+    }
+    alert = $alert({
+      content: "The page you are trying to access is not available to you.",
+      type: "danger",
+      duration: 5,
+    });
+    $location.path("/");
+  });
+
   $rootScope.$on("invalid-service", function onInvalidServiceEvent() {
     $rootScope.routeLoading = false;
     if (alert) {

@@ -46,6 +46,7 @@ const app = angular.module("control", [
   angularSanitize,
   angularMessages,
   angularLoadingBar,
+  "feature-flags",
   "LocalStorageModule",
   "mgcrea.ngStrap",
   "picardy.fontawesome",

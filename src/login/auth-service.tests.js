@@ -65,6 +65,8 @@ describe("AuthService", function () {
         token: "xxxxx-xxxxx-from-server",
       });
 
+      $httpBackend.expectGET("https://itframe.innovatete.ch/control/user-info").respond(200, {});
+
       AuthService.logIn(credentials);
       $httpBackend.flush();
       $rootScope.$digest();
@@ -81,6 +83,8 @@ describe("AuthService", function () {
       $httpBackend.expectPOST("https://itframe.innovatete.ch/authenticate", credentials).respond(200, {
         token: token,
       });
+
+      $httpBackend.expectGET("https://itframe.innovatete.ch/control/user-info").respond(200, {});
 
       AuthService.logIn(credentials);
       $httpBackend.flush();
