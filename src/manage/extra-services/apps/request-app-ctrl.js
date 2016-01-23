@@ -369,24 +369,12 @@ export default /*@ngInject*/ function (
 
     // Alternative stream URL
     {
-      key: "needsAlternativeStreamUrl",
-      type: "fullHorizontalCheckbox",
-      defaultValue: false,
-      templateOptions: {
-        label: "I need to use an alternative stream URL",
-        description: "Only check this if you must use an alternative stream URL. This is useful when you are using a stream licensing service that forces you to use their stream URL.",
-      },
-    },
-    {
-      key: "alternativeStreamUrl",
-      type: "horizontalInput",
-      templateOptions: {
-        label: "Alternative Stream URL",
-        type: "url",
-        placeholder: "http(s)://…",
-        required: true,
-      },
-      hideExpression: "!model.needsAlternativeStreamUrl",
+      template: `<div class="form-group">
+  <label class="control-label col-sm-3">Alternative Stream URL</label>
+  <div class="col-sm-9">
+  <p>Please open a ticket if you need to use an alternative stream URL for licensing or any other legal reason.</p>
+  </div>
+</div>`,
     },
 
     {
