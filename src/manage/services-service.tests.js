@@ -136,7 +136,7 @@ describe("ServicesService", function () {
         },
       ];
 
-      $httpBackend.expectGET("https://itframe.innovatete.ch/control/products").respond(200, testResponse);
+      $httpBackend.expectGET(API_ENDPOINT + "/control/products").respond(200, testResponse);
 
       ServicesService.getServicesPromise().then(function (_services_) {
         services = _services_;

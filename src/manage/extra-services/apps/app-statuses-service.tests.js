@@ -4,7 +4,7 @@ describe("AppStatusesService", function () {
 
   beforeEach(angular.mock.module("control"));
   beforeEach(angular.mock.module(function ($provide) {
-    $provide.value("ENV", { apiEndpoint: "itframe.innovatete.ch" });
+    $provide.value("ENV", { apiEndpoint: API_ENDPOINT });
   }));
   beforeEach(inject(function (AppStatusesService, $httpBackend) {
     this.service = AppStatusesService;
