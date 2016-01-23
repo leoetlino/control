@@ -9,7 +9,7 @@ describe("AuthService", function () {
 
   beforeEach(angular.mock.module("control"));
   beforeEach(angular.mock.module(function ($provide) {
-    $provide.value("ENV", { apiEndpoint: "itframe.innovatete.ch" });
+    $provide.value("ENV", { apiEndpoint: API_ENDPOINT });
   }));
   beforeEach(inject(function (_$rootScope_, _AuthService_, _$httpBackend_, AUTH_EVENTS, _Session_, $interval) {
     this.AUTH_EVENTS = AUTH_EVENTS;
@@ -61,11 +61,11 @@ describe("AuthService", function () {
         password: "hackme",
       };
 
-      $httpBackend.expectPOST("https://itframe.innovatete.ch/authenticate", credentials).respond(200, {
+      $httpBackend.expectPOST(API_ENDPOINT + "/authenticate", credentials).respond(200, {
         token: "xxxxx-xxxxx-from-server",
       });
 
-      $httpBackend.expectGET("https://itframe.innovatete.ch/control/user-info").respond(200, {});
+      $httpBackend.expectGET(API_ENDPOINT + "/control/user-info").respond(200, {});
 
       AuthService.logIn(credentials);
       $httpBackend.flush();
@@ -80,11 +80,11 @@ describe("AuthService", function () {
       };
       var token = "xxxxx-xxxxx-from-server";
 
-      $httpBackend.expectPOST("https://itframe.innovatete.ch/authenticate", credentials).respond(200, {
+      $httpBackend.expectPOST(API_ENDPOINT + "/authenticate", credentials).respond(200, {
         token: token,
       });
 
-      $httpBackend.expectGET("https://itframe.innovatete.ch/control/user-info").respond(200, {});
+      $httpBackend.expectGET(API_ENDPOINT + "/control/user-info").respond(200, {});
 
       AuthService.logIn(credentials);
       $httpBackend.flush();
@@ -98,7 +98,7 @@ describe("AuthService", function () {
         password: "uhohwrongpassword",
       };
 
-      $httpBackend.expectPOST("https://itframe.innovatete.ch/authenticate", credentials).respond(401, {
+      $httpBackend.expectPOST(API_ENDPOINT + "/authenticate", credentials).respond(401, {
         result: "error",
         error: "Incorrect credentials",
       });
@@ -114,7 +114,7 @@ describe("AuthService", function () {
   describe("logOut", function () {
 
     it("should destroy the session client-side when server logout succeeds", function () {
-      $httpBackend.expectPOST("https://itframe.innovatete.ch/control/log-out").respond(200, {});
+      $httpBackend.expectPOST(API_ENDPOINT + "/control/log-out").respond(200, {});
       AuthService.logOut();
       $httpBackend.flush();
       $rootScope.$digest();
@@ -122,7 +122,7 @@ describe("AuthService", function () {
     });
 
     it("should broadcast AUTH_EVENTS.logoutSuccess when server logout succeeds", function () {
-      $httpBackend.expectPOST("https://itframe.innovatete.ch/control/log-out").respond(200, {});
+      $httpBackend.expectPOST(API_ENDPOINT + "/control/log-out").respond(200, {});
       AuthService.logOut();
       $httpBackend.flush();
       $rootScope.$digest();
@@ -130,7 +130,7 @@ describe("AuthService", function () {
     });
 
     it("should broadcast AUTH_EVENTS.logoutFailed when server logout fails", function () {
-      $httpBackend.expectPOST("https://itframe.innovatete.ch/control/log-out").respond(500, {});
+      $httpBackend.expectPOST(API_ENDPOINT + "/control/log-out").respond(500, {});
       AuthService.logOut();
       $httpBackend.flush();
       $rootScope.$digest();

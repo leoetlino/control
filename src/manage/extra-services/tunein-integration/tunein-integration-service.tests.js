@@ -42,7 +42,7 @@ describe("TuneInIntegrationService", function () {
       };
       var succeeded;
 
-      this.$httpBackend.expectPUT("https://itframe.innovatete.ch/control/tunein-air-integration/settings/test", testData).respond(200, { result: "success" });
+      this.$httpBackend.expectPUT(API_ENDPOINT + "/control/tunein-air-integration/settings/test", testData).respond(200, { result: "success" });
 
       this.service.saveSettings(testData.username, testData).then(function () {
         succeeded = true;
@@ -56,7 +56,7 @@ describe("TuneInIntegrationService", function () {
       var testData = {};
       var succeeded;
 
-      this.$httpBackend.expectPUT("https://itframe.innovatete.ch/control/tunein-air-integration/settings/", testData).respond(500, { result: "error", error: "Missing data" });
+      this.$httpBackend.expectPUT(API_ENDPOINT + "/control/tunein-air-integration/settings/", testData).respond(500, { result: "error", error: "Missing data" });
 
       this.service.saveSettings("", testData).then(function () {
         succeeded = true;

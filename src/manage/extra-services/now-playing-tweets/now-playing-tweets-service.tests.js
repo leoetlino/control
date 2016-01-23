@@ -41,7 +41,7 @@ describe("NowPlayingTweetsService", function () {
       };
       var succeeded;
 
-      this.$httpBackend.expectPUT("https://itframe.innovatete.ch/control/now-playing-tweets/settings/test", testData).respond(200, { result: "success" });
+      this.$httpBackend.expectPUT(API_ENDPOINT + "/control/now-playing-tweets/settings/test", testData).respond(200, { result: "success" });
 
       this.service.submitSettings(testData.username, testData).then(function () {
         succeeded = true;
@@ -55,7 +55,7 @@ describe("NowPlayingTweetsService", function () {
       var testData = {};
       var succeeded;
 
-      this.$httpBackend.expectPUT("https://itframe.innovatete.ch/control/now-playing-tweets/settings/", testData).respond(500, { result: "error", error: "Missing data" });
+      this.$httpBackend.expectPUT(API_ENDPOINT + "/control/now-playing-tweets/settings/", testData).respond(500, { result: "error", error: "Missing data" });
 
       this.service.submitSettings("", testData).then(function () {
         succeeded = true;

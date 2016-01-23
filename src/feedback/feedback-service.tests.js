@@ -4,7 +4,7 @@ describe("FeedbackService", function () {
 
   beforeEach(angular.mock.module("control"));
   beforeEach(angular.mock.module(function ($provide) {
-    $provide.value("ENV", { apiEndpoint: "itframe.innovatete.ch" });
+    $provide.value("ENV", { apiEndpoint: API_ENDPOINT });
   }));
   beforeEach(inject(function (FeedbackService, $httpBackend) {
     this.service = FeedbackService;
@@ -25,7 +25,7 @@ describe("FeedbackService", function () {
       var title = "dummy";
       var message = "dummy message";
 
-      this.$httpBackend.expectPOST("https://itframe.innovatete.ch/control/feedback", {
+      this.$httpBackend.expectPOST(API_ENDPOINT + "/control/feedback", {
         subject: title,
         message: message,
       }).respond(200, { result: "success" });
@@ -44,7 +44,7 @@ describe("FeedbackService", function () {
       var title = "dummy";
       var message = "dummy message";
 
-      this.$httpBackend.expectPOST("https://itframe.innovatete.ch/control/feedback", {
+      this.$httpBackend.expectPOST(API_ENDPOINT + "/control/feedback", {
         subject: title,
         message: message,
       }).respond(500, { result: "error" });
