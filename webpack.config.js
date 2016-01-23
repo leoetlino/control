@@ -1,4 +1,4 @@
-module.exports = require('./webpack.make')({
-    BUILD: false,
-    TEST: false,
+module.exports = require("./webpack.make")({
+  BUILD: false,
+  TEST: false,
 });
