@@ -1,7 +1,7 @@
 {
   "name": "control",
   "version": "1.0.0",
-  "license": "private",
+  "license": "AGPL-3.0",
   "repository": "git@git.innovatete.ch:site/control",
   "description": "Stay in control of SHOUTca.st services",
   "dependencies": {
