@@ -22,11 +22,6 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
     font-family: "Montserrat";
 }
 
-/* Those alerts go under the order panels. */
-.order-panel.alert {
-    margin-top: -2.5em;
-}
-
 .no-margin-top {
     margin-top: 0;
 }
@@ -73,15 +68,6 @@ a[href^="http://shoutca.st"]:after, a[href^="https://shoutca.st"]:after, a.no-ic
     margin: 0 auto;
 }
 
-.reseller-plans .price {
-    font-size: 42px !important;
-}
-
-.plans-selector {
-    margin-bottom: 0;
-    margin-top: -5em;
-}
-
 .btn-group-container {
     width: 20%;
     margin-top: -2em;
@@ -96,26 +82,6 @@ a[href^="http://shoutca.st"]:after, a[href^="https://shoutca.st"]:after, a.no-ic
     .plans-selector {
         float: none !important;
         margin-top: 0;
-    }
-}
-
-#pricing-row .carousel-inner {
-    overflow: visible;
-}
-
-#plans-slider .row {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.order-panel {
-    width: 70%;
-    margin: 3.5em auto;
-}
-
-@media screen and (max-width: 769px) {
-    .order-panel {
-        width: 98%;
     }
 }
 
@@ -155,84 +121,10 @@ a.list-group-item:hover .list-group-item-heading, a.list-group-item:focus .list-
     overflow: hidden;
 }
 
-.flexslider {
-    margin: 0;
-    background: transparent;
-    border: none;
-    position: relative;
-    border-radius: 0 !important;
-    box-shadow: 0 !important;
-}
-
-.flexslider .slides img {
-    width: initial;
-    display: initial;
-}
-
-.action-list {
-    padding-left: 0;
-    list-style: none;
-}
-
-.action-list > li {
-    margin-top: 0.5em;
-    display: inline-block;
-    padding-right: 5px;
-    padding-left: 5px;
-}
-
-.action-list > li:first-child {
-    padding-left: 0;
-    margin-top: 0;
-}
-
-.mobile-apps-slide .platform-icon {
-    font-size: 15em;
-}
-
-.mobile-apps-slide .platform-icon:first-child {
-    margin-right: 0.3em;
-}
-
-.mobile-apps-slide .platform-icon.icon-android {
-    color: #A0FF42;
-}
-
 @media (max-width: 768px) {
     .modal-dialog {
         width: 100% !important;
     }
-    .mobile-apps-slide .platform-icon {
-        font-size: 5.5em;
-    }
-
-    .mobile-apps-slide .platform-icon:first-child {
-        margin-right: 0.15em;
-    }
-
-    .autodj-slide .autodj-image {
-        height: 3em;
-    }
-
-    .action-list {
-        margin: 0 10px;
-    }
-
-    .action-list > li {
-        padding-left: 0;
-        padding-right: 0;
-        display: block;
-        width: 100%;
-    }
-
-    .action-list > li .btn {
-        display: block;
-        width: 100%;
-    }
-}
-
-#ayah-modal .modal-dialog {
-    width: 35%;
 }
 
 #topbar .nav {
@@ -343,15 +235,6 @@ a.list-group-item.active>.badge, .nav-pills>.active>a>.badge {
     color: white;
 }
 
-.sign-up-button {
-    padding: 4px 0;
-}
-
-.sign-up-button .btn {
-    padding: 10px 12px;
-}
-
-
 .dropdown-form {
     padding: 15px;
 }
@@ -360,20 +243,12 @@ a.list-group-item.active>.badge, .nav-pills>.active>a>.badge {
     text-transform: uppercase;
 }
 
-.plan .btn-group.dropdown-group {
-    display: block;
-}
-
 .btn {
     transition: all 0.5s ease;
 }
 
 ul {
     list-style: square;
-}
-
-.purechat-name-input {
-    height: 30px !important;
 }
 
 #main-footer {
@@ -430,21 +305,6 @@ input, textarea {
     padding: 15px 40px;
 }
 
-.jumbotron {
-    padding-bottom: 0;
-}
-
-.contact-us-panel {
-    box-sizing: border-box;
-    width: 50%;
-    margin: 2em auto;
-    transition: all 1s ease;
-}
-
-.contact-us-panel .panel-heading {
-    transition: all 1s ease;
-}
-
 .margin-top-0dot5em {
     margin-top: 0.5em;
 }
@@ -457,240 +317,8 @@ input, textarea {
     margin-top: -0.5em;
 }
 
-.slides, .slides > * {
-    background: none;
-    text-align: center;
-    padding-top: 1em;
-}
-
-.flex-control-nav {
-    width: 100%;
-    position: static;
-    bottom: -40px;
-    text-align: center;
-    padding-top: 20px;
-}
-
-.flex-direction-nav a {
-    display: block;
-    width: 80px;
-    height: 80px;
-    margin: -20px 0 0;
-    position: absolute;
-    top: 35%;
-    z-index: 10;
-    overflow: hidden;
-    opacity: 0;
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.5);
-    text-shadow: none;
-    transition: all .3s ease;
-}
-
-.hero-unit h1 {
-    padding-bottom: 15px;
-}
-
-.hero-unit h3 {
-    font-weight: normal;
-    line-height: 1.5em;
-    padding-bottom: 15px;
-}
-
-.features .thumbnail {
-    text-align: center;
-    border: none;
-}
-
-.stations .thumbnail {
-    margin-top: 20px;
-}
-
-.main-page-container > div {
-    margin-bottom: 1.5em;
-}
-
-.main-page-container h2, .main-page-container h3 {
-    text-align: center;
-}
-
-.main-page-container h3 {
-    margin-top: -0.125em;
-    color: #666;
-    font-weight: normal;
-}
-
-#pricing {
-    padding-top: 0.25em;
-}
-
-.contact-us {
-    margin-top: 2em;
-}
-
-.why-us {
-    margin-top: 50px;
-}
-
-.why-us .why-us-image {
-    text-align: center;
-}
-
-.why-us h2, .why-us h3 {
-    text-align: left !important;
-}
-
-.why-us h3 {
-    color: #666;
-    font-weight: normal;
-}
-
-.ticklist {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.ticklist li {
-    width: 50%;
-    float: left;
-    padding: 5px 5px 5px 30px;
-    box-sizing: border-box;
-    background: url('https://shoutca.st/images/tick.png') no-repeat left;
-}
-
-.testimonial {
-    margin-bottom: 2em;
-}
-
-@media (max-width: 768px) {
-    nav .container, #contact {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-}
-
 .green-icon {
     color: #e67e22;
-}
-
-.plan {
-    margin-top: 60px;
-    transition: all 0.4s ease;
-    margin-bottom: 20px;
-}
-
-.plan .planName {
-    background: #202b34;
-    padding-top: 50px;
-    padding-bottom: 10px;
-    text-align: center;
-}
-
-.plan .price {
-    background: #2cc76a;
-    padding: 5px;
-    color: #FFF;
-    font-size: 50px;
-    border-radius: 100%;
-    display: block;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
-    margin: 0 auto;
-    position: relative;
-    margin-top: -107px;
-    margin-bottom: 10px;
-}
-
-.plan.recommended .price{
-    background: #f45c57;
-}
-
-.plan .planName h4 {
-    color: #FFF;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-    text-transform: uppercase;
-}
-
-.plan .planName p {
-    color: #999;
-    text-align: center;
-}
-
-.plan .planFeatures {
-    background: #e8e9ea;
-    text-align: center;
-    padding: 10px;
-}
-
-.plan .planFeatures ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.plan .planFeatures ul li {
-    padding: 10px 0;
-    list-style: none;
-}
-
-.plan p {
-    margin: 0;
-}
-
-.plan .btn {
-    width: 100%;
-    border-radius: 0;
-    margin: 0;
-    box-sizing: border-box;
-    padding: 15px 20px;
-    text-transform: uppercase;
-}
-
-.flex-control-paging li a {
-    background: rgba(255, 255, 255, 0.4);
-    transition: all 0.2s ease;
-}
-
-.flex-control-paging li a:hover {
-    background: rgba(255, 255, 255, 0.5);
-}
-
-.flex-control-paging li a.flex-active {
-    background: rgba(255, 255, 255, 0.8);
-}
-
-
-#login-modal form .form-control {
-  position: relative;
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-#login-modal form .form-control:focus {
-  z-index: 2;
-}
-#login-modal form .form-group.email {
-    margin-bottom: 0;
-}
-#login-modal form .form-group.password {
-    margin-bottom: 2em;
-}
-#login-modal form input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-#login-modal form input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 }
 
 @media (max-width: 768px) {
@@ -701,69 +329,8 @@ input, textarea {
         border-radius: 6px !important;
     }
 
-    .flex-control-nav.flex-control-paging {
-        bottom: -3.5em;
-    }
-
-    .jumbotron {
-        top: -15px !important;
-    }
-    .jumbotron h3 {
-        font-size: 16px;
-    }
-
     img {
         max-width: 100%;
         height: auto;
     }
-
-    .plan:hover {
-        transform: none !important;
-        z-index: 2;
-        padding-left: 15px !important;
-        padding-right: 15px !important;
-        box-shadow: none !important;
-    }
-}
-
-@media screen and (max-width: 640px) {
-    .client-plans .row, .reseller-plans .row {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-
-    .plan {
-        width: 100%;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-
-    .plan:hover {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-}
-
-.call-me-back {
-    z-index: 3;
-    position: fixed;
-    background: rgba(0, 0, 0, 0.5);
-    bottom: 0;
-    left: 0;
-    color: white;
-    padding: 0.5em 1.5em;
-    font-size: 20px;
-    transform: rotate(-90deg);
-    transform-origin: 0% 0%;
-    transition: background 0.2s ease, box-shadow 0.2s ease;
-}
-
-.call-me-back:hover, .call-me-back:active, .call-me-back:focus {
-    background: #3B973B;
-    color: white;
-    text-decoration: none;
-}
-
-.call-me-back:active, .call-me-back:focus {
-    box-shadow: 0 0 50px grey;
 }
