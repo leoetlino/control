@@ -1,10 +1,9 @@
 /**
- * Main site CSS from commit cbc24a537edb76f963c25fbb69a96c12be7f8388
- * Some URLs and rules have been modified
+ * Main site CSS based on commit cbc24a537edb76f963c25fbb69a96c12be7f8388
+ * Some URLs and rules have been modified or removed
  */
 
 ::selection {
-    /*background: #2c3e50;*/
     background: #27ae60;
     color: white;
 }
@@ -103,22 +102,6 @@ a[href^="http://shoutca.st"]:after, a[href^="https://shoutca.st"]:after, a.no-ic
 
 a.list-group-item:hover .list-group-item-heading, a.list-group-item:focus .list-group-item-heading {
     color: #1eb45a;
-}
-
-.jumbotron, .footer {
-    color: #fff;
-    background: url('https://shoutca.st/images/bg.png') no-repeat #232a31;
-    background-size: cover;
-    background-attachment: fixed;
-    overflow: hidden;
-}
-
-.footer {
-    color: #fff;
-    background: url('https://shoutca.st/images/bg_footer.png') no-repeat #232a31;
-    background-size: cover;
-    background-attachment: fixed;
-    overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -249,38 +232,6 @@ a.list-group-item.active>.badge, .nav-pills>.active>a>.badge {
 
 ul {
     list-style: square;
-}
-
-#main-footer {
-    margin-top: 50px;
-}
-
-.footer .container {
-    padding-top: 35px;
-    padding-bottom: 35px;
-}
-
-.footer .copyright {
-    margin-top: 20px;
-}
-
-.footer h5 {
-    font-size: 1.3em;
-    font-weight: bold !important;
-    text-transform: uppercase;
-}
-
-.footer a {
-    color: white;
-}
-
-.footer ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.footer ul li {
-    margin-bottom: 5px;
 }
 
 input, textarea {
