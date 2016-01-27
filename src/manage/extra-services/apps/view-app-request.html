@@ -9,16 +9,17 @@
 <div class="panel panel-default" ng-show="ctrl.app && ctrl.app._id">
 <div class="panel-body">
 
-<h4 class="pull-left"><a class="back-button" href="/manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps <small><i class="fa" ng-class="{'fa-apple': ctrl.isiOSApp, 'fa-android': ctrl.isAndroidApp}"></i> {{ctrl.app._id}} ({{ctrl.app.username}})</small></h4>
-<div class="pull-right no-transition visible-md visible-lg" ng-hide="editableForm.$visible">
-    <button ng-show="!editableForm.$visible" class="btn btn-default broad-button" ng-click="editableForm.$show()"><i class="fa fa-edit"></i> Edit</button>
+<div class="flex-left-right">
+<h4 class="left"><a class="back-button" href="/manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps <small><i class="fa" ng-class="{'fa-apple': ctrl.isiOSApp, 'fa-android': ctrl.isAndroidApp}"></i> {{ctrl.app._id}} ({{ctrl.app.username}})</small></h4>
+<div class="right no-transition visible-md visible-lg" ng-hide="editableForm.$visible">
+    <button ng-show="!editableForm.$visible" class="btn btn-default broad-button" ng-click="!ctrl.shouldBlockEditing(ctrl.app).blocked && editableForm.$show()" ng-class="{ disabled: ctrl.shouldBlockEditing(ctrl.app).blocked }" bs-tooltip data-title="{{ctrl.shouldBlockEditing(ctrl.app).blocked ? ctrl.shouldBlockEditing(ctrl.app).reason : ''}}" data-container="body"><i class="fa fa-edit"></i> Edit</button>
 </div>
-<div class="pull-right no-transition visible-md visible-lg" ng-show="editableForm.$visible">
+<div class="right no-transition visible-md visible-lg" ng-show="editableForm.$visible">
     <button type="submit" class="btn btn-primary broad-button" ng-disabled="editableForm.$waiting" form="info-form"><i class="fa fa-save"></i> Save</button>&nbsp;&nbsp;
     <button type="button" class="btn btn-default broad-button" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel</button>
 </div>
+</div>
 
-<div class="clearfix"></div>
 <br>
 
 <form editable-form name="editableForm" id="info-form" onbeforesave="ctrl.beforeSave()" onaftersave="ctrl.save()" onshow="ctrl.onEdit()" oncancel="ctrl.onCancel()">
@@ -163,7 +164,7 @@
     </div>
 </div>
 <div class="no-transition hidden-md hidden-lg" ng-hide="editableForm.$visible">
-    <button ng-show="!editableForm.$visible" class="btn btn-default btn-block" ng-click="editableForm.$show()"><i class="fa fa-edit"></i> Edit</button>
+    <button ng-show="!editableForm.$visible" class="btn btn-default btn-block" ng-click="!ctrl.shouldBlockEditing(ctrl.app).blocked && editableForm.$show()" ng-class="{ disabled: ctrl.shouldBlockEditing(ctrl.app).blocked }" bs-tooltip data-title="{{ctrl.shouldBlockEditing(ctrl.app).blocked ? ctrl.shouldBlockEditing(ctrl.app).reason : ''}}" data-container="body"><i class="fa fa-edit"></i> Edit</button>
 </div>
 
 <br>

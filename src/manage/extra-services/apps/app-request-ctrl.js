@@ -1,4 +1,5 @@
 import { angular, lodash as _ } from "../../../vendor";
+import moment from "moment";
 
 export default /*@ngInject*/ function (
   RequestAppService,
@@ -25,6 +26,44 @@ export default /*@ngInject*/ function (
   ///////////////////////////////////////////////////////////////////////////////////////////////
   // Editable form
   ///////////////////////////////////////////////////////////////////////////////////////////////
+
+  const EDIT_BLOCKED_REASONS = {
+    STILL_PENDING: {
+      blocked: true,
+      reason: "Cannot edit because it was updated more than 5 minutes ago and the request is still pending.",
+    },
+    IN_PROGRESS: {
+      blocked: true,
+      reason: "We are currently processing this request.",
+    },
+    IOS_SUBMITTED: {
+      blocked: true,
+      reason: "We cannot update apps that are submitted but not yet approved by Apple.",
+    },
+    DEFAULT: {
+      blocked: false,
+    },
+  };
+  /**
+   * @param  {Object} appToCheck
+   * @return {Object} Returns an object with blocked: Boolean, reason: String.
+   */
+  ctrl.shouldBlockEditing = (appToCheck = {}) => {
+    if (!appToCheck._id) {
+      return EDIT_BLOCKED_REASONS.DEFAULT;
+    }
+    if (appToCheck.status.includes("pending")
+      && moment() > moment(appToCheck.lastUpdated || appToCheck.submittedOn).add(5, "minutes")) {
+      return EDIT_BLOCKED_REASONS.STILL_PENDING;
+    }
+    if (appToCheck.status === "inProgress") {
+      return EDIT_BLOCKED_REASONS.IN_PROGRESS;
+    }
+    if (ctrl.isiOSApp && appToCheck.status.includes("submitted")) {
+      return EDIT_BLOCKED_REASONS.IOS_SUBMITTED;
+    }
+    return EDIT_BLOCKED_REASONS.DEFAULT;
+  };
 
   ctrl.addTab = function (type, value) {
     if (ctrl.app.tabs.length === 3) {

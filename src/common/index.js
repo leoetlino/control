@@ -1,3 +1,4 @@
+import "./css-helpers/flex-left-right.css";
 import "./footer.css";
 
 import { angular, angularRoute } from "../vendor";

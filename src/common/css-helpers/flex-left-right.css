@@ -1,0 +1,16 @@
+.flex-left-right {
+  display: flex;
+  justify-content: space-between;
+
+  .left {
+    flex: 1;
+    margin-right: auto;
+    text-align: left;
+  }
+  .right {
+    flex: 1;
+    margin-left: auto;
+    text-align: right;
+  }
+}
+
