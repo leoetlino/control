@@ -60,6 +60,23 @@
     }
 }
 
+/* left right container */
+.flex-left-right {
+  display: flex;
+  justify-content: space-between;
+
+  .left {
+    flex: 1;
+    margin-right: auto;
+    text-align: left;
+  }
+  .right {
+    flex: 1;
+    margin-left: auto;
+    text-align: right;
+  }
+}
+
 /* spacing */
 .no-margin-bottom {
     margin-bottom: 0;
