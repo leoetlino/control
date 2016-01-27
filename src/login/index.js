@@ -1,9 +1,7 @@
 import { angular } from "../vendor";
-import AuthService from "./auth-service";
 import LoginCtrl from "./login-ctrl";
 
 export default angular.module("control.login", [])
-    .service("AuthService", AuthService)
     .controller("LoginCtrl", LoginCtrl)
     .config(/*@ngInject*/ ($routeSegmentProvider, $routeProvider, USER_ROLES) => {
       $routeSegmentProvider

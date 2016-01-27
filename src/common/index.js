@@ -2,6 +2,7 @@ import "./footer.css";
 
 import { angular, angularRoute } from "../vendor";
 import Session from "./auth/session";
+import AuthService from "./auth/auth-service";
 import AuthChecker from "./auth/auth-checker";
 import { AUTH_EVENTS, USER_ROLES } from "./auth/auth-constants";
 import authEventHandlers from "./auth/auth-event-handlers";
@@ -18,6 +19,7 @@ import configRouting from "./config-routing";
 
 export default angular.module("control.common", [angularRoute, "route-segment", "view-segment"])
   .service("Session", Session)
+  .service("AuthService", AuthService)
   .service("AuthChecker", AuthChecker)
   .service("AuthInterceptor", AuthInterceptor)
   .service("HttpTimeoutInterceptor", HttpTimeoutInterceptor)
@@ -25,6 +27,7 @@ export default angular.module("control.common", [angularRoute, "route-segment", 
   .constant("AUTH_EVENTS", AUTH_EVENTS)
   .constant("USER_ROLES", USER_ROLES)
   .run(authEventHandlers)
+
   .run(routeEventHandlers)
   .controller("FormUploadCtrl", FormUploadCtrl)
   .controller("NavigationCtrl", NavigationCtrl)
