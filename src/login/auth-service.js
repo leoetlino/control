@@ -37,8 +37,7 @@ export default class AuthService {
         $http.post(ENV.apiEndpoint + "/control/keep-alive")
           .then(function (res) {
             Session.update(res.data.token);
-          }, function (response) {
-            $rootScope.$broadcast(AUTH_EVENTS.sessionTimeout, response);
+          }, function () {
             $interval.cancel(AuthService.keepAlivePromise);
             AuthService.keepAlivePromise = null;
           });
