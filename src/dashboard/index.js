@@ -1,3 +1,5 @@
+import "./dashboard.css";
+
 import { angular } from "../vendor";
 import DashboardCtrl from "./dashboard-ctrl";
 

@@ -1,0 +1,17 @@
+[bs-collapse-toggle] {
+    cursor: pointer;
+}
+
+[bs-collapse-toggle] .toggler {
+    float: right;
+    cursor: pointer;
+    transition: transform 0.2s linear;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    font-size: inherit;
+}
+
+[bs-collapse-toggle] .toggler:before {
+    content: "\f138";
+}

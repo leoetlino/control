@@ -1,0 +1,85 @@
+.bootcards-cards .alert-warning,
+.alert-warning.border-darker, .panel-warning.border-darker {
+    border-color: #E6DABF;
+}
+
+.bootcards-cards .alert-success,
+.alert-success.border-darker, .panel-success.border-darker {
+    border-color: #C3D6B4;
+}
+
+.bootcards-cards .alert-danger,
+.alert-danger.border-darker, .panel-danger.border-darker {
+    border-color: #CCB1B5;
+}
+
+.bootcards-cards .alert-info,
+.alert-info.border-darker, .panel-info.border-darker {
+    border-color: #A9CED6;
+}
+
+section.panel {
+    padding-bottom: 10px;
+}
+
+section.panel .panel-body > h4,
+.card-header {
+    font-size: 20px;
+    color: #232a31;
+}
+
+.panel .panel-body > h4 small,
+.card-header small {
+    font-size: 88%;
+    padding-left: 5px;
+}
+
+section.panel .list-group-item-heading {
+    font-size: 16px;
+}
+
+.service-description {
+    font-size: 16px;
+    color: #5d5d5d;
+}
+
+/* Collapsed cards */
+section.panel[bs-collapse]:not(.not-collapsed) {
+    padding-bottom: 0;
+}
+
+section.panel[bs-collapse] .collapsed-description {
+    display: none;
+}
+
+section.panel[bs-collapse]:not(.not-collapsed) .collapsed-description {
+    display: block;
+}
+
+/* List groups */
+.list-group-item {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+a.list-group-item {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+a.list-group-item:hover .list-group-item-heading, a.list-group-item:focus .list-group-item-heading {
+    color: #1eb45a;
+}
+.list-group-item.disabled {
+    color: darkgray;
+    cursor: not-allowed;
+}
+
+
+/* Panels */
+.panel-standalone {
+    margin-top: 3.5em;
+}
+
+.panel-actions {
+    text-align: right;
+    padding: 15px;
+}

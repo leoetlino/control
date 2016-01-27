@@ -1,3 +1,5 @@
+import "./app-status-colours.css";
+
 import { angular } from "../../../vendor";
 
 import AppRequestCtrl from "./app-request-ctrl";

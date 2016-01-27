@@ -1,0 +1,18 @@
+/* GeoLock icon */
+.geolock-icon-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.geolock-icon-container .fa-globe {
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.geolock-icon-container .fa-lock {
+    position: absolute;
+    left: 0;
+    top: -25%;
+    text-shadow: 3px 3px 3px rgba(119, 119, 119, 0.75);
+}

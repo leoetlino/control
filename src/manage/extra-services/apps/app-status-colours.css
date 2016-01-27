@@ -1,0 +1,20 @@
+/* App status colours */
+.pending, .pendingUpdate, option[value="pending"], option[value="pendingUpdate"] {
+    color: #e74c3c;
+}
+
+.inProgress, option[value="inProgress"] {
+    color: #3498db;
+}
+
+.submitted, .submittedUpdate, option[value="submitted"], option[value="submittedUpdate"] {
+    color: #27ae60;
+}
+
+.iOS .submitted, .iOS .submittedUpdate, select.iOS option[value="submitted"], select.iOS option[value="submittedUpdate"] {
+    color: #d35400;
+}
+
+.approved, .approvedUpdate, option[value="approved"], option[value="approvedUpdate"] {
+    color: #27ae60;
+}

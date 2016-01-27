@@ -1,5 +1,10 @@
-.dl-taller dt, .dl-taller dd {
-    padding-top: 8px;
+/* Text */
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-original {
+    text-transform: none !important;
 }
 
 .uc-first {
@@ -10,6 +15,27 @@
     font-family: 'Diavlo Light';
 }
 
+.always-wrap {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.never-wrap {
+    white-space: nowrap;
+}
+
+/* Buttons */
+.broad-button {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* dl lists */
+.dl-taller dt, .dl-taller dd {
+    padding-top: 8px;
+}
+
+/* Visibility */
 .always-visible-block {
     display: block !important;
 }
@@ -22,6 +48,7 @@
     display: inline-block !important;
 }
 
+/* Equal height rows */
 @media screen and (min-width: 769px) {
     .row-equal-height, .row-equal-height > div[class*='col-'] {
         display: flex;
@@ -33,12 +60,7 @@
     }
 }
 
-@media screen and (max-width: 769px) {
-    .tab-content {
-        margin-top: 10px;
-    }
-}
-
+/* spacing */
 .no-margin-bottom {
     margin-bottom: 0;
 }
@@ -63,34 +85,12 @@
     border-top: 0;
 }
 
-.always-wrap {
-    word-wrap: break-word;
-    white-space: normal;
-}
-
-.never-wrap {
-    white-space: nowrap;
-}
-
-.panel-standalone {
-    margin-top: 3.5em;
-}
-
-.panel-actions {
-    text-align: right;
-    padding: 15px;
-}
-
-.margin-bottom-10px {
-    margin-bottom: 10px;
-}
-
 .no-margin-never {
     margin: 0 !important;
 }
 
-.back-to-services-link {
-    font-size: 15px;
+.margin-bottom-10px {
+    margin-bottom: 10px;
 }
 
 /* Alert icons */

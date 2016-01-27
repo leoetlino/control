@@ -1,3 +1,5 @@
+import "./manage-nav.css";
+
 import { angular } from "../vendor";
 import ServicesService from "./services-service";
 import ManageService from "./manage-service";
