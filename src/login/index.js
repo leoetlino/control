@@ -1,3 +1,5 @@
+import "./login.css";
+
 import { angular } from "../vendor";
 import LoginCtrl from "./login-ctrl";
 

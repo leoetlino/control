@@ -1,4 +1,6 @@
-import "./footer.css";
+// Import all CSS files from ./styles/
+let cssContext = require.context("./styles", true, /\.css$/);
+cssContext.keys().forEach(cssContext);
 
 import { angular, angularRoute } from "../vendor";
 import Session from "./auth/session";
@@ -13,6 +15,7 @@ import ServerErrorInterceptor from "./http-interceptors/server-error-interceptor
 import FormUploadCtrl from "./forms/form-upload-ctrl";
 import NavigationCtrl from "./navigation-ctrl";
 import SpinnerComponent from "./components/spinner-component";
+import "./components/spinner.css";
 import TextCollapseDirective from "./components/text-collapse-directive";
 import ShowIfFeatureFlagDirective from "./components/show-if-feature-flag-directive";
 import configRouting from "./config-routing";

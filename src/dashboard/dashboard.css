@@ -1,0 +1,14 @@
+@media screen and (min-width: 768px) {
+    .dashboard-box .panel-body {
+        min-height: 12em;
+    }
+}
+
+.dashboard-box .panel-heading, .dashboard-box .panel-body {
+    text-align: center;
+}
+
+.dashboard-box .large-number {
+    font-size: 72px;
+    font-family: 'Diavlo Light';
+}

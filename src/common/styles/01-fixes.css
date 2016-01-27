@@ -1,5 +1,11 @@
-#topbar .nav {
-    margin-top: 0 !important;
+@media (max-width: 768px) {
+    .modal-dialog {
+        width: 100% !important;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 }
 
 @media screen and (max-width: 769px) {
@@ -15,6 +21,16 @@
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
+@media screen and (max-width: 769px) {
+    .tab-content {
+        margin-top: 10px;
+    }
+}
+
+/* ui-select */
+.ui-select-multiple.ui-select-bootstrap {
+    padding: 5px 10px 3px 10px;
+}
 
 .fade:not(.in) {
     animation: fadeOut 0.3s both ease-in;
@@ -28,30 +44,6 @@
 input[type="file"] {
     margin-top: 8px;
     display: inline;
-}
-
-.ats-switch.switch-large .switch-left, .ats-switch.switch-large .switch-right, .ats-switch.switch-large .knob {
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-.ats-switch.switch-default .switch-left, .ats-switch.switch-default .switch-right, .ats-switch.switch-default .knob {
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-.ats-switch.switch-small .switch-left, .ats-switch.switch-small .switch-right, .ats-switch.switch-small .knob {
-    padding-left: 3px;
-    padding-right: 3px;
-}
-
-.ats-switch.switch-disabled, .ats-switch.switch-readonly, .ats-switch.switch-indeterminate {
-    opacity: 1;
-    border-color: #E6E6E6;
-}
-
-.ats-switch.switch-disabled .ats-switch-container, .ats-switch.switch-readonly .ats-switch-container, .ats-switch.switch-indeterminate .ats-switch-container {
-    opacity: 0.5;
 }
 
 [ng-cloak] {
@@ -98,20 +90,6 @@ input[type="file"] {
 
 .editable-wrap, .editable-wrap .editable-input {
     display: block;
-}
-
-/* Don't use ugly monospace default font */
-code, kbd, pre, samp, .monospace-font {
-    font-family: Menlo, Monaco, Consolas, monospace;
-}
-
-.no-transition, .no-transition * {
-    -webkit-transition: none !important;
-    transition: none !important;
-}
-
-select {
-    font-family: "Lato";
 }
 
 /* Overrides from bootstrap-cards */

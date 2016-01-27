@@ -56,7 +56,7 @@ export default /*@ngInject*/ function (
 
   formlyConfig.setType({
     name: "colorpicker",
-    template: require("./common/form-colorpicker.html"),
+    template: require("./common/forms/form-colorpicker.html"),
     extends: "input",
     wrapper: ["bootstrapLabel", "bootstrapHasError"],
   });
@@ -79,7 +79,7 @@ export default /*@ngInject*/ function (
 
   formlyConfig.setType({
     name: "upload",
-    template: require("./common/form-upload.html"),
+    template: require("./common/forms/form-upload.html"),
     extends: "input",
     wrapper: ["bootstrapLabel", "bootstrapHasError"],
   });

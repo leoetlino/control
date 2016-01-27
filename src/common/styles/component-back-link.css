@@ -1,0 +1,10 @@
+.back-link {
+    color: #468847;
+    text-decoration: none;
+    transition: 0.2s all ease;
+}
+
+.back-link:hover, .back-link:active {
+    color: #37C539;
+    text-decoration: none;
+}

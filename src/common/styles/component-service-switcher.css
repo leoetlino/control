@@ -1,0 +1,91 @@
+/* Service switcher */
+.service-switcher {
+    display: inline;
+    padding-top: 22.5px;
+    padding-bottom: 22.5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: transparent;
+    border: 0;
+    text-align: left;
+    color: white;
+    font-size: 16px;
+    transition: all 0.1s linear;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 767px) {
+    .service-switcher {
+        font-size: 18px;
+        padding-bottom: 20px;
+        padding-top: 25px;
+    }
+    .service-switcher + .dropdown-menu {
+        left: 10px !important;
+        right: 10px !important;
+        min-width: inherit !important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .hidden-in-small-navbar {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .service-switcher {
+        width: 120px;
+    }
+    .navbar-brand {
+        display: none;
+    }
+}
+
+.service-switcher {
+    font-weight: normal !important;
+}
+
+.service-switcher:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.service-switcher .caret {
+    border-top-color: white !important;
+    border-bottom-color: white !important;
+}
+
+.service-switcher > .show-in-dropdown-only {
+    display: none;
+}
+
+.service-switcher + .dropdown-menu {
+    margin-top: -1px;
+    min-width: 400px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow-y: auto;
+    max-height: 350px;
+}
+
+.service-switcher + .dropdown-menu .hidden-in-small-navbar {
+    display: inherit !important;
+}
+
+.service-switcher + .dropdown-menu li a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.service-switcher + .dropdown-menu li:not(.active) a:hover,
+.service-switcher + .dropdown-menu li:not(.active) a:focus {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    color: inherit !important;
+}
+
+.dropdown-menu .active .text-muted,
+.dropdown-menu li:focus .text-muted {
+    color: white !important;
+}

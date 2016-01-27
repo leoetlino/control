@@ -9,7 +9,7 @@
 <div class="panel panel-default" ng-show="ctrl.app && ctrl.app._id">
 <div class="panel-body">
 
-<h4 class="pull-left"><a class="back-button" href="/manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps <small><i class="fa" ng-class="{'fa-apple': ctrl.isiOSApp, 'fa-android': ctrl.isAndroidApp}"></i> {{ctrl.app._id}} ({{ctrl.app.username}})</small></h4>
+<h4 class="pull-left"><a class="back-link" href="/manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps <small><i class="fa" ng-class="{'fa-apple': ctrl.isiOSApp, 'fa-android': ctrl.isAndroidApp}"></i> {{ctrl.app._id}} ({{ctrl.app.username}})</small></h4>
 <div class="pull-right no-transition visible-md visible-lg" ng-hide="editableForm.$visible">
     <button ng-show="!editableForm.$visible" class="btn btn-default broad-button" ng-click="editableForm.$show()"><i class="fa fa-edit"></i> Edit</button>
 </div>

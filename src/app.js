@@ -16,16 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import "./legacy/css/shoutca-st.css";
-import "./legacy/css/animations.css";
-import "./legacy/css/branding.css";
-import "./legacy/css/components.css";
-import "./legacy/css/fixes.css";
-import "./legacy/css/helpers.css";
-import "./legacy/css/loading-bar.css";
-import "./legacy/css/loading-bar-green.css";
-import "./legacy/css/spinner.css";
-
 import {
     angular,
     angularRoute,
