@@ -1,3 +1,5 @@
+import "./geolock-icon.css";
+
 import { angular } from "../../../vendor";
 
 import GeoLockCtrl from "./geolock-ctrl.js";
