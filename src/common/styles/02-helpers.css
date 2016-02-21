@@ -75,6 +75,9 @@
     margin-left: auto;
     text-align: right;
   }
+  .flex-auto {
+    flex: 0 auto;
+  }
 }
 
 /* spacing */
