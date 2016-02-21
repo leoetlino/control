@@ -10,8 +10,6 @@ export default /*@ngInject*/ function ($rootScope, $location, $window, $alert, $
     });
   }
 
-  var alert;
-
   $rootScope.$on(AUTH_EVENTS.loginSuccess, function () {
     ServicesService.invalidateCache();
     return initServices().then(function onInitSuccess() {
@@ -65,27 +63,31 @@ export default /*@ngInject*/ function ($rootScope, $location, $window, $alert, $
     });
   });
 
+  let alertForBadRequest;
   $rootScope.$on(AUTH_EVENTS.badRequest, function onBadRequest() {
-    if (alert) {
-      alert.destroy();
+    if (alertForBadRequest) {
+      return;
     }
-    alert = $alert({
+    alertForBadRequest = $alert({
       content: "Something went wrong. Please try again. If the problem persists, reload the page and contact us.",
       type: "danger",
       duration: 10,
     });
+    setTimeout(() => alertForBadRequest = null, 5000); // rate-limit these alerts
   });
 
+  let alertForSessionTimeout;
   $rootScope.$on(AUTH_EVENTS.sessionTimeout, function onSessionTimeout() {
     Session.destroy();
     $location.path("/log-in");
-    if (alert) {
-      alert.destroy();
+    if (alertForSessionTimeout) {
+      return;
     }
-    alert = $alert({
+    alertForSessionTimeout = $alert({
       content: "Your session has expired, so you have been logged out.",
       type: "warning",
     });
+    setTimeout(() => alertForSessionTimeout = null, 5000); // rate-limit these alerts
   });
 
   $rootScope.$on(AUTH_EVENTS.notAuthenticated, function onNotAuthenticatedEvent() {
