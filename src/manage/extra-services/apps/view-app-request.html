@@ -10,11 +10,11 @@
 <div class="panel-body">
 
 <div class="flex-left-right">
-<h4 class="left"><a class="back-link" href="/manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps <small><i class="fa" ng-class="{'fa-apple': ctrl.isiOSApp, 'fa-android': ctrl.isAndroidApp}"></i> {{ctrl.app._id}} ({{ctrl.app.username}})</small></h4>
-<div class="right no-transition visible-md visible-lg" ng-hide="editableForm.$visible">
+<h4 class="left flex-auto"><a class="back-link" href="/manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps <small><i class="fa" ng-class="{'fa-apple': ctrl.isiOSApp, 'fa-android': ctrl.isAndroidApp}"></i> {{ctrl.app._id}} ({{ctrl.app.username}})</small></h4>
+<div class="right flex-auto no-transition visible-md visible-lg" ng-hide="editableForm.$visible">
     <button ng-show="!editableForm.$visible" class="btn btn-default broad-button" ng-click="!ctrl.shouldBlockEditing(ctrl.app).blocked && editableForm.$show()" ng-class="{ disabled: ctrl.shouldBlockEditing(ctrl.app).blocked }" bs-tooltip data-title="{{ctrl.shouldBlockEditing(ctrl.app).blocked ? ctrl.shouldBlockEditing(ctrl.app).reason : ''}}" data-container="body"><i class="fa fa-edit"></i> Edit</button>
 </div>
-<div class="right no-transition visible-md visible-lg" ng-show="editableForm.$visible">
+<div class="right flex-auto no-transition visible-md visible-lg" ng-show="editableForm.$visible">
     <button type="submit" class="btn btn-primary broad-button" ng-disabled="editableForm.$waiting" form="info-form"><i class="fa fa-save"></i> Save</button>&nbsp;&nbsp;
     <button type="button" class="btn btn-default broad-button" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel</button>
 </div>
