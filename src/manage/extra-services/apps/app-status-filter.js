@@ -41,7 +41,7 @@ export /*@ngInject*/ function appStatusExplanation() {
         return "Your app update has been approved by Apple and will be available within 24 hours.";
       case "iOS.onHold":
       case "android.onHold":
-        return "Your app request has some issues. Please contact support to resolve this situation.";
+        return "Your app request was rejected by our team.";
       case "android.rejectedByGoogle":
         return "Your app request has some issues and was rejected by Google. Please contact support to resolve this situation.";
       case "iOS.rejectedByGoogle":

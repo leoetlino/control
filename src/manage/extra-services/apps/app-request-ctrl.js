@@ -65,6 +65,10 @@ export default /*@ngInject*/ function (
     return EDIT_BLOCKED_REASONS.DEFAULT;
   };
 
+  ctrl.hasBeenRejected = () => {
+    return ctrl.app.reviews.some(review => review.actionTaken === "reject");
+  };
+
   ctrl.addTab = function (type, value) {
     if (ctrl.app.tabs.length === 3) {
       $alert({

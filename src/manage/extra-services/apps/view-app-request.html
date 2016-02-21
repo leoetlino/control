@@ -6,6 +6,14 @@
     </div>
 </div>
 
+<div class="alert alert-warning" ng-show="ctrl.app && ctrl.hasBeenRejected()">
+<p><fa name="warning"></fa> <b>This request was rejected for the following reason:</b></p>
+<p><i>{{ctrl.app.reviews[0].reason}}</i></p>
+<p>Tip: Do not update your request until you have completely fixed the issue.
+Otherwise, we will simply reject it again, which is a waste of time for both you and us.
+If you think this is a mistake, please <a href="https://my.shoutca.st/submitticket.php?step=2&deptid=2">open a ticket</a>.</p>
+</div>
+
 <div class="panel panel-default" ng-show="ctrl.app && ctrl.app._id">
 <div class="panel-body">
 
