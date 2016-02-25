@@ -82,6 +82,14 @@ export default /*@ngInject*/ function (
           },
         },
         {
+          key: "rejectMeImmediately",
+          type: "checkbox",
+          templateOptions: {
+            required: false,
+            label: "I want my request to be rejected immediately",
+          },
+        },
+        {
           type: "checkbox",
           templateOptions: {
             required: true,
@@ -425,6 +433,10 @@ export default /*@ngInject*/ function (
     request.username = $rootScope.service.username;
     if (!request.needsAlternativeStreamUrl) {
       request.alternativeStreamUrl = undefined;
+    }
+
+    if ($scope.confirmFormModel.rejectMeImmediately) {
+      request.rejectMeImmediately = true;
     }
 
     let promises = [];
