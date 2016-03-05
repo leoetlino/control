@@ -51,7 +51,7 @@ If you think this is a mistake, please <a href="https://my.shoutca.st/submittick
                     <a ng-show="!editableForm.$visible" href="{{ctrl.app.streamUrl}}">{{ctrl.app.streamUrl}}</a>
                     <span ng-hide="!editableForm.$visible"><i>The stream URL will be filled in when you save the app.</i></span>
                 </dd>
-                <div ng-hide="!ctrl.app.alternativeStreamUrl && !editableForm.$visible">
+                <div ng-hide="!ctrl.app.alternativeStreamUrl">
                     <dt>Alternative Stream URL</dt>
                     <dd><span editable-url="ctrl.app.alternativeStreamUrl" e-placeholder="Override the stream URL (optional)"><a href="{{ctrl.app.alternativeStreamUrl}}">{{ctrl.app.alternativeStreamUrl}}</a></span></dd>
                 </div>
