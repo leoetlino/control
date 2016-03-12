@@ -66,7 +66,7 @@ export default /*@ngInject*/ function (
   };
 
   ctrl.hasBeenRejected = () => {
-    return ctrl.app.reviews.some(review => review.actionTaken === "reject");
+    return (ctrl.app.reviews[0] || {}).actionTaken === "reject";
   };
 
   ctrl.addTab = function (type, value) {
