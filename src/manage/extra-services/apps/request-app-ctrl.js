@@ -1,13 +1,13 @@
 import { angular } from "../../../vendor";
 
 export default /*@ngInject*/ function (
-    $rootScope,
-    $scope,
-    RequestAppService,
-    ENV,
-    $alert,
-    apps,
-    $q
+  $rootScope,
+  $scope,
+  RequestAppService,
+  ENV,
+  $alert,
+  apps,
+  $q
 ) {
 
   $scope.apps = angular.copy(apps) || {};
@@ -28,8 +28,9 @@ export default /*@ngInject*/ function (
 
   let areNoPlatformsSelected = (x, y, scope) => {
     let platforms = scope.fields.filter(field => {
-      return typeof field.key === "string" && field.key.includes("platforms")
-                && scope.model.platforms[field.key.replace("platforms.", "")];
+      return typeof field.key === "string"
+        && field.key.includes("platforms")
+        && scope.model.platforms[field.key.replace("platforms.", "")];
     });
     return platforms.length === 0;
   };
@@ -51,7 +52,7 @@ export default /*@ngInject*/ function (
         label: "My icon respects the guideline dimensions (512×512 for Android, 1024×1024 for iOS or both)",
       },
     },
-        { template: "<hr>" },
+    { template: "<hr>" },
     {
       key: "isMyImage",
       type: "radio",
@@ -59,8 +60,8 @@ export default /*@ngInject*/ function (
         required: true,
         label: "Do I own the images in the app request?",
         options: [
-                    { value: "yes", name: "Yes" },
-                    { value: "no", name: "No, I found them on the Internet, generated them online, or someone made them for me" },
+          { value: "yes", name: "Yes" },
+          { value: "no", name: "No, I found them on the Internet, generated them online, or someone made them for me" },
         ],
       },
     },
@@ -143,7 +144,7 @@ export default /*@ngInject*/ function (
   ];
 
   $scope.requestFields = [
-        // Platforms
+    // Platforms
     {
       key: "platforms.android",
       type: "fullHorizontalCheckbox",
@@ -151,8 +152,8 @@ export default /*@ngInject*/ function (
       templateOptions: {
         label: "Submit for Android",
         description: !$scope.apps.android
-                    ? "Tick this if you want us to build and submit an Android app."
-                    : "You have already submitted an Android app request.",
+          ? "Tick this if you want us to build and submit an Android app."
+          : "You have already submitted an Android app request.",
         disabled: !!$scope.apps.android,
       },
       expressionProperties: {
@@ -166,17 +167,17 @@ export default /*@ngInject*/ function (
       templateOptions: {
         label: "Submit for iOS",
         description: !$scope.apps.iOS
-                    ? "Tick this if you want us to build and submit an iOS app (for iPhone, iPad and iPod)."
-                    : "You have already submitted an iOS app request.",
+          ? "Tick this if you want us to build and submit an iOS app (for iPhone, iPad and iPod)."
+          : "You have already submitted an iOS app request.",
         disabled: !!$scope.apps.iOS,
       },
       expressionProperties: {
         "templateOptions.required": areNoPlatformsSelected,
       },
     },
-        { template: "<hr><br>" },
+    { template: "<hr><br>" },
 
-        // Base information
+    // Base information
     {
       key: "name",
       type: "horizontalInput",
@@ -239,9 +240,9 @@ export default /*@ngInject*/ function (
         },
       },
     },
-        { template: "<hr><br>" },
+    { template: "<hr><br>" },
 
-        // Tabs
+    // Tabs
     {
       key: "website",
       type: "horizontalInput",
@@ -298,9 +299,9 @@ export default /*@ngInject*/ function (
 </div>
 </div>`,
     },
-        { template: "<hr><br>" },
+    { template: "<hr><br>" },
 
-        // Colours
+    // Colours
     {
       key: "backgroundColour",
       type: "horizontalColorpicker",
@@ -333,7 +334,7 @@ export default /*@ngInject*/ function (
       },
       hideExpression: "!model.platforms.android",
     },
-        // Graphics
+    // Graphics
     {
       key: "icon",
       type: "horizontalUpload",
