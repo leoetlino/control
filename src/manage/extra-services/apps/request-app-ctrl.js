@@ -230,7 +230,8 @@ export default /*@ngInject*/ function (
         type: "horizontalTextarea",
         label: "App Description",
         required: true,
-        placeholder: "A description for your app, which shouldn't be too short and should have a minimum of 2 sentences.",
+        maxlength: 4000,
+        placeholder: "A description for your app, which shouldn't be too short and should have a minimum of 2 sentences. (Must be shorter than 4000 characters.)",
         description: "Describe your station. Why should someone download the app and listen to it? Avoid excessive keywords and pay attention to the grammar, as your app could get rejected otherwise. Also, do not write in ALL CAPS.",
         rows: 4,
         addonLeft: {
