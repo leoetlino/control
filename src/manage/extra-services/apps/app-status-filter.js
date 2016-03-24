@@ -44,6 +44,8 @@ export /*@ngInject*/ function appStatusExplanation() {
         return "Your app request was rejected by our team.";
       case "android.rejectedByGoogle":
         return "Your app request has some issues and was rejected by Google. Please contact support to resolve this situation.";
+      case "android.removedByGoogle":
+        return "Because of an issue with our Google Play Developer account, your app has been unpublished from the Play Store. We're working to get them submitted and published again. If you would like to publish your app or host it yourself, please update your app request and tick the “Self-hosted” option. We'll then process your request and send you an email when your app is built; the link to the APK will be available in Control.";
       case "iOS.rejectedByGoogle":
         return "This doesn't make any sense. Please contact support.";
       case "iOS.rejectedByApple":

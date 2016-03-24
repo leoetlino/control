@@ -14,6 +14,10 @@ Otherwise, we will simply reject it again, which is a waste of time for both you
 If you think this is a mistake, please <a href="https://my.shoutca.st/submitticket.php?step=2&deptid=2">open a ticket</a>.</p>
 </div>
 
+<div class="alert alert-info" ng-show="ctrl.app && ctrl.app.swiftDownloadLink">
+<p>You can download the APK <a href="{{ctrl.app.swiftDownloadLink}}">here</a>.</p>
+</div>
+
 <div class="panel panel-default" ng-show="ctrl.app && ctrl.app._id">
 <div class="panel-body">
 
