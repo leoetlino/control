@@ -72,6 +72,10 @@ If you think this is a mistake, please <a href="https://my.shoutca.st/submittick
                 </div>
                 <dt>Last Updated</dt>
                 <dd><span ng-show="ctrl.app.lastUpdated" data-placement="right" data-title="{{ctrl.app.lastUpdated| date:'yyyy-MM-dd HH:mm:ss Z'}}">{{ctrl.app.lastUpdated|date:'dd/MM/yyyy HH:mm Z'}}</span><span ng-show="!ctrl.app.lastUpdated">-</span></dd>
+                <div ng-show="ctrl.isAndroidApp">
+                    <dt bs-tooltip data-title="Self-hosted (don't submit to Google Play)">Self-hosted</dt>
+                    <dd><span editable-checkbox="app.selfHosted">{{ (app.selfHosted) ? 'Yes' : 'No' }}</span></dd>
+                </div>
             </dl>
         </section>
         <hr>
