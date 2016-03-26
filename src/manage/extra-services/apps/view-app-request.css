@@ -1,0 +1,8 @@
+#info-form .radio input[type="radio"],
+#info-form .radio-inline input[type="radio"],
+#info-form .checkbox input[type="checkbox"],
+#info-form .checkbox-inline input[type="checkbox"] {
+  position: inherit;
+  margin-left: inherit;
+  margin-top: -5px;
+}

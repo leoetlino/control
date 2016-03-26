@@ -1,4 +1,5 @@
 import "./app-status-colours.css";
+import "./view-app-request.css";
 
 import { angular } from "../../../vendor";
 
