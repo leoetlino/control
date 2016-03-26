@@ -4,7 +4,7 @@ export /*@ngInject*/ function appStatus(AppStatusesService) {
   filterFn = function (input) { return input; };
   AppStatusesService.getStatusesByValue().then(function (data) {
     statuses = data;
-    filterFn = function (input) { return statuses[input]; };
+    filterFn = function (input) { return statuses[input] || "Unknown"; };
   });
   var wrapperFn = function wrapper(input) {
     return filterFn(input);
