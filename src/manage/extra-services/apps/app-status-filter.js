@@ -52,6 +52,9 @@ export /*@ngInject*/ function appStatusExplanation() {
         return "Your app request has some issues and was rejected by Apple. Please contact support to resolve this situation.";
       case "android.rejectedByApple":
         return "This doesn't make any sense. Please contact support.";
+      case "iOS.submittedClient":
+      case "android.submittedClient":
+        return "This app has been built and submitted by yourself.";
       default:
         return "For more details, please contact support.";
     }
