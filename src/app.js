@@ -39,9 +39,6 @@ import controlDashboard from "./dashboard";
 import controlFeedback from "./feedback";
 import controlManage from "./manage";
 
-require("./header-nav.html");
-require("./footer.html");
-
 const app = angular.module("control", [
   config,
   controlCommon,
@@ -76,6 +73,10 @@ const app = angular.module("control", [
 app.config(configHttp);
 app.config(configAngularStrap);
 app.run(configForms);
+app.run(($templateCache) => {
+  $templateCache.put("header-nav.html", require("./header-nav.html"));
+  $templateCache.put("footer.html", require("./footer.html"));
+});
 
 if (IS_PRODUCTION) {
   require("./config-production").default(app);
