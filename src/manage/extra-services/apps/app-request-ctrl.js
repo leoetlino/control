@@ -111,7 +111,7 @@ export default /*@ngInject*/ function (
       return $q.reject();
     }
 
-    if (ctrl.app.tabs.length > 3) {
+    if (!ctrl.isAndroidApp && ctrl.app.tabs.length > 3) {
       $alert({
         content: "You cannot have more than 3 tabs.",
         type: "danger",
