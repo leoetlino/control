@@ -70,7 +70,7 @@ export default /*@ngInject*/ function (
   };
 
   ctrl.addTab = function (type, value) {
-    if (ctrl.app.tabs.length === 3) {
+    if (!ctrl.isAndroidApp && ctrl.app.tabs.length === 3) {
       $alert({
         content: "You cannot have more than 3 tabs.",
         type: "danger",
