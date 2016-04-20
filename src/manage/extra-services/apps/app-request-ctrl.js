@@ -23,6 +23,15 @@ export default /*@ngInject*/ function (
   ctrl.appType = (platform === "iOS") ? "iOS" : "Android";
 
 
+  ctrl.convertIntoSelfHosted = () => {
+    if (!ctrl.isAndroidApp) {
+      throw new Error("Converting into selfHosted is only for Android apps.");
+    }
+    ctrl.beforeSave();
+    ctrl.app.selfHosted = true;
+    return ctrl.save();
+  };
+
   ///////////////////////////////////////////////////////////////////////////////////////////////
   // Editable form
   ///////////////////////////////////////////////////////////////////////////////////////////////
