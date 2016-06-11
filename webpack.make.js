@@ -78,6 +78,11 @@ module.exports = function makeWebpackConfig(options) {
         loader: "ng-annotate!babel-loader",
       },
       {
+        test: /\.js$/,
+        include: path.join(__dirname, "node_modules", "angular-route-segment"),
+        loader: "babel-loader",
+      },
+      {
         test: /\.css$/,
         loader: TEST ? "null" : "style-loader!css-loader",
       },
