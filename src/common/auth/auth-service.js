@@ -32,7 +32,7 @@ export default class AuthService {
         });
     };
 
-    this.keepAlive = function () {
+    this.keepAlive = () => {
       $http.post(`${ENV.apiEndpoint}/control/keep-alive`)
         .then(({ data }) => {
           Session.update({ token: data.token }, false);
