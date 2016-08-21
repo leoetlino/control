@@ -347,7 +347,7 @@ export default /*@ngInject*/ function (
         url: ENV.apiEndpoint + "/control/apps/upload-image?imageType=icon",
       },
       expressionProperties: {
-        "templateOptions.description": `'The image that will represent your app. Avoid putting too much detail in the app icon. The size must be ' + (model.platforms.iOS ? '1024×1024' : '512×512') + ' or it will not look good. (JPG, PNG and GIF only. PNG highly recommended.)'`,
+        "templateOptions.description": "'The image that will represent your app. Avoid putting too much detail in the app icon. The size must be ' + (model.platforms.iOS ? '1024×1024' : '512×512') + ' or it will not look good. (JPG, PNG and GIF only. PNG highly recommended.)'",
       },
     },
     {
@@ -413,7 +413,7 @@ export default /*@ngInject*/ function (
     },
 
     {
-      template: `<p class="text-warning"><fa name="warning"></fa> For iOS apps, make sure that you are not mentioning other platforms such as Android in your app descriptions or even on your website. Otherwise, Apple may reject your app.</p>`,
+      template: "<p class=\"text-warning\"><fa name=\"warning\"></fa> For iOS apps, make sure that you are not mentioning other platforms such as Android in your app descriptions or even on your website. Otherwise, Apple may reject your app.</p>",
       hideExpression: "!model.platforms.iOS",
     },
   ];

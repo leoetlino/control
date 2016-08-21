@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 export default function Enum(a) {
   let i = Object
         .keys(a)
