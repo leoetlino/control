@@ -55,7 +55,7 @@ module.exports = function makeWebpackConfig(options) {
   ///////////////////////////////////////////////////////////////////////////////////////////////
 
   config.eslint = {
-    configFile: ".eslintrc",
+    configFile: ".eslintrc.yml",
     failOnError: BUILD || TEST,
   };
   config.postcss = function () {
