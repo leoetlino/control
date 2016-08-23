@@ -5,22 +5,9 @@ export default /*@ngInject*/ function (
     $http,
     $scope,
     ConfigService,
-    AboutService,
     config,
     countries
 ) {
-  const FIRST_SUPPORTED_REV = "1fc60531f11343f8046ed757d6f908a3a5a3a0dc";
-  const CURRENT_CAST_REV = config.version.Cast;
-  AboutService.getCastBuildInfo().then(({ version }) => {
-    if (CURRENT_CAST_REV !== version && CURRENT_CAST_REV !== FIRST_SUPPORTED_REV) {
-      $alert({
-        type: "info",
-        content: "If GeoLock does not work correctly, please try updating Cast from the About page.",
-      });
-    }
-  });
-
-
   this.countries = countries;
 
   this.serverSettings = config.geolock || { enabled: false }; // settings saved server-side
