@@ -1,3 +1,5 @@
+import "./statistics.css";
+
 import { angular } from "../../../vendor";
 
 import StatisticsService from "./statistics-service";

@@ -27,6 +27,7 @@ import jQuery from "jquery";
 import "ui-select/dist/select.js";
 import "ui-select/dist/select.css";
 import ngFileUpload from "ng-file-upload";
+import ngMap from "ngmap";
 
 import "animate.css/animate.css";
 import "api-check";
@@ -57,4 +58,5 @@ export {
     angularSmartTable,
     jQuery,
     ngFileUpload,
+    ngMap,
 };
