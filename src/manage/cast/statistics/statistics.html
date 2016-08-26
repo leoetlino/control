@@ -23,7 +23,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="listener in ctrl.listeners[stream.stream] | limitTo: listenersShownAtMost">
-                                <td>{{listener.ip}}</td>
+                                <td><span class="flag-icon flag-icon-{{listener.countryCode | lowercase}}" tooltips tooltip-template="{{listener.country}}" tooltip-side="right"></span> {{listener.ip}}</td>
                                 <td><span dd-text-collapse dd-text-collapse-max-length="50" dd-text-collapse-text="{{listener.client}}"></span></td>
                                 <td>{{listener.starttime * 1000 |date:'dd/MM/yyyy HH:mm:ss Z'}}</td>
                             </tr>
