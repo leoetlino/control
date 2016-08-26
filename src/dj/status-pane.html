@@ -1,0 +1,29 @@
+<section class="panel panel-default">
+  <div class="panel-body">
+    <div class="flex-left-right margin-bottom-10px">
+      <h4 class="left flex-auto card-header">DJ</h4>
+      <div class="right flex-auto">
+        <div toggle-switch
+          is-disabled="DjStatusCtrl.disableForm"
+          ng-model="DjStatusCtrl.config.enabled"
+          on-label="Enabled" off-label="Disabled" class="switch-success switch-large"></div>
+      </div>
+    </div>
+    <p><!-- FIXME -->[FIXME: short description of DJ here] DJ is free and you will only get billed for the disk space you use.</p>
+    <p>DJ is currently <b><span class="text-{{DjStatusCtrl.config.enabled ? 'success' : 'danger'}}">{{DjStatusCtrl.config.enabled ? 'enabled' : 'disabled'}}</span></b> for this Cast server.</p>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-sm-6">
+          <label>Service ID</label>
+          <h4 class="list-group-item-heading">#{{service.id}}</h4>
+        </div>
+        <div class="col-sm-6">
+          <label>Hostname</label>
+          <h4 class="list-group-item-heading"><a link="https://{{service.username}}.radioca.st"></a></h4>
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>

@@ -35,6 +35,7 @@ import configHttp from "./config-http";
 import configAngularStrap from "./config-angular-strap";
 
 import controlCommon from "./common";
+import controlDj from "./dj";
 import controlLogin from "./login";
 import controlDashboard from "./dashboard";
 import controlFeedback from "./feedback";
@@ -47,6 +48,7 @@ const app = angular.module("control", [
   controlDashboard,
   controlFeedback,
   controlManage,
+  controlDj,
   "angular-promise-cache",
   angularRoute,
   "route-segment",
