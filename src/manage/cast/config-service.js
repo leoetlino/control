@@ -2,7 +2,8 @@ export default class ConfigService {
   /*@ngInject*/
   constructor($http, ENV, promiseCache, $rootScope, $q) {
     this.invalidateCache = function () {
-      promiseCache.remove("castConfig");
+      const username = $rootScope.service.username;
+      promiseCache.remove("castConfig_" + username);
     };
 
     this.getConfig = function () {
@@ -19,7 +20,7 @@ export default class ConfigService {
               return response.data;
             });
         },
-        key: "castConfig",
+        key: "castConfig_" + username,
         ttl: -1,
       });
     };
@@ -73,8 +74,6 @@ export default class ConfigService {
         .then(response => response.data);
     };
 
-
-    $rootScope.$on("selected-service-changed", this.invalidateCache);
     $rootScope.$on("invalidate-cast-config-cache", this.invalidateCache);
   }
 }
