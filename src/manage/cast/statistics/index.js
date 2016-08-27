@@ -1,4 +1,5 @@
 import "./statistics.css";
+import "flag-icon-css/css/flag-icon.css";
 
 import { angular } from "../../../vendor";
 

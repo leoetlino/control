@@ -30,6 +30,7 @@
     "api-check": "^7.5.5",
     "bootstrap": "^3.3.6",
     "bootstrap-additions": "^0.3.1",
+    "flag-icon-css": "^2.4.0",
     "font-awesome": "^4.5.0",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
