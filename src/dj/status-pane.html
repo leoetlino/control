@@ -3,20 +3,55 @@
     <div class="flex-left-right margin-bottom-10px">
       <h4 class="left flex-auto card-header">DJ</h4>
       <div class="right flex-auto">
-        <div toggle-switch
-          is-disabled="DjStatusCtrl.disableForm"
-          ng-model="DjStatusCtrl.config.enabled"
-          on-label="Enabled" off-label="Disabled" class="switch-success switch-large"></div>
+        <div toggle-switch is-disabled="DjStatusCtrl.disableForm" ng-model="DjStatusCtrl.config.enabled" on-label="Enabled" off-label="Disabled"
+          class="switch-success switch-large"></div>
       </div>
     </div>
-    <p><!-- FIXME -->[FIXME: short description of DJ here] DJ is free and you will only get billed for the disk space you use.</p>
-    <p>DJ is currently <b><span class="text-{{DjStatusCtrl.config.enabled ? 'success' : 'danger'}}">{{DjStatusCtrl.config.enabled ? 'enabled' : 'disabled'}}</span></b> for {{service.username}}.</p>
+    <p>
+      <!-- FIXME -->[FIXME: short description of DJ here] DJ is free and you will only get billed for the disk space you use.</p>
+    <p>DJ is currently <b><span class="text-{{DjStatusCtrl.config.enabled ? 'success' : 'danger'}}">{{DjStatusCtrl.config.enabled ? 'enabled' : 'disabled'}}</span></b>      for {{service.username}}.</p>
   </div>
 </section>
 
-<section class="panel panel-default" ng-show="DjStatusCtrl.config.enabled">
-  <div class="panel-body">
-    <div class="flex-left-right margin-bottom-10px">
-      <h4 class="left flex-auto card-header">Now</h4>
-    </div>
-</section>
+<div class="row">
+  <div class="col-sm-6">
+    <section class="panel panel-default" ng-show="DjStatusCtrl.config.enabled">
+      <div class="panel-body">
+        <h4 class="left flex-auto">Now Playing</h4>
+        <div class="row">
+          <div class="col-sm-4">
+            <img src="https://photon.shoutca.st/cdn.shoutca.st/noalbum.png?w=200" class="img-responsive"></img>
+          </div>
+          <div class="col-sm-8">
+            <p class="song-title">Awesome Song</p>
+            <p>Some Artist</p>
+            <p>
+              <button type="button" class="btn btn-success"><fa name="step-forward"></fa></button>
+              <button type="button" class="btn btn-danger"><fa name="refresh"></fa></button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="col-sm-6">
+    <section class="panel panel-default" ng-show="DjStatusCtrl.config.enabled">
+      <div class="panel-body">
+        <h4 class="left flex-auto">Up next</h4>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="i in [1,2,3,4,5]">
+          <div class="row">
+            <div class="col-sm-3">
+              <img src="https://photon.shoutca.st/cdn.shoutca.st/noalbum.png?w=120" class="img-responsive"></img>
+            </div>
+            <div class="col-sm-9">
+              <p class="song-title">Other Song</p>
+              <p>Other Artist</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import "../manage/manage-nav.css";
+import "./status-pane.css";
 
 import { angular } from "../vendor";
 import DjManageService from "./dj-manage-service";
