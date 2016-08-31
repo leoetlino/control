@@ -6,17 +6,18 @@ import DjManageService from "./dj-manage-service";
 import DjManageCtrl from "./manage-ctrl";
 import DjConfigService from "./dj-config-service";
 import DjStatusCtrl from "./dj-status-ctrl";
+import Clocks from "./clocks";
 
 const watchForService = /*@ngInject*/ ($rootScope) => ($rootScope.service) ? $rootScope.service.id : undefined;
 
 export default angular.module("control.dj", [
-
+  Clocks,
 ])
   .service("DjManageService", DjManageService)
   .service("DjConfigService", DjConfigService)
   .controller("DjManageCtrl", DjManageCtrl)
   .controller("DjStatusCtrl", DjStatusCtrl)
-  .config(/*@ngInject*/ ($routeSegmentProvider) => {
+  .config(/*@ngInject*/($routeSegmentProvider) => {
     $routeSegmentProvider
       .when("/dj", "dj")
       .when("/dj/status", "dj.status")
