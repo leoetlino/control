@@ -28,6 +28,7 @@ import "ui-select/dist/select.js";
 import "ui-select/dist/select.css";
 import ngFileUpload from "ng-file-upload";
 import ngMap from "ngmap";
+import moment from "moment";
 
 import "animate.css/animate.css";
 import "api-check";
@@ -61,4 +62,8 @@ export {
     jQuery,
     ngFileUpload,
     ngMap,
+    moment,
 };
+
+// set global variables
+global.moment = moment;

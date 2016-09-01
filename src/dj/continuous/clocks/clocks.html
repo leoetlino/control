@@ -1,0 +1,24 @@
+<section class="panel panel-default">
+  <div class="panel-body">
+    <h4>Clocks</h4>
+    <p>Tick Tock.</p>
+  </div>
+</section>
+<section class="panel panel-default">
+  <div class="panel-body">
+    <div class="pull-right">
+      <button class="btn btn-success no-transition" type="button" ><fa name="plus"></fa> Add</button>
+    </div>
+
+    <table class="table">
+      <tr>
+        <th></th>
+        <th ng-repeat="day in ctrl.daysOfWeek">{{day}}</th>
+      </tr>
+      <tr ng-repeat="time in ctrl.hoursOfDay">
+        <th>{{time}}:00</th>
+        <td ng-repeat="day in ctrl.daysOfWeek"></td>
+      </tr>
+    </table>
+  </div>
+</section>

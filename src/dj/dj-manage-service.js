@@ -71,7 +71,6 @@ export default class DjManageService {
       }
 
       section.items.push(newItem);
-
       const routeObject = _.extend(newItem.route, {
         watcher: /*@ngInject*/ ($rootScope) => {
           if (!$rootScope.service) {

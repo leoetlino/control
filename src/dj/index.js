@@ -6,12 +6,12 @@ import DjManageService from "./dj-manage-service";
 import DjManageCtrl from "./manage-ctrl";
 import DjConfigService from "./dj-config-service";
 import DjStatusCtrl from "./dj-status-ctrl";
-import Clocks from "./clocks";
+import Continuous from "./continuous";
 
 const watchForService = /*@ngInject*/ ($rootScope) => ($rootScope.service) ? $rootScope.service.id : undefined;
 
 export default angular.module("control.dj", [
-  Clocks,
+  Continuous,
 ])
   .service("DjManageService", DjManageService)
   .service("DjConfigService", DjConfigService)
