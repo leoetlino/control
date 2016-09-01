@@ -29,6 +29,8 @@ import {
   ngMap,
 } from "./vendor";
 
+import "angular-file-upload";
+
 import config from "./config";
 import configForms from "./config-forms";
 import configHttp from "./config-http";
@@ -72,6 +74,7 @@ const app = angular.module("control", [
   "xeditable",
   "ui.select",
   ngMap,
+  "angularFileUpload",
 ]);
 
 app.config(configHttp);

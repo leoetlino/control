@@ -7,11 +7,13 @@ import DjManageCtrl from "./manage-ctrl";
 import DjConfigService from "./dj-config-service";
 import DjStatusCtrl from "./dj-status-ctrl";
 import Continuous from "./continuous";
+import Media from "./media";
 
 const watchForService = /*@ngInject*/ ($rootScope) => ($rootScope.service) ? $rootScope.service.id : undefined;
 
 export default angular.module("control.dj", [
   Continuous,
+  Media,
 ])
   .service("DjManageService", DjManageService)
   .service("DjConfigService", DjConfigService)
