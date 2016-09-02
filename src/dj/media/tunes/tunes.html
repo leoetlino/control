@@ -1,0 +1,75 @@
+<section class="panel panel-default">
+    <div class="panel-body">
+        <h4>Tunes</h4>
+        <p>Files... and stuff</p>
+    </div>
+</section>
+
+<section class="panel panel-default">
+    <div class="panel-body">
+        <ul class="nav nav-tabs">
+            <li role="presentation" ng-class="ctrl.tab === 'songs' && 'active'" ng-click="ctrl.setTab('songs')"><a href="#">Songs</a></li>
+            <li role="presentation" ng-class="ctrl.tab === 'artists' && 'active'" ng-click="ctrl.setTab('artists')"><a href="#">Artists</a></li>
+            <li role="presentation" ng-class="ctrl.tab === 'albums' && 'active'" ng-click="ctrl.setTab('albums')"><a href="#">Albums</a></li>
+        </ul>
+    </div>
+    <div class="panel-body" ng-show="ctrl.tab === 'songs'">
+        <div class="search-form pull-right">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search" />
+                </div>
+                <button class="btn btn-success"><fa name="search"></fa> Search</button>
+            </form>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <th><input type="checkbox"></input>
+                </th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>BPM</th>
+                <th>Tags</th>
+            </tr>
+            <tr ng-repeat="song in ctrl.songs">
+                <td><input type="checkbox"></input>
+                </td>
+                <td>{{song.song}}</td>
+                <td>{{song.artist}}</td>
+                <td>{{song.album || "Unknown"}}</td>
+                <td>{{song.bpm | number:0}} BPM</td>
+                <td>Tags</td>
+            </tr>
+        </table>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <form class="form-inline pull-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="search" />
+                    </div>
+                    <button class="btn btn-success"><span class="add-tags"><i class="fa fa-tags fa-fw"></i><i class="fa fa-plus"></i></i></span> Add tags</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
