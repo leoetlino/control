@@ -17,7 +17,22 @@
       </tr>
       <tr ng-repeat="time in ctrl.hoursOfDay">
         <th>{{time}}:00</th>
-        <td ng-repeat="day in ctrl.daysOfWeek"></td>
+        <td ng-repeat="day in ctrl.daysOfWeek" class="clock-td">
+          <div class="clock-box" ng-if="ctrl.getClockForTime($index + 1, time)" ng-style="{
+          'border-top-left-radius': (clock.start.hour === time || time === 0)? '5px' : '0px', 
+          'border-top-right-radius': (clock.start.hour === time || time === 0)? '5px' : '0px',
+          'border-bottom-left-radius': (clock.end.hour === time || time === 23)? '5px' : '0px',
+          'border-bottom-right-radius': (clock.end.hour === time || time === 23)? '5px' : '0px',
+          'border-top': (clock.start.hour === time || time === 0)? '1px solid blue' : 'none',
+          'border-bottom': (clock.end.hour === time || time === 23)? '1px solid blue' : 'none'
+          }">
+            {{clock = ctrl.getClockForTime($index + 1, time);""}}
+            <div ng-if="clock.start.hour === time || time === 0">
+              <p class="clock-name">{{clock.name}}</p>
+              <p class="clock-tags"><span ng-repeat="tag in clock.tags">{{tag.percent}}% {{tag.tag}}</span></p>
+            </div>
+          </div>
+        </td>
       </tr>
     </table>
   </div>
