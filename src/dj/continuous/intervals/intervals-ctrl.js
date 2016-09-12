@@ -1,26 +1,17 @@
 import { lodash as _, angular, moment } from "../../../vendor";
 
-export default /*@ngInject*/ function ($scope) {
+export default /*@ngInject*/ function ($scope, IntervalsService) {
+  let _intervals;
+  let _removedIntervals = [];
+
   this.now = new Date();
 
   $scope.moment = moment;
-  this.intervals = [{ // dummy data
-    "username": "opencast",
-    "name": "passion",
-    "songs": [
-      "565094428a32bdab10188b0e",
-      "5650d3838a32bdab10198dc2",
-      "5650d3bc8a32bdab10198e9e",
-      "5650d3ec8a32bdab10198f59",
-    ],
-    "intervalType": "random",
-    "every": 2,
-    "intervalMode": "songs",
-    "songsAtOnce": 1,
-    "start": "2015-11-21T19:42:48.457Z",
-    "end": "2015-11-21T19:42:48.457Z",
-    "forever": true,
-  }];
+  this.intervals = [];
+
+  IntervalsService.getIntervals().then((intervals) => {
+    this.intervals = intervals;
+  });
 
   // convert dte string to date
   for (let interval of this.intervals) {
@@ -59,8 +50,8 @@ export default /*@ngInject*/ function ($scope) {
   };
 
   this.removeInterval = (interval) => {
-
     this.intervals = _.without(this.intervals, interval);
+    _removedIntervals.push(interval);
   };
 
   this.beforeSave = () => {
@@ -68,16 +59,28 @@ export default /*@ngInject*/ function ($scope) {
   };
 
   this.save = () => {
+    _removedIntervals.forEach((interval) => {
+      interval._id && IntervalsService.deleteInterval(interval._id);
+    });
+    this.intervals.forEach((interval) => {
+      if (interval._id) {
+        IntervalsService.updateInterval(interval._id, interval);
+      } else {
+        IntervalsService.addInterval(interval).then((data) => {
+          interval._id = data._id;
+        });
+      }
+    });
     this.disableForm = false;
-    // some saving stuff
   };
 
-  let _intervals;
   this.onEdit = () => {
     _intervals = angular.copy(this.intervals);
+    _removedIntervals = [];
   };
   this.onCancel = () => {
     this.intervals = angular.copy(_intervals);
+    _removedIntervals = [];
   };
 
 }
