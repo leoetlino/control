@@ -1,31 +1,59 @@
-export default /*@ngInject*/ function () {
+export default /*@ngInject*/ function ($scope, TunesService, $rootScope) {
   this.tab = "songs";
 
   this.songs = [];
+  this.page = 1;
+  this.numberOfPages = 0;
+  this.sortOn = "artist";
+  this.songPlaying = null;
+  this.audioThread = null;
 
-  for (let i = 0; i <= 10; i++) {
-    this.songs.push({
-      "song": "10.000 Luchtballonnen",
-      "artist": "K3",
-      "album": "10.000 Luchtballonnen",
-      "artwork": "https://photon.shoutca.st/swift.innovatete.ch/v1/AUTH_c7c69319e10b45c9b13b144831accc93/images/1537e807-c2fd-4e02-8ce4-b1537968b05c.png",
-      "genre": "Kindermuziek",
-      "internalURL": "",
-      "tags": [
-        "k3",
-      ],
-      "size": 12296778,
-      "available": true,
-      "username": "armwasmyfirstlove",
-      "type": "song",
-      "__v": 0,
-      "duration": 219.59000000000000341,
-      "bpm": 107.0379999999999967,
-    });
-  }
-
+  TunesService.getNumberOfPages().then((numberOfPages) => {
+    this.numberOfPages = numberOfPages;
+    this.loadSongs();
+  });
   this.setTab = (tab) => {
     this.tab = tab;
   };
+
+  this.loadSongs = () => {
+    TunesService.getSongsOnPage(this.sortOn, this.page).then((data) => {
+      this.songs = data;
+    });
+  };
+
+  this.togglePreview = (id) => {
+    if (this.songPlaying === id) {
+      this.audioThread.pause();
+      this.songPlaying = null;
+    } else {
+      if (this.songPlaying) {
+        this.audioThread.pause();
+      }
+      this.audioThread = new Audio(`https://${$rootScope.service.username}.radioca.st/dj/preview/${id}`);
+      this.audioThread.play();
+      this.songPlaying = id;
+    }
+  };
+
+  this.isSortedOn = (sortedOn) => {
+    return this.sortOn === sortedOn || this.sortOn === "-" + sortedOn;
+  };
+
+  this.sort = (sortOn) => {
+    this.sortOn = sortOn;
+    this.loadSongs();
+  };
+
+  this.deleteSong = (id) => {
+    TunesService.deleteSong(id).then(() => {
+      this.loadSongs();
+    });
+  };
+
+  $scope.getNumber = (num) => {
+    return new Array(num);
+  };
+
 
 }

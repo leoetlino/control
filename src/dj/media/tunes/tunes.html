@@ -24,22 +24,26 @@
         </div>
         <table class="table table-hover">
             <tr>
-                <th><input type="checkbox"></input>
-                </th>
-                <th>Title</th>
-                <th>Artist</th>
-                <th>Album</th>
-                <th>BPM</th>
+                <th><input type="checkbox"></input></th>
+                <th></th>
+                <th>Title <fa name="sort" ng-hide="ctrl.isSortedOn('song')" ng-click="ctrl.sort('song')"></fa><fa name="sort-asc" ng-show="ctrl.sortOn ==='song'" ng-click="ctrl.sort('-song')"></fa><fa name="sort-desc" ng-show="ctrl.sortOn === '-song'" ng-click="ctrl.sort('song')"></fa></th>
+                <th>Artist <fa name="sort" ng-hide="ctrl.isSortedOn('artist')" ng-click="ctrl.sort('artist')"></fa><fa name="sort-asc" ng-show="ctrl.sortOn ==='artist'" ng-click="ctrl.sort('-artist')"></fa><fa name="sort-desc" ng-show="ctrl.sortOn === '-artist'" ng-click="ctrl.sort('artist')"></fa></th>
+                <th>Album <fa name="sort" ng-hide="ctrl.isSortedOn('album')" ng-click="ctrl.sort('album')"></fa><fa name="sort-asc" ng-show="ctrl.sortOn ==='album'" ng-click="ctrl.sort('-album')"></fa><fa name="sort-desc" ng-show="ctrl.sortOn === '-album'" ng-click="ctrl.sort('album')"></fa></th>
+                <th>Duration <fa name="sort" ng-hide="ctrl.isSortedOn('duration')" ng-click="ctrl.sort('duration')"></fa><fa name="sort-asc" ng-show="ctrl.sortOn ==='duration'" ng-click="ctrl.sort('-duration')"></fa><fa name="sort-desc" ng-show="ctrl.sortOn === '-duration'" ng-click="ctrl.sort('duration')"></fa></th>
+                <th>BPM <fa name="sort" ng-hide="ctrl.isSortedOn('bpm')" ng-click="ctrl.sort('bpm')"></fa><fa name="sort-asc" ng-show="ctrl.sortOn ==='bpm'" ng-click="ctrl.sort('-bpm')"></fa><fa name="sort-desc" ng-show="ctrl.sortOn === '-bpm'" ng-click="ctrl.sort('bpm')"></fa></th>
                 <th>Tags</th>
+                <th></th>
             </tr>
             <tr ng-repeat="song in ctrl.songs">
-                <td><input type="checkbox"></input>
-                </td>
+                <td><input type="checkbox"></input></td>
+                <td ng-click="ctrl.togglePreview(song._id)"><fa name="play" ng-if="ctrl.songPlaying !== song._id"></fa><fa name="stop" ng-if="ctrl.songPlaying === song._id"></fa></td>
                 <td>{{song.song}}</td>
                 <td>{{song.artist}}</td>
                 <td>{{song.album || "Unknown"}}</td>
-                <td>{{song.bpm | number:0}} BPM</td>
+                <td>{{song.duration | secondsToDateTime | date:'mm:ss'}}</td>
+                <td>{{song.bpm | number:0}}</td>
                 <td>Tags</td>
+                <td><button class="btn btn-danger" ng-click="ctrl.deleteSong(song._id)"><fa name="trash"></fa></td>
             </tr>
         </table>
         <div class="row">
@@ -50,11 +54,7 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
+                    <li ng-repeat="i in getNumber(ctrl.numberOfPages)"><a href="#">{{$index+1}}</a></li>
                     <li>
                         <a href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
@@ -64,6 +64,7 @@
             </div>
             <div class="col-md-6">
                 <form class="form-inline pull-right">
+                    <button class="btn btn-danger"><fa name="trash">
                     <div class="form-group">
                         <input type="text" class="form-control" id="search" />
                     </div>
