@@ -46,9 +46,9 @@ export default /*@ngInject*/ function (TagsService, $q) {
     }
     for (let tag of this.tags) {
       if (!tag._id) {
-        promises.push(TagsService.addTag(tag)).then((itframeTag) => {
+        promises.push(TagsService.addTag(tag).then((itframeTag) => {
           tag._id = itframeTag._id;
-        });
+        }));
       } else {
         promises.push(TagsService.updateTag(tag));
       }
