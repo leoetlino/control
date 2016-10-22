@@ -1,6 +1,6 @@
 import { lodash as _, angular, moment } from "../../../vendor";
 
-export default /*@ngInject*/ function ($scope, IntervalsService) {
+export default /*@ngInject*/ function ($scope, IntervalsService, $q) {
   let _intervals;
   let _removedIntervals = [];
 
@@ -59,19 +59,25 @@ export default /*@ngInject*/ function ($scope, IntervalsService) {
   };
 
   this.save = () => {
-    _removedIntervals.forEach((interval) => {
-      interval._id && IntervalsService.deleteInterval(interval._id);
-    });
-    this.intervals.forEach((interval) => {
+    const promises = [];
+
+    for (let interval of _removedIntervals) {
+      promises.push(IntervalsService.deleteInterval(interval._id));
+    }
+
+    for (let interval of this.intervals) {
       if (interval._id) {
-        IntervalsService.updateInterval(interval._id, interval);
+        promises.push(IntervalsService.updateInterval(interval));
       } else {
-        IntervalsService.addInterval(interval).then((data) => {
+        promises.push(IntervalsService.addInterval(interval).then((data) => {
           interval._id = data._id;
-        });
+        }));
       }
+    }
+
+    $q.all(promises).then(()=> {
+      this.disableForm = false;
     });
-    this.disableForm = false;
   };
 
   this.onEdit = () => {

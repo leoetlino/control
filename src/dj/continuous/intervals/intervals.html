@@ -6,7 +6,7 @@
 </section>
 
 <form editable-form name="editableForm" onbeforesave="ctrl.beforeSave()" onaftersave="ctrl.save()" onshow="ctrl.onEdit()" oncancel="ctrl.onCancel()">
-    <fieldset ng-disabled="disableForm">
+    <fieldset ng-disabled="ctrl.disableForm">
         <section class="panel panel-default">
             <div class="panel-body">
                 <div class="pull-right">
@@ -27,8 +27,8 @@
                     <span editable-select="interval.intervalMode" e-ng-options="s.value as s.text for s in ctrl.intervalModes" e-style="display: inline-block !important; width: 50%; float: left;" e-required> {{interval.intervalMode}}</span></p>
                     <p ng-hide="interval.intervalType === 'all' && editableForm.$visible">Songs played: <span editable-number="interval.songsAtOnce" e-min="1" e-required>{{interval.songsAtOnce}}</span></p>
                     <p>Start date: <span editable-combodate="interval.start" e-min-year="{{ctrl.now.getFullYear() - 10}}" e-max-year="{{ctrl.now.getFullYear() + 10}}" e-required>{{interval.start | date}}</span></p>
-                    <p ng-hide="interval.forever && !editableForm.$visible">End date: <span editable-combodate="interval.end" e-min-year="{{ctrl.now.getFullYear() - 10}}" e-max-year="{{ctrl.now.getFullYear() + 10}}" e-required>{{interval.end | date}}</span></p>
-                    <p ng-show="editableForm.$visible"><span editable-checkbox="interval.forever" e-title="Run forever"></span></p>
+                    <p ng-hide="forever && !editableForm.$visible">End date: <span editable-combodate="interval.end" e-min-year="{{ctrl.now.getFullYear() - 10}}" e-max-year="{{ctrl.now.getFullYear() + 10}}" e-required>{{interval.end | date}}</span></p>
+                    <p ng-show="editableForm.$visible"><span editable-checkbox="interval.forever" e-title="Run forever" ng-model="forever"></span></p>
                     <p ng-show="editableForm.$visible"><button class="btn btn-success no-transition" type="button"><fa name="list-ul"></fa> Select songs</button></p>
                 </div>
             </div>
