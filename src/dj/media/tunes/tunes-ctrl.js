@@ -1,3 +1,5 @@
+import * as _ from "lodash";
+
 export default /*@ngInject*/ function ($scope, TunesService, $rootScope) {
   this.tab = "songs";
 
@@ -7,6 +9,7 @@ export default /*@ngInject*/ function ($scope, TunesService, $rootScope) {
   this.sortOn = "artist";
   this.songPlaying = null;
   this.audioThread = null;
+  this.allSelected = false;
 
   TunesService.getNumberOfPages().then((numberOfPages) => {
     this.numberOfPages = numberOfPages;
@@ -32,6 +35,11 @@ export default /*@ngInject*/ function ($scope, TunesService, $rootScope) {
       }
       this.audioThread = new Audio(`https://${$rootScope.service.username}.radioca.st/dj/preview/${id}`);
       this.audioThread.play();
+      this.audioThread.addEventListener("ended", () => {
+        this.audioThread = null;
+        this.songPlaying = null;
+        $scope.$apply();
+      });
       this.songPlaying = id;
     }
   };
@@ -45,14 +53,40 @@ export default /*@ngInject*/ function ($scope, TunesService, $rootScope) {
     this.loadSongs();
   };
 
-  this.deleteSong = (id) => {
-    TunesService.deleteSong(id).then(() => {
-      this.loadSongs();
+  this.deleteSong = (song) => {
+    song.isDisabled = true;
+    TunesService.deleteSong(song._id).then(() => {
+      this.songs = _.without(this.songs, song);
     });
   };
 
+  this.updateSong = (song) => {
+    song.isDisabled = true;
+    TunesService.updateSong(song).then(() => {
+      song.isDisabled = false;
+    });
+  };
+
+  this.selectAll = () => {
+    for (let song of this.songs) {
+      song.selected = this.allSelected;
+    }
+  };
+
+  this.deleteSelected = () => {
+    for (let song of this.songs) {
+      if (song.selected) {
+        this.deleteSong(song);
+      }
+    }
+  };
+
   $scope.getNumber = (num) => {
-    return new Array(num);
+    const numberArray = [];
+    for (let i = 1; i <= num; i++) {
+      numberArray.push(i);
+    }
+    return numberArray;
   };
 
 

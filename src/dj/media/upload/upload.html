@@ -40,6 +40,7 @@
         <fa name="check" ng-show="item.isSuccess"></fa>
         <fa name="ban" ng-show="item.isCancel"></fa>
         <fa name="exclamation" ng-show="item.isError"></fa>
+        <fa name="spinner" spin ng-show="item.isUploading"></fa>
       </h4>
       <p>Size: {{ item.file.size/1024/1024|number:2 }} MB</p>
       <div class="progress">

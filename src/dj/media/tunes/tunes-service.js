@@ -11,5 +11,8 @@ export default class TunesService {
     this.deleteSong = (id) => {
       return $http.delete(`${ENV.apiEndpoint}/control/cast/tunes/song/${username}/${id}`).then(resp => resp.data);
     };
+    this.updateSong = (song) => {
+      return $http.post(`${ENV.apiEndpoint}/control/cast/tunes/song/${username}/${song._id}`, song).then(resp => resp.data);
+    };
   }
 }

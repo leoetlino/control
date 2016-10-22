@@ -24,7 +24,7 @@
         </div>
         <table class="table table-hover">
             <tr>
-                <th><input type="checkbox"></input></th>
+                <th><input type="checkbox" ng-model="ctrl.allSelected" ng-click="ctrl.selectAll()"></input></th>
                 <th></th>
                 <th>Title <fa name="sort" ng-hide="ctrl.isSortedOn('song')" ng-click="ctrl.sort('song')"></fa><fa name="sort-asc" ng-show="ctrl.sortOn ==='song'" ng-click="ctrl.sort('-song')"></fa><fa name="sort-desc" ng-show="ctrl.sortOn === '-song'" ng-click="ctrl.sort('song')"></fa></th>
                 <th>Artist <fa name="sort" ng-hide="ctrl.isSortedOn('artist')" ng-click="ctrl.sort('artist')"></fa><fa name="sort-asc" ng-show="ctrl.sortOn ==='artist'" ng-click="ctrl.sort('-artist')"></fa><fa name="sort-desc" ng-show="ctrl.sortOn === '-artist'" ng-click="ctrl.sort('artist')"></fa></th>
@@ -35,15 +35,16 @@
                 <th></th>
             </tr>
             <tr ng-repeat="song in ctrl.songs">
-                <td><input type="checkbox"></input></td>
-                <td ng-click="ctrl.togglePreview(song._id)"><fa name="play" ng-if="ctrl.songPlaying !== song._id"></fa><fa name="stop" ng-if="ctrl.songPlaying === song._id"></fa></td>
-                <td>{{song.song}}</td>
-                <td>{{song.artist}}</td>
-                <td>{{song.album || "Unknown"}}</td>
+                <td><input type="checkbox" ng-model="song.selected"></input></td>
+                <td ng-show="song.available" ng-click="ctrl.togglePreview(song._id)"><fa name="play" ng-if="ctrl.songPlaying !== song._id"></fa><fa name="stop" ng-if="ctrl.songPlaying === song._id"></fa></td>
+                <td ng-hide="song.available"><i class="fa fa-cog fa-spin" bs-tooltip data-title="Processing"></i></td>
+                <td><fieldset ng-disabled="song.isDisabled || !song.available" editable-text="song.song" buttons="no" onaftersave="ctrl.updateSong(song)">{{song.song || "Unknown"}}</fieldset></td>
+                <td><fieldset ng-disabled="song.isDisabled || !song.available" editable-text="song.artist" edit-disabled="song.isDisabled || !song.available" buttons="no" onaftersave="ctrl.updateSong(song)">{{song.artist || "Unknown"}}</fieldset></td>
+                <td><fieldset ng-disabled="song.isDisabled || !song.available" editable-text="song.album" edit-disabled="song.isDisabled || !song.available" buttons="no" onaftersave="ctrl.updateSong(song)">{{song.album || "Unknown"}}</fieldset></td>
                 <td>{{song.duration | secondsToDateTime | date:'mm:ss'}}</td>
                 <td>{{song.bpm | number:0}}</td>
                 <td>Tags</td>
-                <td><button class="btn btn-danger" ng-click="ctrl.deleteSong(song._id)"><fa name="trash"></fa></td>
+                <td><button class="btn btn-danger" ng-click="ctrl.deleteSong(song)" ng-disabled="song.isDisabled || !song.available"><fa name="trash"></fa></td>
             </tr>
         </table>
         <div class="row">
@@ -54,7 +55,7 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li ng-repeat="i in getNumber(ctrl.numberOfPages)"><a href="#">{{$index+1}}</a></li>
+                    <li ng-repeat="i in getNumber(ctrl.numberOfPages)"><a href="#">{{i}}</a></li>
                     <li>
                         <a href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
@@ -64,7 +65,7 @@
             </div>
             <div class="col-md-6">
                 <form class="form-inline pull-right">
-                    <button class="btn btn-danger"><fa name="trash">
+                    <button class="btn btn-danger" ng-click="ctrl.deleteSelected()"><fa name="trash"></button>
                     <div class="form-group">
                         <input type="text" class="form-control" id="search" />
                     </div>
