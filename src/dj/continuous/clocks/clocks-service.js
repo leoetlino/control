@@ -1,44 +1,18 @@
-export default /*@ngInject*/ function () {
-  this.getClocks = () => new Promise((resolve) => {
-    resolve([{
-      "username": "swiftly",
-      "name": "Week",
-      "tags": [
-        {
-          "percent": 100,
-          "tag": "song",
-        },
-      ],
-      "start": {
-        "dayOfWeek": 1,
-        "hour": 0,
-        "minute": 0,
-      },
-      "end": {
-        "dayOfWeek": 5,
-        "hour": 23,
-        "minute": 59,
-      },
-    },
-    {
-      "username": "swiftly",
-      "name": "Weekend",
-      "tags": [
-        {
-          "percent": 100,
-          "tag": "song",
-        },
-      ],
-      "start": {
-        "dayOfWeek": 6,
-        "hour": 0,
-        "minute": 0,
-      },
-      "end": {
-        "dayOfWeek": 7,
-        "hour": 23,
-        "minute": 59,
-      },
-    }]);
-  });
+export default class ClocksService {
+    /*@ngInject*/
+  constructor($http, $rootScope, ENV) {
+    const username = $rootScope.service.username;
+    this.getTags = () => {
+      return $http.get(`${ENV.apiEndpoint}/control/cast/dj/tags/${username}`).then(resp => resp.data);
+    };
+    this.deteleTag = (id) => {
+      return $http.delete(`${ENV.apiEndpoint}/control/cast/dj/tags/${username}/${id}`).then(resp => resp.data);
+    };
+    this.addTag = (tag) => {
+      return $http.put(`${ENV.apiEndpoint}/control/cast/dj/tags/${username}`, tag).then(resp => resp.data);
+    };
+    this.updateTag = (tag) => {
+      return $http.post(`${ENV.apiEndpoint}/control/cast/dj/tags/${username}/${tag._id}`, tag).then(resp => resp.data);
+    };
+  }
 }
