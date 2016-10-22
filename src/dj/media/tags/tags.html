@@ -7,11 +7,11 @@
 
 <form editable-form name="editableForm" onbeforesave="ctrl.beforeSave()" onaftersave="ctrl.save()" onshow="ctrl.onEdit()"
     oncancel="ctrl.onCancel()">
-    <fieldset ng-disabled="disableForm">
+    <fieldset ng-disabled="ctrl.disableForm">
         <section class="panel panel-default">
             <div class="panel-body">
                 <div class="pull-right">
-                    <button class="btn btn-success no-transition" type="button" ng-hide="!editableForm.$visible" ng-click="ctrl.addInterval()"><fa name="plus"></fa> Add</button>
+                    <button class="btn btn-success no-transition" type="button" ng-hide="!editableForm.$visible" ng-click="ctrl.addTag()"><fa name="plus"></fa> Add</button>
                 </div>
             </div>
             <div class="list-group">

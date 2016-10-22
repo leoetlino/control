@@ -1,18 +1,9 @@
 import { lodash as _, angular } from "../../../vendor";
 
-export default /*@ngInject*/ function () {
+export default /*@ngInject*/ function (TagsService, $q) {
   this.now = new Date();
 
-  this.tags = [{
-    name: "testing",
-    color: "#ff01b8",
-  }, {
-    name: "testing",
-    color: "#ffb1b1",
-  }, {
-    name: "testing",
-    color: "#ddb1ff",
-  }];
+  this.tags = [];
 
   this.isSaving = false;
 
@@ -25,7 +16,19 @@ export default /*@ngInject*/ function () {
     });
   };
 
+  let _tags;
+  let _deletedTags = [];
+  this.onEdit = () => {
+    _tags = angular.copy(this.tags);
+    _deletedTags = [];
+  };
+  this.onCancel = () => {
+    this.tags = angular.copy(_tags);
+    _deletedTags = [];
+  };
+
   this.removeTag = (tag) => {
+    _deletedTags.push(angular.copy(tag));
     this.tags = _.without(this.tags, tag);
   };
 
@@ -34,16 +37,25 @@ export default /*@ngInject*/ function () {
   };
 
   this.save = () => {
-    this.disableForm = false;
-    // some saving stuff
-  };
+    const promises = [];
 
-  let _tags;
-  this.onEdit = () => {
-    _tags = angular.copy(this.tags);
-  };
-  this.onCancel = () => {
-    this.tags = angular.copy(_tags);
+    for (let tag of _deletedTags) {
+      if (tag._id) {
+        promises.push(TagsService.deteleTag(tag._id));
+      }
+    }
+    for (let tag of this.tags) {
+      if (!tag._id) {
+        promises.push(TagsService.addTag(tag)).then((itframeTag) => {
+          tag._id = itframeTag._id;
+        });
+      } else {
+        promises.push(TagsService.updateTag(tag));
+      }
+    }
+    $q.all(promises).then(()=> {
+      this.disableForm = false;
+    });
   };
 
   // color stuff
@@ -63,5 +75,13 @@ export default /*@ngInject*/ function () {
       return "#FFFFFF";
     }
   };
+
+  this.getTags = () => {
+    TagsService.getTags().then((tags) => {
+      this.tags = tags;
+    });
+  };
+
+  this.getTags();
 
 }
