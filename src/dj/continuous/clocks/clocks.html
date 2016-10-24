@@ -7,7 +7,7 @@
 <section class="panel panel-default">
   <div class="panel-body">
     <div class="pull-right">
-      <button class="btn btn-success no-transition" type="button" ><fa name="plus"></fa> Add</button>
+      <button class="btn btn-success no-transition" type="button" ng-click="ctrl.addClock()" ><fa name="plus"></fa> Add</button>
     </div>
 
     <table class="table">
@@ -19,12 +19,16 @@
         <th>{{time}}:00</th>
         <td ng-repeat="day in ctrl.daysOfWeek" class="clock-td">
           <div class="clock-box" ng-if="ctrl.getClockForTime($index + 1, time)" ng-style="{
+          'background-color': clock.color,
+          'color': ctrl.ClocksColorService.getTheme(clock.color) === 'light'? 'black' : 'white',
+          'border-left': '3px solid ' + ctrl.ClocksColorService.getShadedBackgroundColour(clock.color),
+          'border-right': '3px solid ' + ctrl.ClocksColorService.getShadedBackgroundColour(clock.color),
           'border-top-left-radius': (clock.start.hour === time || time === 0)? '5px' : '0px', 
           'border-top-right-radius': (clock.start.hour === time || time === 0)? '5px' : '0px',
           'border-bottom-left-radius': (clock.end.hour === time || time === 23)? '5px' : '0px',
           'border-bottom-right-radius': (clock.end.hour === time || time === 23)? '5px' : '0px',
-          'border-top': (clock.start.hour === time || time === 0)? '1px solid blue' : 'none',
-          'border-bottom': (clock.end.hour === time || time === 23)? '1px solid blue' : 'none'
+          'border-top': (clock.start.hour === time || time === 0)? '3px solid ' + ctrl.ClocksColorService.getShadedBackgroundColour(clock.color) : 'none',
+          'border-bottom': (clock.end.hour === time || time === 23)? '3px solid ' + ctrl.ClocksColorService.getShadedBackgroundColour(clock.color) : 'none'
           }">
             {{clock = ctrl.getClockForTime($index + 1, time);""}}
             <div ng-if="clock.start.hour === time || time === 0">
