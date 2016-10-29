@@ -14,5 +14,8 @@ export default class TunesService {
     this.updateSong = (song) => {
       return $http.post(`${ENV.apiEndpoint}/control/cast/tunes/song/${username}/${song._id}`, song).then(resp => resp.data);
     };
+    this.setTags = (song, tags) => {
+      return $http.post(`${ENV.apiEndpoint}/control/cast/tunes/set-tags/${username}/${song._id}`, tags).then(resp => resp.data);
+    };
   }
 }

@@ -1,9 +1,11 @@
-import * as _ from "lodash";
+import { lodash as _ } from "../../../vendor";
 
-export default /*@ngInject*/ function ($scope, TunesService, $rootScope) {
+export default /*@ngInject*/ function ($scope, TunesService, TagsService, $rootScope) {
   this.tab = "songs";
 
   this.songs = [];
+  this.tags = [];
+  this.newTags = [];
   this.page = 1;
   this.numberOfPages = 0;
   this.sortOn = "artist";
@@ -24,6 +26,10 @@ export default /*@ngInject*/ function ($scope, TunesService, $rootScope) {
       this.songs = data;
     });
   };
+
+  TagsService.getTags().then((tags) => {
+    this.tags = tags;
+  });
 
   this.togglePreview = (id) => {
     if (this.songPlaying === id) {
@@ -87,6 +93,32 @@ export default /*@ngInject*/ function ($scope, TunesService, $rootScope) {
       numberArray.push(i);
     }
     return numberArray;
+  };
+
+  this.saveTags = (song, tags) => {
+    song.isDisabled = true;
+    song.editingTags = false;
+    if (tags) { // only add new tags
+      song.tags = song.tags.concat(tags);
+      song.tags = _.uniq(song.tags);
+    }
+
+    const postTags = [];
+    for (let tag of song.tags) {
+      postTags.push(tag._id);
+    }
+    TunesService.setTags(song, postTags).then(() => {
+      song.isDisabled = false;
+    });
+  };
+
+  this.tagSelected = () => {
+    for (let song of this.songs) {
+      if (song.selected) {
+        this.saveTags(song, this.newTags);
+      }
+    }
+    this.newTags = [];
   };
 
 

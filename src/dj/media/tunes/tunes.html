@@ -43,7 +43,21 @@
                 <td><fieldset ng-disabled="song.isDisabled || !song.available" editable-text="song.album" edit-disabled="song.isDisabled || !song.available" buttons="no" onaftersave="ctrl.updateSong(song)">{{song.album || "Unknown"}}</fieldset></td>
                 <td>{{song.duration | secondsToDateTime | date:'mm:ss'}}</td>
                 <td>{{song.bpm | number:0}}</td>
-                <td>Tags</td>
+                <td>
+                    <span ng-show="song.editingTags">
+                        <ui-select multiple class="ui-select multiple" ng-model="song.tags" theme="bootstrap">
+                    	    <ui-select-match class="ui-select-match" ng-style="{'color': $item.color}" placeholder="Select tags">{{$item.name}}</ui-select-match>
+                    	    <ui-select-choices class="ui-select-choices" repeat="tag in ctrl.tags | filter: $select.search | limitTo: 20">
+                        	    <div ng-bind-html="tag.name | highlight: $select.search"></div>
+                    	    </ui-select-choices>
+                	    </ui-select>
+                        <button class="btn btn-success" ng-click="ctrl.saveTags(song)"><fa name="save"></fa> Save</button>
+                    </span>
+                    <span ng-click="song.editingTags = true" ng-hide="song.editingTags">
+                         <button ng-show="song.tags.length === 0" class="btn btn-success"><span class="add-tags"><i class="fa fa-tags fa-fw"></i><i class="fa fa-plus"></i></i></span></button>
+                        <span ng-repeat="tag in song.tags">{{tag.name}}</span>
+                    </span>
+                </td>
                 <td><button class="btn btn-danger" ng-click="ctrl.deleteSong(song)" ng-disabled="song.isDisabled || !song.available"><fa name="trash"></fa></td>
             </tr>
         </table>
@@ -67,9 +81,14 @@
                 <form class="form-inline pull-right">
                     <button class="btn btn-danger" ng-click="ctrl.deleteSelected()"><fa name="trash"></button>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="search" />
+                        <ui-select multiple class="ui-select multiple" ng-model="ctrl.newTags" theme="bootstrap">
+                    	    <ui-select-match class="ui-select-match" ng-style="{'color': $item.color}" placeholder="Select tags">{{$item.name}}</ui-select-match>
+                    	    <ui-select-choices class="ui-select-choices" repeat="tag in ctrl.tags | filter: $select.search | limitTo: 20">
+                        	    <div ng-bind-html="tag.name | highlight: $select.search"></div>
+                    	    </ui-select-choices>
+                	    </ui-select>
                     </div>
-                    <button class="btn btn-success"><span class="add-tags"><i class="fa fa-tags fa-fw"></i><i class="fa fa-plus"></i></i></span> Add tags</button>
+                    <button class="btn btn-success" ng-click="ctrl.tagSelected()"><span class="add-tags"><i class="fa fa-tags fa-fw"></i><i class="fa fa-plus"></i></i></span> Add tags</button>
                 </form>
             </div>
         </div>
