@@ -20,6 +20,22 @@
 				</div>
 				<div class="form-group">
 					<label for="tags">Tags</label>
+					<ui-select multiple class="ui-select multiple" ng-model="ctrl.newClock.tags" theme="bootstrap">
+                    	<ui-select-match class="ui-select-match" ng-style="{'color': $item.color}" placeholder="Select tags">{{$item.name}}</ui-select-match>
+                    	<ui-select-choices class="ui-select-choices" repeat="tag in ctrl.tags | filter: $select.search | limitTo: 20">
+                        	<div ng-bind-html="tag.name | highlight: $select.search"></div>
+                    	</ui-select-choices>
+                	</ui-select>
+				</div>
+				<div class="form-group" ng-show="ctrl.newClock.tags.length !== 0">
+					<label for="tags">Amount of songs per tag</label>
+					<div class="form-inline" ng-repeat="tag in ctrl.newClock.tags">
+						<label>{{tag.name}}</label>
+						<div class="input-group">
+  							<input type="number" ng-model="ctrl.newClock.tagTime[$index]" min="0" max="100" class="form-control" required> 
+  							<span class="input-group-addon">%</span>
+						</div>
+					</div>
 				</div>
 				<div class="form-group">
 					<label>Start</label>
