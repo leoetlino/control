@@ -28,6 +28,7 @@ export default /*@ngInject*/ function ClocksCtrl(ClocksService, ClocksColorServi
       this.originalClocks = angular.copy(clocks);
     });
   };
+  this.loadClocks();
 
   TagsService.getTags().then((tags) => {
     this.tags = tags;
