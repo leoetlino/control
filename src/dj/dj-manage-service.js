@@ -31,7 +31,7 @@ export default class DjManageService {
         featureFlag: section.featureFlag || "none",
       });
 
-      const pendingItemsForSection = _.where(itemsQueue, { sectionId: section.id });
+      const pendingItemsForSection = _. filter(itemsQueue, { sectionId: section.id });
       if (pendingItemsForSection.length) {
         pendingItemsForSection.forEach(this.addItem);
       }
@@ -48,7 +48,7 @@ export default class DjManageService {
         throw new Error("The section object must contain a `route` object");
       }
 
-      const section = _.findWhere(sections, { id: item.sectionId });
+      const section = _.find(sections, { id: item.sectionId });
       if (!section) {
         itemsQueue.push(item);
         return;

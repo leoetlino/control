@@ -81,7 +81,7 @@ export default /*@ngInject*/ function ($scope, TunesService, TagsService, $rootS
 
   this.deleteSelected = () => {
     for (let song of this.songs) {
-      if (song.selected) {
+      if (song.selected && song.available) {
         this.deleteSong(song);
       }
     }
@@ -100,7 +100,7 @@ export default /*@ngInject*/ function ($scope, TunesService, TagsService, $rootS
     song.editingTags = false;
     if (tags) { // only add new tags
       song.tags = song.tags.concat(tags);
-      song.tags = _.uniq(song.tags);
+      song.tags = _.uniqWith(song.tags, (a, b) => { return a._id === b._id; });
     }
 
     const postTags = [];
@@ -114,7 +114,7 @@ export default /*@ngInject*/ function ($scope, TunesService, TagsService, $rootS
 
   this.tagSelected = () => {
     for (let song of this.songs) {
-      if (song.selected) {
+      if (song.selected && song.available) {
         this.saveTags(song, this.newTags);
       }
     }

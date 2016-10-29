@@ -62,7 +62,7 @@ export default /*@ngInject*/ function (config, ConfigService, $alert, $q, $scope
       return $q.reject();
     }
 
-    if (_.where(this.streams, { primary: true }).length === 0) {
+    if (_. filter(this.streams, { primary: true }).length === 0) {
       $alert({
         content: "You must have one primary stream.",
         type: "danger",
@@ -72,7 +72,7 @@ export default /*@ngInject*/ function (config, ConfigService, $alert, $q, $scope
       return $q.reject();
     }
 
-    if (_.where(this.streams, { primary: true }).length > 1) {
+    if (_. filter(this.streams, { primary: true }).length > 1) {
       $alert({
         content: "You must have only one primary stream.",
         type: "danger",
@@ -113,7 +113,7 @@ export default /*@ngInject*/ function (config, ConfigService, $alert, $q, $scope
   let _streams;
   this.onEdit = () => {
     _streams = angular.copy(this.streams);
-    var primaryCheckboxes = _.where($scope.editableForm.$editables, { name: "stream.primary" });
+    var primaryCheckboxes = _. filter($scope.editableForm.$editables, { name: "stream.primary" });
     primaryCheckboxes.forEach((item) => {
       item.scope.$watch("$data", (isPrimary, oldValue) => {
         if (!isPrimary || isPrimary === oldValue) {
