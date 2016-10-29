@@ -18,7 +18,7 @@
                 <div class="list-group-item" ng-repeat="tag in ctrl.tags">
                     <span editable-text="tag.name" e-placeholder="Tag name" e-style="display: inline-block !important; width: 95%; float: left;"
                         e-required>
-                            <h4><span class="label label-info" ng-style="{background: tag.color, color: ctrl.getFontColor(tag.color)}"><fa name="tag" fw></fa> {{tag.name}}</span></h4>
+                            <h4><span class="label label-info" ng-style="{background: tag.color, color: ctrl.colorService.getFontColor(tag.color)}"><fa name="tag" fw></fa> {{tag.name}}</span></h4>
                     </span>
                     <button class="btn btn-default pull-right no-transition" type="button" ng-hide="!editableForm.$visible" ng-click="ctrl.removeTag(tag)"><i class="fa fa-trash-o"></i></button>
                     <div class="clearfix"></div>
