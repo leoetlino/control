@@ -1,6 +1,6 @@
 import { lodash as _ } from "../../../vendor";
 
-export default /*@ngInject*/ function ($scope, TunesService, TagsService, $rootScope) {
+export default /*@ngInject*/ function ($scope, TunesService, TagsService, TagsColorService, $rootScope) {
   this.tab = "songs";
 
   this.songs = [];
@@ -12,6 +12,7 @@ export default /*@ngInject*/ function ($scope, TunesService, TagsService, $rootS
   this.songPlaying = null;
   this.audioThread = null;
   this.allSelected = false;
+  this.tagsColorService = TagsColorService;
 
   TunesService.getNumberOfPages().then((numberOfPages) => {
     this.numberOfPages = numberOfPages;
