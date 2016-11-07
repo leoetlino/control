@@ -101,7 +101,7 @@ export default /*@ngInject*/ function ClocksCtrl(ClocksService, ClocksColorServi
       canBeSaved = false;
     }
     // check on changes
-    if (this.originalClocks.toString() === this.clocks.toString()) {
+    if ((this.originalClocks || []).toString() === this.clocks.toString()) {
       canBeSaved = false;
     }
     return canBeSaved;
