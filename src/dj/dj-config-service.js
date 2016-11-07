@@ -7,7 +7,7 @@ export default class DjConfigService {
      * @return {Object} DJ config
      */
     this.getConfig = function () {
-      return ConfigService.getConfig().then(castConfig => castConfig.dj);
+      return ConfigService.getConfig();
     };
 
     /**
