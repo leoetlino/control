@@ -17,20 +17,12 @@ export default class DjConfigService {
      */
     this.saveConfig = (config) => {
       const username = $rootScope.service.username;
-      return $http.put(`${ENV.apiEndpoint}/control/cast/dj/${username}`, config)
-        .then(this.invalidateCache);
-    };
-
-    /**
-     * Update the DJ config (as in PATCH) and invalidate the cache
-     * @param  {Object} config - Object with partial (or complete) DJ config
-     * @async
-     */
-    this.updateConfig = (config) => {
-      return this.getConfig().then((oldConfig) => {
-        const newConfig = Object.assign({}, oldConfig, config);
-        return this.saveConfig(newConfig);
-      });
+      return $http.post(`${ENV.apiEndpoint}/control/cast/dj/settings/${username}`, {
+        enabled: config.DJ.enabled,
+        name: config.name,
+        genre: config.genre,
+        fadeLength: config.DJ.fadeLength,
+      }).then(this.invalidateCache);
     };
   }
 }

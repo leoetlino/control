@@ -8,13 +8,13 @@
       </div>
     </div>
     <p>DJ is an advanced automation solution for Cast. It allows you to to play music how you want it 24/7. DJ is free, you're only charged for the diskspace you use.</p>
-    <p>DJ is currently <b><span class="text-{{enabled ? 'success' : 'danger'}}">{{enabled ? 'enabled' : 'disabled'}}</span></b> for {{service.username}}.</p>
+    <p>DJ is currently <b><span class="text-{{DjStatusCtrl.enabled ? 'success' : 'danger'}}">{{DjStatusCtrl.enabled ? 'enabled' : 'disabled'}}</span></b> for {{service.username}}.</p>
   </div>
 </section>
 
 <div class="row">
   <div class="col-sm-6">
-    <section class="panel panel-default" ng-show="DjStatusCtrl.config.enabled">
+    <section class="panel panel-default" ng-show="DjStatusCtrl.config.DJ.enabled">
       <div class="panel-body">
         <h4 class="left flex-auto">Now Playing</h4>
         <div class="row">

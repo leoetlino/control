@@ -39,7 +39,8 @@ export default /*@ngInject*/ function ($scope, $alert, $modal, DjConfigService) 
       return;
     }
     if (!newValue) {
-      return DjConfigService.updateConfig({ enabled: false });
+      this.config.DJ.enabled = false;
+      return DjConfigService.saveConfig(this.config);
     }
 
     if (!this.config.fadeLength) {
@@ -49,9 +50,13 @@ export default /*@ngInject*/ function ($scope, $alert, $modal, DjConfigService) 
   };
 
   this.enableDJ = () => {
-    DjConfigService.updateConfig(this.config).then(() => {
+    this.config.DJ.enabled = true;
+    DjConfigService.saveConfig(this.config).then(() => {
       this.enableModal.$hide();
     });
+  };
+
+  this.disableDJ = () => {
   };
 
   $scope.$watch("DjStatusCtrl.enabled", this.enableDisbale);
