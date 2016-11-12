@@ -46,14 +46,12 @@ export default /*@ngInject*/ function ($scope, $alert, $modal, DjConfigService) 
     if (!this.config.fadeLength) {
       this.config.fadeLength = 5;
     }
-    this.enableModal = $modal({ scope: $scope, template: require("./dj-settings.html"), show: true });
+    $modal({ scope: $scope, template: require("./dj-settings.html"), show: true });
   };
 
   this.enableDJ = () => {
     this.config.DJ.enabled = true;
-    DjConfigService.saveConfig(this.config).then(() => {
-      this.enableModal.$hide();
-    });
+    DjConfigService.saveConfig(this.config);
   };
 
   this.disableDJ = () => {
