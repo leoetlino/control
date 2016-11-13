@@ -1,29 +1,59 @@
+<div class="alert alert-info">
+    <p><fa name="info-circle"></fa> Hi there, DJ tester! DJ is far from perfect; we're doing our best to get it ready. We appreciate any feedback on DJ and thank you for taking your time to try out DJ!</p>
+</div>
 <section class="panel panel-default">
   <div class="panel-body">
     <div class="flex-left-right margin-bottom-10px">
       <h4 class="left flex-auto card-header">DJ</h4>
       <div class="right flex-auto">
-        <div toggle-switch
-          is-disabled="DjStatusCtrl.disableForm"
-          ng-model="DjStatusCtrl.config.enabled"
-          on-label="Enabled" off-label="Disabled" class="switch-success switch-large"></div>
+        <div toggle-switch is-disabled="DjStatusCtrl.disableForm" ng-model="DjStatusCtrl.enabled" ng-change="DjStatusCtrl.enableDisable(enabled)" on-label="Enabled" off-label="Disabled"
+          class="switch-success switch-large"></div>
       </div>
     </div>
-    <p><!-- FIXME -->[FIXME: short description of DJ here] DJ is free and you will only get billed for the disk space you use.</p>
-    <p>DJ is currently <b><span class="text-{{DjStatusCtrl.config.enabled ? 'success' : 'danger'}}">{{DjStatusCtrl.config.enabled ? 'enabled' : 'disabled'}}</span></b> for this Cast server.</p>
+    <p>DJ is an advanced automation solution for Cast. It allows you to to play music how you want it 24/7. DJ is free, you're only charged for the diskspace you use.</p>
+    <p>DJ is currently <b><span class="text-{{DjStatusCtrl.enabled ? 'success' : 'danger'}}">{{DjStatusCtrl.enabled ? 'enabled' : 'disabled'}}</span></b> for {{service.username}}.</p>
   </div>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col-sm-6">
-          <label>Service ID</label>
-          <h4 class="list-group-item-heading">#{{service.id}}</h4>
-        </div>
-        <div class="col-sm-6">
-          <label>Hostname</label>
-          <h4 class="list-group-item-heading"><a link="https://{{service.username}}.radioca.st"></a></h4>
+</section>
+
+<div class="row">
+  <div class="col-sm-6">
+    <section class="panel panel-default" ng-show="DjStatusCtrl.config.DJ.enabled">
+      <div class="panel-body">
+        <h4 class="left flex-auto">Now Playing</h4>
+        <div class="row">
+          <div class="col-sm-4">
+            <img src="https://photon.shoutca.st/cdn.shoutca.st/noalbum.png?w=200" class="img-responsive"></img>
+          </div>
+          <div class="col-sm-8">
+            <p class="song-title">Awesome Song</p>
+            <p>Some Artist</p>
+            <p>
+              <button type="button" class="btn btn-success" bs-tooltip data-title="Skip song"><fa name="step-forward"></fa></button>
+              <button type="button" class="btn btn-danger" bs-tooltip data-title="Force reload playlists"><fa name="refresh"></fa></button>
+            </p>
+          </div>
         </div>
       </div>
-    </li>
-  </ul>
-</section>
+    </section>
+  </div>
+  <div class="col-sm-6">
+    <section class="panel panel-default" ng-show="DjStatusCtrl.config.enabled">
+      <div class="panel-body">
+        <h4 class="left flex-auto">Up next</h4>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="i in [1,2,3,4,5]">
+          <div class="row">
+            <div class="col-sm-3">
+              <img src="https://photon.shoutca.st/cdn.shoutca.st/noalbum.png?w=120" class="img-responsive"></img>
+            </div>
+            <div class="col-sm-9">
+              <p class="song-title">Other Song</p>
+              <p>Other Artist</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>
