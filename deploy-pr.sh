@@ -21,7 +21,6 @@ ssh deploy@control-host.shoutca.st "mv /var/www/html/pr.control/${STRIDER_PR} ~/
 
 printf "Moving the new build…\n"
 ssh deploy@control-host.shoutca.st <<EOF
-mkdir /var/www/html/pr.control/${STRIDER_PR}
 mv ~/control-${STRIDER_JOB_ID} /var/www/html/pr.control/${STRIDER_PR}
 date > /var/www/html/pr.control/${STRIDER_PR}/build-time
 echo ${STRIDER_JOB_ID} > /var/www/html/pr.control/${STRIDER_PR}/ci-job-id
