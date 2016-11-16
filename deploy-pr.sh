@@ -14,14 +14,14 @@ printf "Copying build to remote server…\n"
 scp -r dist/ deploy@control-host.shoutca.st:control-${STRIDER_JOB_ID}
 
 printf "Removing the backup of the previous production build…\n"
-ssh deploy@control-host.shoutca.st "rm -rf ~/control.backup || true"
+ssh deploy@control-host.shoutca.st "rm -rf ~/control-${STRIDER_PR}.backup || true"
 
 printf "Making a backup of the current production build backup…\n"
-ssh deploy@control-host.shoutca.st "mv /var/www/html/control ~/control.backup"
+ssh deploy@control-host.shoutca.st "mv /var/www/html/pr.control/${STRIDER_PR} ~/control-${STRIDER_PR}.backup || true"
 
 printf "Moving the new build…\n"
 ssh deploy@control-host.shoutca.st <<EOF
-mkdir /var/www/html/control
+mkdir /var/www/html/pr.control/${STRIDER_PR}
 mv ~/control-${STRIDER_JOB_ID} /var/www/html/pr.control/${STRIDER_PR}
 date > /var/www/html/pr.control/${STRIDER_PR}/build-time
 echo ${STRIDER_JOB_ID} > /var/www/html/pr.control/${STRIDER_PR}/ci-job-id
