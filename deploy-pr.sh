@@ -11,7 +11,7 @@ chmod 600 $PRIVATE_KEY_NAME
 ssh-add $PRIVATE_KEY_NAME
 
 echo $STRIDER_BRANCH
-echo $STRIDER_PROJECT
+echo $STRIDER_FETCH
 exit 0
 
 printf "Copying build to remote server…\n"
