@@ -10,10 +10,6 @@ echo "$STRIDER_SSH_PRIV" > $PRIVATE_KEY_NAME
 chmod 600 $PRIVATE_KEY_NAME
 ssh-add $PRIVATE_KEY_NAME
 
-echo $STRIDER_BRANCH
-echo $STRIDER_FETCH
-exit 0
-
 printf "Copying build to remote server…\n"
 scp -r dist/ deploy@control-host.shoutca.st:control-${STRIDER_JOB_ID}
 
@@ -26,9 +22,9 @@ ssh deploy@control-host.shoutca.st "mv /var/www/html/control ~/control.backup"
 printf "Moving the new build…\n"
 ssh deploy@control-host.shoutca.st <<EOF
 mkdir /var/www/html/control
-mv ~/control-${STRIDER_JOB_ID} /var/www/html/control/dist
-date > /var/www/html/control/build-time
-echo ${STRIDER_JOB_ID} > /var/www/html/control/ci-job-id
+mv ~/control-${STRIDER_JOB_ID} /var/www/html/pr.control/${STRIDER_PR}
+date > /var/www/html/pr.control/${STRIDER_PR}/build-time
+echo ${STRIDER_JOB_ID} > /var/www/html/pr.control/${STRIDER_PR}/ci-job-id
 EOF
 
 printf "${green}Deployed.${reset}\n"
