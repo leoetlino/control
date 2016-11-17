@@ -28,6 +28,12 @@ export default /*@ngInject*/ function ($scope, TunesService, TagsService, TagsCo
     });
   };
 
+  this.search = (term) => {
+    TunesService.searchSongs(term).then((data) => {
+      this.songs = data;
+    });
+  };
+
   TagsService.getTags().then((tags) => {
     this.tags = tags;
   });

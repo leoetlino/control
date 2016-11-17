@@ -8,6 +8,9 @@ export default class TunesService {
     this.getSongsOnPage = (sort, page) => {
       return $http.get(`${ENV.apiEndpoint}/control/cast/tunes/get-songs/${username}/${sort}/${page}`).then(resp => resp.data);
     };
+    this.searchSongs = (term) => {
+      return $http.get(`${ENV.apiEndpoint}/control/cast/tunes/search/${username}`, { params: { term } }).then(resp => resp.data);
+    };
     this.deleteSong = (id) => {
       return $http.delete(`${ENV.apiEndpoint}/control/cast/tunes/song/${username}/${id}`).then(resp => resp.data);
     };
