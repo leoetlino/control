@@ -29,6 +29,7 @@ import "ui-select/dist/select.css";
 import ngFileUpload from "ng-file-upload";
 import ngMap from "ngmap";
 import moment from "moment";
+import dndLists from "angular-drag-and-drop-lists";
 
 import "animate.css/animate.css";
 import "api-check";
@@ -63,6 +64,7 @@ export {
     ngFileUpload,
     ngMap,
     moment,
+    dndLists,
 };
 
 // set global variables

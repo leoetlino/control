@@ -1,10 +1,14 @@
 import { lodash as _, angular, moment } from "../../../vendor";
 
-export default /*@ngInject*/ function ($scope, IntervalsService, $q) {
+export default /*@ngInject*/ function ($scope, IntervalsService, $q, $modal, TunesService, TagsColorService) {
   let _intervals;
   let _removedIntervals = [];
+  let _oldSongs = [];
 
+  this.editSongsSelectedInterval = null;
+  this.songsAvailable = [];
   this.now = new Date();
+  this.tagsColorService = TagsColorService;
 
   $scope.moment = moment;
   this.intervals = [];
@@ -75,7 +79,7 @@ export default /*@ngInject*/ function ($scope, IntervalsService, $q) {
       }
     }
 
-    $q.all(promises).then(()=> {
+    $q.all(promises).then(() => {
       this.disableForm = false;
     });
   };
@@ -84,9 +88,28 @@ export default /*@ngInject*/ function ($scope, IntervalsService, $q) {
     _intervals = angular.copy(this.intervals);
     _removedIntervals = [];
   };
+
   this.onCancel = () => {
     this.intervals = angular.copy(_intervals);
     _removedIntervals = [];
   };
 
+  this.onCancelSongSelect = () => {
+    this.editSongsSelectedInterval.songs = angular.copy(_oldSongs);
+  };
+
+  this.searchAvailableSongs = (term) => {
+    TunesService.searchSongs(term).then((data) => {
+      this.songsAvailable = data;
+    });
+  };
+
+  this.editSongsInInterval = (interval) => {
+    _oldSongs = angular.copy(interval.songs);
+    this.editSongsSelectedInterval = interval;
+    TunesService.getSongsOnPage("artist", 1, 10).then((data) => {
+      this.songsAvailable = data;
+    });
+    $modal({ scope: $scope, template: require("./edit-songs.html"), show: true });
+  };
 }

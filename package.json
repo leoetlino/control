@@ -10,6 +10,7 @@
     "angular-bootstrap-colorpicker": "^3.0.22",
     "angular-bootstrap-show-errors": "^2.3.0",
     "angular-bootstrap-toggle-switch": "github:JumpLink/angular-toggle-switch",
+    "angular-drag-and-drop-lists": "^1.4.0",
     "angular-feature-flags": "^0.1.0",
     "angular-file-upload": "^2.3.4",
     "angular-fontawesome": "^0.4.0",

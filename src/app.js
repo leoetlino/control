@@ -75,6 +75,7 @@ const app = angular.module("control", [
   "ui.select",
   ngMap,
   "angularFileUpload",
+  "dndLists",
 ]);
 
 app.config(configHttp);

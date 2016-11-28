@@ -2,6 +2,7 @@ import { angular } from "../../../vendor";
 
 import IntervalsCtrl from "./intervals-ctrl";
 import IntervalsService from "./intervals-service";
+import "./intervals.css";
 
 export default angular.module("control.dj.continuous.intervals", [])
     .controller("IntervalsCtrl", IntervalsCtrl)
