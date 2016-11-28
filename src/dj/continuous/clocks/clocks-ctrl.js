@@ -100,13 +100,17 @@ export default /*@ngInject*/ function ClocksCtrl(ClocksService, ClocksColorServi
 
   this.saveClock = (clock) => {
     let _clocks = angular.copy(this.clocks);
-    this.clocks = _.reject(this.clocks, { _id: clock._id });
+    this.clocks = _.reject(this.clocks, { start: clock.start });
     if (!this.pushClock(clock)) {
       // some error
       this.clocks = _clocks;
       return false;
     }
     return true;
+  };
+
+  this.deleteClock = (clock) => {
+    this.clocks = _.reject(this.clocks, { start: clock.start });
   };
 
   this.pushClock = (clock) => {
