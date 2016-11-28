@@ -64,14 +64,14 @@
         <div class="row">
             <div class="col-md-6">
                 <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
+                    <li ng-class="ctrl.page === 1? 'disabled' : ''">
+                        <a href="#" aria-label="Previous" ng-click="ctrl.loadPage(ctrl.page - 1)">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li ng-repeat="i in getNumber(ctrl.numberOfPages)"><a href="#">{{i}}</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
+                    <li ng-repeat="i in getNumber(ctrl.numberOfPages)"  ng-class="ctrl.page === i? 'disabled' : ''"><a ng-click="ctrl.loadPage(i)">{{i}}</a></li>
+                    <li ng-class="ctrl.page === ctrl.numberOfPages? 'disabled' : ''">
+                        <a href="#" aria-label="Next" ng-click="ctrl.loadPage(ctrl.page + 1)">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
