@@ -70,10 +70,16 @@ export default /*@ngInject*/ function ($scope, IntervalsService, $q, $modal, Tun
     }
 
     for (let interval of this.intervals) {
-      if (interval._id) {
-        promises.push(IntervalsService.updateInterval(interval));
+      const intervalCopy = angular.copy(interval);
+      intervalCopy.songs = [];
+      for (let song of interval.songs) {
+        intervalCopy.songs.push(song._id);
+      }
+
+      if (intervalCopy._id) {
+        promises.push(IntervalsService.updateInterval(intervalCopy));
       } else {
-        promises.push(IntervalsService.addInterval(interval).then((data) => {
+        promises.push(IntervalsService.addInterval(intervalCopy).then((data) => {
           interval._id = data._id;
         }));
       }
