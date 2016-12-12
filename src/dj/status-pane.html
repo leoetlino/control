@@ -17,19 +17,19 @@
 
 <div class="row">
   <div class="col-sm-6">
-    <section class="panel panel-default" ng-show="DjStatusCtrl.config.DJ.enabled">
+    <section class="panel panel-default" ng-show="DjStatusCtrl.config.DJ.enabled && DjStatusCtrl.current.song">
       <div class="panel-body">
         <h4 class="left flex-auto">Now Playing</h4>
         <div class="row">
           <div class="col-sm-4">
-            <img src="https://photon.shoutca.st/cdn.shoutca.st/noalbum.png?w=200" class="img-responsive"></img>
+            <img ng-src="{{(DjStatusCtrl.current.artwork || 'https://photon.shoutca.st/cdn.shoutca.st/noalbum.png') + '?w=200'}}" class="img-responsive"></img>
           </div>
           <div class="col-sm-8">
-            <p class="song-title">Awesome Song</p>
-            <p>Some Artist</p>
+            <p class="song-title">{{DjStatusCtrl.current.song}}</p>
+            <p>{{DjStatusCtrl.current.artist}}</p>
+            <p>{{DjStatusCtrl.current.album}}</p>
             <p>
-              <button type="button" class="btn btn-success" bs-tooltip data-title="Skip song"><fa name="step-forward"></fa></button>
-              <button type="button" class="btn btn-danger" bs-tooltip data-title="Force reload playlists"><fa name="refresh"></fa></button>
+              
             </p>
           </div>
         </div>
@@ -37,19 +37,19 @@
     </section>
   </div>
   <div class="col-sm-6">
-    <section class="panel panel-default" ng-show="DjStatusCtrl.config.enabled">
+    <section class="panel panel-default" ng-show="DjStatusCtrl.config.DJ.enabled && DjStatusCtrl.queue.length !== 0">
       <div class="panel-body">
-        <h4 class="left flex-auto">Up next</h4>
+        <h4 class="left flex-auto">Up next <button type="button" class="btn btn-success btn-xs" bs-tooltip data-title="Skip song"><fa name="step-forward"></fa></button> <button type="button" class="btn btn-danger btn-xs" bs-tooltip data-title="Force reload playlists"><fa name="refresh"></fa></button></h4>
       </div>
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="i in [1,2,3,4,5]">
+        <li class="list-group-item" ng-repeat="song in DjStatusCtrl.queue">
           <div class="row">
             <div class="col-sm-3">
-              <img src="https://photon.shoutca.st/cdn.shoutca.st/noalbum.png?w=120" class="img-responsive"></img>
+              <img ng-src="{{(song.artwork || 'https://photon.shoutca.st/cdn.shoutca.st/noalbum.png') + '?w=200'}}" class="img-responsive"></img>
             </div>
             <div class="col-sm-9">
-              <p class="song-title">Other Song</p>
-              <p>Other Artist</p>
+              <p class="song-title">{{song.song}}</p>
+              <p>{{song.artist}}</p>
             </div>
           </div>
         </li>

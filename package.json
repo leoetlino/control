@@ -39,6 +39,7 @@
     "mdi": "^1.5.54",
     "moment": "^2.14.1",
     "ngmap": "1.17.0",
+    "socket.io-client": "^1.7.2",
     "ui-select": "^0.13.2"
   },
   "devDependencies": {
