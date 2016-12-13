@@ -8,6 +8,7 @@ export default /*@ngInject*/ function (config, ConfigService, $alert, $q, $scope
   this.hideListenerCount = config.hideListenerCount;
   this.hideListenerCount = config.antiStreamRipper;
   this.isSaving = false;
+  this.djEnabled = config.DJ.enabled;
 
   /////////////////
   // Editable form
