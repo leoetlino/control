@@ -41,7 +41,7 @@ module.exports = function makeWebpackConfig(options) {
     app: ["babel-polyfill", path.join(APP_ROOT, "app")],
   };
   config.output = TEST ? {} : {
-    publicPath: "/",
+    publicPath: "./",
     path: "dist",
     filename: "[name].js",
   };
