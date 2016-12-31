@@ -155,7 +155,7 @@ module.exports = function makeWebpackConfig(options) {
   if (!BUILD && !TEST) {
     config.devServer = {
       contentBase: APP_ROOT,
-      port: 8900 || process.env.PORT,
+      port: process.env.PORT || 8900,
       noInfo: true,
       historyApiFallback: true,
     };
