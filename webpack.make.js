@@ -41,7 +41,9 @@ module.exports = function makeWebpackConfig(options) {
     app: ["babel-polyfill", path.join(APP_ROOT, "app")],
   };
   config.output = TEST ? {} : {
-    publicPath: "/",
+    // This is used as a prefix to all asset paths. In most cases, this doesn't need to be changed
+    // unless the base path is different.
+    publicPath: process.env.PUBLIC_PATH || "/",
     path: "dist",
     filename: "[name].js",
   };
