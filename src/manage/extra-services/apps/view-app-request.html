@@ -1,6 +1,6 @@
 <div class="panel panel-default" ng-hide="ctrl.app && ctrl.app._id">
     <div class="panel-body">
-        <h4><a class="back-button" href="/manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps</h4>
+        <h4><a class="back-button" href="manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps</h4>
         <p class="text-info">There's no app request for this platform associated to this service.</p>
         <br>
     </div>
@@ -24,7 +24,7 @@ If you think this is a mistake, please <a href="https://my.shoutca.st/submittick
 <form editable-form name="editableForm" id="info-form" onbeforesave="ctrl.beforeSave()" onaftersave="ctrl.save()" onshow="ctrl.onEdit()" oncancel="ctrl.onCancel()">
     <fieldset ng-disabled="ctrl.disableForm">
         <div class="flex-left-right">
-        <h4 class="left flex-auto"><a class="back-link" href="/manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps <small><i class="fa" ng-class="{'fa-apple': ctrl.isiOSApp, 'fa-android': ctrl.isAndroidApp}"></i> {{ctrl.app._id}} ({{ctrl.app.username}})</small></h4>
+        <h4 class="left flex-auto"><a class="back-link" href="manage/apps"><fa name="chevron-left"></fa></a> Mobile Apps <small><i class="fa" ng-class="{'fa-apple': ctrl.isiOSApp, 'fa-android': ctrl.isAndroidApp}"></i> {{ctrl.app._id}} ({{ctrl.app.username}})</small></h4>
         <div class="right flex-auto no-transition visible-md visible-lg" ng-hide="editableForm.$visible">
           <button type="button" class="btn btn-warning"
             ng-show="ctrl.isAndroidApp && !ctrl.app.selfHosted"

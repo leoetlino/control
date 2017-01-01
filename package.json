@@ -23,7 +23,7 @@
     "angular-promise-cache": "0.0.12",
     "angular-resizable": "^1.2.0",
     "angular-route": "1.4.8",
-    "angular-route-segment": "github:leoetlino/angular-route-segment#v2.0.4",
+    "angular-route-segment": "github:leoetlino/angular-route-segment#v3.0.0",
     "angular-sanitize": "1.4.8",
     "angular-smart-table": "^2.1.6",
     "angular-strap": "^2.3.6",
