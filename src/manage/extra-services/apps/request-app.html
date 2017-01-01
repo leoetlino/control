@@ -17,7 +17,7 @@
                 {{apps.android ? 'Requested' : 'Not requested'}}
             </h4>
             <div class="clearfix"></div>
-            <p class="list-group-item-text" ng-show="apps.android.status">Current status: <span class="{{apps.android.status}}">{{apps.android.status|appStatus}}</span> <b class="text-warning" ng-show="apps.android._id && !apps.android.reviewed">(pending review from our team)</b><br>{{apps.android.status|appStatusExplanation:'android'}} <a href="/manage/apps/view-request/android">More <fa name="chevron-right"></fa></a></p>
+            <p class="list-group-item-text" ng-show="apps.android.status">Current status: <span class="{{apps.android.status}}">{{apps.android.status|appStatus}}</span> <b class="text-warning" ng-show="apps.android._id && !apps.android.reviewed">(pending review from our team)</b><br>{{apps.android.status|appStatusExplanation:'android'}} <a href="manage/apps/view-request/android">More <fa name="chevron-right"></fa></a></p>
         </li>
         <li class="list-group-item iOS">
             <h4 class="list-group-item-heading pull-left">iOS App</h4>
@@ -25,7 +25,7 @@
                 {{apps.iOS ? 'Requested' : 'Not requested'}}
             </h4>
             <div class="clearfix"></div>
-            <p class="list-group-item-text" ng-show="apps.iOS.status">Current status: <span class="{{apps.iOS.status}}">{{apps.iOS.status|appStatus}}</span> <b class="text-warning" ng-show="apps.iOS._id && !apps.iOS.reviewed">(pending review from our team)</b><br>{{apps.iOS.status|appStatusExplanation:'iOS'}} <a href="/manage/apps/view-request/iOS">More <fa name="chevron-right"></fa></a></p>
+            <p class="list-group-item-text" ng-show="apps.iOS.status">Current status: <span class="{{apps.iOS.status}}">{{apps.iOS.status|appStatus}}</span> <b class="text-warning" ng-show="apps.iOS._id && !apps.iOS.reviewed">(pending review from our team)</b><br>{{apps.iOS.status|appStatusExplanation:'iOS'}} <a href="manage/apps/view-request/iOS">More <fa name="chevron-right"></fa></a></p>
         </li>
     </ul>
 </section>
