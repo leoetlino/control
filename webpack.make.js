@@ -31,6 +31,7 @@ module.exports = function makeWebpackConfig(options) {
   var TEST = !!options.TEST;
   var DEBUG = !!options.DEBUG || process.env.DEBUG === "true";
   var config = {};
+  const publicPath = process.env.PUBLIC_PATH || "/";
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
   // Entry and output
@@ -43,7 +44,7 @@ module.exports = function makeWebpackConfig(options) {
   config.output = TEST ? {} : {
     // This is used as a prefix to all asset paths. In most cases, this doesn't need to be changed
     // unless the base path is different.
-    publicPath: process.env.PUBLIC_PATH || "/",
+    publicPath: publicPath,
     path: "dist",
     filename: "[name].js",
   };
@@ -122,8 +123,8 @@ module.exports = function makeWebpackConfig(options) {
   if (!TEST) {
     config.plugins.push(
       new HtmlWebpackPlugin({
-        inject: true,
-        template: path.join(APP_ROOT, "index.html"),
+        htmlBase: publicPath,
+        template: path.join(APP_ROOT, "index.ejs"),
         minify: BUILD ? {
           collapseBooleanAttributes: true,
           collapseWhitespace: true,

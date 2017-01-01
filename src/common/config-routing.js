@@ -16,6 +16,6 @@ export default /*@ngInject*/ function (
   $routeSegmentProvider.options.strictMode = true;
   $locationProvider.html5Mode({
     enabled: true,
-    requireBase: false,
+    requireBase: true,
   });
 }
